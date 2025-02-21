@@ -1,8 +1,9 @@
 "use client";
 
-import { Container, Typography, Button, Box, Grid } from "@mui/material";
+import { Typography, Button, Box, Grid } from "@mui/material";
 import GlassCard from "@/components/card/glass-card/GlassCard";
 import { useTheme } from "@mui/material/styles";
+import Image from "next/image";
 
 const Hero = () => {
   const theme = useTheme(); // Get theme colors
@@ -40,7 +41,7 @@ const Hero = () => {
               boxShadow: "0px 4px 30px rgba(0, 0, 0, 0.1)",
             }}
           >
-            <img
+            <Image
               src="/code.jpg"
               alt="Hero"
               style={{ width: "100%", height: "auto", borderRadius: "8px" }}
