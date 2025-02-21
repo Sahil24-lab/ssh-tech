@@ -30,8 +30,9 @@ export default function Custom404() {
         variant="h5"
         sx={{ mb: 3, color: theme.palette.text.secondary }}
       >
-        Oops! The page you're looking for doesn't exist.
+        Oops! The page you&apos;re looking for doesn&apos;t exist.
       </Typography>
+
       <Button
         component={Link}
         href="/"
