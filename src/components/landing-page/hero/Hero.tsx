@@ -2,11 +2,11 @@
 
 import { Typography, Button, Box, Grid } from "@mui/material";
 import GlassCard from "@/components/card/glass-card/GlassCard";
-import { useTheme } from "@mui/material/styles";
+ 
 import Image from "next/image";
 
 const Hero = () => {
-  const theme = useTheme(); // Get theme colors
+ 
 
   return (
     <Box

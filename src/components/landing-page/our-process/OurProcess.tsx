@@ -1,4 +1,4 @@
-import { Container, Typography, Grid, Box } from "@mui/material";
+import { Typography, Grid, Box } from "@mui/material";
 import GlassCard from "@/components/card/glass-card/GlassCard";
 
 const processes = [
