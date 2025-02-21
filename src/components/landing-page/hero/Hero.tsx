@@ -10,19 +10,17 @@ const Hero = () => {
   return (
     <Box
       sx={{
-        mt: 6,
+        mt: 12,
       }}
     >
-      <Grid container spacing={4} alignItems="center">
+      <Grid container spacing={12} alignItems="center">
         {/* Left Side - Text Section */}
         <Grid item xs={12} md={6}>
           <Typography variant="h1" component="h1" gutterBottom>
-            Your Dev Partner for Onboarding the Next Wave of Crypto Users
+            Making Web3 User Friendly
           </Typography>
           <Typography variant="h5" component="p" gutterBottom sx={{ mb: 4 }}>
-            At SSH Tech, we craft intuitive and secure frontends for crypto
-            projects & build custom tools that supercharge your community
-            engagement.
+            At SSH Tech, we craft bullet proof easy to use web3 frontends
           </Typography>
           <Box sx={{ display: "flex", gap: 2 }}>
             <Button variant="contained" color="primary" size="large">

@@ -29,12 +29,12 @@ const theme = createTheme({
   typography: {
     fontFamily: "Roboto, sans-serif",
     h1: {
-      fontSize: "2.5rem",
+      fontSize: "3rem",
       fontWeight: 600,
       color: "#EFFEEB", // Ensuring readability
     },
     h2: {
-      fontSize: "2rem",
+      fontSize: "2.5rem",
       fontWeight: 500,
       color: "#91FEE6",
     },

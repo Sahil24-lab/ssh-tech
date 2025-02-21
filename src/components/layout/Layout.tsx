@@ -28,7 +28,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     >
       <Header />
       <Container
-        maxWidth="md" // Ensures consistency across pages
+        maxWidth="xl" // Ensures consistency across pages
         sx={{
           flexGrow: 1,
           display: "flex",
