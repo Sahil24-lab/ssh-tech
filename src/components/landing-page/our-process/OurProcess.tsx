@@ -32,7 +32,7 @@ const OurProcess = () => {
   return (
     <Box sx={{ py: 8 }}>
       <Typography variant="h2" component="h2" gutterBottom align="center">
-        Our process
+        Our Process
       </Typography>
       <Typography
         variant="subtitle1"
