@@ -1,10 +1,8 @@
 import Layout from "@/components/layout/Layout";
+import { Typography } from "@mui/material";
 
 export default function AboutPage() {
-  return (
-    <Layout>
-      <h1>About Us</h1>
-      <p>Click in the header to test the loading spinner.</p>
-    </Layout>
-  );
+  return <Layout>
+    <Typography>Blog Page</Typography>
+  </Layout>;
 }

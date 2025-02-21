@@ -1,12 +1,5 @@
-import {
-  Container,
-  Typography,
-  Grid,
-  Card,
-  CardContent,
-  Button,
-  Box,
-} from "@mui/material";
+import { Typography, Grid, Button, Box } from "@mui/material";
+import GlassCard from "@/components/card/glass-card/GlassCard";
 
 const projects = [
   {
@@ -28,33 +21,49 @@ const projects = [
 
 const ProofOfWork = () => {
   return (
-    <Box id="work" sx={{ py: 8, backgroundColor: "background.paper" }}>
-      <Container maxWidth="lg">
-        <Typography variant="h2" component="h2" gutterBottom>
-          Trusted by Leading DeFi and GameFi Projects
-        </Typography>
-        <Grid container spacing={4}>
-          {projects.map((project, index) => (
-            <Grid item xs={12} md={4} key={index}>
-              <Card>
-                <CardContent>
-                  <Typography variant="h5" component="h3" gutterBottom>
-                    {project.title}
-                  </Typography>
-                  <Typography variant="body2" sx={{ mb: 2 }}>
-                    {project.description}
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Grid>
-          ))}
-        </Grid>
-        <Box sx={{ mt: 4, textAlign: "center" }}>
-          <Button variant="contained" color="primary" size="large">
-            View Our Work
-          </Button>
-        </Box>
-      </Container>
+    <Box
+      id="work"
+      sx={{
+        px: 10,
+        py: 10,
+        backgroundColor: "background.paper",
+        textAlign: "center",
+        borderRadius: "12px",
+      }}
+    >
+      {/* Section Title with Better Spacing */}
+      <Typography variant="h2" component="h2" gutterBottom sx={{ mb: 6 }}>
+        Trusted by Leading DeFi and GameFi Projects
+      </Typography>
+
+      {/* Grid Container */}
+      <Grid container spacing={6} justifyContent="center">
+        {projects.map((project, index) => (
+          <Grid item xs={12} md={4} key={index}>
+            <GlassCard
+              sx={{
+                p: 4,
+                height: "100%", // Ensures all cards have equal height
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
+              }}
+            >
+              <Typography variant="h5" component="h3" gutterBottom>
+                {project.title}
+              </Typography>
+              <Typography variant="body2">{project.description}</Typography>
+            </GlassCard>
+          </Grid>
+        ))}
+      </Grid>
+
+      {/* CTA Button */}
+      <Box sx={{ mt: 6 }}>
+        <Button variant="contained" color="primary" size="large">
+          View Our Work
+        </Button>
+      </Box>
     </Box>
   );
 };
