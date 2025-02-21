@@ -44,6 +44,8 @@ const Hero = () => {
             <Image
               src="/code.jpg"
               alt="Hero"
+              width={600}
+              height={400}
               style={{ width: "100%", height: "auto", borderRadius: "8px" }}
             />
           </GlassCard>
