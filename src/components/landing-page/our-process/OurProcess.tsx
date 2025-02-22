@@ -4,27 +4,27 @@ import GlassCard from "@/components/card/glass-card/GlassCard";
 const processes = [
   {
     step: "01",
-    title: "Discovery and Research",
+    title: "Tailored Solutions for You",
     description:
-      "Understand the client's values and audience. Conduct market research. Identify key design elements.",
+      "No two projects are the same, which is why we tailor our approach to fit your specific needs. Whether you’re building a DApp or creating community tools, we take the time to understand your goals and deliver custom development that fits your project needs.",
   },
   {
     step: "02",
-    title: "Concept Development",
+    title: "Simple, Scalable Pricing",
     description:
-      "Brainstorm and sketch initial concepts. Focus on simplicity. Prioritise ideas for further development.",
+      "We operate on a simple flat-rate monthly fee for ongoing development and support. It’s transparent, predictable, and scales as your project grows. You’ll always know what to expect.",
   },
   {
     step: "03",
-    title: "Design and Refinement",
+    title: "Fast Onboarding, Quick Results",
     description:
-      "Create digital versions of prioritised concepts. Refine the designs, ensuring clarity. Incorporate client feedback for fine-tuning.",
+      "With over 7 years of experience in the crypto space, we hit the ground running. We bring the expertise and the understanding of what it takes to get results quickly, so you can start seeing real progress sooner rather than later.",
   },
   {
     step: "04",
-    title: "Finalisation and Delivery",
+    title: "Flexible Collaboration",
     description:
-      "Prepare the final deliverables in various formats. Provide a comprehensive brand guide. Deliver the final assets and support.",
+      "We mold our process to fit your preferences—whether you prefer regular updates and a hands-on approach, or need us to handle the details more independently. Our goal is to work the way that’s best for you, giving you the freedom to focus on what matters most.",
   },
 ];
 

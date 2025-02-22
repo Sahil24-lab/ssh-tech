@@ -40,7 +40,7 @@ const theme = createTheme({
     },
     body1: {
       fontSize: "1rem",
-      color: "#C8FFF1",
+      color: "#FFFF",
     },
   },
   components: {

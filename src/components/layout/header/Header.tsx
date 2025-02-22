@@ -68,8 +68,8 @@ export default function Header() {
             <Button component={Link} href="/blogs" variant="text">
               Blogs
             </Button>
-            <Button component={Link} href="/client-projects" variant="text">
-              Client Projects
+            <Button component={Link} href="/proof-of-work" variant="text">
+              Proof Of Work
             </Button>
             <Button component={Link} href="/tools-resources" variant="text">
               Tools & Resources
@@ -118,10 +118,10 @@ export default function Header() {
           </ListItem>
           <ListItem
             component={Link}
-            href="/client-projects"
+            href="/proof-of-work"
             onClick={handleDrawerToggle}
           >
-            <ListItemText primary="Client Projects" />
+            <ListItemText primary="Proof Of Work" />
           </ListItem>
           <ListItem
             component={Link}

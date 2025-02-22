@@ -3,9 +3,9 @@ import GlassCard from "@/components/card/glass-card/GlassCard";
 
 const services = [
   {
-    title: "Frontend Development for DApps",
+    title: "Development of DApps",
     description:
-      "We design and build sleek, responsive frontends. With a focus on intuitive, user-centered design, we make sure your platform is accessible for both newcomers and crypto natives.",
+      "We build sleek, responsive frontends. With a focus on intuitive, user-centered design, we make your platform accessible for both newcomers and crypto natives.",
   },
   {
     title: "Community Engagement Tools",
@@ -15,7 +15,7 @@ const services = [
   {
     title: "Frontend Security",
     description:
-      "Trust is everything. We integrate best-in-class security practices directly into the frontend, ensuring your users feel confident interacting with your platform—every click of the way.",
+      "Trust is everything. We integrate best-in-class security practices directly into the frontend, ensuring your users feel confident interacting with your platform.",
   },
 ];
 
@@ -39,7 +39,7 @@ const OurServices = () => {
           <Grid item xs={12} md={4} key={index}>
             <GlassCard
               sx={{
-                p: 4,
+                p: 6,
                 height: "100%",
                 display: "flex",
                 flexDirection: "column",
