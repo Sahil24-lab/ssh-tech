@@ -24,46 +24,39 @@ export default async function ProofOfWorkList() {
         variant="h3"
         gutterBottom
         align="center"
-        sx={{ marginTop: 4, marginBottom: 4 }}
+        sx={{ marginBottom: 4 }}
       >
         Proof of Work
       </Typography>
       <Grid container spacing={6} justifyContent="center" alignItems="stretch">
         {projects.map((project) => (
-          <Grid
-            item
-            xs={12}
-            md={12}
-            lg={10}
-            key={project.sys.id}
-            sx={{ display: "flex" }}
-          >
+          <Grid item xs={12} md={12} lg={10} key={project.sys.id}>
             <Card
               sx={{
                 display: "flex",
                 flexDirection: { xs: "column", md: "row" },
-                flexGrow: 1,
-                alignItems: "stretch",
                 borderRadius: "16px",
                 overflow: "hidden",
-                transition: "box-shadow 0.2s ease-in-out",
-                boxShadow: "0 2px 6px rgba(0, 0, 0, 0.1)",
+                transition:
+                  "box-shadow 0.2s ease-in-out, transform 0.1s ease-in-out",
+                boxShadow: "0 2px 4px rgba(0, 0, 0, 0.08)",
                 "&:hover": {
-                  boxShadow: "0 6px 16px rgba(0, 0, 0, 0.2)",
+                  boxShadow: "0 6px 12px rgba(0, 0, 0, 0.15)",
+                  transform: "translateY(-1px)",
                 },
-                minHeight: "100%", // Ensure consistent height
               }}
             >
-              {/* Image Section */}
-              {(project.fields.image as unknown as ContentfulImageAsset)?.fields
-                ?.file?.url && (
-                <CardMedia
-                  sx={{
-                    height: "100%",
-                    width: { xs: "100%", md: "50%" },
-                    flexShrink: 0,
-                  }}
-                >
+              <CardMedia
+                sx={{
+                  width: { xs: "100%", md: "50%" },
+                  height: { xs: "auto", md: "100%" },
+                  flexShrink: 0,
+                }}
+              >
+                {Boolean(
+                  (project.fields.image as unknown as ContentfulImageAsset)
+                    ?.fields?.file?.url
+                ) && (
                   <Image
                     src={`https:${
                       (project.fields.image as unknown as ContentfulImageAsset)
@@ -78,37 +71,28 @@ export default async function ProofOfWorkList() {
                       objectFit: "cover",
                     }}
                   />
-                </CardMedia>
-              )}
-
-              {/* Content Section */}
+                )}
+              </CardMedia>
               <CardContent
                 sx={{
                   display: "flex",
                   flexDirection: "column",
-                  flexGrow: 1,
                   justifyContent: "space-between",
                   padding: { xs: 3, md: 5 },
-                  minHeight: "100%", // Ensure content height consistency
                 }}
               >
-                <Typography
-                  color="text.secondary"
-                  variant="h5"
-                  sx={{ marginBottom: 2 }}
-                >
+                <Typography variant="h5" sx={{ marginBottom: 2 }}>
                   {String(project.fields.title ?? "Untitled Project")}
                 </Typography>
                 <Typography
                   variant="body1"
-                  sx={{ flexGrow: 1, marginBottom: 2 }}
+                  color="text.secondary"
+                  sx={{ marginBottom: 2 }}
                 >
                   {String(
                     project.fields.description ?? "No description available"
                   )}
                 </Typography>
-
-                {/* Tags */}
                 {project.fields.tags &&
                   Array.isArray(project.fields.tags) &&
                   project.fields.tags.length > 0 && (
@@ -130,14 +114,10 @@ export default async function ProofOfWorkList() {
                       ))}
                     </Box>
                   )}
-
-                {/* Extra Space After Tags */}
-                <Box sx={{ flexGrow: 1 }}></Box>
-
-                {/* Button Positioned at Bottom */}
-                <Box sx={{ display: "flex", justifyContent: "flex-start" }}>
+                <Box sx={{ flexGrow: 1 }} />
+                <Box>
                   <Link href={`/proof-of-work/${project.fields.slug}`} passHref>
-                    <Button variant="contained" color="primary">
+                    <Button variant="contained" color="primary" disableRipple>
                       View Project
                     </Button>
                   </Link>
