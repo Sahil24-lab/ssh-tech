@@ -16,6 +16,7 @@ import Layout from "@/components/layout/Layout";
 import { CenteredBackButton } from "@/components/button/back-button/BackButton";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useEffect, useState } from "react";
+import FeatureImage from "@/components/feature-image/FeatureImage";
 
 export default function ProofOfWorkPage({
   project,
@@ -226,47 +227,21 @@ export default function ProofOfWorkPage({
           </Box>
         </Card>
 
-        {/* Features Section (Images & Text Alternating) */}
+        {/* Features Section (Images Take Full Width) */}
         {safeScreenshots.map((shot, index) => (
-          <Grid
-            container
-            key={index}
-            className="max-w-6xl mx-auto"
-            spacing={4}
-            marginTop="2rem"
-            padding="0rem 1rem"
-            sx={{ flexDirection: index % 2 === 0 ? "row" : "row-reverse" }}
-          >
-            {/* Text - 25% */}
-            <Grid
-              item
-              xs={12}
-              md={3}
-              className="flex flex-col justify-center text-left"
-            >
-              <Typography variant="h2" fontWeight={700}>
-                {shot.fields?.title ?? `Feature ${index + 1}`}
-              </Typography>
-              <Typography variant="body1" className="mt-4">
-                {shot.fields?.description ?? "Feature description here."}
-              </Typography>
-            </Grid>
-
-            {/* Image - 75% */}
-            <Grid item xs={12} md={9}>
-              <Box sx={{ backgroundColor: "transparent" }}>
-                {shot.fields?.file?.url && (
-                  <Image
-                    src={`https:${shot.fields.file.url}`}
-                    alt={shot.fields?.title ?? `Feature ${index + 1}`}
-                    width={1200}
-                    height={800}
-                    className="rounded-lg object-cover"
-                  />
-                )}
-              </Box>
-            </Grid>
-          </Grid>
+          <Box key={index} marginTop="2rem">
+            {/* Full-Width Image with Hover Overlay */}
+            {shot.fields?.file?.url && (
+              <FeatureImage
+                src={`https:${shot.fields.file.url}`}
+                alt={shot.fields?.title ?? `Feature ${index + 1}`}
+                title={shot.fields?.title ?? `Feature ${index + 1}`}
+                description={
+                  shot.fields?.description ?? "Feature description here."
+                }
+              />
+            )}
+          </Box>
         ))}
       </Box>
     </Layout>

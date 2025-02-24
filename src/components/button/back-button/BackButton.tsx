@@ -60,9 +60,11 @@ const BackButton = styled(BackButtonBase)(({ theme }) => ({
   width: "auto",
   minWidth: "150px",
   height: "48px",
-  textDecoration: "none", // REMOVE UNDERLINE
-  color: "inherit", // Prevents unwanted color overrides
-  variant: "plain",
+  textDecoration: "none !important", // Force remove underline
+  color: "inherit !important", // Prevent color overrides
+  background: "none",
+  border: "none",
+
   transition: theme.transitions.create([
     "background-color",
     "box-shadow",
@@ -72,23 +74,18 @@ const BackButton = styled(BackButtonBase)(({ theme }) => ({
     "padding",
     "transform",
   ]),
+
   transformOrigin: "left center",
   position: "fixed",
 
   "&:hover": {
     backgroundColor: "rgba(255, 255, 255, 0.1)", // Subtle color change
-    transform: "translateY(-2px)", // Subtle movement upwards
-    textDecoration: "none", // Remove underline on hover
+    transform: "translateY(-2px)", // Slight movement
   },
 
   "&:active": {
     transform: "translateY(1px) scale(0.98)", // Pressing effect
-    boxShadow: theme.shadows[2], // Slightly reduced shadow when pressed
-    textDecoration: "none", // Remove underline on active
-  },
-
-  "&:focus": {
-    textDecoration: "none", // Remove underline on focus
+    boxShadow: theme.shadows[2],
   },
 
   "&.scrolled": {
@@ -103,6 +100,12 @@ const BackButton = styled(BackButtonBase)(({ theme }) => ({
     justifyContent: "center",
     alignItems: "center",
     paddingLeft: theme.spacing(1),
+  },
+
+  // Ensure MUI Link styles NEVER override this button
+  "& a": {
+    textDecoration: "none !important",
+    color: "inherit !important",
   },
 }));
 
