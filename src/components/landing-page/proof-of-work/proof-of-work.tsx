@@ -61,7 +61,7 @@ const ProofOfWork = () => {
       {/* CTA Button */}
       <Box sx={{ mt: 6 }}>
         <Button variant="contained" color="primary" size="large">
-          View Our Work
+          Proof of Work
         </Button>
       </Box>
     </Box>
