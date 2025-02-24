@@ -28,7 +28,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     >
       <Header />
       <Container
-        maxWidth="xl" // Ensures consistency across pages
         sx={{
           flexGrow: 1,
           display: "flex",
@@ -37,6 +36,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           alignItems: "center",
           paddingTop: "64px",
           paddingBottom: 2,
+          margin: "0 auto",
+          maxWidth: "1200px",
         }}
       >
         {loading ? <CircularProgress size={50} /> : children}

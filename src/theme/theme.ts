@@ -1,6 +1,7 @@
 import { createTheme } from "@mui/material/styles";
 import LinkStyles from "./link-styles/LinkStyles";
 import ButtonStyles from "./button-styles/ButtonStyles";
+import ChipStyles from "./chip-styles/ChipStyles";
 import NavigationButtonStyles from "./navigation-button-styles/NavigationButtonStyles";
 // Define your custom theme
 const theme = createTheme({
@@ -27,20 +28,55 @@ const theme = createTheme({
     },
   },
   typography: {
-    fontFamily: "Roboto, sans-serif",
+    fontFamily: "var(--font-montserrat), sans-serif",
     h1: {
+      fontFamily: "var(--font-montserrat), sans-serif",
+      fontWeight: 700,
       fontSize: "3rem",
-      fontWeight: 600,
-      color: "#EFFEEB", // Ensuring readability
+      lineHeight: 1.2,
+      color: "#1FE2C4", // Vibrant turquoise (Primary main)
     },
     h2: {
+      fontFamily: "var(--font-montserrat), sans-serif",
+      fontWeight: 600,
       fontSize: "2.5rem",
+      lineHeight: 1.3,
+      color: "#1FE2C4", // Lighter turquoise (Primary light)
+    },
+    h3: {
+      fontFamily: "var(--font-montserrat), sans-serif",
       fontWeight: 500,
-      color: "#91FEE6",
+      fontSize: "2rem",
+      lineHeight: 1.4,
+      color: "#029F8C", // Darker turquoise (Primary dark)
+    },
+    h4: {
+      fontFamily: "var(--font-montserrat), sans-serif",
+      fontWeight: 500,
+      fontSize: "1.75rem",
+      lineHeight: 1.4,
+      color: "#EFFEEB", // Lightest text color
+    },
+    h5: {
+      fontFamily: "var(--font-montserrat), sans-serif",
+      fontWeight: 400,
+      fontSize: "1.25rem",
+      lineHeight: 1.5,
+      color: "#91FEE6", // Softer light turquoise
     },
     body1: {
-      fontSize: "1rem",
-      color: "#FFFF",
+      fontFamily: "var(--font-montserrat), sans-serif",
+      fontWeight: 400,
+      fontSize: "1.1rem",
+      lineHeight: 1.6,
+      color: "#EFFEEB", // Default text color
+    },
+    body2: {
+      fontFamily: "var(--font-poppins), sans-serif", // Alternative body text style
+      fontWeight: 400,
+      fontSize: "0.875rem",
+      lineHeight: 1.6,
+      color: "#91FEE6", // Softer light turquoise for contrast
     },
   },
   components: {
@@ -71,6 +107,7 @@ const theme = createTheme({
     ...LinkStyles,
     ...ButtonStyles,
     ...NavigationButtonStyles,
+    ...ChipStyles,
   },
 });
 

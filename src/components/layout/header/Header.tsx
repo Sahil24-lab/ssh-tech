@@ -42,7 +42,7 @@ export default function Header() {
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
-          padding: "0 16px",
+          padding: "16px 16px",
         }}
       >
         {/* Left: Logo with Link to Homepage */}

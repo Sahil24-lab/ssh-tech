@@ -1,168 +1,273 @@
-// app/proof-of-work/[slug]/ProofOfWorkPage.tsx
-
 "use client";
 
-import Layout from "@/components/layout/Layout";
 import { ProofOfWorkEntry, ContentfulImageAsset } from "../../types/contentful";
 import Image from "next/image";
 import {
   Box,
   Button,
-  Card,
-  CardContent,
-  CardMedia,
   Grid,
   Typography,
+  Card,
+  CardContent,
+  Chip,
+  Link,
 } from "@mui/material";
+import Layout from "@/components/layout/Layout";
+import { CenteredBackButton } from "@/components/button/back-button/BackButton";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import { useEffect, useState } from "react";
 
 export default function ProofOfWorkPage({
   project,
 }: {
   project: ProofOfWorkEntry;
 }) {
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 100);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   if (!project) {
     return (
-      <Layout>
+      <Box className="flex items-center justify-center h-screen">
         <Typography variant="h5">Project not found</Typography>
-      </Layout>
+      </Box>
     );
   }
 
-  const { title, description, demo, tags, screenshots, videoDemo } =
+  // Extract safe content
+  const { title, description, demo, github, tags, screenshots, demoVideo } =
     project.fields;
 
-  const safeTitle = typeof title === "string" ? title : "";
-  const safeDescription = typeof description === "string" ? description : "";
-  const safeDemo = typeof demo === "string" ? demo : "";
-  const safeTags = Array.isArray(tags) ? tags : [];
-  const safeScreenshots = Array.isArray(screenshots)
+  const safeTags: string[] = Array.isArray(tags) ? tags : [];
+  const safeScreenshots: ContentfulImageAsset[] = Array.isArray(screenshots)
     ? (screenshots as ContentfulImageAsset[])
     : [];
-  const safeVideoDemo = Array.isArray(videoDemo)
-    ? (videoDemo as ContentfulImageAsset[])
-    : [];
 
-  // Use "image" in the UI so it's not flagged as unused
+  const videoUrl: string = typeof demoVideo === "string" ? demoVideo : "";
+
+  const isYouTube =
+    videoUrl.includes("youtube.com") || videoUrl.includes("youtu.be");
+
+  const getYouTubeEmbedUrl = (url: string) => {
+    let videoId = "";
+    const youtubeMatch = url.match(/(?:youtu\.be\/|v=)([^&]+)/);
+    if (youtubeMatch) videoId = youtubeMatch[1];
+    return `https://www.youtube.com/embed/${videoId}`;
+  };
+
   return (
     <Layout>
-      <Box sx={{ maxWidth: 900, margin: "auto", padding: 3 }}>
-        <Typography variant="h4" gutterBottom>
-          {safeTitle}
-        </Typography>
-
-        <Typography variant="body1" color="text.secondary">
-          {safeDescription}
-        </Typography>
-
-        <CardMedia
+      <Box className="flex flex-col gap-10" marginTop="4rem">
+        <Card
           sx={{
-            width: { xs: "100%", md: "50%" },
-            height: { xs: "auto", md: "100%" },
-            flexShrink: 0,
+            display: "flex",
+            flexDirection: { xs: "column", md: "row" },
+            borderRadius: "16px",
+            overflow: "hidden",
           }}
         >
-          {Boolean(
-            (project.fields.image as unknown as ContentfulImageAsset)?.fields
-              ?.file?.url
-          ) && (
-            <Image
-              src={`https:${
-                (project.fields.image as unknown as ContentfulImageAsset).fields
-                  .file.url
-              }`}
-              alt={String(project.fields.title ?? "Project Image")}
-              width={800}
-              height={500}
-              style={{
-                width: "100%",
-                height: "100%",
-                objectFit: "cover",
-              }}
-            />
-          )}
-        </CardMedia>
+          {/* Sticky Back Button */}
+          <Box>
+            <CenteredBackButton
+              component={Link}
+              href="/proof-of-work"
+              startIcon={<ArrowBackIcon />}
+              color="primary"
+              className={isScrolled ? "scrolled" : ""}
+            >
+              {!isScrolled && "Back to Projects"}
+            </CenteredBackButton>
+          </Box>
 
-        {safeDemo && (
-          <Button
-            variant="contained"
-            color="primary"
-            href={safeDemo}
-            target="_blank"
-            rel="noopener noreferrer"
-            sx={{ mt: 2 }}
+          {/* Header Section */}
+          <Box
+            sx={{
+              position: "relative",
+              padding: "4rem",
+              textAlign: "left",
+              color: "white",
+              overflow: "hidden",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+            }}
           >
-            View Demo
-          </Button>
-        )}
+            <Box sx={{ position: "relative", zIndex: 2 }}>
+              <Typography variant="h1" fontWeight={700}>
+                {String(title ?? "Title")}
+              </Typography>
 
-        {safeTags.length > 0 && (
-          <Box sx={{ mt: 3 }}>
-            {safeTags.map((tag, index) => (
-              <Button
-                key={index}
-                variant="outlined"
-                sx={{ mr: 1, mb: 1 }}
-                size="small"
-              >
-                {tag}
-              </Button>
-            ))}
-          </Box>
-        )}
+              {/* Description */}
+              <Typography variant="body1" sx={{ mt: 4, mb: 4 }}>
+                {String(description ?? "No description available")}
+              </Typography>
 
-        {safeScreenshots.length > 0 && (
-          <Box sx={{ mt: 4 }}>
-            <Typography variant="h5" gutterBottom>
-              Screenshots
-            </Typography>
-            <Grid container spacing={2}>
-              {safeScreenshots.map(
-                (shot, index) =>
-                  shot?.fields?.file?.url && (
-                    <Grid item xs={12} sm={6} key={index}>
-                      <Card>
-                        <CardMedia
-                          component="img"
-                          height="200"
-                          image={`https:${shot.fields.file.url}`}
-                          alt={shot.fields.title ?? `Screenshot ${index + 1}`}
-                          sx={{ objectFit: "cover" }}
+              {/* Tags */}
+              {safeTags.length > 0 && (
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexWrap: "wrap",
+                    gap: 1,
+                    marginBottom: 2,
+                  }}
+                >
+                  {safeTags.map((tag, index) => (
+                    <Chip
+                      key={index}
+                      label={tag}
+                      color="primary"
+                      variant="outlined"
+                    />
+                  ))}
+                </Box>
+              )}
+
+              {/* Demo Video Section */}
+              {demoVideo && (
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    width: "100%",
+                    textAlign: "center",
+                    marginTop: "1.5rem",
+                  }}
+                >
+                  <Card
+                    sx={{
+                      width: "80%",
+                      maxWidth: "900px",
+                      border: "none",
+                      boxShadow: "none",
+                      display: "flex",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <CardContent
+                      sx={{
+                        width: "100%",
+                        display: "flex",
+                        justifyContent: "center",
+                      }}
+                    >
+                      {isYouTube ? (
+                        <Box
+                          component="iframe"
+                          src={getYouTubeEmbedUrl(videoUrl)}
+                          width="100%"
+                          height="auto"
+                          sx={{
+                            aspectRatio: "16/9",
+                            borderRadius: "16px",
+                            border: "none",
+                            display: "block",
+                            margin: "auto",
+                          }}
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                          allowFullScreen
                         />
-                      </Card>
-                    </Grid>
-                  )
+                      ) : (
+                        <video
+                          controls
+                          className="rounded-lg shadow-lg"
+                          style={{
+                            width: "100%",
+                            height: "auto",
+                            aspectRatio: "16/9",
+                            display: "block",
+                            margin: "auto",
+                          }}
+                        >
+                          <source src={videoUrl} />
+                          Your browser does not support the video tag.
+                        </video>
+                      )}
+                    </CardContent>
+                  </Card>
+                </Box>
               )}
-            </Grid>
-          </Box>
-        )}
 
-        {safeVideoDemo.length > 0 && (
-          <Box sx={{ mt: 4 }}>
-            <Typography variant="h5" gutterBottom>
-              Video Demo
-            </Typography>
-            <Grid container spacing={2}>
-              {safeVideoDemo.map(
-                (vid, index) =>
-                  vid?.fields?.file?.url && (
-                    <Grid item xs={12} sm={6} key={index}>
-                      <Card>
-                        <CardContent>
-                          <video
-                            controls
-                            style={{ width: "100%", height: "auto" }}
-                          >
-                            <source src={`https:${vid.fields.file.url}`} />
-                            Your browser does not support the video tag.
-                          </video>
-                        </CardContent>
-                      </Card>
-                    </Grid>
-                  )
-              )}
-            </Grid>
+              <Box sx={{ display: "flex", gap: 2 }}>
+                {/* Demo Button */}
+                {demo && (
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    href={String(demo)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    sx={{ mt: 3 }}
+                  >
+                    View Demo
+                  </Button>
+                )}
+                {github && (
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    href={String(github)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    sx={{ mt: 3 }}
+                  >
+                    View Github
+                  </Button>
+                )}
+              </Box>
+            </Box>
           </Box>
-        )}
+        </Card>
+
+        {/* Features Section (Images & Text Alternating) */}
+        {safeScreenshots.map((shot, index) => (
+          <Grid
+            container
+            key={index}
+            className="max-w-6xl mx-auto"
+            spacing={4}
+            marginTop="2rem"
+            padding="0rem 1rem"
+            sx={{ flexDirection: index % 2 === 0 ? "row" : "row-reverse" }}
+          >
+            {/* Text - 25% */}
+            <Grid
+              item
+              xs={12}
+              md={3}
+              className="flex flex-col justify-center text-left"
+            >
+              <Typography variant="h2" fontWeight={700}>
+                {shot.fields?.title ?? `Feature ${index + 1}`}
+              </Typography>
+              <Typography variant="body1" className="mt-4">
+                {shot.fields?.description ?? "Feature description here."}
+              </Typography>
+            </Grid>
+
+            {/* Image - 75% */}
+            <Grid item xs={12} md={9}>
+              <Box sx={{ backgroundColor: "transparent" }}>
+                {shot.fields?.file?.url && (
+                  <Image
+                    src={`https:${shot.fields.file.url}`}
+                    alt={shot.fields?.title ?? `Feature ${index + 1}`}
+                    width={1200}
+                    height={800}
+                    className="rounded-lg object-cover"
+                  />
+                )}
+              </Box>
+            </Grid>
+          </Grid>
+        ))}
       </Box>
     </Layout>
   );

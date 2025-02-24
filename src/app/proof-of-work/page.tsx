@@ -2,8 +2,7 @@ import { fetchEntries } from "../lib/contentful";
 import { ContentfulImageAsset, ProofOfWorkEntry } from "../types/contentful";
 import Image from "next/image";
 import Link from "next/link";
-import {
-  Container,
+import { 
   Typography,
   Card,
   CardContent,

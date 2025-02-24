@@ -27,7 +27,8 @@ export interface ProofOfWorkFields {
   slug?: string;
   tags?: string[];
   screenshots?: ContentfulImageAsset[];
-  videoDemo?: ContentfulImageAsset[];
+  demoVideo?: string;
+  github?: string;
 }
 
 // Ensure the Content Type structure is correct

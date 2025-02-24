@@ -1,17 +1,16 @@
 import { Components, Theme } from "@mui/material/styles";
 
-const LinkStyles: Components<Omit<Theme, "components">> = {
+const ButtonStyles: Components<Omit<Theme, "components">> = {
   MuiIconButton: {
     styleOverrides: {
       root: {
         color: "#91FEE6",
+        fontWeight: "600",
         transition: "color 0.2s ease-in-out, transform 0.1s ease-in-out",
-        "&:hover": {
-          color: "#C8FFF1", // Brighter hover color
+        "&:hover": { 
           transform: "scale(1.1)", // Slight scaling effect
         },
-        "&:active": {
-          color: "#EFFEEB", // Highest contrast when pressed
+        "&:active": { 
           transform: "scale(0.95)", // Press effect
         },
       },
@@ -19,4 +18,4 @@ const LinkStyles: Components<Omit<Theme, "components">> = {
   },
 };
 
-export default LinkStyles;
+export default ButtonStyles;
