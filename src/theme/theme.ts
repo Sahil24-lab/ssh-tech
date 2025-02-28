@@ -3,6 +3,7 @@ import LinkStyles from "./link-styles/LinkStyles";
 import ButtonStyles from "./button-styles/ButtonStyles";
 import ChipStyles from "./chip-styles/ChipStyles";
 import NavigationButtonStyles from "./navigation-button-styles/NavigationButtonStyles";
+import ScrollbarStyles from "./scrollbar-styles/ScrollbarStyles";
 // Define your custom theme
 const theme = createTheme({
   palette: {
@@ -108,6 +109,7 @@ const theme = createTheme({
     ...ButtonStyles,
     ...NavigationButtonStyles,
     ...ChipStyles,
+    ...ScrollbarStyles,
   },
 });
 

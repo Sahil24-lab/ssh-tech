@@ -13,42 +13,41 @@ import GlassCard from "@/components/card/glass-card/GlassCard";
 
 const pricingPlans = [
   {
-    name: "Lite",
-    price: "$1,495",
+    name: "Essential",
+    price: "$6K /month",
     description:
-      "Quickly receive a high-quality brand logo, representing your business vision.",
+      "Kickstart your project with 20 hrs/week of targeted Web3 development and strategic blueprinting.",
     features: [
-      "Primary logo",
-      "Brand colours",
-      "72hr delivery",
-      "Max 1 revision",
-      "Figma files",
+      "20 hrs/week dedicated development time",
+      "Blueprint Discovery Call & 1–2 Week Proof-of-Concept",
+      "Core Web3 development & strategic planning",
+      "Minimum 3-month commitment (6-month discount available)",
     ],
   },
   {
-    name: "Standard",
-    price: "$2,225",
+    name: "Growth",
+    price: "$9K /month",
     description:
-      "Full scale brand identity promoting and connecting with your target audience.",
+      "Accelerate success with 30 hrs/week of iterative development, frequent reviews, and enhanced project management.",
     features: [
-      "Primary and secondary logos",
-      "Full brand guidebook",
-      "2 weeks delivery",
-      "Max 3 revisions",
-      "Figma files",
+      "30 hrs/week development time",
+      "Everything in Essential, plus:",
+      "Extended development & iterative enhancements",
+      "Enhanced Subgraph deployment for real-time data indexing",
+      "Iterative Web3 integration improvements with additional security testing",
     ],
   },
   {
-    name: "Monthly",
-    price: "$2,495/m",
+    name: "Premium",
+    price: "$13K /month",
     description:
-      "Monthly design support, perfect for companies who require ongoing design work.",
+      "Transform your digital presence with 40 hrs/week of dedicated support",
     features: [
-      "Unlimited banners",
-      "Unlimited revisions",
-      "Updates every 24 hours",
-      "Max 1 revision",
-      "Pause or cancel anytime",
+      "40 hrs/week development time",
+      "Everything in Growth, plus:",
+      "Scalable, robust Subgraph deployment for high-performance data retrieval",
+      "Access to Private discord server with dedicated 24/7 support for your project",
+      "Extensive, automated security and performance testing",
     ],
   },
 ];
