@@ -28,7 +28,7 @@ const pricingPlans = [
     name: "Growth",
     price: "$9K /month",
     description:
-      "Accelerate success with 30 hrs/week of iterative development, frequent reviews, and enhanced project management.",
+      "Accelerate your project wiht 30 hrs/week of iterative development, and adnvanced security testing",
     features: [
       "30 hrs/week development time",
       "Everything in Essential, plus:",
@@ -41,7 +41,7 @@ const pricingPlans = [
     name: "Premium",
     price: "$13K /month",
     description:
-      "Transform your digital presence with 40 hrs/week of dedicated support",
+      "Transform your project with dedicated 40 hrs/week of development and 24/7 dedicated support",
     features: [
       "40 hrs/week development time",
       "Everything in Growth, plus:",

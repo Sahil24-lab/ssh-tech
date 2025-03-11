@@ -2,18 +2,18 @@
 
 import { Typography, Button, Box, Grid } from "@mui/material";
 import GlassCard from "@/components/card/glass-card/GlassCard";
- 
 import Image from "next/image";
 
 const Hero = () => {
- 
+  const handleScroll = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   return (
-    <Box
-      sx={{
-        mt: 12,
-      }}
-    >
+    <Box sx={{ mt: 12 }}>
       <Grid container spacing={12} alignItems="center">
         {/* Left Side - Text Section */}
         <Grid item xs={12} md={6}>
@@ -24,11 +24,21 @@ const Hero = () => {
             At SSH Tech, we craft bullet proof easy to use web3 frontends
           </Typography>
           <Box sx={{ display: "flex", gap: 2 }}>
-            <Button variant="contained" color="primary" size="large">
-              View plans
+            <Button
+              variant="contained"
+              color="primary"
+              size="large"
+              onClick={() => handleScroll("faq")}
+            >
+              Book a Call
             </Button>
-            <Button variant="outlined" color="secondary" size="large">
-              Learn more
+            <Button
+              variant="outlined"
+              color="secondary"
+              size="large"
+              onClick={() => handleScroll("pricing")}
+            >
+              View Plans
             </Button>
           </Box>
         </Grid>
