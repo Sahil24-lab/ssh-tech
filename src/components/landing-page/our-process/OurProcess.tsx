@@ -31,7 +31,19 @@ const processes = [
 const OurProcess = () => {
   return (
     <Box sx={{ py: 8 }}>
-      <Typography variant="h2" component="h2" gutterBottom align="center">
+      <Typography
+        variant="h2"
+        component="h2"
+        gutterBottom
+        align="center"
+        sx={{
+          mb: 1,
+          fontSize: "2.5rem",
+          fontWeight: "bold",
+          letterSpacing: "0.5px",
+          color: "#FFFFFF",
+        }}
+      >
         Our Process
       </Typography>
       <Typography

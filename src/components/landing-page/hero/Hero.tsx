@@ -20,7 +20,12 @@ const Hero = () => {
           <Typography variant="h1" component="h1" gutterBottom>
             Making Web3 User Friendly
           </Typography>
-          <Typography variant="h5" component="p" gutterBottom sx={{ mb: 4 }}>
+          <Typography
+            variant="h5"
+            component="p"
+            gutterBottom
+            sx={{ mb: 4, color: "#fff" }}
+          >
             At SSH Tech, we craft bullet proof easy to use web3 frontends
           </Typography>
           <Box sx={{ display: "flex", gap: 2 }}>

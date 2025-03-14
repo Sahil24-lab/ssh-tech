@@ -41,16 +41,20 @@ const FAQ = () => {
   return (
     <Box id="faq" sx={{ py: 8 }}>
       <Container maxWidth="lg">
-        <Typography variant="h2" component="h2" gutterBottom align="center">
-          Frequently Asked Questions
-        </Typography>
         <Typography
-          variant="subtitle1"
-          align="center"
+          variant="h2"
+          component="h2"
           gutterBottom
-          sx={{ mb: 4 }}
+          align="center"
+          sx={{
+            fontSize: "2.5rem",
+            fontWeight: "bold",
+            letterSpacing: "0.5px",
+            color: "#FFFFFF",
+            mb: 4,
+          }}
         >
-          The most common questions we get asked.
+          Frequently Asked Questions
         </Typography>
         <GlassCard>
           {faqs.map((faq, index) => (

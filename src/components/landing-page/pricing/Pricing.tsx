@@ -28,7 +28,7 @@ const pricingPlans = [
     name: "Growth",
     price: "$9K /month",
     description:
-      "Accelerate your project wiht 30 hrs/week of iterative development, and adnvanced security testing",
+      "Accelerate your project with 30 hrs/week of iterative development, and adnvanced security testing",
     features: [
       "30 hrs/week development time",
       "Everything in Essential, plus:",
@@ -55,7 +55,19 @@ const pricingPlans = [
 const Pricing = () => {
   return (
     <Box id="pricing" sx={{ py: 8 }}>
-      <Typography variant="h2" component="h2" gutterBottom align="center">
+      <Typography
+        variant="h2"
+        component="h2"
+        gutterBottom
+        align="center"
+        sx={{
+          fontSize: "2.5rem",
+          fontWeight: "bold",
+          letterSpacing: "0.5px",
+          color: "#FFFFFF",
+          mb: 1,
+        }}
+      >
         Our Services
       </Typography>
       <Typography
@@ -77,10 +89,20 @@ const Pricing = () => {
                 flexDirection: "column",
               }}
             >
-              <Typography variant="h6" color="primary" gutterBottom>
+              <Typography
+                variant="h6"
+                color="primary"
+                gutterBottom
+                sx={{ fontWeight: "bold" }}
+              >
                 {plan.name}
               </Typography>
-              <Typography variant="h3" component="p" gutterBottom>
+              <Typography
+                variant="h3"
+                component="p"
+                gutterBottom
+                sx={{ color: "#fff", fontWeight: "bold" }}
+              >
                 {plan.price}
               </Typography>
               <Typography variant="body2" paragraph>

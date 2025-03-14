@@ -21,14 +21,20 @@ const services = [
 
 const OurServices = () => {
   return (
-    <Box id="services" sx={{ py: 10, width: "100%" }}>
+    <Box id="services" sx={{ padding: "40px 0px 0px 0px", width: "100%" }}>
       {/* Section Title with More Spacing */}
       <Typography
         variant="h2"
         component="h2"
         gutterBottom
         align="center"
-        sx={{ mb: 6 }}
+        sx={{
+          mb: 1,
+          fontSize: "2.5rem",
+          fontWeight: "bold",
+          letterSpacing: "0.5px",
+          color: "#FFFFFF",
+        }}
       >
         Our Services
       </Typography>
