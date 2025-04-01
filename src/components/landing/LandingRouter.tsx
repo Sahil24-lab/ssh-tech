@@ -8,7 +8,6 @@ import { useSubdomain } from "@/contexts/SubdomainContexts";
 export default function LandingRouter() {
   const subdomain = useSubdomain();
 
-  // 🚨 Add safety fallback
   if (!subdomain) {
     return <div className="text-center mt-10">Loading...</div>;
   }
@@ -17,4 +16,3 @@ export default function LandingRouter() {
   if (subdomain === "robotics") return <RoboticsLanding />;
   return <Web3Landing />;
 }
-f
