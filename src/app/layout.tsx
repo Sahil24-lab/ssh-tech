@@ -1,9 +1,10 @@
+// src/app/layout.tsx
 import React from "react";
 import { Montserrat, Poppins } from "next/font/google";
 import "./globals.css";
 import ThemeRegistry from "@/theme/ThemeRegistry";
-import { cookies } from "next/headers";
-import { SubdomainContext } from "@/contexts/SubdomainContexts";
+import { headers } from "next/headers";
+import SubdomainProvider from "@/contexts/SubdomainProvider";
 
 const montserrat = Montserrat({
   variable: "--font-montserrat",
@@ -27,8 +28,8 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const cookieStore = await cookies();
-  const subdomain = cookieStore.get("subdomain")?.value;
+  const host = (await headers()).get("host") || "";
+  const subdomain = host.split(".")[0];
 
   return (
     <html lang="en">
@@ -36,9 +37,7 @@ export default async function RootLayout({
         className={`${montserrat.variable} ${poppins.variable} antialiased`}
       >
         <ThemeRegistry>
-          <SubdomainContext.Provider value={subdomain}>
-            {children}
-          </SubdomainContext.Provider>
+          <SubdomainProvider value={subdomain}>{children}</SubdomainProvider>
         </ThemeRegistry>
       </body>
     </html>
