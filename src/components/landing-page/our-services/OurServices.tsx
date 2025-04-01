@@ -21,7 +21,7 @@ const services = [
 
 const OurServices = () => {
   return (
-    <Box id="services" sx={{ padding: "40px 0px 0px 0px", width: "100%" }}>
+    <Box id="services" sx={{ padding: "20px 0px 40px 0px", width: "100%" }}>
       {/* Section Title with More Spacing */}
       <Typography
         variant="h2"
@@ -40,7 +40,11 @@ const OurServices = () => {
       </Typography>
 
       {/* Grid Container for Services */}
-      <Grid container spacing={6} sx={{ width: "100%", margin: 0 }}>
+      <Grid
+        container
+        spacing={4}
+        sx={{ width: "100%", align: "center", margin: 0 }}
+      >
         {services.map((service, index) => (
           <Grid item xs={12} md={4} key={index}>
             <GlassCard

@@ -1,34 +1,34 @@
 import { Components, Theme } from "@mui/material/styles";
 
-const ButtonStyles: Components<Omit<Theme, "components">> = {
+const ButtonStyles: Components<Theme> = {
   MuiButton: {
     styleOverrides: {
-      root: {
+      root: () => ({
         textTransform: "none",
         borderRadius: 8,
         fontWeight: 600,
-      },
-      containedPrimary: {
+      }),
+      containedPrimary: () => ({
         backgroundColor: "#07DFC1",
         color: "#003330",
         "&:hover": {
           backgroundColor: "#029F8C",
         },
-      },
-      outlinedSecondary: {
+      }),
+      outlinedSecondary: () => ({
         borderWidth: 2,
-        borderColor: "#EFFEEB", // Near-white for strong contrast
+        borderColor: "#EFFEEB",
         color: "#EFFEEB",
         "&:hover": {
           borderColor: "#91FEE6",
           color: "#91FEE6",
         },
-      },
+      }),
     },
   },
   MuiIconButton: {
     styleOverrides: {
-      root: {
+      root: () => ({
         color: "#91FEE6",
         fontWeight: 600,
         transition: "color 0.2s ease-in-out, transform 0.1s ease-in-out",
@@ -38,7 +38,7 @@ const ButtonStyles: Components<Omit<Theme, "components">> = {
         "&:active": {
           transform: "scale(0.95)",
         },
-      },
+      }),
     },
   },
 };

@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://web3.ssh-tech.xyz
+
+# Sitemaps
+Sitemap: https://web3.ssh-tech.xyz/sitemap.xml

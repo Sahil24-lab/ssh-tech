@@ -1,12 +1,9 @@
-// Layout.tsx
 "use client";
 
-import { Box, Container } from "@mui/material";
+import { Box } from "@mui/material";
 import Header from "./header/Header";
 import Footer from "./footer/Footer";
 
-// Removed the loading spinner to avoid hydration mismatch.
-// This ensures server and client see the same markup.
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <Box
@@ -22,27 +19,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       }}
     >
       <Header />
-      <Container
-        sx={{
-          flexGrow: 1,
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          paddingTop: { xs: "64px", md: "80px", lg: "100px" },
-          paddingX: { xs: 2, sm: 4, md: 6 },
-          paddingBottom: 2,
-          margin: "0 auto",
-          maxWidth: {
-            xs: "95%",
-            sm: "90%",
-            md: "1100px",
-            lg: "1400px",
-            xl: "1600px",
-          },
-        }}
-      >
-        {children}
-      </Container>
+      {children}
       <Footer />
     </Box>
   );
