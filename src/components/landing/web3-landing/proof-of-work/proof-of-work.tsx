@@ -22,13 +22,11 @@ const projects = [
 const ProofOfWork = () => {
   return (
     <Box
-      id="work"
       sx={{
         px: 10,
         py: 10,
         backgroundColor: "background.paper",
         textAlign: "center",
-        borderRadius: "12px",
       }}
     >
       {/* Section Title with Better Spacing */}

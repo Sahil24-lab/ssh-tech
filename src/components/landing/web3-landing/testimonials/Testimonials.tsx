@@ -135,22 +135,6 @@ const TestimonialCard = ({ testimonial }: TestimonialCardProps) => {
 const Testimonials = () => {
   return (
     <Box sx={{ py: 8 }}>
-      <Typography
-        variant="h2"
-        component="h2"
-        gutterBottom
-        align="center"
-        sx={{
-          fontSize: "2.5rem",
-          fontWeight: "bold",
-          letterSpacing: "0.5px",
-          color: "#FFFFFF",
-          mb: 4,
-        }}
-      >
-        Trusted by Experts
-      </Typography>
-
       {/* Enforce consistent card heights */}
       <Grid container spacing={4} alignItems="stretch">
         {testimonials.map((testimonial, index) => (

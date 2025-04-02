@@ -24,13 +24,12 @@ const OurServices = () => {
     <Box id="services" sx={{ padding: "20px 0px 40px 0px", width: "100%" }}>
       {/* Section Title with More Spacing */}
       <Typography
-        variant="h2"
-        component="h2"
+        variant="h1"
+        component="h1"
         gutterBottom
         align="center"
         sx={{
           mb: 1,
-          fontSize: "2.5rem",
           fontWeight: "bold",
           letterSpacing: "0.5px",
           color: "#FFFFFF",

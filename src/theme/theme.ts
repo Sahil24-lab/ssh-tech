@@ -76,9 +76,9 @@ const themeOptions = {
     body2: {
       fontFamily: "var(--font-poppins), sans-serif", // Alternative body style
       fontWeight: 400,
-      fontSize: "0.875rem",
+      fontSize: "1rem",
       lineHeight: 1.6,
-      color: "#91FEE6", // Contrast for secondary text
+      color: "#eee", // Contrast for secondary text
     },
   },
   // Define breakpoints for responsive layouts

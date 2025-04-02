@@ -12,7 +12,7 @@ export default function LandingRouter() {
     return <div className="text-center mt-10">Loading...</div>;
   }
 
-  if (subdomain === "profile") return <ProfileLanding />;
+  if (subdomain === "sahil") return <ProfileLanding />;
   if (subdomain === "robotics") return <RoboticsLanding />;
   return <Web3Landing />;
 }

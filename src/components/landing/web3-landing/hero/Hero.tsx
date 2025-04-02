@@ -13,10 +13,10 @@ const Hero = () => {
   };
 
   return (
-    <Box sx={{ mt: 12, padding: "2rem 4rem" }}>
+    <Box sx={{ mt: 12, padding: "2rem 6rem" }}>
       <Grid container spacing={12} alignItems="center">
         {/* Left Side - Text Section */}
-        <Grid item xs={12} md={6}>
+        <Grid item xs={12} md={6} >
           <Typography variant="h1" component="h1" gutterBottom>
             Making Web3 User Friendly
           </Typography>
