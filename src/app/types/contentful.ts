@@ -1,13 +1,20 @@
 import { Entry, EntrySkeletonType } from "contentful";
 
-// Explicitly define the Asset structure
+// Asset file structure
 export interface ContentfulFile {
   url: string;
-  details?: object;
+  details?: {
+    size?: number;
+    image?: {
+      width: number;
+      height: number;
+    };
+  };
   fileName?: string;
   contentType?: string;
 }
 
+// Asset structure
 export interface ContentfulImageAsset {
   metadata?: object;
   sys: { id: string };
@@ -18,20 +25,34 @@ export interface ContentfulImageAsset {
   };
 }
 
-// Define the Proof of Work content structure
-export interface ProofOfWorkFields {
-  title: string;
-  description: string;
-  image?: ContentfulImageAsset;
-  demo?: string;
-  slug?: string;
-  tags?: string[];
-  screenshots?: ContentfulImageAsset[];
-  demoVideo?: string;
-  github?: string;
+// RichText type for 'github' field
+export interface RichTextNode {
+  nodeType: string;
+  content: RichTextNode[] | string;
+  data?: any;
 }
 
-// Ensure the Content Type structure is correct
+// Complete structure for ProofOfWork content
+export interface ProofOfWorkFields {
+  title: string;
+  subtitle?: string;
+  achievements?: string[];
+  projectLogo?: ContentfulImageAsset;
+  description: string;
+  image?: ContentfulImageAsset;
+  slug?: string;
+  demo?: string;
+  tags?: string[];
+  screenshots?: ContentfulImageAsset[];
+  github?: {
+    data: {};
+    content: RichTextNode[];
+    nodeType: "document";
+  };
+  demoVideo?: string;
+}
+
+// Skeleton for Contentful entry
 export interface ProofOfWorkSkeleton extends EntrySkeletonType {
   fields: ProofOfWorkFields;
   contentTypeId: "proofOfWork";

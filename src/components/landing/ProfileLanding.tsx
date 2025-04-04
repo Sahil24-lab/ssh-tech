@@ -31,9 +31,9 @@ import {
 import GlassCard from "../card/glass-card/GlassCard";
 import Link from "next/link";
 import Layout from "../layout/Layout";
-import ConstrainedContainer from "@/components/layout/contrainer/constrained-container";
+import ConstrainedContainer from "@/components/layout/container/constrained-container";
 import CallToAction from "./profile-landing/CallToAction";
-import FullWidthContainer from "../layout/contrainer/full-width-container";
+import FullWidthContainer from "../layout/container/full-width-container";
 import ForRecruiters from "./profile-landing/ForRecruiters";
 import Education from "./profile-landing/Education";
 import Testimonials from "./web3-landing/testimonials/Testimonials";
@@ -71,6 +71,13 @@ export default function ProfilePage() {
           </section>
         </FullWidthContainer>
         {/* Key Skills Section - Organized by Category */}
+
+        {/* For Recruiters Section */}
+        <FullWidthContainer>
+          <section id="for-recruiters">
+            <ForRecruiters />
+          </section>
+        </FullWidthContainer>
 
         {/* Work Experience Section */}
         <FullWidthContainer>
@@ -161,12 +168,7 @@ https://www.youtube.com/@ssh_tech
             <Education />
           </section>
         </FullWidthContainer>
-        {/* For Recruiters Section */}
-        <FullWidthContainer>
-          <section id="for-recruiters">
-            <ForRecruiters />
-          </section>
-        </FullWidthContainer>
+
         {/* Call to Action */}
         <FullWidthContainer>
           <section id="call-to-action">

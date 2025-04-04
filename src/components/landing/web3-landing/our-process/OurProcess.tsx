@@ -1,103 +1,181 @@
 "use client";
 
-import { Typography, Grid, Box, Fade } from "@mui/material";
-import GlassCard from "@/components/card/glass-card/GlassCard";
 import {
-  MapsUgc,
-  DesignServices,
-  Code,
-  RocketLaunch,
-} from "@mui/icons-material";
+  Typography,
+  Grid,
+  Box,
+  Chip,
+  Fade,
+  useTheme,
+  alpha,
+} from "@mui/material";
+import GlassCard from "@/components/card/glass-card/GlassCard";
+import { Code, RocketLaunch } from "@mui/icons-material";
+import ArchitectureIcon from "@mui/icons-material/Architecture";
+import EmojiObjectsIcon from "@mui/icons-material/EmojiObjects";
 
 const processes = [
   {
-    step: "01",
-    title: "Blueprint & Planning",
+    phase: "Phase 1",
+    title: "Blueprint",
     description:
-      "We define goals, user flows, and success metrics in a free Blueprint Call—then deliver a clear execution plan.",
-    icon: <MapsUgc fontSize="small" />,
+      "We define your goals, user flows, and success metrics in a free Blueprint Call—then deliver a clear execution plan.",
+    icon: <EmojiObjectsIcon sx={{ fontSize: 72 }} />,
   },
   {
-    step: "02",
-    title: "Design & Architecture",
-    description:
-      "We craft intuitive UIs and smart contract architecture—scalable, secure, and mainnet-ready.",
-    icon: <DesignServices fontSize="small" />,
-  },
-  {
-    step: "03",
-    title: "Build & Validate",
+    phase: "Phase 2",
+    title: "Validate",
     description:
       "We ship a working POC or modular feature set for early feedback—minimizing risk and accelerating delivery.",
-    icon: <Code fontSize="small" />,
+    icon: <ArchitectureIcon sx={{ fontSize: 72 }} />,
   },
   {
-    step: "04",
+    phase: "Phase 3",
+    title: "Build",
+    description:
+      "We craft intuitive UIs and smart contract architecture—scalable, secure, and mainnet-ready.",
+    icon: <Code sx={{ fontSize: 72 }} />,
+  },
+  {
+    phase: "Phase 4",
     title: "Launch & Optimize",
     description:
       "We deploy to mainnet and stay involved post-launch—handling updates, analytics, and improvements.",
-    icon: <RocketLaunch fontSize="small" />,
+    icon: <RocketLaunch sx={{ fontSize: 72 }} />,
   },
 ];
 
 const OurProcess = () => {
+  const theme = useTheme();
+
   return (
-    <Box sx={{ py: 8 }} id="process">
-      <Typography variant="h2" align="center" gutterBottom sx={{ mb: 1 }}>
+    <Box sx={{ py: 10 }} id="process">
+      <Typography
+        variant="h1"
+        align="center"
+        sx={{
+          mb: 1,
+          fontWeight: "bold",
+          letterSpacing: "0.5px",
+          color: "#FFFFFF",
+        }}
+      >
         Our Process
       </Typography>
 
       <Typography
-        variant="subtitle1"
+        variant="h5"
         align="center"
-        gutterBottom
-        sx={{ mb: 4 }}
+        sx={{ mb: 6, color: "text.secondary" }}
       >
         Built for shipping fast, scaling smart, and staying secure.
       </Typography>
 
       <Grid container spacing={4} justifyContent="center">
         {processes.map((process, index) => (
-          <Grid item xs={12} sm={6} md={3} key={index}>
+          <Grid
+            item
+            xs={12} // 1 column for xs-sm-md
+            lg={6} // 2 columns from lg (≥1280px)
+            xl={3} // 4 columns from xl (≥1536px)
+            key={index}
+          >
             <Fade
               in
-              timeout={600 + index * 200}
-              style={{ transitionDelay: `${index * 150}ms` }}
+              timeout={600}
+              style={{ transitionDelay: `${index * 200}ms` }}
             >
-              <GlassCard
+              <Box
                 sx={{
-                  p: 4,
-                  height: "100%",
                   display: "flex",
                   flexDirection: "column",
-                  alignItems: "flex-start",
-                  gap: 2,
+                  alignItems: "center",
+                  position: "relative",
+                  "&:hover .glow-icon": {
+                    boxShadow: `0 0 48px ${theme.palette.primary.main}`,
+                    transform: "scale(1.05)",
+                  },
                 }}
               >
                 <Box
+                  className="glow-icon"
                   sx={{
+                    width: 140,
+                    height: 140,
+                    borderRadius: "50%",
                     display: "flex",
                     alignItems: "center",
-                    gap: 1,
-                    backgroundColor: "primary.main",
-                    color: "primary.contrastText",
-                    px: 2,
-                    py: 0.5,
-                    borderRadius: "999px",
-                    fontWeight: 600,
-                    fontSize: "0.875rem",
+                    justifyContent: "center",
+                    backgroundColor: theme.palette.primary.main,
+                    color: theme.palette.primary.contrastText,
+                    position: "absolute",
+                    top: 0,
+                    zIndex: 2,
+                    boxShadow: `0 0 32px ${alpha(
+                      theme.palette.primary.main,
+                      0.4
+                    )}`,
+                    transition: "all 0.3s ease",
                   }}
                 >
                   {process.icon}
-                  {process.step}
                 </Box>
 
-                <Typography variant="h4" gutterBottom>
-                  {process.title}
-                </Typography>
+                <GlassCard
+                  sx={{
+                    pt: { xs: 12, sm: 14 },
+                    pb: { xs: 8, sm: 10 },
+                    px: { xs: 3, sm: 4 },
+                    mt: { xs: 8, sm: 9 },
+                    minHeight: {
+                      xs: 400,
+                      md: 360,
+                      lg: 440,
+                    },
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    justifyContent: "flex-start",
+                    position: "relative",
+                    textAlign: "center",
+                  }}
+                >
+                  <Typography
+                    variant="h4"
+                    sx={{
+                      color: "text.primary",
+                      mb: 2,
+                    }}
+                  >
+                    {process.title}
+                  </Typography>
+                  <Typography
+                    variant="body1"
+                    sx={{
+                      color: "text.primary",
+                      maxWidth: "90%",
+                    }}
+                  >
+                    {process.description}
+                  </Typography>
 
-                <Typography variant="body2">{process.description}</Typography>
-              </GlassCard>
+                  <Chip
+                    label={process.phase}
+                    color="primary"
+                    sx={{
+                      fontWeight: 900,
+                      borderRadius: "999px",
+                      px: 6,
+                      py: 2,
+                      height: 32,
+                      position: "absolute",
+                      bottom: 40,
+                      left: "50%",
+                      transform: "translateX(-50%)",
+                    }}
+                  />
+                </GlassCard>
+              </Box>
             </Fade>
           </Grid>
         ))}

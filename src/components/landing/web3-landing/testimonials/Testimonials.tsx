@@ -134,7 +134,7 @@ const TestimonialCard = ({ testimonial }: TestimonialCardProps) => {
 
 const Testimonials = () => {
   return (
-    <Box sx={{ py: 8 }}>
+    <Box sx={{ py: 2 }}>
       {/* Enforce consistent card heights */}
       <Grid container spacing={4} alignItems="stretch">
         {testimonials.map((testimonial, index) => (

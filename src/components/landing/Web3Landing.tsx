@@ -1,6 +1,11 @@
+"use client";
+
+import { useRef, useState } from "react";
+import { Box, LinearProgress, Typography } from "@mui/material";
+
 import Layout from "@/components/layout/Layout";
-import FullWidthContainer from "@/components/layout/contrainer/full-width-container";
-import ConstrainedContainer from "@/components/layout/contrainer/constrained-container";
+import FullWidthContainer from "@/components/layout/container/full-width-container";
+import ConstrainedContainer from "@/components/layout/container/constrained-container";
 import Hero from "@/components/landing/web3-landing/hero/Hero";
 import OurServices from "@/components/landing/web3-landing/our-services/OurServices";
 import OurProcess from "@/components/landing/web3-landing/our-process/OurProcess";
@@ -8,60 +13,76 @@ import ProofOfWork from "@/components/landing/web3-landing/proof-of-work/proof-o
 import Testimonials from "@/components/landing/web3-landing/testimonials/Testimonials";
 import Pricing from "@/components/landing/web3-landing/pricing/Pricing";
 import FAQ from "@/components/landing/web3-landing/faq/FAQ";
-import { Typography } from "@mui/material";
 
 export default function Web3Landing() {
   return (
     <Layout>
-      <FullWidthContainer>
-        <section id="hero">
+      {/* Progress Bar below header */}
+      <Box
+        sx={{
+          position: "fixed",
+          top: 64,
+          left: 0,
+          right: 0,
+          zIndex: 10,
+        }}
+      ></Box>
+
+      <Box id="hero" sx={{ mb: 14 }}>
+        <FullWidthContainer>
           <Hero />
-        </section>
-      </FullWidthContainer>
+        </FullWidthContainer>
+      </Box>
 
-      <ConstrainedContainer>
-        <section id="services">
+      <Box id="services" sx={{ mb: 14 }}>
+        <ConstrainedContainer>
           <OurServices />
-        </section>
-      </ConstrainedContainer>
-      <FullWidthContainer>
-        <section id="proof">
+        </ConstrainedContainer>
+      </Box>
+
+      <Box id="proof" sx={{ mb: 14 }}>
+        <FullWidthContainer>
           <ProofOfWork />
-        </section>
-      </FullWidthContainer>
+        </FullWidthContainer>
+      </Box>
 
-      <ConstrainedContainer>
-        <section id="process">
+      <Box id="process" sx={{ mb: 14 }}>
+        <ConstrainedContainer>
           <OurProcess />
-        </section>
+        </ConstrainedContainer>
+      </Box>
 
-        <section id="testimonials">
+      <Box id="pricing" sx={{ mb: 14 }}>
+        <ConstrainedContainer>
+          <Pricing />
+        </ConstrainedContainer>
+      </Box>
+
+      <Box id="testimonials" sx={{ mb: 14 }}>
+        <ConstrainedContainer>
           <Typography
-            variant="h2"
-            component="h2"
+            variant="h1"
+            component="h1"
             gutterBottom
             align="center"
             sx={{
-              fontSize: "2.5rem",
+              mb: 4,
               fontWeight: "bold",
               letterSpacing: "0.5px",
               color: "#FFFFFF",
-              mb: 4,
             }}
           >
             Trusted by Experts
           </Typography>
-
           <Testimonials />
-        </section>
+        </ConstrainedContainer>
+      </Box>
 
-        <section id="pricing">
-          <Pricing />
-        </section>
-      </ConstrainedContainer>
-      <section id="faq">
-        <FAQ />
-      </section>
+      <Box id="faq">
+        <ConstrainedContainer>
+          <FAQ />
+        </ConstrainedContainer>
+      </Box>
     </Layout>
   );
 }

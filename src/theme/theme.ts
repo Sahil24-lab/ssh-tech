@@ -1,9 +1,22 @@
-import { createTheme, responsiveFontSizes, ThemeOptions } from "@mui/material/styles";
+import {
+  createTheme,
+  responsiveFontSizes,
+  ThemeOptions,
+} from "@mui/material/styles";
 import LinkStyles from "./link-styles/LinkStyles";
 import ButtonStyles from "./button-styles/ButtonStyles";
 import ChipStyles from "./chip-styles/ChipStyles";
 import NavigationButtonStyles from "./navigation-button-styles/NavigationButtonStyles";
 import ScrollbarStyles from "./scrollbar-styles/ScrollbarStyles";
+
+interface BreakpointOverrides {
+  xs: true;
+  sm: true;
+  md: true;
+  lg: true;
+  xl: true;
+  xxl: true;
+}
 
 // Base theme options for palette, typography, breakpoints, and component overrides
 const themeOptions = {
@@ -86,9 +99,10 @@ const themeOptions = {
     values: {
       xs: 0,
       sm: 600,
-      md: 900,
-      lg: 1200,
+      md: 960,
+      lg: 1280,
       xl: 1536,
+      xxl: 1800,
     },
   },
   // Component overrides to keep styling consistent

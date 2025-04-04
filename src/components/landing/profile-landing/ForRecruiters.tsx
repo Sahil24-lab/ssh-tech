@@ -72,10 +72,10 @@ export default function ForRecruiters() {
   ];
 
   const techStack = [
-    "Frontend: React, Next.js, TypeScript",
-    "Blockchain: Solidity, Web3.js, Ethers.js",
+    "Frontend: Next.js, RainbowKit, Viem, Wagmi",
+    "Blockchain: Solidity, Foundry, Chai, Mocha ",
     "Backend: Node.js, AWS, Supabase",
-    "Embedded: C++, Robotics, IoT",
+    "APIs: Nest.JS, Subquery, Subgraph",
   ];
 
   return (

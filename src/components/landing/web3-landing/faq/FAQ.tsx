@@ -5,9 +5,10 @@ import {
   AccordionSummary,
   AccordionDetails,
   Box,
+  useTheme,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import GlassCard from "@/components/card/glass-card/GlassCard";
+import GlassCardDark from "@/components/card/glass-card-dark/GlassCardDark";
 
 const faqs = [
   {
@@ -56,47 +57,97 @@ We review your existing codebase, identify gaps, and plan out new features witho
 ];
 
 const FAQ = () => {
+  const theme = useTheme();
+
   return (
     <Box id="faq" sx={{ py: 8 }}>
       <Container maxWidth="lg">
         <Typography
-          variant="h2"
-          component="h2"
+          variant="h1"
+          component="h1"
           gutterBottom
           align="center"
           sx={{
-            fontSize: "2.5rem",
+            mb: 4,
             fontWeight: "bold",
             letterSpacing: "0.5px",
             color: "#FFFFFF",
-            mb: 4,
           }}
         >
           Frequently Asked Questions
         </Typography>
-        <GlassCard>
-          {faqs.map((faq, index) => (
-            <Accordion
-              key={index}
-              elevation={0}
-              sx={{
-                background: "transparent",
-                "&:before": { display: "none" },
-              }}
-            >
-              <AccordionSummary
-                expandIcon={<ExpandMoreIcon />}
-                aria-controls={`panel${index + 1}-content`}
-                id={`panel${index + 1}-header`}
+
+        <GlassCardDark>
+          {faqs.map((faq, index) => {
+            const isFirst = index === 0;
+            const isLast = index === faqs.length - 1;
+
+            return (
+              <Accordion
+                key={index}
+                disableGutters
+                elevation={0}
+                sx={{
+                  backgroundColor: "#0E1A24",
+                  mb: 1,
+                  overflow: "hidden",
+                  borderTopLeftRadius: isFirst ? 24 : 0,
+                  borderTopRightRadius: isFirst ? 24 : 0,
+                  borderBottomLeftRadius: isLast ? 24 : 0,
+                  borderBottomRightRadius: isLast ? 24 : 0,
+                  "&:before": { display: "none" },
+                }}
               >
-                <Typography variant="h6">{faq.question}</Typography>
-              </AccordionSummary>
-              <AccordionDetails>
-                <Typography>{faq.answer}</Typography>
-              </AccordionDetails>
-            </Accordion>
-          ))}
-        </GlassCard>
+                <AccordionSummary
+                  expandIcon={
+                    <ExpandMoreIcon
+                      sx={{ color: theme.palette.primary.main }}
+                    />
+                  }
+                  aria-controls={`panel${index + 1}-content`}
+                  id={`panel${index + 1}-header`}
+                  sx={{
+                    borderTopLeftRadius: isFirst ? 900 : 0,
+                    borderTopRightRadius: isFirst ? 900 : 0,
+                    backgroundColor: "#0E1A24",
+                  }}
+                >
+                  <Typography
+                    variant="body1"
+                    sx={{
+                      fontWeight: 800,
+                      color: "#ffffff",
+                    }}
+                  >
+                    {faq.question}
+                  </Typography>
+                </AccordionSummary>
+
+                <AccordionDetails
+                  sx={{
+                    backgroundColor: "rgba(255,255,255,0.05)",
+                    px: 3,
+                    py: 2,
+                    ...(isLast && {
+                      borderBottomLeftRadius: 24,
+                      borderBottomRightRadius: 24,
+                    }),
+                  }}
+                >
+                  <Typography
+                    variant="body2"
+                    sx={{
+                      color: "#ffffff",
+                      lineHeight: 1.6,
+                    }}
+                  >
+                    {faq.answer}
+                  </Typography>
+                </AccordionDetails>
+              </Accordion>
+            );
+          })}
+        </GlassCardDark>
       </Container>
     </Box>
   );

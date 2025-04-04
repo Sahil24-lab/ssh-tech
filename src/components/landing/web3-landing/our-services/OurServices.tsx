@@ -3,19 +3,19 @@ import GlassCard from "@/components/card/glass-card/GlassCard";
 
 const services = [
   {
-    title: "Development of DApps",
+    title: "DApp Developments",
     description:
-      "We build sleek, responsive frontends. With a focus on intuitive, user-centered design, we make your platform accessible for both newcomers and crypto natives.",
+      "We build fast, accessible, and beautiful user interfaces—optimized for all types of users",
   },
   {
-    title: "Community Engagement Tools",
+    title: "Community Tools",
     description:
-      "From custom Discord bots to DAO voting tools, we build engagement systems that help your community grow and stay active.",
+      "From custom bots to DAO dashboards, we help you engage and grow your community",
   },
   {
     title: "Frontend Security",
     description:
-      "Trust is everything. We integrate best-in-class security practices directly into the frontend, ensuring your users feel confident interacting with your platform.",
+      "Security baked into the UI layer—so your users can trust every click, tap, and transaction",
   },
 ];
 

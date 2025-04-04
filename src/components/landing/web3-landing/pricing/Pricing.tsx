@@ -131,7 +131,7 @@ export default function Pricing() {
                 sx={{
                   px: 5,
                   py: plan.tag === "Most Popular" ? 9 : 6,
-                  minHeight: plan.tag === "Most Popular" ? 780 : 640,
+                  minHeight: plan.tag === "Most Popular" ? 740 : 640,
                   display: "flex",
                   flexDirection: "column",
                   flex: 1,

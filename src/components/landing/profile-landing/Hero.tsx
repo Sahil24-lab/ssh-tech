@@ -1,5 +1,12 @@
-import GlassCard from "@/components/card/glass-card/GlassCard";
-import { Box, Grid, Typography, Button, Avatar } from "@mui/material";
+import GlassCardDark from "@/components/card/glass-card-dark/GlassCardDark";
+import {
+  Box,
+  Grid,
+  Typography,
+  Button,
+  Avatar,
+  Container,
+} from "@mui/material";
 import {
   Download as DownloadIcon,
   LinkedIn as LinkedinIcon,
@@ -8,26 +15,34 @@ import {
   LocationOn as LocationIcon,
 } from "@mui/icons-material";
 import React from "react";
+import Image from "next/image";
 
 export default function Hero() {
   return (
-    <GlassCard
+    <GlassCardDark
       sx={{
-        mb: 6,
-        p: { xs: 3, md: 4 },
+        p: {
+          xs: "4rem 4rem",
+          sm: "4rem 4rem",
+          md: "4rem 4rem",
+          lg: "4rem 4rem",
+          xxl: "4rem 6rem",
+        }, // internal padding inside the card
+        borderRadius: 4,
+        my: 4,
         position: "relative",
         overflow: "hidden",
       }}
     >
-      <Grid container spacing={4} alignItems="center">
+      <Grid container spacing={5} alignItems="center">
         <Grid item xs={12} md={8}>
           <Box>
-            <Typography variant="h2" component="h1" gutterBottom>
+            <Typography variant="h1" component="h1" gutterBottom>
               Sahil Harriram
             </Typography>
 
             <Typography
-              variant="h5"
+              variant="h4"
               gutterBottom
               sx={{ color: "secondary.light" }}
             >
@@ -70,7 +85,7 @@ export default function Hero() {
                 variant="outlined"
                 startIcon={<LinkedinIcon />}
                 component="a"
-                href="https://linkedin.com"
+                href="https://www.linkedin.com/in/sahil-harriram/"
                 target="_blank"
                 sx={{
                   borderColor: "primary.light",
@@ -84,7 +99,7 @@ export default function Hero() {
                 variant="outlined"
                 startIcon={<GithubIcon />}
                 component="a"
-                href="https://github.com"
+                href="https://github.com/Sahil24-lab"
                 target="_blank"
                 sx={{
                   borderColor: "primary.light",
@@ -110,30 +125,44 @@ export default function Hero() {
           </Box>
         </Grid>
 
+        {/* AVATAR */}
         <Grid
           item
           xs={12}
           md={4}
           sx={{
             display: "flex",
-            justifyContent: { xs: "center", md: "flex-end" },
+            justifyContent: "center",
+            alignItems: "center",
           }}
         >
-          <Avatar
+          <Box
             sx={{
-              width: { xs: 150, md: 180 },
-              height: { xs: 150, md: 180 },
+              width: { xs: 150, md: 300 },
+              height: { xs: 150, md: 300 },
               border: "4px solid",
               borderColor: "primary.main",
-              fontSize: { xs: 40, md: 48 },
               backgroundColor: "background.paper",
               boxShadow: "0 8px 32px rgba(7, 223, 193, 0.3)",
+              borderRadius: "50%",
+              overflow: "hidden",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
             }}
           >
-            SH
-          </Avatar>
+            <Image
+              src="/logos/S Shape.png"
+              alt="Logo"
+              width={120}
+              height={120}
+              style={{
+                objectFit: "contain",
+              }}
+            />
+          </Box>
         </Grid>
       </Grid>
-    </GlassCard>
+    </GlassCardDark>
   );
 }
