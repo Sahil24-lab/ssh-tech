@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 import {
   AppBar,
@@ -12,6 +14,7 @@ import {
   ListItemText,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
+import CloseIcon from "@mui/icons-material/Close";
 import Link from "next/link";
 import { useTheme } from "@mui/material/styles";
 
@@ -20,7 +23,7 @@ export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const handleDrawerToggle = () => {
-    setMobileOpen(!mobileOpen);
+    setMobileOpen((prev) => !prev);
   };
 
   return (
@@ -28,10 +31,10 @@ export default function Header() {
       position="fixed"
       elevation={0}
       sx={{
-        backdropFilter: "blur(10px)", // Glass effect
-        backgroundColor: "rgba(255, 255, 255, 0.1)", // Transparent header
-        borderBottom: "1px solid rgba(255, 255, 255, 0.2)", // Subtle border
-        boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)", // Soft shadow
+        backdropFilter: "blur(10px)",
+        backgroundColor: "rgba(255, 255, 255, 0.1)",
+        borderBottom: "1px solid rgba(255, 255, 255, 0.2)",
+        boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
       }}
     >
       <Toolbar
@@ -45,7 +48,7 @@ export default function Header() {
           padding: "16px 16px",
         }}
       >
-        {/* Left: Logo with Link to Homepage */}
+        {/* Logo */}
         <Box sx={{ display: "flex", alignItems: "center", gap: 3 }}>
           <Typography
             variant="h6"
@@ -63,7 +66,7 @@ export default function Header() {
             SSH Tech
           </Typography>
 
-          {/* Navigation Links (Visible on Tablet & Desktop) */}
+          {/* Desktop Nav */}
           <Box sx={{ display: { xs: "none", md: "flex" }, gap: 2 }}>
             <Button component={Link} href="/blogs" variant="text">
               Blogs
@@ -77,7 +80,7 @@ export default function Header() {
           </Box>
         </Box>
 
-        {/* Right: "Book a Call" CTA (Visible on Tablet & Desktop) */}
+        {/* Desktop CTA */}
         <Button
           variant="contained"
           color="primary"
@@ -88,56 +91,106 @@ export default function Header() {
           Book a Call
         </Button>
 
-        {/* Mobile Menu Button */}
+        {/* Mobile Hamburger/X */}
         <IconButton
           edge="end"
-          color="inherit"
-          aria-label="menu"
           onClick={handleDrawerToggle}
-          sx={{ display: { md: "none" } }}
+          sx={{
+            display: { md: "none" },
+            color: theme.palette.primary.main,
+            transition: "transform 0.3s ease",
+          }}
         >
-          <MenuIcon />
+          {mobileOpen ? <CloseIcon /> : <MenuIcon />}
         </IconButton>
       </Toolbar>
 
-      {/* Mobile Drawer */}
+      {/* Mobile Fullscreen Drawer */}
       <Drawer
         anchor="right"
         open={mobileOpen}
         onClose={handleDrawerToggle}
-        sx={{
-          "& .MuiDrawer-paper": {
-            backgroundColor: theme.palette.background.paper,
-            color: theme.palette.text.primary,
+        transitionDuration={300}
+        PaperProps={{
+          sx: {
+            width: "100%",
+            height: "100vh",
+            backgroundColor: "rgba(9, 31, 44, 0.85)",
+            backdropFilter: "blur(14px)",
+            color: "#ffffff",
+            paddingX: 3,
+            paddingY: 4,
+            display: "flex",
+            flexDirection: "column",
           },
         }}
       >
-        <List>
-          <ListItem component={Link} href="/blogs" onClick={handleDrawerToggle}>
-            <ListItemText primary="Blogs" />
-          </ListItem>
-          <ListItem
-            component={Link}
-            href="/proof-of-work"
-            onClick={handleDrawerToggle}
-          >
-            <ListItemText primary="Proof Of Work" />
-          </ListItem>
-          <ListItem
-            component={Link}
-            href="/tools-resources"
-            onClick={handleDrawerToggle}
-          >
-            <ListItemText primary="Tools & Resources" />
-          </ListItem>
-          {/* Mobile "Book a Call" CTA */}
-          <ListItem
-            component={Link}
-            href="/book-a-call"
-            onClick={handleDrawerToggle}
-          >
-            <ListItemText primary="Book a Call" />
-          </ListItem>
+        {/* Close Icon */}
+        <IconButton
+          onClick={handleDrawerToggle}
+          sx={{
+            position: "absolute",
+            top: 16,
+            right: 16,
+            color: "#ffffff",
+          }}
+        >
+          <CloseIcon />
+        </IconButton>
+
+        {/* Navigation Items */}
+        <List sx={{ mt: 8, display: "flex", flexDirection: "column", gap: 2 }}>
+          {[
+            { label: "Blogs", href: "/blogs" },
+            { label: "Proof Of Work", href: "/proof-of-work" },
+            { label: "Tools & Resources", href: "/tools-resources" },
+          ].map(({ label, href }) => (
+            <ListItem
+              key={label}
+              component={Link}
+              href={href}
+              onClick={handleDrawerToggle}
+              sx={{
+                px: 2,
+                borderRadius: 2,
+                transition: "background-color 0.2s",
+                "&:hover": {
+                  backgroundColor: "rgba(255, 255, 255, 0.05)",
+                },
+                "&:active": {
+                  backgroundColor: "rgba(255, 255, 255, 0.08)",
+                },
+              }}
+            >
+              <ListItemText
+                primary={label}
+                primaryTypographyProps={{
+                  fontSize: "1.25rem",
+                  fontWeight: 400,
+                }}
+              />
+            </ListItem>
+          ))}
+
+          {/* CTA */}
+          <Box mt={4} px={2}>
+            <Button
+              variant="contained"
+              color="primary"
+              fullWidth
+              component={Link}
+              href="/book-a-call"
+              onClick={handleDrawerToggle}
+              sx={{
+                fontWeight: "bold",
+                textTransform: "none",
+                fontSize: "1rem",
+                borderRadius: "8px",
+              }}
+            >
+              Book a Call
+            </Button>
+          </Box>
         </List>
       </Drawer>
     </AppBar>

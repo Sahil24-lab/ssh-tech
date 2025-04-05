@@ -18,12 +18,18 @@ const Hero = () => {
       sx={{
         position: "relative",
         width: "100%",
-        minHeight: "100vh",
-        backgroundColor: "#0b0c10",
+        minHeight: {
+          xs: "auto",
+          sm: "60vh",
+          md: "50vh",
+          lg: "80vh",
+          xl: "90vh",
+        },
         overflow: "hidden",
+        backgroundColor: "#0b0c10",
       }}
     >
-      {/* Background image that fills the viewport */}
+      {/* Background + overlay */}
       <Box
         sx={{
           position: "absolute",
@@ -41,7 +47,6 @@ const Hero = () => {
           }}
           priority
         />
-        {/* Overlay that starts transparent and becomes #091F2C toward the bottom */}
         <Box
           sx={{
             position: "absolute",
@@ -53,42 +58,102 @@ const Hero = () => {
         />
       </Box>
 
+      {/* Content */}
       <Box
         sx={{
           position: "relative",
           zIndex: 1,
-          // More generous padding all around
-          px: { xs: 4, md: 24 },
-          py: { xs: 8, md: 24 },
+          px: { xs: 3, sm: 6, md: 12, lg: 20, xl: 24 },
+          pt: { xs: 12, sm: 14, md: 20 },
+          pb: { xs: 6, sm: 8, md: 10 },
           display: "flex",
           alignItems: "center",
           minHeight: "100%",
         }}
       >
-        <Grid container spacing={4} alignItems="center">
-          {/* Left Side - Text Section */}
-          <Grid item xs={12} md={6}>
-            <Typography
-              variant="h1"
-              component="h1"
-              gutterBottom
-              sx={{ fontWeight: "bold" }}
+        <Grid
+          container
+          spacing={6}
+          direction={{ xs: "column", md: "row" }}
+          alignItems="center"
+          justifyContent="center"
+        >
+          {/* Image on top for mobile */}
+          <Grid item xs={12} md={6} order={{ xs: 1, md: 2 }}>
+            <Box
+              sx={{
+                maxWidth: { xs: 340, sm: 300, md: 600 },
+                mx: { xs: "auto", md: "unset" },
+              }}
             >
-              Bulletproof Interfaces, Brilliant Experiences
-            </Typography>
+              <GlassCard
+                sx={{
+                  p: { xs: 2, md: 4 },
+                  boxShadow: "0px 4px 30px rgba(0, 0, 0, 0.1)",
+                }}
+              >
+                <Image
+                  src="/Hero/hero-image.png"
+                  alt="Hero Image"
+                  width={600}
+                  height={400}
+                  style={{
+                    width: "100%",
+                    height: "auto",
+                    borderRadius: "8px",
+                  }}
+                  priority
+                />
+              </GlassCard>
+            </Box>
+          </Grid>
+
+          {/* Text Section */}
+          <Grid item xs={12} md={6} order={{ xs: 2, md: 1 }}>
             <Typography
-              variant="h5"
+              variant="h3"
+              gutterBottom
+              sx={{
+                fontWeight: "bold",
+                color: "primary.main",
+                textAlign: { xs: "center", md: "left" },
+              }}
+            >
+              Bulletproof Interfaces, <br /> Brilliant Experiences
+            </Typography>
+
+            <Typography
+              variant="body1"
               component="p"
-              gutterBottom
-              sx={{ mb: 12, color: "#ffffff" }}
+              sx={{
+                color: "#ffffff",
+                mt: 2,
+                mb: 4,
+                textAlign: { xs: "center", md: "left" },
+              }}
             >
-              At SSH Tech we are empowering the next <br /> generation of web3 Dapps
+              At SSH Tech we are empowering the next
+              <br />
+              generation of web3 Dapps
             </Typography>
-            <Box sx={{ display: "flex", gap: 2 }}>
+
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: { xs: "column", sm: "row" },
+                gap: 2,
+                justifyContent: { xs: "center", md: "flex-start" },
+                maxWidth: { xs: 360, sm: "none" },
+                mx: { xs: "auto", sm: 0 },
+              }}
+            >
               <Button
                 variant="contained"
                 color="primary"
                 size="large"
+                sx={{
+                  width: { xs: "100%", sm: "100%", md: "auto" },
+                }}
                 onClick={() => handleScroll("faq")}
               >
                 Book a Call
@@ -97,34 +162,14 @@ const Hero = () => {
                 variant="outlined"
                 color="primary"
                 size="large"
+                sx={{
+                  width: { xs: "100%", sm: "100%", md: "auto" },
+                }}
                 onClick={() => handleScroll("pricing")}
               >
                 View Plans
               </Button>
             </Box>
-          </Grid>
-
-          {/* Right Side - Image inside GlassCard */}
-          <Grid item xs={12} md={6}>
-            <GlassCard
-              sx={{
-                p: 4,
-                boxShadow: "0px 4px 30px rgba(0, 0, 0, 0.)",
-              }}
-            >
-              <Image
-                src="/Hero/hero-image.png"
-                alt="Hero Image"
-                width={600}
-                height={400}
-                style={{
-                  width: "100%",
-                  height: "auto",
-                  borderRadius: "8px",
-                }}
-                priority
-              />
-            </GlassCard>
           </Grid>
         </Grid>
       </Box>

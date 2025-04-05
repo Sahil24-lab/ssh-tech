@@ -67,9 +67,15 @@ const OurServices = () => {
                 sx={{
                   mb: 3,
                   width: "100%",
-                  maxWidth: 376,
+                  maxWidth: {
+                    xs: 140, // extra-small screens
+                    sm: 120, // small screens
+                    md: 140, // medium and up
+                    lg: 376, // medium and up
+                  },
                   display: "flex",
                   justifyContent: "center",
+                  mx: "auto", // center the box horizontally
                 }}
               >
                 <Image
@@ -83,6 +89,7 @@ const OurServices = () => {
                   }}
                 />
               </Box>
+
               <Typography
                 variant="h5"
                 component="h2"
