@@ -116,7 +116,7 @@ export default function Pricing() {
       </Typography>
       <Box
         sx={{
-          width: { xs: "100%", sm: "90%", md: "80%", lg: "96%", xl: "90%", xxl: "76%" },
+          width: { xs: "100%", sm: "90%", md: "80%", lg: "96%", xl: "94%", xxl: "76%" },
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
@@ -147,7 +147,8 @@ export default function Pricing() {
                     sm: index === 1 ? 780 : 680,
                     md: index === 1 ? 800 : 800,
                     lg: index === 1 ? 880 : 760,
-                    xl: index === 1 ? 900 : 800,
+                    xl: index === 1 ? 780 : 740,
+                    xxl: index === 1 ? 900 : 800,
                   },
                   display: "flex",
                   flexDirection: "column",

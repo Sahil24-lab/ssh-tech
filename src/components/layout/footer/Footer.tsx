@@ -1,10 +1,10 @@
 import { Box, Typography, IconButton, Link } from "@mui/material";
 import { GitHub, LinkedIn, Twitter } from "@mui/icons-material";
-import ArticleIcon from "@mui/icons-material/Article"; // Medium Alternative
+import ArticleIcon from "@mui/icons-material/Article";
 import { useTheme } from "@mui/material/styles";
 
 export default function Footer() {
-  const theme = useTheme(); // Access theme colors
+  const theme = useTheme();
 
   return (
     <Box
@@ -16,24 +16,28 @@ export default function Footer() {
         backgroundColor: theme.palette.background.paper,
         color: theme.palette.text.primary,
         display: "flex",
-        flexDirection: { xs: "column", sm: "row" }, // Column on mobile, row on desktop
+        flexDirection: { xs: "column", sm: "row" },
         alignItems: "center",
         justifyContent: "space-between",
+        gap: 2,
         textAlign: "center",
       }}
     >
-      {/* Left: Copyright Text */}
-      <Typography variant="body2" sx={{ mb: { xs: 2, sm: 0 } }}>
-        © {new Date().getFullYear()} Sahil Harriram. All rights reserved.
-      </Typography>
+      {/* Left */}
+      <Box sx={{ flex: 1, textAlign: { xs: "center", sm: "left" } }}>
+        <Typography variant="body2">
+          © {new Date().getFullYear()} Sahil Harriram | SSH Tech. All rights
+          reserved.
+        </Typography>
+      </Box>
 
-      {/* Center: Social Icons */}
+      {/* Center */}
       <Box
         sx={{
+          flex: 1,
           display: "flex",
+          justifyContent: "center",
           gap: 2,
-          mt: { xs: 0, sm: 0 },
-          justifyContent: "center", // Centering on mobile
         }}
       >
         <IconButton
@@ -41,12 +45,9 @@ export default function Footer() {
           href="https://x.com/sahil_harriram"
           target="_blank"
           rel="noopener noreferrer"
-          sx={{
-            color: theme.palette.primary.light,
-            fontSize: { xs: "24px", md: "32px" }, // Bigger on desktop
-          }}
+          sx={{ color: theme.palette.primary.light }}
         >
-          <Twitter fontSize="inherit" />
+          <Twitter />
         </IconButton>
 
         <IconButton
@@ -54,12 +55,9 @@ export default function Footer() {
           href="https://medium.com/@sahilharriram"
           target="_blank"
           rel="noopener noreferrer"
-          sx={{
-            color: theme.palette.primary.light,
-            fontSize: { xs: "24px", md: "32px" },
-          }}
+          sx={{ color: theme.palette.primary.light }}
         >
-          <ArticleIcon fontSize="inherit" />
+          <ArticleIcon />
         </IconButton>
 
         <IconButton
@@ -67,12 +65,9 @@ export default function Footer() {
           href="https://www.linkedin.com/in/sahil-harriram/"
           target="_blank"
           rel="noopener noreferrer"
-          sx={{
-            color: theme.palette.primary.light,
-            fontSize: { xs: "24px", md: "32px" },
-          }}
+          sx={{ color: theme.palette.primary.light }}
         >
-          <LinkedIn fontSize="inherit" />
+          <LinkedIn />
         </IconButton>
 
         <IconButton
@@ -80,18 +75,17 @@ export default function Footer() {
           href="https://github.com/Sahil24-lab"
           target="_blank"
           rel="noopener noreferrer"
-          sx={{
-            color: theme.palette.primary.light,
-            fontSize: { xs: "24px", md: "32px" },
-          }}
+          sx={{ color: theme.palette.primary.light }}
         >
-          <GitHub fontSize="inherit" />
+          <GitHub />
         </IconButton>
       </Box>
 
-      {/* Right: Privacy Policy with New Link Style */}
-      <Box sx={{ mt: { xs: 2, sm: 0 } }}>
-        <Link href="/privacy-policy">Privacy Policy</Link>
+      {/* Right */}
+      <Box sx={{ flex: 1, textAlign: { xs: "center", sm: "right" } }}>
+        <Link href="/privacy-policy" underline="hover">
+          Privacy Policy
+        </Link>
       </Box>
     </Box>
   );
