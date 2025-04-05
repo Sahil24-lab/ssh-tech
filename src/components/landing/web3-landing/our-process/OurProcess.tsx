@@ -33,7 +33,7 @@ const processes = [
     phase: "Phase 3",
     title: "Build",
     description:
-      "We craft intuitive UIs and smart contract architecture—scalable, secure, and mainnet-ready.",
+      "We craft intuitive, user-friendly interfaces designed for seamless interaction and maximum engagement.",
     icon: <Code sx={{ fontSize: 72 }} />,
   },
   {
@@ -82,7 +82,8 @@ const OurProcess = () => {
           <Grid
             item
             xs={12}
-            md={12}
+            sm={12}
+            md={6}
             lg={6}
             xl={3}
             sx={{ display: "flex", justifyContent: "center" }}
@@ -154,9 +155,10 @@ const OurProcess = () => {
                     }}
                   >
                     <Typography
-                      variant="h4"
+                      variant="h3"
                       sx={{
                         color: "text.primary",
+                        fontWeight: "700",
                         mb: 2,
                       }}
                     >
