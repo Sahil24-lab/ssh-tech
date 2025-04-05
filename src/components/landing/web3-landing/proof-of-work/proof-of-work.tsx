@@ -45,7 +45,7 @@ const ProofOfWork = () => {
   return (
     <Box
       sx={{
-        px: { xs: 4, sm: 8, md: 12 },
+        px: { xs: 4, sm: 4, md: 8, lg: 8, xl: 8, xxl: 30 },
         py: { xs: 10, sm: 14, md: 20 },
         backgroundColor: "background.paper",
       }}
@@ -56,7 +56,7 @@ const ProofOfWork = () => {
         sx={{
           color: "text.primary",
           fontWeight: 700,
-          mb: 8,
+          mb: 16,
           textAlign: "center",
         }}
       >
@@ -123,17 +123,17 @@ const ProofOfWork = () => {
                     key={i}
                     label={highlight}
                     size="medium"
-                    icon={
-                      <EmojiEventsIcon
-                        sx={{ fontSize: 18, color: "primary.contrastText" }}
-                      />
-                    }
+                    icon={<EmojiEventsIcon />}
                     sx={{
                       borderRadius: "999px",
                       backgroundColor: "primary.main",
                       color: "primary.contrastText",
                       fontWeight: 600,
                       px: 1.6,
+                      "& .MuiChip-icon": {
+                        color: "primary.contrastText",
+                        fontSize: 18,
+                      },
                     }}
                   />
                 ))}

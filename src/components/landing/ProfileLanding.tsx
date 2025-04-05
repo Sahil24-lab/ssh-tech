@@ -1,35 +1,6 @@
 "use client";
 
-import { useState } from "react";
-import {
-  Container,
-  Box,
-  Typography,
-  Button,
-  Avatar,
-  Grid,
-  Chip,
-  List,
-  ListItem,
-  ListItemText,
-  ListItemIcon,
-  CardContent,
-  CardActions,
-} from "@mui/material";
-import {
-  LinkedIn as LinkedinIcon,
-  GitHub as GithubIcon,
-  Email as MailIcon,
-  OpenInNew as ExternalLinkIcon,
-  Download as DownloadIcon,
-  LocationOn as LocationIcon,
-  Star as StarIcon,
-  CheckCircle as CheckCircleIcon,
-  ArrowForward as ArrowForwardIcon,
-  Code as CodeIcon,
-} from "@mui/icons-material";
-import GlassCard from "../card/glass-card/GlassCard";
-import Link from "next/link";
+import { Typography } from "@mui/material";
 import Layout from "../layout/Layout";
 import ConstrainedContainer from "@/components/layout/container/constrained-container";
 import CallToAction from "./profile-landing/CallToAction";

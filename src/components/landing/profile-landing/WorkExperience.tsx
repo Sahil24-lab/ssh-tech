@@ -10,11 +10,7 @@ import {
   ListItemText,
   Collapse,
 } from "@mui/material";
-import {
-  ArrowForward as ArrowForwardIcon,
-  ExpandLess,
-  ExpandMore,
-} from "@mui/icons-material";
+import { ExpandLess, ExpandMore } from "@mui/icons-material";
 import React, { useState } from "react";
 
 interface Experience {

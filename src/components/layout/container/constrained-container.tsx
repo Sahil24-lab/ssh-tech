@@ -21,7 +21,7 @@ export default function ConstrainedContainer({
         maxWidth: {
           xs: "95%",
           sm: "90%",
-          md: "960px",
+          md: "100%",
           lg: "1200px",
           xl: "1400px",
           xxl: "1600px",

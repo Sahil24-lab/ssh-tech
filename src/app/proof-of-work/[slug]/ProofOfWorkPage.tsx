@@ -1,7 +1,6 @@
 "use client";
 
 import { ProofOfWorkEntry, ContentfulImageAsset } from "../../types/contentful";
-import Image from "next/image";
 import {
   Box,
   Button,

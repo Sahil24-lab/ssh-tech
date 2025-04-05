@@ -16,6 +16,7 @@ import {
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { Check, Whatshot } from "@mui/icons-material";
+import theme from "@/theme/theme";
 
 const GlassPane = styled(Paper)(({ theme }) => ({
   background: "linear-gradient(135deg, rgba(0,0,0,0.7), rgba(0,0,0,0.5))",
@@ -80,9 +81,9 @@ export default function Pricing() {
 
   return (
     <Box
-      id="pricing"
       sx={{
         py: 8,
+        px: { xs: 2, sm: 4, md: 6, xl: 12 },
         animation: "fadeIn 0.8s ease-in-out",
         "@keyframes fadeIn": {
           from: { opacity: 0 },
@@ -96,58 +97,101 @@ export default function Pricing() {
         gutterBottom
         align="center"
         sx={{
-          mb: 1,
+          mb: 2,
           fontWeight: "bold",
           letterSpacing: "0.5px",
           color: "#FFFFFF",
         }}
       >
-        Our Services
+        Our Pricing
       </Typography>
 
       <Typography
         variant="h5"
         align="center"
         gutterBottom
-        sx={{ mb: 4, color: "text.secondary" }}
+        sx={{ mb: 6, color: "text.secondary" }}
       >
         Fixed-cost plans to avoid negotiations and start creating.
       </Typography>
-
-      <Grid container spacing={4} alignItems="center">
-        {pricingPlans.map((plan, index) => (
-          <Grid
-            item
-            xs={12}
-            md={4}
-            key={index}
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-            }}
-          >
-            <Box sx={{ width: "100%", height: "100%", display: "flex" }}>
+      <Box
+        sx={{
+          width: { xs: "100%", sm: "80%", md: "80%", lg: "96%", xl: "90%", xxl: "76%" },
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          margin: "0 auto",
+        }}
+      >
+        <Grid container spacing={4} alignItems="center" justifyContent="center">
+          {pricingPlans.map((plan, index) => (
+            <Grid
+              item
+              xs={12}
+              md={6}
+              lg={4}
+              key={index}
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                marginLeft: "auto",
+                marginRight: "auto",
+              }}
+            >
               <GlassCardDark
                 sx={{
                   px: 5,
-                  py: plan.tag === "Most Popular" ? 9 : 6,
-                  minHeight: plan.tag === "Most Popular" ? 740 : 640,
+                  py: 6,
+                  minHeight: {
+                    xs: index === 1 ? 740 : 640,
+                    sm: index === 1 ? 780 : 680,
+                    md: index === 1 ? 800 : 800,
+                    lg: index === 1 ? 880 : 760,
+                    xl: index === 1 ? 900 : 800,
+                  },
                   display: "flex",
                   flexDirection: "column",
-                  flex: 1,
                   justifyContent: "space-between",
+                  flexGrow: 1,
+                  flexBasis: {
+                    xs: "100%",
+                    sm: "80%",
+                    md: "70%",
+                    lg: "100%",
+                  },
+                  maxWidth: {
+                    xs: "100%",
+                    md: "460px",
+                    lg: "500px",
+                  },
                   backgroundColor:
                     plan.tag === "Most Popular"
                       ? "background.paper"
                       : undefined,
-                  transform:
-                    plan.tag === "Most Popular" ? "scale(1.02)" : "scale(1)",
+                  transform: {
+                    xs: "scale(1)",
+                    sm: "scale(1)",
+                    md: plan.tag === "Most Popular" ? "scale(1)" : "scale(1)",
+                    lg:
+                      plan.tag === "Most Popular" ? "scale(1.02)" : "scale(1)",
+                    xl:
+                      plan.tag === "Most Popular" ? "scale(1.02)" : "scale(1)",
+                  },
                   transition: "all 0.3s ease",
                   "&:hover": {
-                    transform:
-                      plan.tag === "Most Popular"
-                        ? "scale(1.04) translateY(-8px)"
-                        : "scale(1.02) translateY(-4px)",
+                    transform: {
+                      xs: "scale(1)",
+                      sm: "scale(1)",
+                      md: plan.tag === "Most Popular" ? "scale(1)" : "scale(1)",
+                      lg:
+                        plan.tag === "Most Popular"
+                          ? "scale(1.04) translateY(-8px)"
+                          : "scale(1.02) translateY(-4px)",
+                      xl:
+                        plan.tag === "Most Popular"
+                          ? "scale(1.04) translateY(-8px)"
+                          : "scale(1.02) translateY(-4px)",
+                    },
                     boxShadow: "0px 16px 36px rgba(0, 0, 0, 0.35)",
                   },
                   border: plan.tag === "Most Popular" ? "2px solid" : "none",
@@ -245,10 +289,10 @@ export default function Pricing() {
                   Book a Call
                 </Button>
               </GlassCardDark>
-            </Box>
-          </Grid>
-        ))}
-      </Grid>
+            </Grid>
+          ))}
+        </Grid>
+      </Box>
     </Box>
   );
 }

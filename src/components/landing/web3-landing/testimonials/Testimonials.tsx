@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Typography, Grid, Box, Rating, Avatar } from "@mui/material";
+import { Typography, Grid, Box, Rating, Avatar, useTheme } from "@mui/material";
 import GlassCard from "@/components/card/glass-card/GlassCard";
 
 // Define the Testimonial interface
@@ -116,13 +116,16 @@ const TestimonialCard = ({ testimonial }: TestimonialCardProps) => {
           sx={{ width: 48, height: 48, mr: 2 }}
         />
         <Box>
-          <Typography variant="subtitle2" sx={{ mb: 0 }}>
+          <Typography
+            variant="subtitle1"
+            sx={{ fontWeight: 500, lineHeight: 1.4 }}
+          >
             {testimonial.author}
           </Typography>
           <Typography
-            variant="caption"
+            variant="body1"
             color="text.secondary"
-            sx={{ fontWeight: "bold" }}
+            sx={{ fontWeight: 600, lineHeight: 1.4 }}
           >
             {testimonial.role}
           </Typography>
@@ -133,6 +136,7 @@ const TestimonialCard = ({ testimonial }: TestimonialCardProps) => {
 };
 
 const Testimonials = () => {
+  const theme = useTheme();
   return (
     <Box sx={{ py: 2 }}>
       {/* Enforce consistent card heights */}
@@ -140,12 +144,19 @@ const Testimonials = () => {
         {testimonials.map((testimonial, index) => (
           <Grid
             item
-            xs={12}
-            md={4}
             key={index}
+            xs={12}
+            md={6}
+            lg={4}
             sx={{
               display: "flex",
               flexDirection: "column",
+              ...(index === 2 && {
+                [theme.breakpoints.only("md")]: {
+                  ml: "auto",
+                  mr: "auto",
+                },
+              }),
             }}
           >
             <TestimonialCard testimonial={testimonial} />

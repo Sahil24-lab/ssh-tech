@@ -1,7 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
-import { Box, LinearProgress, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 
 import Layout from "@/components/layout/Layout";
 import FullWidthContainer from "@/components/layout/container/full-width-container";
@@ -53,9 +52,9 @@ export default function Web3Landing() {
       </Box>
 
       <Box id="pricing" sx={{ mb: 14 }}>
-        <ConstrainedContainer>
+        <FullWidthContainer>
           <Pricing />
-        </ConstrainedContainer>
+        </FullWidthContainer>
       </Box>
 
       <Box id="testimonials" sx={{ mb: 14 }}>

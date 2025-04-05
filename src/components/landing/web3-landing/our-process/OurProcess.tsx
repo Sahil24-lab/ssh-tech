@@ -49,7 +49,7 @@ const OurProcess = () => {
   const theme = useTheme();
 
   return (
-    <Box sx={{ py: 10 }} id="process">
+    <Box>
       <Typography
         variant="h1"
         align="center"
@@ -66,117 +66,131 @@ const OurProcess = () => {
       <Typography
         variant="h5"
         align="center"
-        sx={{ mb: 6, color: "text.secondary" }}
+        sx={{ mb: 8, color: "text.secondary" }}
       >
         Built for shipping fast, scaling smart, and staying secure.
       </Typography>
 
-      <Grid container spacing={4} justifyContent="center">
+      <Grid
+        container
+        rowSpacing={{ xs: 4, lg: 8 }}
+        columnSpacing={{ xs: 4, lg: 4 }}
+        justifyContent="center"
+        minWidth="100%"
+      >
         {processes.map((process, index) => (
           <Grid
             item
-            xs={12} // 1 column for xs-sm-md
-            lg={6} // 2 columns from lg (≥1280px)
-            xl={3} // 4 columns from xl (≥1536px)
+            xs={12}
+            md={12}
+            lg={6}
+            xl={3}
+            sx={{ display: "flex", justifyContent: "center" }}
             key={index}
           >
-            <Fade
-              in
-              timeout={600}
-              style={{ transitionDelay: `${index * 200}ms` }}
-            >
-              <Box
-                sx={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  position: "relative",
-                  "&:hover .glow-icon": {
-                    boxShadow: `0 0 48px ${theme.palette.primary.main}`,
-                    transform: "scale(1.05)",
-                  },
-                }}
+            <Box sx={{ width: "100%" }}>
+              <Fade
+                in
+                timeout={600}
+                style={{ transitionDelay: `${index * 200}ms` }}
               >
                 <Box
-                  className="glow-icon"
                   sx={{
-                    width: 140,
-                    height: 140,
-                    borderRadius: "50%",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    backgroundColor: theme.palette.primary.main,
-                    color: theme.palette.primary.contrastText,
-                    position: "absolute",
-                    top: 0,
-                    zIndex: 2,
-                    boxShadow: `0 0 32px ${alpha(
-                      theme.palette.primary.main,
-                      0.4
-                    )}`,
-                    transition: "all 0.3s ease",
-                  }}
-                >
-                  {process.icon}
-                </Box>
-
-                <GlassCard
-                  sx={{
-                    pt: { xs: 12, sm: 14 },
-                    pb: { xs: 8, sm: 10 },
-                    px: { xs: 3, sm: 4 },
-                    mt: { xs: 8, sm: 9 },
-                    minHeight: {
-                      xs: 400,
-                      md: 360,
-                      lg: 440,
-                    },
                     display: "flex",
                     flexDirection: "column",
                     alignItems: "center",
-                    justifyContent: "flex-start",
                     position: "relative",
-                    textAlign: "center",
+                    "&:hover .glow-icon": {
+                      boxShadow: `0 0 48px ${theme.palette.primary.main}`,
+                      transform: "scale(1.05)",
+                    },
                   }}
                 >
-                  <Typography
-                    variant="h4"
+                  <Box
+                    className="glow-icon"
                     sx={{
-                      color: "text.primary",
-                      mb: 2,
-                    }}
-                  >
-                    {process.title}
-                  </Typography>
-                  <Typography
-                    variant="body1"
-                    sx={{
-                      color: "text.primary",
-                      maxWidth: "90%",
-                    }}
-                  >
-                    {process.description}
-                  </Typography>
-
-                  <Chip
-                    label={process.phase}
-                    color="primary"
-                    sx={{
-                      fontWeight: 900,
-                      borderRadius: "999px",
-                      px: 6,
-                      py: 2,
-                      height: 32,
+                      width: 140,
+                      height: 140,
+                      borderRadius: "50%",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      backgroundColor: theme.palette.primary.main,
+                      color: theme.palette.primary.contrastText,
                       position: "absolute",
-                      bottom: 40,
-                      left: "50%",
-                      transform: "translateX(-50%)",
+                      top: 0,
+                      zIndex: 2,
+                      boxShadow: `0 0 32px ${alpha(
+                        theme.palette.primary.main,
+                        0.4
+                      )}`,
+                      transition: "all 0.3s ease",
                     }}
-                  />
-                </GlassCard>
-              </Box>
-            </Fade>
+                  >
+                    {process.icon}
+                  </Box>
+
+                  <GlassCard
+                    sx={{
+                      pt: { xs: 12, sm: 14 },
+                      pb: { xs: 8, sm: 10 },
+                      px: { xs: 3, sm: 4 },
+                      mt: { xs: 8, sm: 9 },
+                      minHeight: {
+                        xs: 360,
+                        sm: 340,
+                        md: 340,
+                        lg: 380,
+                        xl: 440,
+                      },
+                      width: "100%",
+                      maxWidth: "100%",
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                      justifyContent: "flex-start",
+                      position: "relative",
+                      textAlign: "center",
+                    }}
+                  >
+                    <Typography
+                      variant="h4"
+                      sx={{
+                        color: "text.primary",
+                        mb: 2,
+                      }}
+                    >
+                      {process.title}
+                    </Typography>
+                    <Typography
+                      variant="body1"
+                      sx={{
+                        color: "text.primary",
+                        maxWidth: "90%",
+                      }}
+                    >
+                      {process.description}
+                    </Typography>
+
+                    <Chip
+                      label={process.phase}
+                      color="primary"
+                      sx={{
+                        fontWeight: 900,
+                        borderRadius: "999px",
+                        px: 6,
+                        py: 2,
+                        height: 32,
+                        position: "absolute",
+                        bottom: 40,
+                        left: "50%",
+                        transform: "translateX(-50%)",
+                      }}
+                    />
+                  </GlassCard>
+                </Box>
+              </Fade>
+            </Box>
           </Grid>
         ))}
       </Grid>

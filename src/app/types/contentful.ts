@@ -45,7 +45,7 @@ export interface ProofOfWorkFields {
   tags?: string[];
   screenshots?: ContentfulImageAsset[];
   github?: {
-    data: {};
+    data: object;
     content: RichTextNode[];
     nodeType: "document";
   };
