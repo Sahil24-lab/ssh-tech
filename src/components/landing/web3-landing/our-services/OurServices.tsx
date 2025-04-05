@@ -2,28 +2,26 @@
 
 import { Typography, Grid, Box } from "@mui/material";
 import GlassCard from "@/components/card/glass-card/GlassCard";
-import HubIcon from "@mui/icons-material/Hub";
-import SecurityIcon from "@mui/icons-material/Security";
-import { Code as CodeIcon } from "@mui/icons-material";
+import Image from "next/image";
 
 const services = [
   {
     title: "DApp Developments",
     description:
       "We build fast, accessible, and beautiful user interfaces—optimized for all types of users",
-    icon: <CodeIcon sx={{ fontSize: 56 }} />,
+    imageSrc: "/icons/our-services/development.svg",
   },
   {
     title: "Community Tools",
     description:
       "From custom bots to DAO dashboards, we help you engage and grow your community",
-    icon: <HubIcon sx={{ fontSize: 56 }} />,
+    imageSrc: "/icons/our-services/community.svg",
   },
   {
     title: "Frontend Security",
     description:
       "Security baked into the UI layer—so your users can trust every click, tap, and transaction",
-    icon: <SecurityIcon sx={{ fontSize: 56 }} />,
+    imageSrc: "/icons/our-services/security.svg",
   },
 ];
 
@@ -65,7 +63,26 @@ const OurServices = () => {
                 textAlign: "center",
               }}
             >
-              <Box sx={{ mb: 3, color: "primary.main" }}>{service.icon}</Box>
+              <Box
+                sx={{
+                  mb: 3,
+                  width: "100%",
+                  maxWidth: 376,
+                  display: "flex",
+                  justifyContent: "center",
+                }}
+              >
+                <Image
+                  src={service.imageSrc}
+                  alt={service.title}
+                  width={376}
+                  height={286}
+                  style={{
+                    width: "100%",
+                    height: "auto",
+                  }}
+                />
+              </Box>
               <Typography
                 variant="h5"
                 component="h2"

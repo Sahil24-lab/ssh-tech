@@ -16,18 +16,7 @@ import FAQ from "@/components/landing/web3-landing/faq/FAQ";
 export default function Web3Landing() {
   return (
     <Layout>
-      {/* Progress Bar below header */}
-      <Box
-        sx={{
-          position: "fixed",
-          top: 64,
-          left: 0,
-          right: 0,
-          zIndex: 10,
-        }}
-      ></Box>
-
-      <Box id="hero" sx={{ mb: 14 }}>
+      <Box id="hero" sx={{ mb: 2 }}>
         <FullWidthContainer>
           <Hero />
         </FullWidthContainer>

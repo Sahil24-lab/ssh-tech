@@ -12,10 +12,10 @@ import GlassCardDark from "@/components/card/glass-card-dark/GlassCardDark";
 
 const faqs = [
   {
-    question: "What sets you apart from hiring an in-house developer?",
-    answer: `Hiring can be expensive and time-consuming, especially in the crypto space.
-We offer immediate availability, expert-level skills, and the flexibility to pause or cancel anytime.
-You skip the overhead of recruiting and training, while still getting top-tier development.`,
+    question: "What sets you apart from hiring in-house developers?",
+    answer: `Working with us gives you a flexible technical partner. Instead of recruiting and training staff, you get immediate access to product-focused engineering you can scale up or down as needed. 
+    
+    This approach helps you manage your roadmap, respond to shifts in priority, and move faster — without locking into long-term headcount.`,
   },
   {
     question: "How does the 1–2 week POC refund clause work?",
@@ -28,26 +28,25 @@ This de-risks the engagement and shows our confidence in delivering real value e
   },
   {
     question: "Do you offer ongoing support after the main development?",
-    answer: `Yes. We have a 3-month plan at $1.5K/month for additional handover, feedback, and minor updates. This ensures continued stability and guidance without the full cost of a higher-tier plan.`,
+    answer: `Yes. We have a 3-month minimum at $1.5K/month for additional handover, feedback, and minor updates. With this you maintain access to your private Discord channel in our server. This ensures continued stability and guidance without the full cost of a higher-tier plan.`,
   },
   {
     question: "How do you handle security and product quality?",
     answer: `We integrate security checks, QA testing, and analytics at every stage.
-We also conduct automated scans for vulnerabilities and stress test smart contracts before deployment.
+We also conduct automated scans for vulnerabilities and stress test critical components before deployment.
 We treat every product with the same rigor, whether it's a new build or a feature expansion.`,
   },
   {
     question:
       "Is your process different for teams who already have a deployed product?",
     answer: `Our core steps remain the same, but we focus more on enhancements, integrations, and upgrades.
-We review your existing codebase, identify gaps, and plan out new features without disrupting what's already live.`,
+We review your existing codebase, identify gaps, and plan out new features without disrupting what's already live. We work with your existing tech stack and processes.`,
   },
 ];
 
 const FAQ = () => {
   const theme = useTheme();
   const darkBg = "#0E1A24";
-  const expandedBg = "rgba(14, 26, 36, 0.5)";
 
   return (
     <Box id="faq" sx={{ py: 8 }}>
@@ -55,7 +54,6 @@ const FAQ = () => {
         <Typography
           variant="h1"
           component="h1"
-          gutterBottom
           align="center"
           sx={{
             mb: 4,
@@ -106,30 +104,28 @@ const FAQ = () => {
                   aria-controls={`panel${index + 1}-content`}
                   id={`panel${index + 1}-header`}
                   sx={{
+                    px: "3rem",
+                    py: 2.5,
                     backgroundColor: darkBg,
-                    px: 3,
-                    py: 2,
                   }}
                 >
                   <Typography
-                    variant="h5"
+                    variant="h6"
                     sx={{
-                      fontWeight: 800,
+                      fontWeight: 700,
                       color: "#ffffff",
                     }}
                   >
                     {faq.question}
                   </Typography>
                 </AccordionSummary>
-
                 <AccordionDetails
                   sx={{
-                    px: 3,
-                    py: 2,
-                    background:
-                      "linear-gradient(to bottom, rgba(255,255,255,0.07), rgba(14,26,36,0.1))",
+                    px: "3rem",
+                    py: 4,
+                    background: "rgba(255, 255, 255, 0.035)",
                     backdropFilter: "blur(2px)",
-                    boxShadow: "inset 0px 6px 12px rgba(0, 0, 0, 0.3)",
+                    boxShadow: "inset 0px 2px 6px rgba(0, 0, 0, 0.25)",
                     transition: "background 0.3s ease, box-shadow 0.3s ease",
                     ...(isLast && {
                       borderBottomLeftRadius: 24,
@@ -140,8 +136,9 @@ const FAQ = () => {
                   <Typography
                     variant="body1"
                     sx={{
-                      color: "#ffffff",
-                      lineHeight: 1.6,
+                      color: "#DDE3E9",
+                      lineHeight: 1.7,
+                      whiteSpace: "pre-line",
                     }}
                   >
                     {faq.answer}
