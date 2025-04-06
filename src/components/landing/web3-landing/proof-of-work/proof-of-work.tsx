@@ -164,16 +164,7 @@ const ProofOfWork = () => {
           justifyContent: "center",
         }}
       >
-        <Button
-          variant="contained"
-          size="large"
-          sx={{
-            px: 5,
-            py: 2,
-            fontWeight: 700,
-            fontSize: "1rem",
-          }}
-        >
+        <Button variant="contained" size="large">
           PROOF OF WORK
         </Button>
       </Box>

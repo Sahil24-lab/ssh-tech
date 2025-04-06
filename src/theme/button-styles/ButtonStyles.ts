@@ -8,6 +8,7 @@ const ButtonStyles: Components<Theme> = {
         borderRadius: 8,
         fontWeight: 700,
         transition: "all 0.2s ease-in-out",
+        
       },
       sizeSmall: {
         fontSize: "0.85rem",
@@ -29,6 +30,7 @@ const ButtonStyles: Components<Theme> = {
         style: ({ theme }) => ({
           backgroundColor: theme.palette.primary.main,
           color: theme.palette.primary.contrastText,
+          fontWeight: 700,
           "&:hover": {
             backgroundColor: theme.palette.primary.dark,
           },
@@ -39,6 +41,7 @@ const ButtonStyles: Components<Theme> = {
         style: ({ theme }) => ({
           backgroundColor: theme.palette.secondary.main,
           color: theme.palette.secondary.contrastText,
+          fontWeight: 700,
           "&:hover": {
             backgroundColor: theme.palette.secondary.dark,
           },
@@ -49,6 +52,7 @@ const ButtonStyles: Components<Theme> = {
         style: ({ theme }) => ({
           border: `2px solid ${theme.palette.primary.main}`,
           color: theme.palette.primary.main,
+          fontWeight: 700,
           backgroundColor: "transparent",
           "&:hover": {
             borderColor: theme.palette.primary.light,
@@ -61,6 +65,7 @@ const ButtonStyles: Components<Theme> = {
         style: ({ theme }) => ({
           border: `2px solid ${theme.palette.secondary.contrastText}`,
           color: theme.palette.secondary.contrastText,
+          fontWeight: 700,
           backgroundColor: "transparent",
           "&:hover": {
             borderColor: theme.palette.text.secondary,
@@ -73,6 +78,7 @@ const ButtonStyles: Components<Theme> = {
         props: { variant: "text", color: "primary" },
         style: ({ theme }) => ({
           color: theme.palette.primary.main,
+          fontWeight: 700,
           backgroundColor: "transparent",
           "&:hover": {
             backgroundColor: `${theme.palette.primary.main}1A`,
@@ -83,6 +89,7 @@ const ButtonStyles: Components<Theme> = {
         props: { variant: "text", color: "secondary" },
         style: ({ theme }) => ({
           color: theme.palette.secondary.contrastText,
+          fontWeight: 700,
           backgroundColor: "transparent",
           "&:hover": {
             backgroundColor: `${theme.palette.secondary.contrastText}1A`,

@@ -4,7 +4,7 @@
 <circle cx="47" cy="36" r="9.5" fill="#11C5B5" stroke="#00464E"/>
 <circle cx="80" cy="36" r="9.5" fill="#11C5B5" stroke="#00464E"/>
 <circle cx="113" cy="36" r="9.5" fill="#11C5B5" stroke="#00464E"/>
-<path d="M161 203H235M97 122L142.783 153.475C143.887 154.235 143.947 155.845 142.901 156.684L97 193.5" stroke="#025255" stroke-width="14" stroke-linecap="round"/>
+<path d="M154 208H228M90 127L135.783 158.475C136.887 159.235 136.947 160.845 135.901 161.684L90 198.5" stroke="#025255" stroke-width="14" stroke-linecap="round"/>
 <defs>
 <linearGradient id="paint0_linear_3173_19" x1="205.5" y1="286" x2="125" y2="76" gradientUnits="userSpaceOnUse">
 <stop stop-color="#1EB4A4"/>

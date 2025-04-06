@@ -132,8 +132,8 @@ const themeOptions = {
       },
     },
     // Include custom component styles
-    ...LinkStyles,
     ...ButtonStyles,
+    ...LinkStyles,
     ...NavigationButtonStyles,
     ...ChipStyles,
     ...ScrollbarStyles,
