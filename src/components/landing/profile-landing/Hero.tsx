@@ -138,8 +138,8 @@ export default function Hero() {
         >
           <Box
             sx={{
-              width: { xs: 150, md: 300 },
-              height: { xs: 150, md: 300 },
+              width: { xs: 150, sm: 200, md: 300 },
+              height: { xs: 150, sm: 200, md: 300 },
               border: "4px solid",
               borderColor: "primary.main",
               backgroundColor: "background.paper",
@@ -151,15 +151,22 @@ export default function Hero() {
               justifyContent: "center",
             }}
           >
-            <Image
-              src="/logos/S Shape.png"
-              alt="Logo"
-              width={120}
-              height={120}
-              style={{
-                objectFit: "contain",
+            <Box
+              sx={{
+                width: { xs: 80, sm: 100, md: 160 },
+                height: { xs: 80, sm: 100, md: 160 },
+                position: "relative",
               }}
-            />
+            >
+              <Image
+                src="/logos/S Shape.png"
+                alt="Logo"
+                fill
+                style={{
+                  objectFit: "contain",
+                }}
+              />
+            </Box>
           </Box>
         </Grid>
       </Grid>
