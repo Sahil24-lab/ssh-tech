@@ -11,6 +11,7 @@ import {
 } from "@mui/material";
 import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
 import GlassCard from "@/components/card/glass-card/GlassCard";
+import { useRouter } from "next/navigation";
 
 const projects = [
   {
@@ -39,8 +40,15 @@ const projects = [
   },
 ];
 
+const slugify = (title: string) =>
+  title
+    .toLowerCase()
+    .replace(/\s+/g, "")
+    .replace(/[^a-z0-9]/g, "");
+
 const ProofOfWork = () => {
   const theme = useTheme();
+  const router = useRouter();
 
   return (
     <Box
@@ -72,6 +80,9 @@ const ProofOfWork = () => {
         {projects.map((project, index) => (
           <Grid item xs={12} sm={12} md={6} lg={4} key={index}>
             <GlassCard
+              onClick={() =>
+                router.push(`/proof-of-work/${slugify(project.title)}`)
+              }
               sx={{
                 p: 4,
                 height: "100%",
@@ -79,6 +90,11 @@ const ProofOfWork = () => {
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "space-between",
+                cursor: "pointer",
+                transition: "box-shadow 0.3s ease",
+                "&:hover": {
+                  boxShadow: "0px 0px 18px 4px rgba(64, 224, 208, 0.4)", // Light turquoise glow
+                },
               }}
             >
               {/* Header */}
@@ -164,7 +180,11 @@ const ProofOfWork = () => {
           justifyContent: "center",
         }}
       >
-        <Button variant="contained" size="large">
+        <Button
+          variant="contained"
+          size="large"
+          onClick={() => router.push("/proof-of-work")}
+        >
           PROOF OF WORK
         </Button>
       </Box>

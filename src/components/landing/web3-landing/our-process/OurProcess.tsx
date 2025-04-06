@@ -8,11 +8,13 @@ import {
   Fade,
   useTheme,
   alpha,
+  useMediaQuery,
 } from "@mui/material";
 import GlassCard from "@/components/card/glass-card/GlassCard";
 import { Code, RocketLaunch } from "@mui/icons-material";
 import ArchitectureIcon from "@mui/icons-material/Architecture";
 import EmojiObjectsIcon from "@mui/icons-material/EmojiObjects";
+import { useEffect, useRef, useState } from "react";
 
 const processes = [
   {
@@ -47,6 +49,35 @@ const processes = [
 
 const OurProcess = () => {
   const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+
+  useEffect(() => {
+    if (!isMobile) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const index = Number(entry.target.getAttribute("data-index"));
+          if (entry.isIntersecting) {
+            setActiveIndex(index);
+          }
+        });
+      },
+      {
+        threshold: 0.6, // Trigger when 60% visible
+      }
+    );
+
+    cardRefs.current.forEach((ref) => {
+      if (ref) observer.observe(ref);
+    });
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [isMobile]);
 
   return (
     <Box>
@@ -89,7 +120,13 @@ const OurProcess = () => {
             sx={{ display: "flex", justifyContent: "center" }}
             key={index}
           >
-            <Box sx={{ width: "100%" }}>
+            <Box
+              sx={{ width: "100%" }}
+              ref={(el: HTMLDivElement | null) => {
+                cardRefs.current[index] = el;
+              }}
+              data-index={index}
+            >
               <Fade
                 in
                 timeout={600}
@@ -101,10 +138,26 @@ const OurProcess = () => {
                     flexDirection: "column",
                     alignItems: "center",
                     position: "relative",
-                    "&:hover .glow-icon": {
-                      boxShadow: `0 0 48px ${theme.palette.primary.main}`,
-                      transform: "scale(1.05)",
-                    },
+                    ...(isMobile
+                      ? {
+                          ".glow-icon": {
+                            boxShadow:
+                              activeIndex === index
+                                ? `0 0 48px ${theme.palette.primary.main}`
+                                : `0 0 0 transparent`,
+                            transform:
+                              activeIndex === index
+                                ? "scale(1.05)"
+                                : "scale(1)",
+                            transition: "all 0.3s ease",
+                          },
+                        }
+                      : {
+                          "&:hover .glow-icon": {
+                            boxShadow: `0 0 48px ${theme.palette.primary.main}`,
+                            transform: "scale(1.05)",
+                          },
+                        }),
                   }}
                 >
                   <Box
@@ -125,7 +178,6 @@ const OurProcess = () => {
                         theme.palette.primary.main,
                         0.4
                       )}`,
-                      transition: "all 0.3s ease",
                     }}
                   >
                     {process.icon}

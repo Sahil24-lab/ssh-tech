@@ -3,8 +3,11 @@
 import { Typography, Button, Box, Grid } from "@mui/material";
 import GlassCard from "@/components/card/glass-card/GlassCard";
 import Image from "next/image";
-
+import BookCallModal from "@/components/book-call-modal/BookCallModal";
+import { useState } from "react";
 const Hero = () => {
+  const [open, setOpen] = useState(false);
+
   const handleScroll = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
@@ -154,7 +157,7 @@ const Hero = () => {
                 sx={{
                   width: { xs: "100%", sm: "100%", md: "auto" },
                 }}
-                onClick={() => handleScroll("faq")}
+                onClick={() => setOpen(true)}
               >
                 Book a Call
               </Button>
@@ -173,6 +176,7 @@ const Hero = () => {
           </Grid>
         </Grid>
       </Box>
+      <BookCallModal open={open} handleClose={() => setOpen(false)} />
     </Box>
   );
 };

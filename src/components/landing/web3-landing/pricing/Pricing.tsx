@@ -17,6 +17,8 @@ import {
 import { styled } from "@mui/material/styles";
 import { Check, Whatshot } from "@mui/icons-material";
 import theme from "@/theme/theme";
+import BookCallModal from "@/components/book-call-modal/BookCallModal";
+import { useState } from "react";
 
 const GlassPane = styled(Paper)(({ theme }) => ({
   background: "linear-gradient(135deg, rgba(0,0,0,0.7), rgba(0,0,0,0.5))",
@@ -32,6 +34,7 @@ const GlassCardDark: React.FC<PaperProps> = (props) => {
 };
 
 export default function Pricing() {
+  const [open, setOpen] = useState(false);
   const pricingPlans = [
     {
       name: "Essential",
@@ -116,7 +119,14 @@ export default function Pricing() {
       </Typography>
       <Box
         sx={{
-          width: { xs: "100%", sm: "90%", md: "80%", lg: "96%", xl: "94%", xxl: "76%" },
+          width: {
+            xs: "100%",
+            sm: "90%",
+            md: "80%",
+            lg: "96%",
+            xl: "94%",
+            xxl: "76%",
+          },
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
@@ -286,7 +296,12 @@ export default function Pricing() {
                   ))}
                 </List>
 
-                <Button variant="contained" color="primary" fullWidth>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  fullWidth
+                  onClick={() => setOpen(true)}
+                >
                   Book a Call
                 </Button>
               </GlassCardDark>
@@ -294,6 +309,7 @@ export default function Pricing() {
           ))}
         </Grid>
       </Box>
+      <BookCallModal open={open} handleClose={() => setOpen(false)} />
     </Box>
   );
 }

@@ -17,10 +17,12 @@ import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import Link from "next/link";
 import { useTheme } from "@mui/material/styles";
+import BookCallModal from "@/components/book-call-modal/BookCallModal";
 
 export default function Header() {
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [open, setOpen] = useState(false);
 
   const handleDrawerToggle = () => {
     setMobileOpen((prev) => !prev);
@@ -85,8 +87,7 @@ export default function Header() {
           variant="contained"
           color="primary"
           sx={{ display: { xs: "none", md: "block" } }}
-          component={Link}
-          href="/book-a-call"
+          onClick={() => setOpen(true)}
         >
           Book a Call
         </Button>
@@ -178,9 +179,7 @@ export default function Header() {
               variant="contained"
               color="primary"
               fullWidth
-              component={Link}
-              href="/book-a-call"
-              onClick={handleDrawerToggle}
+              onClick={() => setOpen(true)}
               sx={{
                 fontWeight: "bold",
                 textTransform: "none",
@@ -193,6 +192,7 @@ export default function Header() {
           </Box>
         </List>
       </Drawer>
+      <BookCallModal open={open} handleClose={() => setOpen(false)} />
     </AppBar>
   );
 }
