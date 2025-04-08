@@ -52,7 +52,6 @@ export default function BookCallModal({
     transform: "translateX(-50%)",
     width: "100%",
     maxWidth: 840,
-    height: isMobile ? "100vh" : "auto",
     maxHeight: isMobile ? "100vh" : "90vh",
     bgcolor: "background.paper",
     borderRadius: 2,
