@@ -5,6 +5,7 @@ import "./globals.css";
 import ThemeRegistry from "@/theme/ThemeRegistry";
 import { headers } from "next/headers";
 import SubdomainProvider from "@/contexts/SubdomainProvider";
+import Script from "next/script";
 
 const montserrat = Montserrat({
   variable: "--font-montserrat",
@@ -37,7 +38,15 @@ export default async function RootLayout({
         className={`${montserrat.variable} ${poppins.variable} antialiased`}
       >
         <ThemeRegistry>
-          <SubdomainProvider value={subdomain}>{children}</SubdomainProvider>
+          <SubdomainProvider value={subdomain}>
+            {children}
+            <Script
+              async
+              defer
+              data-website-id={process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID}
+              src={process.env.NEXT_PUBLIC_UMAMI_SCRIPT_URL}
+            />
+          </SubdomainProvider>
         </ThemeRegistry>
       </body>
     </html>

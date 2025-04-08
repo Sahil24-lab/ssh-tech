@@ -1,4 +1,5 @@
 // components/BookCallModal.tsx
+
 import React, { useState, useEffect } from "react";
 import {
   Box,
@@ -20,6 +21,17 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
+
+// Removes basic dangerous characters
+function sanitizeInput(input: string): string {
+  return input.replace(/[<>]/g, "");
+}
+
+// Checks basic email format
+function isValidEmail(email: string): boolean {
+  const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return re.test(email.toLowerCase());
+}
 
 const steps = ["Project Info", "Next Steps"];
 
@@ -52,6 +64,8 @@ export default function BookCallModal({
   };
 
   const [step, setStep] = useState(0);
+  const [isRateLimited, setIsRateLimited] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -65,6 +79,7 @@ export default function BookCallModal({
   useEffect(() => {
     if (!open) {
       setStep(0);
+      setErrorMessage("");
       setFormData({
         name: "",
         email: "",
@@ -78,27 +93,53 @@ export default function BookCallModal({
   }, [open]);
 
   const handleChange = (field: string, value: string) => {
-    setFormData((prev) => ({ ...prev, [field]: value }));
+    setFormData((prev) => ({ ...prev, [field]: sanitizeInput(value) }));
   };
 
   const handleNext = async () => {
+    if (isRateLimited) {
+      return;
+    }
+
+    if (!isValidEmail(formData.email)) {
+      setErrorMessage("Please enter a valid email address.");
+      return;
+    }
+
     if (
-      formData.name &&
-      formData.email &&
-      formData.budget &&
-      formData.timeline &&
-      formData.projectType
+      !formData.name ||
+      !formData.email ||
+      !formData.budget ||
+      !formData.timeline ||
+      !formData.projectType
     ) {
+      setErrorMessage("All required fields must be filled out.");
+      return;
+    }
+
+    setIsRateLimited(true);
+    setTimeout(() => {
+      setIsRateLimited(false);
+    }, 3000);
+
+    try {
       await fetch("/api/leads", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
       setStep((prev) => prev + 1);
+      setErrorMessage("");
+    } catch {
+      setErrorMessage("There was an error submitting your form.");
     }
   };
 
-  const handleBack = () => setStep((prev) => prev - 1);
+  const handleBack = () => {
+    if (step > 0) {
+      setStep((prev) => prev - 1);
+    }
+  };
 
   const qualified =
     formData.budget !== "<$5K" && formData.timeline !== "2+ months";
@@ -107,14 +148,16 @@ export default function BookCallModal({
     <Modal open={open} onClose={handleClose} aria-labelledby="book-call-modal">
       <Box sx={style}>
         <Box display="flex" justifyContent="space-between" alignItems="center">
-          <Typography variant="h6">Book a Call</Typography>
+          <Typography variant="h5" fontWeight="700">
+            Book a Call
+          </Typography>
           <IconButton onClick={handleClose} color="inherit">
             <CloseIcon />
           </IconButton>
         </Box>
 
         <Stepper activeStep={step} alternativeLabel>
-          {steps.map((label, index) => (
+          {steps.map((label) => (
             <Step key={label}>
               <StepLabel
                 sx={{
@@ -130,6 +173,13 @@ export default function BookCallModal({
                       fill: theme.palette.text.primary,
                     },
                   },
+                  "& .MuiStepLabel-label": {
+                    color: theme.palette.text.secondary,
+                  },
+                  "&.Mui-active .MuiStepLabel-label": {
+                    color: theme.palette.background.paper,
+                    fontWeight: 400,
+                  },
                 }}
               >
                 {label}
@@ -137,6 +187,12 @@ export default function BookCallModal({
             </Step>
           ))}
         </Stepper>
+
+        {errorMessage && (
+          <Typography color="error" mt={2}>
+            {errorMessage}
+          </Typography>
+        )}
 
         {step === 0 && (
           <Box component="form" mt={4}>
@@ -169,10 +225,12 @@ export default function BookCallModal({
                   }}
                 />
               </Grid>
-              <Grid item xs={12}>
+              <Grid item xs={12} marginTop={2}>
                 <FormControl component="fieldset" fullWidth>
-                  <FormLabel sx={{ color: theme.palette.text.primary }}>
-                    Budget
+                  <FormLabel
+                    sx={{ color: theme.palette.text.primary, fontWeight: 600 }}
+                  >
+                    Budget:
                   </FormLabel>
                   <RadioGroup
                     value={formData.budget}
@@ -198,8 +256,10 @@ export default function BookCallModal({
               </Grid>
               <Grid item xs={12}>
                 <FormControl component="fieldset" fullWidth>
-                  <FormLabel sx={{ color: theme.palette.text.primary }}>
-                    Timeline
+                  <FormLabel
+                    sx={{ color: theme.palette.text.primary, fontWeight: 600 }}
+                  >
+                    Timeline:
                   </FormLabel>
                   <RadioGroup
                     value={formData.timeline}
@@ -225,8 +285,10 @@ export default function BookCallModal({
               </Grid>
               <Grid item xs={12}>
                 <FormControl component="fieldset" fullWidth>
-                  <FormLabel sx={{ color: theme.palette.text.primary }}>
-                    Project Type
+                  <FormLabel
+                    sx={{ color: theme.palette.text.primary, fontWeight: 600 }}
+                  >
+                    Project Type:
                   </FormLabel>
                   <RadioGroup
                     value={formData.projectType}
@@ -303,6 +365,7 @@ export default function BookCallModal({
                   color="primary"
                   onClick={handleNext}
                   fullWidth
+                  disabled={isRateLimited}
                 >
                   Next
                 </Button>
