@@ -6,6 +6,7 @@ import ThemeRegistry from "@/theme/ThemeRegistry";
 import { headers } from "next/headers";
 import SubdomainProvider from "@/contexts/SubdomainProvider";
 import Script from "next/script";
+import { getUmamiWebsiteId } from "./lib/getUmamiWebsiteId";
 
 const montserrat = Montserrat({
   variable: "--font-montserrat",
@@ -31,6 +32,7 @@ export default async function RootLayout({
 }) {
   const host = (await headers()).get("host") || "";
   const subdomain = host.split(".")[0];
+  const websiteId = getUmamiWebsiteId(subdomain);
 
   return (
     <html lang="en">
@@ -43,7 +45,7 @@ export default async function RootLayout({
             <Script
               async
               defer
-              data-website-id={process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID}
+              data-website-id={websiteId}
               src={process.env.NEXT_PUBLIC_UMAMI_SCRIPT_URL}
             />
           </SubdomainProvider>
