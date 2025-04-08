@@ -22,20 +22,42 @@ type InfoSectionProps = {
   title: string;
   icon: React.ReactElement;
   items: string[];
+  iconColor?: string;
 };
 
-function InfoSection({ title, icon, items }: InfoSectionProps) {
+function InfoSection({
+  title,
+  icon,
+  items,
+  iconColor = "primary.main",
+}: InfoSectionProps) {
   return (
-    <Box sx={{ p: 2 }}>
+    <Box
+      sx={{
+        p: 2,
+        borderRadius: 2,
+        height: "100%",
+      }}
+    >
       <Typography
-        variant="h6"
-        color="primary.light"
+        variant="h5"
+        fontWeight="800"
+        color="background.main"
         gutterBottom
         sx={{ display: "flex", alignItems: "center" }}
       >
         <Box
           component="span"
-          sx={{ mr: 1, display: "inline-flex", verticalAlign: "middle" }}
+          sx={{
+            mr: 1,
+            p: 1,
+            backgroundColor: "primary.light",
+            borderRadius: "50%",
+            display: "inline-flex",
+            alignItems: "center",
+            justifyContent: "center",
+            color: "background.paper",
+          }}
         >
           {icon}
         </Box>
@@ -44,9 +66,9 @@ function InfoSection({ title, icon, items }: InfoSectionProps) {
 
       <List dense>
         {items.map((text, index) => (
-          <ListItem key={index} sx={{ px: 0 }}>
+          <ListItem key={index} sx={{ px: 0, mb: 1 }}>
             <ListItemIcon sx={{ minWidth: 28 }}>
-              <CheckCircleIcon sx={{ color: "primary.main", fontSize: 20 }} />
+              <CheckCircleIcon sx={{ color: iconColor, fontSize: 20 }} />
             </ListItemIcon>
             <ListItemText primary={text} />
           </ListItem>
@@ -79,8 +101,8 @@ export default function ForRecruiters() {
   ];
 
   const handleClick = () => {
-    if (typeof window !== "undefined" && (window as any).umami) {
-      (window as any).umami.track("resume-full-pdf-click");
+    if (typeof window !== "undefined" && (window as any).umami?.track) {
+      (window as any).umami.track("resume-recruiters-pdf-click");
     }
   };
 
@@ -93,11 +115,11 @@ export default function ForRecruiters() {
         borderColor: "primary.main",
       }}
     >
-      <Typography variant="h4" gutterBottom>
+      <Typography variant="h3" gutterBottom>
         For Recruiters
       </Typography>
 
-      <Typography variant="body1" sx={{ mb: 2 }}>
+      <Typography variant="body1" sx={{ mb: 4 }}>
         Thank you for considering my profile. Here's what you should know about
         my expertise and availability:
       </Typography>
@@ -108,6 +130,7 @@ export default function ForRecruiters() {
             title="Core Competencies"
             icon={<BusinessIcon />}
             items={competencies}
+            iconColor="background.paper"
           />
         </Grid>
         <Grid item xs={12} md={4}>
@@ -115,6 +138,7 @@ export default function ForRecruiters() {
             title="Work Preferences"
             icon={<WorkIcon />}
             items={preferences}
+            iconColor="background.paper"
           />
         </Grid>
         <Grid item xs={12} md={4}>
@@ -122,11 +146,12 @@ export default function ForRecruiters() {
             title="Technical Stack"
             icon={<CodeIcon />}
             items={techStack}
+            iconColor="background.paper"
           />
         </Grid>
       </Grid>
 
-      <Box sx={{ mt: 3, textAlign: "center" }}>
+      <Box sx={{ mt: 4, textAlign: "center" }}>
         <Button
           variant="contained"
           size="large"

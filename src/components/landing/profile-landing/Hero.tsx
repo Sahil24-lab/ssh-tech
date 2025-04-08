@@ -19,7 +19,7 @@ import Image from "next/image";
 
 export default function Hero() {
   const handleClick = () => {
-    if (typeof window !== "undefined" && (window as any).umami) {
+    if (typeof window !== "undefined" && (window as any).umami?.track) {
       (window as any).umami.track("resume-pdf-click");
     }
   };
