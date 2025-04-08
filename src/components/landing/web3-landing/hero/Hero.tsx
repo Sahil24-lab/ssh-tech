@@ -1,12 +1,25 @@
 "use client";
 
-import { Typography, Button, Box, Grid } from "@mui/material";
+import {
+  Typography,
+  Button,
+  Box,
+  Grid,
+  useTheme,
+  useMediaQuery,
+} from "@mui/material";
 import GlassCard from "@/components/card/glass-card/GlassCard";
 import Image from "next/image";
 import BookCallModal from "@/components/book-call-modal/BookCallModal";
 import { useState } from "react";
+
 const Hero = () => {
   const [open, setOpen] = useState(false);
+
+  const theme = useTheme();
+  const isXLUp = useMediaQuery(theme.breakpoints.up("xl"));
+  const isLargeUp = useMediaQuery(theme.breakpoints.up("lg"));
+  const variantSubtitle = isXLUp ? "h4" : isLargeUp ? "h6" : "body1";
 
   const handleScroll = (id: string) => {
     const element = document.getElementById(id);
@@ -26,7 +39,8 @@ const Hero = () => {
           sm: "60vh",
           md: "50vh",
           lg: "80vh",
-          xl: "90vh",
+          xl: "100vh",
+          xxl: "100vh",
         },
         overflow: "hidden",
         backgroundColor: "#0b0c10",
@@ -66,11 +80,13 @@ const Hero = () => {
         sx={{
           position: "relative",
           zIndex: 1,
-          px: { xs: 3, sm: 6, md: 12, lg: 20, xl: 24 },
-          pt: { xs: 12, sm: 14, md: 20 },
-          pb: { xs: 6, sm: 8, md: 10 },
+          px: { xs: 3, sm: 6, md: 12, lg: 20, xl: 24, xxl: 30 },
+          pt: { xs: 12, sm: 14, md: 20, xl: 40, xxl: 48 },
+          pb: { xs: 6, sm: 8, md: 10, xl: 0, xxl: 0 },
           display: "flex",
-          alignItems: "center",
+          alignItems: { xs: "flex-start", xl: "center" },
+          justifyContent: { xs: "start", xl: "center" },
+          flexDirection: "column",
           minHeight: "100%",
         }}
       >
@@ -81,11 +97,18 @@ const Hero = () => {
           alignItems="center"
           justifyContent="center"
         >
-          {/* Image on top for mobile */}
+          {/* Image */}
           <Grid item xs={12} md={6} order={{ xs: 1, md: 2 }}>
             <Box
               sx={{
-                maxWidth: { xs: 340, sm: 300, md: 600 },
+                maxWidth: {
+                  xs: 340,
+                  sm: 360,
+                  md: 500,
+                  lg: 580,
+                  xl: 680,
+                  xxl: 780,
+                },
                 mx: { xs: "auto", md: "unset" },
               }}
             >
@@ -98,8 +121,8 @@ const Hero = () => {
                 <Image
                   src="/Hero/hero-image.png"
                   alt="Hero Image"
-                  width={600}
-                  height={400}
+                  width={680}
+                  height={480}
                   style={{
                     width: "100%",
                     height: "auto",
@@ -114,7 +137,7 @@ const Hero = () => {
           {/* Text Section */}
           <Grid item xs={12} md={6} order={{ xs: 2, md: 1 }}>
             <Typography
-              variant="h3"
+              variant={isXLUp ? "h2" : "h3"}
               gutterBottom
               sx={{
                 fontWeight: "bold",
@@ -126,18 +149,17 @@ const Hero = () => {
             </Typography>
 
             <Typography
-              variant="body1"
+              variant={variantSubtitle}
               component="p"
               sx={{
                 color: "#ffffff",
                 mt: 2,
-                mb: 4,
+                mb: { xs: 4, lg: 10, xl: 10, xxl: 12 },
                 textAlign: { xs: "center", md: "left" },
               }}
             >
-              At SSH Tech we are empowering the next
-              <br />
-              generation of web3 Dapps
+              At SSH Tech we are empowering the <br />
+              next generation of web3 Dapps
             </Typography>
 
             <Box
@@ -154,9 +176,7 @@ const Hero = () => {
                 variant="contained"
                 color="primary"
                 size="large"
-                sx={{
-                  width: { xs: "100%", sm: "100%", md: "auto" },
-                }}
+                sx={{ width: { xs: "100%", sm: "100%", md: "auto" } }}
                 onClick={() => setOpen(true)}
               >
                 Book a Call
@@ -165,9 +185,7 @@ const Hero = () => {
                 variant="outlined"
                 color="primary"
                 size="large"
-                sx={{
-                  width: { xs: "100%", sm: "100%", md: "auto" },
-                }}
+                sx={{ width: { xs: "100%", sm: "100%", md: "auto" } }}
                 onClick={() => handleScroll("pricing")}
               >
                 View Plans

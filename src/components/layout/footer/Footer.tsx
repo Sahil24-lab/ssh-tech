@@ -12,7 +12,7 @@ export default function Footer() {
       sx={{
         mt: 4,
         py: 2,
-        px: 2,
+        px: 4,
         backgroundColor: theme.palette.background.paper,
         color: theme.palette.text.primary,
         display: "flex",

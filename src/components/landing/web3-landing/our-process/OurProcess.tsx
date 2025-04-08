@@ -21,28 +21,28 @@ const processes = [
     phase: "Phase 1",
     title: "Blueprint",
     description:
-      "We define your goals, user flows, and success metrics in a free Blueprint Call—then deliver a clear execution plan.",
+      "We define your goals, user flows & success metrics in a FREE Blueprint Call—then deliver a clear execution plan.",
     icon: <EmojiObjectsIcon sx={{ fontSize: 72 }} />,
   },
   {
     phase: "Phase 2",
     title: "Validate",
     description:
-      "We ship a working POC or modular feature set for early feedback—minimizing risk and accelerating delivery.",
+      "We ship a working POC or modular feature set for early feedback—minimizing risk & accelerating delivery.",
     icon: <ArchitectureIcon sx={{ fontSize: 72 }} />,
   },
   {
     phase: "Phase 3",
     title: "Build",
     description:
-      "We craft intuitive, user-friendly interfaces designed for seamless interaction and maximum engagement.",
+      "We craft intuitive, user-friendly interfaces designed for seamless interaction & maximum engagement.",
     icon: <Code sx={{ fontSize: 72 }} />,
   },
   {
     phase: "Phase 4",
     title: "Launch & Optimize",
     description:
-      "We deploy to mainnet and stay involved post-launch—handling updates, analytics, and improvements.",
+      "We deploy to mainnet and stay involved post-launch—handling updates, analytics & improvements.",
     icon: <RocketLaunch sx={{ fontSize: 72 }} />,
   },
 ];
@@ -194,7 +194,8 @@ const OurProcess = () => {
                         sm: 340,
                         md: 340,
                         lg: 380,
-                        xl: 440,
+                        xl: 460,
+                        xxl: 440,
                       },
                       width: "100%",
                       maxWidth: "100%",
@@ -211,6 +212,7 @@ const OurProcess = () => {
                       sx={{
                         color: "text.primary",
                         fontWeight: "700",
+                        minHeight: { xs: "auto", xl: 80, xxl: 80 },
                         mb: 2,
                       }}
                     >
