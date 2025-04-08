@@ -18,6 +18,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import Link from "next/link";
 import { useTheme } from "@mui/material/styles";
 import BookCallModal from "@/components/book-call-modal/BookCallModal";
+import { trackEvent } from "@/app/lib/umamiTrackEvent";
 
 export default function Header() {
   const theme = useTheme();
@@ -26,6 +27,29 @@ export default function Header() {
 
   const handleDrawerToggle = () => {
     setMobileOpen((prev) => !prev);
+  };
+  const getSubdomain = () => {
+    if (typeof window === "undefined") return null;
+    const host = window.location.hostname;
+
+    if (host.endsWith(".localhost")) {
+      return host.split(".")[0];
+    }
+
+    const parts = host.split(".");
+    if (parts.length >= 3) return parts[0];
+    return null;
+  };
+
+  const handleCTAClick = () => {
+    trackEvent("header_cta_click");
+    const subdomain = getSubdomain();
+
+    if (subdomain === "sahil") {
+      window.open("https://cal.com/ssh-tech/30min-call", "_blank");
+    } else {
+      setOpen(true);
+    }
   };
 
   return (
@@ -87,11 +111,10 @@ export default function Header() {
           variant="contained"
           color="primary"
           sx={{ display: { xs: "none", md: "block" } }}
-          onClick={() => setOpen(true)}
+          onClick={handleCTAClick}
         >
           Book a Call
         </Button>
-
         {/* Mobile Hamburger/X */}
         <IconButton
           edge="end"
@@ -179,7 +202,7 @@ export default function Header() {
               variant="contained"
               color="primary"
               fullWidth
-              onClick={() => setOpen(true)}
+              onClick={handleCTAClick}
               sx={{
                 fontWeight: "bold",
                 textTransform: "none",
