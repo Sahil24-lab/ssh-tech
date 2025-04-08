@@ -1,14 +1,9 @@
 import GlassCard from "@/components/card/glass-card/GlassCard";
 import { Box, Button, Typography } from "@mui/material";
 import React from "react";
+import { trackEvent } from "@/app/lib/umamiTrackEvent";
 
 export default function CallToAction() {
-  const trackClick = (eventName: string) => {
-    if (typeof window !== "undefined" && (window as any).umami?.track) {
-      (window as any).umami.track(eventName);
-    }
-  };
-
   return (
     <GlassCard
       sx={{
@@ -41,7 +36,7 @@ export default function CallToAction() {
           size="large"
           component="a"
           href="mailto:sahil.harriram@gmail.com"
-          onClick={() => trackClick("cta-email-click")}
+          onClick={() => trackEvent("cta-email-click")}
           sx={{
             backgroundColor: "primary.main",
             "&:hover": { backgroundColor: "primary.dark" },
@@ -56,7 +51,7 @@ export default function CallToAction() {
           href="https://cal.com/ssh-tech/30min-call"
           target="_blank"
           rel="noopener noreferrer"
-          onClick={() => trackClick("cta-schedule-call-click")}
+          onClick={() => trackEvent("cta-schedule-call-click")}
           sx={{ borderColor: "primary.light", color: "primary.light" }}
         >
           Schedule a Call

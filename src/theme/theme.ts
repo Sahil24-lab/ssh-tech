@@ -63,7 +63,7 @@ const themeOptions = {
       fontWeight: 500,
       fontSize: "2rem",
       lineHeight: 1.4,
-      color: "#029F8C", // Primary dark color
+      color: "#1FE2C4", // Primary dark color
     },
     h4: {
       fontFamily: "var(--font-montserrat), sans-serif",

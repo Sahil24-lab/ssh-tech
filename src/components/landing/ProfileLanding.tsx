@@ -42,6 +42,12 @@ export default function ProfilePage() {
           </section>
         </FullWidthContainer>
         {/* Key Skills Section - Organized by Category */}
+        {/* Projects Section */}
+        <FullWidthContainer>
+          <section id="projects">
+            <Projects />
+          </section>
+        </FullWidthContainer>
 
         {/* For Recruiters Section */}
         <FullWidthContainer>
@@ -50,19 +56,6 @@ export default function ProfilePage() {
           </section>
         </FullWidthContainer>
 
-        {/* Work Experience Section */}
-        <FullWidthContainer>
-          <section id="work-experience">
-            <WorkExperience />
-          </section>
-        </FullWidthContainer>
-
-        {/* Projects Section */}
-        <FullWidthContainer>
-          <section id="projects">
-            <Projects />
-          </section>
-        </FullWidthContainer>
         {/* Testimonials Section */}
         <FullWidthContainer>
           <Typography
@@ -73,6 +66,7 @@ export default function ProfilePage() {
               borderBottom: "2px solid",
               borderColor: "primary.main",
               pb: 1,
+              mb: 2,
               display: "inline-block",
             }}
           >
@@ -85,6 +79,14 @@ export default function ProfilePage() {
             <Testimonials />
           </section>
         </FullWidthContainer>
+
+        {/* Work Experience Section */}
+        <FullWidthContainer>
+          <section id="work-experience">
+            <WorkExperience />
+          </section>
+        </FullWidthContainer>
+
         {/* <Box component="section" sx={{ mb: 6 }}>
           <Typography
             variant="h3"

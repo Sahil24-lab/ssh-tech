@@ -16,14 +16,9 @@ import {
 } from "@mui/icons-material";
 import React from "react";
 import Image from "next/image";
+import { trackEvent } from "@/app/lib/umamiTrackEvent";
 
 export default function Hero() {
-  const handleClick = () => {
-    if (typeof window !== "undefined" && (window as any).umami?.track) {
-      (window as any).umami.track("resume-pdf-click");
-    }
-  };
-
   return (
     <GlassCardDark
       sx={{
@@ -80,7 +75,7 @@ export default function Hero() {
                 href="https://drive.google.com/file/d/1vQGr7z8OAO2PkedyyYDSlQr16W8hDvjH/view?usp=sharing&utm_source=portfolio"
                 target="_blank"
                 rel="noopener noreferrer"
-                onClick={handleClick}
+                onClick={() => trackEvent("resume-pdf-click")}
                 sx={{
                   backgroundColor: "primary.main",
                   "&:hover": { backgroundColor: "primary.dark" },
@@ -88,12 +83,15 @@ export default function Hero() {
               >
                 Download Resume
               </Button>
+
               <Button
                 variant="outlined"
                 startIcon={<LinkedinIcon />}
                 component="a"
                 href="https://www.linkedin.com/in/sahil-harriram/"
                 target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => trackEvent("social-linkedin-click")}
                 sx={{
                   borderColor: "primary.light",
                   color: "primary.light",
@@ -108,6 +106,8 @@ export default function Hero() {
                 component="a"
                 href="https://github.com/Sahil24-lab"
                 target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => trackEvent("social-github-click")}
                 sx={{
                   borderColor: "primary.light",
                   color: "primary.light",
@@ -121,6 +121,7 @@ export default function Hero() {
                 startIcon={<MailIcon />}
                 component="a"
                 href="mailto:sahil.harriram@gmail.com"
+                onClick={() => trackEvent("social-email-click")}
                 sx={{
                   borderColor: "primary.light",
                   color: "primary.light",

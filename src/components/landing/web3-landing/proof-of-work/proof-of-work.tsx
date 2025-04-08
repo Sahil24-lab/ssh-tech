@@ -13,6 +13,19 @@ import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
 import GlassCard from "@/components/card/glass-card/GlassCard";
 import { useRouter } from "next/navigation";
 
+type Project = {
+  title: string;
+  subtitle: string;
+  description: string;
+  highlights: string[];
+  logo?: string;
+  caseStudyHref?: string;
+  secondaryLink?: {
+    label: string;
+    href: string;
+  };
+};
+
 const projects = [
   {
     logo: "/logos/companies/llamarisk.png",

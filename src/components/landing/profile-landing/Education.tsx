@@ -52,6 +52,7 @@ export default function Education() {
           borderBottom: "2px solid",
           borderColor: "primary.main",
           pb: 1,
+          mb: 2,
           display: "inline-block",
         }}
       >

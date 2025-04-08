@@ -17,6 +17,7 @@ import {
   Work as WorkIcon,
 } from "@mui/icons-material";
 import React from "react";
+import { trackEvent } from "@/app/lib/umamiTrackEvent";
 
 type InfoSectionProps = {
   title: string;
@@ -100,12 +101,6 @@ export default function ForRecruiters() {
     "APIs: Nest.JS, Subquery, Subgraph",
   ];
 
-  const handleClick = () => {
-    if (typeof window !== "undefined" && (window as any).umami?.track) {
-      (window as any).umami.track("resume-recruiters-pdf-click");
-    }
-  };
-
   return (
     <GlassCard
       sx={{
@@ -143,7 +138,7 @@ export default function ForRecruiters() {
         </Grid>
         <Grid item xs={12} md={4}>
           <InfoSection
-            title="Technical Stack"
+            title="Tech Stack"
             icon={<CodeIcon />}
             items={techStack}
             iconColor="background.paper"
@@ -159,7 +154,9 @@ export default function ForRecruiters() {
           href="https://drive.google.com/file/d/1vQGr7z8OAO2PkedyyYDSlQr16W8hDvjH/view?usp=sharing&utm_source=portfolio"
           target="_blank"
           rel="noopener noreferrer"
-          onClick={handleClick}
+          onClick={() => {
+            trackEvent("resume-recruiters-pdf-click");
+          }}
           sx={{
             backgroundColor: "primary.main",
             "&:hover": { backgroundColor: "primary.dark" },
