@@ -18,6 +18,12 @@ import React from "react";
 import Image from "next/image";
 
 export default function Hero() {
+  const handleClick = () => {
+    if (typeof window !== "undefined" && (window as any).umami) {
+      (window as any).umami.track("resume-pdf-click");
+    }
+  };
+
   return (
     <GlassCardDark
       sx={{
@@ -71,8 +77,10 @@ export default function Hero() {
               <Button
                 variant="contained"
                 startIcon={<DownloadIcon />}
-                href="/resume.pdf"
+                href="https://drive.google.com/file/d/1vQGr7z8OAO2PkedyyYDSlQr16W8hDvjH/view?usp=sharing&utm_source=portfolio"
                 target="_blank"
+                rel="noopener noreferrer"
+                onClick={handleClick}
                 sx={{
                   backgroundColor: "primary.main",
                   "&:hover": { backgroundColor: "primary.dark" },
@@ -80,7 +88,6 @@ export default function Hero() {
               >
                 Download Resume
               </Button>
-
               <Button
                 variant="outlined"
                 startIcon={<LinkedinIcon />}

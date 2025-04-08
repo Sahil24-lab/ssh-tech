@@ -78,6 +78,12 @@ export default function ForRecruiters() {
     "APIs: Nest.JS, Subquery, Subgraph",
   ];
 
+  const handleClick = () => {
+    if (typeof window !== "undefined" && (window as any).umami) {
+      (window as any).umami.track("resume-full-pdf-click");
+    }
+  };
+
   return (
     <GlassCard
       sx={{
@@ -125,8 +131,10 @@ export default function ForRecruiters() {
           variant="contained"
           size="large"
           startIcon={<DownloadIcon />}
-          href="/resume.pdf"
+          href="https://drive.google.com/file/d/1vQGr7z8OAO2PkedyyYDSlQr16W8hDvjH/view?usp=sharing&utm_source=portfolio"
           target="_blank"
+          rel="noopener noreferrer"
+          onClick={handleClick}
           sx={{
             backgroundColor: "primary.main",
             "&:hover": { backgroundColor: "primary.dark" },
