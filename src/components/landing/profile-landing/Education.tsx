@@ -6,7 +6,6 @@ import React from "react";
 type EducationItem = {
   institution: string;
   program: string;
-  date: string;
   details: string;
 };
 
@@ -14,14 +13,12 @@ const educationList: EducationItem[] = [
   {
     institution: "University of Newcastle, Australia",
     program: "BEng. (Mechatronics)(Honours)",
-    date: "Graduated: June 2016",
     details:
       "Awarded $2000 scholarship for an Exchange Program to Karlsruher Institut für Technologie, Germany",
   },
   {
     institution: "Cheung Kong Graduate School of Business, China",
     program: "China Start Program",
-    date: "Completed: April 2018",
     details:
       "Secured $8500 Scholarship for the China Start Program. Pitched business to audience >500,000.",
   },
@@ -36,9 +33,6 @@ function EducationCard({ item }: { item: EducationItem }) {
           <Typography variant="h5">{item.institution}</Typography>
           <Typography variant="h6" color="primary.light" gutterBottom>
             {item.program}
-          </Typography>
-          <Typography variant="body2" sx={{ mb: 1 }}>
-            {item.date}
           </Typography>
           <Typography variant="body1">{item.details}</Typography>
         </Box>
