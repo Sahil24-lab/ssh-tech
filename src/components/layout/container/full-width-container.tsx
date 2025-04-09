@@ -12,6 +12,8 @@ export default function FullWidthContainer({
       component="section"
       sx={{
         width: "100%",
+        display: "flex",
+        justifyContent: "center",
       }}
     >
       {children}
