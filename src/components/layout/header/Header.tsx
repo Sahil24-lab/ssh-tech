@@ -100,7 +100,7 @@ export default function Header() {
             <Button component={Link} href="/proof-of-work" variant="text">
               Proof Of Work
             </Button>
-            <Button component={Link} href="/tools-resources" variant="text">
+            <Button component={Link} href="/tools-and-resources" variant="text">
               Tools & Resources
             </Button>
           </Box>
@@ -167,7 +167,7 @@ export default function Header() {
           {[
             { label: "Blog", href: "/blog" },
             { label: "Proof Of Work", href: "/proof-of-work" },
-            { label: "Tools & Resources", href: "/tools-resources" },
+            { label: "Tools & Resources", href: "/tools-and-resources" },
           ].map(({ label, href }) => (
             <ListItem
               key={label}
