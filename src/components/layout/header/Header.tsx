@@ -94,8 +94,8 @@ export default function Header() {
 
           {/* Desktop Nav */}
           <Box sx={{ display: { xs: "none", md: "flex" }, gap: 2 }}>
-            <Button component={Link} href="/blogs" variant="text">
-              Blogs
+            <Button component={Link} href="/blog" variant="text">
+              Blog
             </Button>
             <Button component={Link} href="/proof-of-work" variant="text">
               Proof Of Work
@@ -165,7 +165,7 @@ export default function Header() {
         {/* Navigation Items */}
         <List sx={{ mt: 8, display: "flex", flexDirection: "column", gap: 2 }}>
           {[
-            { label: "Blogs", href: "/blogs" },
+            { label: "Blog", href: "/blog" },
             { label: "Proof Of Work", href: "/proof-of-work" },
             { label: "Tools & Resources", href: "/tools-resources" },
           ].map(({ label, href }) => (
