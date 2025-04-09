@@ -17,11 +17,11 @@ import {
   Box,
   Avatar,
   Stack,
-  useTheme,
 } from "@mui/material";
 import Layout from "@/components/layout/Layout";
 import ConstrainedContainer from "@/components/layout/container/constrained-container";
 import GlassCardDark from "@/components/card/glass-card-dark/GlassCardDark";
+import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
 
 export default async function ProofOfWorkList() {
   const projects: ProofOfWorkEntry[] = await fetchEntries();
@@ -82,8 +82,9 @@ export default async function ProofOfWorkList() {
                         width: { xs: "100%", md: "45%" },
                         height: "100%",
                         flexShrink: 0,
-                        borderTopLeftRadius: 12,
-                        borderBottomLeftRadius: 12,
+                        borderTopLeftRadius: { xs: 12, md: 12 },
+                        borderTopRightRadius: { xs: 12, md: 0 },
+                        borderBottomLeftRadius: { xs: 0, md: 12 },
                         overflow: "hidden",
                       }}
                     >
@@ -96,8 +97,6 @@ export default async function ProofOfWorkList() {
                           width: "100%",
                           height: "100%",
                           objectFit: "cover",
-                          borderTopLeftRadius: 12,
-                          borderBottomLeftRadius: 12,
                         }}
                       />
                     </CardMedia>
@@ -124,22 +123,30 @@ export default async function ProofOfWorkList() {
                           src={`https:${logoUrl}`}
                           alt={title}
                           sx={{
-                            width: 56,
-                            height: 56,
+                            width: 96,
+                            height: 96,
                             border: "2px solid",
+                            boxShadow: "2px 2px 16px rgba(7, 223, 193, 0.7)",
                             borderColor: "primary.main",
                           }}
                         />
                       )}
                       <Box>
                         <Typography
-                          variant="h5"
-                          sx={{ color: "white", fontWeight: 600, mb: 0.5 }}
+                          variant="h3"
+                          sx={{
+                            color: "primary.main",
+                            fontWeight: 700,
+                            mb: 0.5,
+                          }}
                         >
                           {title}
                         </Typography>
                         {subtitle && (
-                          <Typography variant="body2" sx={{ color: "#B0B0B0" }}>
+                          <Typography
+                            variant="h5"
+                            sx={{ fontWeight: 600, color: "#B0B0B0" }}
+                          >
                             {subtitle}
                           </Typography>
                         )}
@@ -161,8 +168,18 @@ export default async function ProofOfWorkList() {
                               <Chip
                                 key={i}
                                 label={achievement}
-                                color="success"
-                                size="small"
+                                size="medium"
+                                icon={<EmojiEventsIcon />}
+                                sx={{
+                                  backgroundColor: "primary.main",
+                                  color: "primary.contrastText",
+                                  fontWeight: 600,
+                                  px: 1.6,
+                                  "& .MuiChip-icon": {
+                                    color: "primary.contrastText",
+                                    fontSize: 18,
+                                  },
+                                }}
                               />
                             )
                           )}
@@ -171,7 +188,12 @@ export default async function ProofOfWorkList() {
 
                     <Typography
                       variant="body2"
-                      sx={{ color: "#E0E0E0", lineHeight: 1.75, mb: 2.5 }}
+                      sx={{
+                        color: "#E0E0E0",
+                        lineHeight: 1.75,
+                        mb: 2.5,
+                        minHeight: { xs: "auto", md: 128 },
+                      }}
                     >
                       {description}
                     </Typography>
@@ -192,6 +214,7 @@ export default async function ProofOfWorkList() {
                             color="primary"
                             variant="outlined"
                             size="small"
+                            sx={{ fontWeight: 600, px: 1.6 }}
                           />
                         ))}
                       </Box>
