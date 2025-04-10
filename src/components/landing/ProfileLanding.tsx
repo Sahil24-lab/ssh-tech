@@ -1,6 +1,6 @@
 "use client";
 
-import { Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import Layout from "../layout/Layout";
 import ConstrainedContainer from "@/components/layout/container/constrained-container";
 import CallToAction from "./profile-landing/CallToAction";
@@ -58,26 +58,40 @@ export default function ProfilePage() {
 
         {/* Testimonials Section */}
         <FullWidthContainer>
-          <Typography
-            variant="h3"
-            component="h2"
-            gutterBottom
+          <Box
             sx={{
-              borderBottom: "2px solid",
-              borderColor: "primary.main",
-              pb: 1,
-              mb: 2,
-              display: "inline-block",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "flex-start", // key: aligns text/underline to left
             }}
           >
-            Testimonials
-          </Typography>
-          <Typography variant="body1" paragraph>
-            What colleagues and clients say about working with me.
-          </Typography>
-          <section id="testimonials">
-            <Testimonials />
-          </section>
+            <Box
+              sx={{
+                display: "inline-flex", // shrink-to-fit
+                flexDirection: "column",
+                borderBottom: "2px solid",
+                borderColor: "primary.main",
+                pb: 1,
+                mb: 2,
+              }}
+            >
+              <Typography
+                variant="h3"
+                component="span" // make text inline-friendly
+                sx={{ whiteSpace: "nowrap" }} // optional: keeps text on one line
+              >
+                Testimonials
+              </Typography>
+            </Box>
+
+            <Typography variant="body1" paragraph>
+              What colleagues and clients say about working with me.
+            </Typography>
+
+            <section id="testimonials">
+              <Testimonials />
+            </section>
+          </Box>
         </FullWidthContainer>
 
         {/* Work Experience Section */}
