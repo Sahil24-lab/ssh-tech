@@ -1,6 +1,8 @@
 import React from "react";
-import { Box, Grid, Typography } from "@mui/material";
+import Link from "next/link";
+import { Box, Button, Grid, Typography } from "@mui/material";
 import ProjectCard from "@/components/card/project-card/ProjectCard";
+import RocketLaunchIcon from "@mui/icons-material/RocketLaunch";
 
 const projects = [
   {
@@ -16,7 +18,7 @@ const projects = [
       "Account Management",
     ],
     highlights: ["Hackathon 1st Place", "$3,000 Prize"],
-    logo: "/logos/companies/bloctrace.png",
+    logo: "/logos/companies/bloctrace.svg",
     caseStudyHref: "/proof-of-work/bloctrace",
     secondaryLink: {
       label: "GitHub",
@@ -39,7 +41,7 @@ const projects = [
     ],
     highlights: ["$50,000 Grant", "3.3K Users in 30 days", "Hackathon Winner"],
     logo: "/logos/companies/buzzkill.png",
-    caseStudyHref: "proof-of-work/projects/buzzkill",
+    caseStudyHref: "proof-of-work/buzzkill",
     secondaryLink: {
       label: "Live Demo",
       href: "https://play.buzzkill.world/",
@@ -49,7 +51,7 @@ const projects = [
 
 export default function Projects() {
   return (
-    <Box component="section" sx={{ mb: 6 }}>
+    <Box component="section" sx={{ mb: 10 }}>
       <Typography
         variant="h3"
         component="h2"
@@ -69,13 +71,35 @@ export default function Projects() {
         Highlighted projects showcasing technical expertise and problem-solving
         capabilities.
       </Typography>
-      <Grid container spacing={4}>
+
+      <Grid container spacing={4} sx={{ mb: 4 }}>
         {projects.map((proj) => (
           <Grid item xs={12} md={6} key={proj.title}>
             <ProjectCard {...proj} />
           </Grid>
         ))}
       </Grid>
+
+      <Box textAlign="center">
+        <Link href="/proof-of-work" passHref>
+          <Button
+            variant="contained"
+            color="primary"
+            size="large"
+            startIcon={<RocketLaunchIcon sx={{ fontSize: 20 }} />}
+            sx={{
+              fontWeight: 700,
+              gap: 1,
+              textTransform: "uppercase",
+              px: 4,
+              py: 1.5,
+              borderWidth: 2,
+            }}
+          >
+            Proof of Work
+          </Button>
+        </Link>
+      </Box>
     </Box>
   );
 }

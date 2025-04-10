@@ -301,6 +301,7 @@ export default function Pricing() {
                   color="primary"
                   fullWidth
                   onClick={() => setOpen(true)}
+                  sx={{ fontWeight: "700" }}
                 >
                   Book a Call
                 </Button>

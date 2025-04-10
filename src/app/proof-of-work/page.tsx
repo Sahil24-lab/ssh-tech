@@ -151,7 +151,7 @@ export default async function ProofOfWorkList() {
                             borderTopRightRadius: { xs: 12, md: 0 },
                             borderBottomLeftRadius: { xs: 0, md: 12 },
                             overflow: "hidden",
-                            background: `linear-gradient(202.89deg, #003338 14.84%, #003E41 42.05%, #004346 59.76%, #003F41 91.02%)`,
+                            background: `#003338`,
                           }}
                         >
                           <Box
@@ -335,10 +335,8 @@ export default async function ProofOfWorkList() {
                               alignItems: "center",
                               justifyContent: "center",
                               gap: 1,
-                              padding: "0.55rem 2rem",
+                              padding: "0.45rem 2rem",
                               fontWeight: 800,
-                              fontSize: "0.95rem",
-                              textTransform: "uppercase",
                             }}
                           >
                             View Project

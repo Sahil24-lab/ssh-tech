@@ -176,7 +176,10 @@ const Hero = () => {
                 variant="contained"
                 color="primary"
                 size="large"
-                sx={{ width: { xs: "100%", sm: "100%", md: "auto" } }}
+                sx={{
+                  fontWeight: "700",
+                  width: { xs: "100%", sm: "100%", md: "auto" },
+                }}
                 onClick={() => setOpen(true)}
               >
                 Book a Call

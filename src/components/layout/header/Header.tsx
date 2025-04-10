@@ -110,7 +110,7 @@ export default function Header() {
         <Button
           variant="contained"
           color="primary"
-          sx={{ display: { xs: "none", md: "block" } }}
+          sx={{ fontWeight: "700", display: { xs: "none", md: "block" } }}
           onClick={handleCTAClick}
         >
           Book a Call
@@ -204,9 +204,9 @@ export default function Header() {
               fullWidth
               onClick={handleCTAClick}
               sx={{
-                fontWeight: "bold",
+                fontWeight: "700",
                 textTransform: "none",
-                fontSize: "1rem",
+
                 borderRadius: "8px",
               }}
             >

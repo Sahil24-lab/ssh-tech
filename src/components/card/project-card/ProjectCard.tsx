@@ -67,11 +67,11 @@ export default function ProjectCard(props: Project) {
           />
         )}
         <Box>
-          <Typography variant="h6" fontWeight={700} sx={{ mb: 0.5 }}>
+          <Typography variant="h5" fontWeight={700} sx={{ mb: 0.5 }}>
             {title}
           </Typography>
           <Typography
-            variant="body1"
+            variant="body2"
             sx={{ color: "primary.main", fontWeight: 500 }}
           >
             {subtitle}
@@ -101,6 +101,7 @@ export default function ProjectCard(props: Project) {
               color: "primary.contrastText",
               fontWeight: 600,
               px: 1.6,
+              opacity: "0.8",
               "& .MuiChip-icon": {
                 color: "primary.contrastText",
                 fontSize: 18,
@@ -127,13 +128,12 @@ export default function ProjectCard(props: Project) {
       <Box sx={{ display: "flex", gap: 1, flexWrap: "wrap", mb: 3 }}>
         {tags.map((tag) => (
           <Chip
+            variant="outlined"
+            color="primary"
             key={tag}
-            size="medium"
+            size="small"
             label={tag}
-            sx={{
-              backgroundColor: "secondary.dark",
-              color: "text.primary",
-            }}
+            sx={{ opacity: 1 }}
           />
         ))}
       </Box>
