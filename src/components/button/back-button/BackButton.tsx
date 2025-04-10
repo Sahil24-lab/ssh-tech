@@ -1,70 +1,47 @@
 "use client";
 
-import * as React from "react";
-import { cn } from "@/app/lib/utils";
-import { styled } from "@mui/material/styles";
-import { Button, type ButtonProps as MuiButtonProps } from "@mui/material";
-import { ArrowBack } from "@mui/icons-material";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
-
-export interface ButtonProps extends Omit<MuiButtonProps, "size" | "variant"> {
-  variant?:
-    | "default"
-    | "destructive"
-    | "outline"
-    | "secondary"
-    | "ghost"
-    | "link";
-  size?: "default" | "sm" | "lg" | "icon";
-}
-
-const BackButtonBase = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, children, ...props }, ref) => {
-    return (
-      <Button
-        className={cn(
-          "inline-flex items-center justify-center rounded-md text-sm font-medium transition-all focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none",
-          variant === "default" &&
-            "bg-primary text-primary-foreground hover:bg-primary/90",
-          variant === "destructive" &&
-            "bg-destructive text-destructive-foreground hover:bg-destructive/90",
-          variant === "outline" &&
-            "bg-transparent border border-input hover:bg-accent hover:text-accent-foreground",
-          variant === "secondary" &&
-            "bg-secondary text-secondary-foreground hover:bg-secondary/80",
-          variant === "ghost" && "hover:bg-accent hover:text-accent-foreground",
-          className
-        )}
-        ref={ref}
-        {...props}
-      >
-        {children}
-      </Button>
-    );
-  }
-);
-BackButtonBase.displayName = "BackButtonBase";
+import { styled, alpha } from "@mui/material/styles";
+import { Button } from "@mui/material";
+import { ArrowBack } from "@mui/icons-material";
 
 const BackButtonWrapper = styled("div")(({ theme }) => ({
   position: "fixed",
   top: `calc(65px + ${theme.spacing(3)})`,
-  right: "calc((100vw - 1600px) / 2)",
   zIndex: 1000,
   pointerEvents: "none",
   display: "flex",
   justifyContent: "flex-end",
+  right: "calc((100vw - 1600px) / 2)",
+
+  [theme.breakpoints.up("sm")]: {
+    right: "calc((100vw - 1400px) / 2)",
+  },
+  [theme.breakpoints.up("md")]: {
+    right: "calc((100vw - 1000px) / 2)",
+  },
+  [theme.breakpoints.up("lg")]: {
+    right: "calc((100vw - 1340px) / 2)",
+  },
+  [theme.breakpoints.up("xl")]: {
+    right: "calc((100vw - 1640px) / 2)",
+  },
+  [theme.breakpoints.up("xxl")]: {
+    right: "calc((100vw - 1800px) / 2)",
+  },
 }));
 
-const BackButton = styled(BackButtonBase)(({ theme }) => ({
+const BackButtonStyled = styled(Button)(({ theme }) => ({
   pointerEvents: "auto",
+  background: "none",
+  border: "none",
+  boxShadow: "none",
+  textDecoration: "none",
   width: "auto",
   minWidth: "150px",
   height: "48px",
-  textDecoration: "none !important", // Force remove underline
-  color: "inherit !important", // Prevent color overrides
-  background: "none",
-  border: "none",
-
+  transformOrigin: "left center",
   transition: theme.transitions.create([
     "background-color",
     "box-shadow",
@@ -73,64 +50,83 @@ const BackButton = styled(BackButtonBase)(({ theme }) => ({
     "min-width",
     "padding",
     "transform",
+    "margin",
   ]),
 
-  transformOrigin: "left center",
-  position: "fixed",
-
-  "&:hover": {
-    backgroundColor: "rgba(255, 255, 255, 0.1)", // Subtle color change
-    transform: "translateY(-2px)", // Slight movement
+  "&, &:hover, &:focus, &:active, &:focus-visible, &::-moz-focus-inner": {
+    outline: "none !important",
+    border: "none !important",
+    boxShadow: "none !important",
+    textDecoration: "none !important",
   },
 
-  "&:active": {
-    transform: "translateY(1px) scale(0.98)", // Pressing effect
-    boxShadow: theme.shadows[2],
+  "&::before, &::after": {
+    content: '""" !important"',
+    display: "none !important",
+    border: "none !important",
+    textDecoration: "none !important",
+  },
+
+  "& .MuiTouchRipple-root": {
+    display: "none !important",
+  },
+
+  "&:hover": {
+    backgroundColor: "transparent",
+  },
+
+  "& span": {
+    textDecoration: "none !important",
   },
 
   "&.scrolled": {
-    backgroundColor: "rgba(18, 18, 18, 0.8)",
+    backgroundColor: alpha("#121212", 0.8),
     backdropFilter: "blur(8px)",
-    borderRadius: "24px",
+    borderRadius: 24,
     boxShadow: theme.shadows[4],
-    width: "52px",
-    minWidth: "54px",
+    width: 52,
+    minWidth: 54,
     padding: 1,
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    paddingLeft: theme.spacing(1),
+    textDecoration: "none !important",
+    alignSelf: "flex-end",
+    marginLeft: "auto",
+
+    "& span": {
+      display: "none",
+    },
   },
 
-  // Ensure MUI Link styles NEVER override this button
-  "& a": {
-    textDecoration: "none !important",
-    color: "inherit !important",
+  "&.scrolled:hover": {
+    backgroundColor: alpha("#121212", 1),
   },
 }));
 
-export function CenteredBackButton(props: ButtonProps) {
-  const [scrolled, setScrolled] = React.useState(false);
+export default function CenteredBackButton() {
+  const [scrolled, setScrolled] = useState(false);
 
-  React.useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 100);
-    };
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 100);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
     <BackButtonWrapper>
-      <BackButton
-        component={Link}
-        href="/proof-of-work"
-        startIcon={!scrolled && <ArrowBack />}
-        className={scrolled ? "scrolled" : ""}
-        color="primary"
-      >
-        {!scrolled ? "Back to Projects" : <ArrowBack fontSize="small" />}
-      </BackButton>
+      <Link href="/proof-of-work" passHref legacyBehavior>
+        <a className="no-underline border-none hover:border-none">
+          <BackButtonStyled className={scrolled ? "scrolled" : ""}>
+            <ArrowBack fontSize="small" />
+            {!scrolled && (
+              <span style={{ marginLeft: 8, textDecoration: "none" }}>
+                Back to Projects
+              </span>
+            )}
+          </BackButtonStyled>
+        </a>
+      </Link>
     </BackButtonWrapper>
   );
 }

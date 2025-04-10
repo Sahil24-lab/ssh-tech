@@ -1,21 +1,34 @@
+// ProofOfWorkPage.tsx
+
 "use client";
 
-import { ProofOfWorkEntry, ContentfulImageAsset } from "../../types/contentful";
+import { useEffect, useState } from "react";
+import {
+  ProofOfWorkEntry,
+  ProofOfWorkFields,
+  ContentfulImageAsset,
+} from "../../types/contentful";
 import {
   Box,
   Button,
-  Grid,
   Typography,
   Card,
   CardContent,
   Chip,
   Link,
+  Avatar,
+  Stack,
 } from "@mui/material";
-import Layout from "@/components/layout/Layout";
-import { CenteredBackButton } from "@/components/button/back-button/BackButton";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { useEffect, useState } from "react";
+import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
+import Layout from "@/components/layout/Layout";
+import CenteredBackButton from "@/components/button/back-button/BackButton";
 import FeatureImage from "@/components/feature-image/FeatureImage";
+import ConstrainedContainer from "@/components/layout/container/constrained-container";
+import {
+  PlayCircle as PlayCircleIcon,
+  GitHub as GithubIcon,
+} from "@mui/icons-material";
 
 export default function ProofOfWorkPage({
   project,
@@ -40,17 +53,37 @@ export default function ProofOfWorkPage({
     );
   }
 
-  // Extract safe content
-  const { title, description, demo, github, tags, screenshots, demoVideo } =
-    project.fields;
+  // Extract fields
+  const fields = project.fields as ProofOfWorkFields;
+  const {
+    title,
+    subtitle,
+    achievements,
+    description,
+    demo,
+    github,
+    tags,
+    screenshots,
+    demoVideo,
+    projectLogo,
+  } = fields;
 
+  // Prepare tags
   const safeTags: string[] = Array.isArray(tags) ? tags : [];
+
+  // Prepare screenshots
   const safeScreenshots: ContentfulImageAsset[] = Array.isArray(screenshots)
     ? (screenshots as ContentfulImageAsset[])
     : [];
 
-  const videoUrl: string = typeof demoVideo === "string" ? demoVideo : "";
+  // Prepare logo (Avatar)
+  const logoUrl =
+    projectLogo && typeof projectLogo === "object" && "fields" in projectLogo
+      ? (projectLogo as ContentfulImageAsset).fields.file.url
+      : undefined;
 
+  // Handle video
+  const videoUrl: string = typeof demoVideo === "string" ? demoVideo : "";
   const isYouTube =
     videoUrl.includes("youtube.com") || videoUrl.includes("youtu.be");
 
@@ -63,186 +96,245 @@ export default function ProofOfWorkPage({
 
   return (
     <Layout>
-      <Box className="flex flex-col gap-10" marginTop="4rem">
-        <Card
-          sx={{
-            display: "flex",
-            flexDirection: { xs: "column", md: "row" },
-            borderRadius: "16px",
-            overflow: "hidden",
-          }}
-        >
-          {/* Sticky Back Button */}
-          <Box>
-            <CenteredBackButton
-              component={Link}
-              href="/proof-of-work"
-              startIcon={<ArrowBackIcon />}
-              color="primary"
-              className={isScrolled ? "scrolled" : ""}
-            >
-              {!isScrolled && "Back to Projects"}
-            </CenteredBackButton>
-          </Box>
-
-          {/* Header Section */}
-          <Box
+      <ConstrainedContainer>
+        <Box className="flex flex-col gap-10" marginTop="4rem">
+          <Card
             sx={{
-              position: "relative",
-              padding: "4rem",
-              textAlign: "left",
-              color: "white",
-              overflow: "hidden",
               display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
+              flexDirection: { xs: "column", md: "row" },
+              borderRadius: "16px",
+              overflow: "hidden",
             }}
           >
-            <Box sx={{ position: "relative", zIndex: 2 }}>
-              <Typography variant="h1" fontWeight={700}>
-                {String(title ?? "Title")}
-              </Typography>
+            {/* Sticky Back Button */}
+            <Box>
+              <CenteredBackButton></CenteredBackButton>
+            </Box>
 
-              {/* Description */}
-              <Typography variant="body1" sx={{ mt: 4, mb: 4 }}>
-                {String(description ?? "No description available")}
-              </Typography>
-
-              {/* Tags */}
-              {safeTags.length > 0 && (
-                <Box
-                  sx={{
-                    display: "flex",
-                    flexWrap: "wrap",
-                    gap: 1,
-                    marginBottom: 2,
-                  }}
-                >
-                  {safeTags.map((tag, index) => (
-                    <Chip
-                      key={index}
-                      label={tag}
-                      color="primary"
-                      variant="outlined"
+            {/* Header Section */}
+            <Box
+              sx={{
+                position: "relative",
+                padding: "3rem 4rem",
+                textAlign: "left",
+                color: "white",
+                overflow: "hidden",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+              }}
+            >
+              <Box sx={{ position: "relative", zIndex: 2 }}>
+                <Stack direction="row" spacing={2} alignItems="flex-start">
+                  {logoUrl && (
+                    <Avatar
+                      src={`https:${logoUrl}`}
+                      alt={String(title ?? "Title")}
+                      sx={{
+                        width: 96,
+                        height: 96,
+                        border: "2px solid",
+                        borderColor: "primary.main",
+                        boxShadow: "none",
+                        transition: "box-shadow 0.3s ease",
+                        "&:hover": {
+                          boxShadow: "2px 2px 16px rgba(7, 223, 193, 0.7)",
+                        },
+                      }}
                     />
-                  ))}
-                </Box>
-              )}
+                  )}
 
-              {/* Demo Video Section */}
-              {demoVideo && (
-                <Box
-                  sx={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    width: "100%",
-                    textAlign: "center",
-                    marginTop: "1.5rem",
-                  }}
-                >
-                  <Card
+                  <Box>
+                    <Typography variant="h1" fontWeight={700}>
+                      {String(title ?? "Title")}
+                    </Typography>
+
+                    {subtitle && (
+                      <Typography
+                        variant="h3"
+                        sx={{ fontWeight: 600, color: "#B0B0B0" }}
+                      >
+                        {subtitle}
+                      </Typography>
+                    )}
+                  </Box>
+                </Stack>
+
+                {/* Achievements */}
+                {Array.isArray(achievements) && achievements.length > 0 && (
+                  <Box
                     sx={{
-                      width: "80%",
-                      maxWidth: "900px",
-                      border: "none",
-                      boxShadow: "none",
                       display: "flex",
-                      justifyContent: "center",
+                      flexWrap: "wrap",
+                      gap: 1,
+                      mt: 3,
                     }}
                   >
-                    <CardContent
+                    {achievements.map((achievement, i) => (
+                      <Chip
+                        key={i}
+                        label={achievement}
+                        size="medium"
+                        icon={<EmojiEventsIcon />}
+                        color="primary"
+                        variant="filled"
+                      />
+                    ))}
+                  </Box>
+                )}
+
+                {/* Description */}
+                <Typography variant="body1" sx={{ mt: 4, mb: 4 }}>
+                  {String(description ?? "No description available")}
+                </Typography>
+
+                {/* Tags */}
+                {safeTags.length > 0 && (
+                  <Box
+                    sx={{
+                      display: "flex",
+                      flexWrap: "wrap",
+                      gap: 1,
+                      marginBottom: 2,
+                    }}
+                  >
+                    {safeTags.map((tag, index) => (
+                      <Chip
+                        key={index}
+                        label={tag}
+                        color="primary"
+                        variant="outlined"
+                      />
+                    ))}
+                  </Box>
+                )}
+
+                {/* Demo Video Section */}
+                {demoVideo && (
+                  <Box
+                    sx={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      width: "100%",
+                      textAlign: "center",
+                      marginTop: "1.5rem",
+                    }}
+                  >
+                    <Card
                       sx={{
-                        width: "100%",
+                        width: "80%",
+                        maxWidth: "900px",
+                        border: "none",
+                        boxShadow: "none",
                         display: "flex",
                         justifyContent: "center",
                       }}
                     >
-                      {isYouTube ? (
-                        <Box
-                          component="iframe"
-                          src={getYouTubeEmbedUrl(videoUrl)}
-                          width="100%"
-                          height="auto"
-                          sx={{
-                            aspectRatio: "16/9",
-                            borderRadius: "16px",
-                            border: "none",
-                            display: "block",
-                            margin: "auto",
-                          }}
-                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                          allowFullScreen
-                        />
-                      ) : (
-                        <video
-                          controls
-                          className="rounded-lg shadow-lg"
-                          style={{
-                            width: "100%",
-                            height: "auto",
-                            aspectRatio: "16/9",
-                            display: "block",
-                            margin: "auto",
-                          }}
-                        >
-                          <source src={videoUrl} />
-                          Your browser does not support the video tag.
-                        </video>
-                      )}
-                    </CardContent>
-                  </Card>
-                </Box>
-              )}
+                      <CardContent
+                        sx={{
+                          width: "100%",
+                          display: "flex",
+                          justifyContent: "center",
+                        }}
+                      >
+                        {isYouTube ? (
+                          <Box
+                            component="iframe"
+                            src={getYouTubeEmbedUrl(videoUrl)}
+                            width="100%"
+                            height="auto"
+                            sx={{
+                              aspectRatio: "16/9",
+                              borderRadius: "16px",
+                              border: "none",
+                              display: "block",
+                              margin: "auto",
+                            }}
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                          />
+                        ) : (
+                          <video
+                            controls
+                            className="rounded-lg shadow-lg"
+                            style={{
+                              width: "100%",
+                              height: "auto",
+                              aspectRatio: "16/9",
+                              display: "block",
+                              margin: "auto",
+                            }}
+                          >
+                            <source src={videoUrl} />
+                            Your browser does not support the video tag.
+                          </video>
+                        )}
+                      </CardContent>
+                    </Card>
+                  </Box>
+                )}
 
-              <Box sx={{ display: "flex", gap: 2 }}>
-                {/* Demo Button */}
-                {demo && (
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    href={String(demo)}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    sx={{ mt: 3 }}
-                  >
-                    View Demo
-                  </Button>
-                )}
-                {github && (
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    href={String(github)}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    sx={{ mt: 3 }}
-                  >
-                    View Github
-                  </Button>
-                )}
+                {/* Thin line with gradient */}
+
+                <Box
+                  sx={{
+                    margin: "0.4rem 0",
+                    width: "100%",
+                    height: "2px",
+                    background: (theme) =>
+                      `linear-gradient(to right, transparent 1%, ${theme.palette.secondary.dark} 20%, ${theme.palette.secondary.dark} 80%, transparent 98%)`,
+                  }}
+                />
+
+                {/* Buttons */}
+                <Box sx={{ display: "flex", gap: 2 }}>
+                  {demo && (
+                    <Button
+                      variant="contained"
+                      startIcon={<PlayCircleIcon />}
+                      color="primary"
+                      href={String(demo)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      sx={{ mt: 2 }}
+                    >
+                      View Demo
+                    </Button>
+                  )}
+                  {github && (
+                    <Button
+                      variant="contained"
+                      startIcon={<GithubIcon />}
+                      color="primary"
+                      href={String(github)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      sx={{ mt: 2 }}
+                    >
+                      View Github
+                    </Button>
+                  )}
+                </Box>
               </Box>
             </Box>
-          </Box>
-        </Card>
+          </Card>
 
-        {/* Features Section (Images Take Full Width) */}
-        {safeScreenshots.map((shot, index) => (
-          <Box key={index} marginTop="2rem">
-            {/* Full-Width Image with Hover Overlay */}
-            {shot.fields?.file?.url && (
-              <FeatureImage
-                src={`https:${shot.fields.file.url}`}
-                alt={shot.fields?.title ?? `Feature ${index + 1}`}
-                title={shot.fields?.title ?? `Feature ${index + 1}`}
-                description={
-                  shot.fields?.description ?? "Feature description here."
-                }
-              />
-            )}
-          </Box>
-        ))}
-      </Box>
+          {/* Features Section (Images Take Full Width) */}
+          {safeScreenshots.map((shot, index) => (
+            <Box key={index} marginTop="2rem">
+              {shot.fields?.file?.url && (
+                <FeatureImage
+                  src={`https:${shot.fields.file.url}`}
+                  alt={shot.fields?.title ?? `Feature ${index + 1}`}
+                  title={shot.fields?.title ?? `Feature ${index + 1}`}
+                  description={shot.fields?.description ?? ""}
+                />
+              )}
+            </Box>
+          ))}
+        </Box>
+      </ConstrainedContainer>
     </Layout>
   );
 }

@@ -9,15 +9,6 @@ import ChipStyles from "./chip-styles/ChipStyles";
 import NavigationButtonStyles from "./navigation-button-styles/NavigationButtonStyles";
 import ScrollbarStyles from "./scrollbar-styles/ScrollbarStyles";
 
-interface BreakpointOverrides {
-  xs: true;
-  sm: true;
-  md: true;
-  lg: true;
-  xl: true;
-  xxl: true;
-}
-
 // Base theme options for palette, typography, breakpoints, and component overrides
 const themeOptions = {
   palette: {

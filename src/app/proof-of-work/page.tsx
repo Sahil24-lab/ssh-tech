@@ -23,6 +23,7 @@ import ConstrainedContainer from "@/components/layout/container/constrained-cont
 import FullWidthContainer from "@/components/layout/container/full-width-container";
 import GlassCardDark from "@/components/card/glass-card-dark/GlassCardDark";
 import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
+import RocketLaunchIcon from "@mui/icons-material/RocketLaunch";
 
 export default async function ProofOfWorkList() {
   const projects: ProofOfWorkEntry[] = await fetchEntries();
@@ -44,7 +45,7 @@ export default async function ProofOfWorkList() {
           }}
         >
           <Typography
-            variant="h3"
+            variant="h1"
             gutterBottom
             align="center"
             sx={{ marginBottom: 6, color: "white" }}
@@ -90,6 +91,11 @@ export default async function ProofOfWorkList() {
                     sx={{
                       display: "flex",
                       flexDirection: { xs: "column", md: "row" },
+                      transition: "transform 0.3s ease, box-shadow 0.3s ease",
+                      "&:hover": {
+                        transform: "translateY(-1px)",
+                        boxShadow: "0 4px 20px rgba(0, 0, 0, 0.2)",
+                      },
                     }}
                   >
                     {imageUrl && (
@@ -100,10 +106,11 @@ export default async function ProofOfWorkList() {
                               xs: "block",
                               sm: "block",
                               md: "none",
-                              lg: "block",
-                              xl: "block",
+                              lg: "none",
+                              xl: "none",
+                              xxl: "block",
                             },
-                            width: { xs: "100%", md: "45%" },
+                            width: { xs: "100%", lg: "40%", xl: "36%" },
                             height: "100%",
                             flexShrink: 0,
                             borderTopLeftRadius: { xs: 12, md: 12 },
@@ -125,35 +132,28 @@ export default async function ProofOfWorkList() {
                           />
                         </CardMedia>
 
-                        {/* Variant for md only: vertically centered over gradient, natural aspect ratio */}
-
                         <CardMedia
                           sx={{
-                            // Stretch left column to match the right content height
                             width: { xs: "100%", md: "45%" },
                             flexShrink: 0,
                             display: {
                               xs: "none",
                               sm: "none",
                               md: "flex",
-                              lg: "none",
-                              xl: "none",
+                              lg: "flex",
+                              xl: "flex",
+                              xxl: "none",
                             },
                             alignItems: "center",
                             justifyContent: "center",
                             position: "relative",
-
-                            // Rounded corners & overflow
                             borderTopLeftRadius: { xs: 12, md: 12 },
                             borderTopRightRadius: { xs: 12, md: 0 },
                             borderBottomLeftRadius: { xs: 0, md: 12 },
                             overflow: "hidden",
-
-                            // Background gradient
                             background: `linear-gradient(202.89deg, #003338 14.84%, #003E41 42.05%, #004346 59.76%, #003F41 91.02%)`,
                           }}
                         >
-                          {/* Wrap the Image in an inline-block container to maintain its natural aspect ratio */}
                           <Box
                             sx={{
                               display: "inline-block",
@@ -165,10 +165,9 @@ export default async function ProofOfWorkList() {
                               alt={title}
                               width={800}
                               height={500}
-                              // For optimal performance, consider adding a sizes prop here
                               style={{
                                 width: "100%",
-                                height: "auto", // preserves natural height
+                                height: "auto",
                                 objectFit: "cover",
                                 display: "block",
                               }}
@@ -178,7 +177,6 @@ export default async function ProofOfWorkList() {
                       </>
                     )}
 
-                    {/* Right side Card = Detailed content */}
                     <CardContent
                       sx={{
                         display: "flex",
@@ -203,8 +201,13 @@ export default async function ProofOfWorkList() {
                               width: 96,
                               height: 96,
                               border: "2px solid",
-                              boxShadow: "2px 2px 16px rgba(7, 223, 193, 0.7)",
                               borderColor: "primary.main",
+                              boxShadow: "none",
+                              transition: "box-shadow 0.3s ease",
+                              "&:hover": {
+                                boxShadow:
+                                  "2px 2px 16px rgba(7, 223, 193, 0.7)",
+                              },
                             }}
                           />
                         )}
@@ -247,15 +250,12 @@ export default async function ProofOfWorkList() {
                                   label={achievement}
                                   size="medium"
                                   icon={<EmojiEventsIcon />}
+                                  color="primary"
+                                  variant="filled"
                                   sx={{
-                                    backgroundColor: "primary.main",
-                                    color: "primary.contrastText",
-                                    fontWeight: 600,
-                                    px: 1.6,
-                                    "& .MuiChip-icon": {
-                                      color: "primary.contrastText",
-                                      fontSize: 18,
-                                    },
+                                    fontWeight: 500,
+                                    borderColor: "#00ffc2",
+                                    opacity: 0.8,
                                   }}
                                 />
                               )
@@ -288,22 +288,58 @@ export default async function ProofOfWorkList() {
                             <Chip
                               key={i}
                               label={tag}
-                              color="primary"
                               variant="outlined"
+                              color="primary"
                               size="small"
-                              sx={{ fontWeight: 600, px: 1.6 }}
+                              sx={{
+                                fontWeight: 500,
+                                opacity: 0.7,
+                              }}
                             />
                           ))}
                         </Box>
                       )}
 
-                      <Box>
+                      <Box
+                        pt={3}
+                        display="flex"
+                        justifyContent={{ xs: "center", sm: "flex-start" }}
+                        sx={{
+                          position: "relative",
+                          width: "100%",
+                          "&::before": {
+                            content: '""',
+                            position: "absolute",
+                            top: 0,
+                            left: 0,
+                            width: "100%",
+                            height: "1px",
+                            background:
+                              "linear-gradient(to right, transparent 0%, #0B645C 10%, #0B645C 90%, transparent 100%)",
+                            opacity: 0.9,
+                          },
+                        }}
+                      >
                         <Link href={`/proof-of-work/${fields.slug}`} passHref>
                           <Button
                             variant="contained"
                             color="primary"
                             disableRipple
-                            size="medium"
+                            size="large"
+                            startIcon={
+                              <RocketLaunchIcon sx={{ fontSize: 20 }} />
+                            }
+                            sx={{
+                              width: { xs: "100%", sm: "auto" },
+                              display: "inline-flex",
+                              alignItems: "center",
+                              justifyContent: "center",
+                              gap: 1,
+                              padding: "0.55rem 2rem",
+                              fontWeight: 800,
+                              fontSize: "0.95rem",
+                              textTransform: "uppercase",
+                            }}
                           >
                             View Project
                           </Button>

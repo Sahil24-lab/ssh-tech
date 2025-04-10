@@ -28,7 +28,7 @@ export default function Hero() {
           md: "4rem 4rem",
           lg: "4rem 4rem",
           xxl: "4rem 6rem",
-        }, // internal padding inside the card
+        }, // internal padding inside the card 
         borderRadius: 4,
         my: 4,
         position: "relative",

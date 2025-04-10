@@ -187,12 +187,6 @@ export default function BookCallModal({
           ))}
         </Stepper>
 
-        {errorMessage && (
-          <Typography color="error" mt={2}>
-            {errorMessage}
-          </Typography>
-        )}
-
         {step === 0 && (
           <Box component="form" mt={4}>
             <Grid container spacing={3}>
@@ -358,6 +352,12 @@ export default function BookCallModal({
                   }}
                 />
               </Grid>
+
+              {errorMessage && (
+                <Typography color="error" mt={2}>
+                  {errorMessage}
+                </Typography>
+              )}
               <Grid item xs={12}>
                 <Button
                   variant="contained"
