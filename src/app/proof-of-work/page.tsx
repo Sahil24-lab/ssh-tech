@@ -1,4 +1,4 @@
-import { fetchEntries } from "../lib/contentful";
+import { fetchEntries } from "../lib/contentful/contentful";
 import {
   ContentfulImageAsset,
   ProofOfWorkEntry,
@@ -33,7 +33,7 @@ export default async function ProofOfWorkList() {
       <FullWidthContainer>
         <Box
           sx={{
-            padding: "8rem 0rem",
+            padding: "3rem 0rem",
             width: {
               xs: "90%",
               sm: "80%",
@@ -330,12 +330,15 @@ export default async function ProofOfWorkList() {
                               <RocketLaunchIcon sx={{ fontSize: 20 }} />
                             }
                             sx={{
-                              width: { xs: "100%", sm: "auto" },
+                              width: { xs: "100%", md: "auto" },
                               display: "inline-flex",
                               alignItems: "center",
                               justifyContent: "center",
                               gap: 1,
-                              padding: "0.45rem 2rem",
+                              padding: {
+                                xs: "0.45rem auto",
+                                md: "0.45rem 2rem",
+                              },
                               fontWeight: 800,
                             }}
                           >

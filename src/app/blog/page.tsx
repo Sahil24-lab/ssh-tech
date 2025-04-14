@@ -1,24 +1,9 @@
-import ConstrainedContainer from "@/components/layout/container/constrained-container";
-import Layout from "@/components/layout/Layout";
-import { Typography, Box } from "@mui/material";
+import { getAllBlogPosts } from "@/app/lib/contentful/blog";
+import BlogSearchClient from "./components/BlogSearchClient";
 
-export default function AboutPage() {
-  return (
-    <Layout>
-      <ConstrainedContainer>
-        <Box
-          sx={{
-            flexGrow: 1,
-            minHeight: "100%",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            textAlign: "center",
-          }}
-        >
-          <Typography variant="h1">Coming Soon</Typography>
-        </Box>
-      </ConstrainedContainer>
-    </Layout>
-  );
+export default async function BlogPage() {
+  // Runs on the server, can safely access environment vars.
+  const allPosts = await getAllBlogPosts();
+
+  return <BlogSearchClient initialPosts={allPosts} />;
 }

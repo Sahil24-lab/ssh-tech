@@ -1,7 +1,7 @@
 // /lib/contentful.ts
 
 import { createClient } from "contentful";
-import { ProofOfWorkEntry, ProofOfWorkSkeleton } from "../types/contentful";
+import { ProofOfWorkEntry, ProofOfWorkSkeleton } from "../../types/contentful";
 
 const client = createClient({
   space: process.env.CONTENTFUL_SPACE_ID!,

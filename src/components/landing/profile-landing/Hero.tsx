@@ -1,12 +1,7 @@
+"use client";
+
 import GlassCardDark from "@/components/card/glass-card-dark/GlassCardDark";
-import {
-  Box,
-  Grid,
-  Typography,
-  Button,
-  Avatar,
-  Container,
-} from "@mui/material";
+import { Box, Grid, Typography, Button } from "@mui/material";
 import {
   Download as DownloadIcon,
   LinkedIn as LinkedinIcon,
@@ -23,12 +18,12 @@ export default function Hero() {
     <GlassCardDark
       sx={{
         p: {
-          xs: "4rem 4rem",
-          sm: "4rem 4rem",
-          md: "4rem 4rem",
-          lg: "4rem 4rem",
+          xs: "2rem",
+          sm: "4rem",
+          md: "4rem",
+          lg: "4rem",
           xxl: "4rem 6rem",
-        }, // internal padding inside the card 
+        },
         borderRadius: 4,
         my: 4,
         position: "relative",
@@ -38,34 +33,120 @@ export default function Hero() {
       <Grid container spacing={5} alignItems="center">
         <Grid item xs={12} md={8}>
           <Box>
-            <Typography variant="h1" component="h1" gutterBottom>
-              Sahil Harriram
+            {/* Inline Avatar + Headline for Mobile */}
+            <Box
+              sx={{
+                display: { xs: "flex", md: "none" },
+                alignItems: "center",
+                gap: 2,
+                mb: 2,
+              }}
+            >
+              <Box
+                sx={{
+                  width: 40,
+                  height: 40,
+                  border: "2px solid",
+                  borderColor: "primary.main",
+                  borderRadius: "50%",
+                  overflow: "hidden",
+                  backgroundColor: "background.paper",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <Image
+                  src="/logos/S Shape.png"
+                  alt="Logo"
+                  width={28}
+                  height={28}
+                  style={{ objectFit: "contain" }}
+                />
+              </Box>
+              <Typography
+                variant="h6"
+                component="h1"
+                sx={{
+                  fontWeight: 600,
+                  fontSize: {
+                    xs: "1.25rem",
+                    sm: "1.5rem",
+                  },
+                }}
+              >
+                Building High-Impact Web3 Products
+              </Typography>
+            </Box>
+
+            {/* Headline for md+ */}
+            <Typography
+              variant="h3"
+              component="h1"
+              gutterBottom
+              sx={{
+                display: { xs: "none", md: "block" },
+                fontWeight: 600,
+              }}
+            >
+              Building High-Impact Web3 Products
             </Typography>
 
             <Typography
-              variant="h4"
+              variant="h5"
               gutterBottom
-              sx={{ color: "secondary.light" }}
+              sx={{ color: "secondary.main", fontWeight: 500 }}
             >
-              Blockchain Developer & Engineering Leader
+              Engineering Leader | Blockchain Developer | Web3 Growth Architect
             </Typography>
 
             <Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
               <LocationIcon sx={{ color: "primary.light", mr: 1 }} />
               <Typography variant="body2">
-                Fully Remote, GMT+7 Timezone
+                Fully Remote — GMT+7 (Asia Pacific)
               </Typography>
             </Box>
 
-            <Typography
-              variant="body1"
-              paragraph
-              sx={{ mb: 3, maxWidth: "100%" }}
+            <Typography variant="body1" paragraph sx={{ mb: 3 }}>
+              I’m Sahil Harriram — I help Web3 startups unlock capital,
+              traction, and growth through full-stack product execution. I lead
+              engineering strategy, build scalable dApps, and deliver real
+              outcomes. From GameFi loops to DeFi dashboards, I ship tech that
+              raises, retains, and scales.
+            </Typography>
+
+            {/* Bullet List */}
+            <Box
+              component="ul"
+              sx={{
+                pl: 3,
+                mb: 4,
+                listStyleType: "disc",
+                listStylePosition: "outside",
+                color: "text.secondary",
+              }}
             >
-              Experienced engineering leader with expertise in blockchain
-              development, technical project management, and product strategy.
-              Passionate about building innovative solutions at the intersection
-              of technology and business.
+              <Typography component="li" variant="body2" sx={{ mb: 1 }}>
+                <strong>Led 12-person global teams</strong> across Web3 &
+                robotics — scaled engineering 4x and shipped 3 full-stack
+                products in parallel
+              </Typography>
+              <Typography component="li" variant="body2" sx={{ mb: 1 }}>
+                Tech delivery directly enabled <strong>$4M+ in sales</strong>{" "}
+                and a <strong>$20M capital raise</strong>
+              </Typography>
+              <Typography component="li" variant="body2" sx={{ mb: 1 }}>
+                Secured over <strong>$600K</strong> through grants, token raises
+                & delivery-led fundraising
+              </Typography>
+              <Typography component="li" variant="body2">
+                Launched GameFi product with <strong>5,000 NFTs minted</strong>{" "}
+                and <strong>3,000+ users in 14 days</strong>
+              </Typography>
+            </Box>
+
+            <Typography variant="body2" sx={{ mb: 2 }}>
+              Let’s connect or dive into my work:
             </Typography>
 
             <Box sx={{ display: "flex", gap: 2, mb: 3, flexWrap: "wrap" }}>
@@ -87,7 +168,6 @@ export default function Hero() {
               <Button
                 variant="outlined"
                 startIcon={<LinkedinIcon />}
-                component="a"
                 href="https://www.linkedin.com/in/sahil-harriram/"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -103,7 +183,6 @@ export default function Hero() {
               <Button
                 variant="outlined"
                 startIcon={<GithubIcon />}
-                component="a"
                 href="https://github.com/Sahil24-lab"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -119,7 +198,6 @@ export default function Hero() {
               <Button
                 variant="outlined"
                 startIcon={<MailIcon />}
-                component="a"
                 href="mailto:sahil.harriram@gmail.com"
                 onClick={() => trackEvent("social-email-click")}
                 sx={{
@@ -133,21 +211,21 @@ export default function Hero() {
           </Box>
         </Grid>
 
-        {/* AVATAR */}
+        {/* Right-side Avatar for md+ only */}
         <Grid
           item
           xs={12}
           md={4}
           sx={{
-            display: "flex",
+            display: { xs: "none", md: "flex" },
             justifyContent: "center",
             alignItems: "center",
           }}
         >
           <Box
             sx={{
-              width: { xs: 150, sm: 200, md: 300 },
-              height: { xs: 150, sm: 200, md: 300 },
+              width: { md: 300 },
+              height: { md: 300 },
               border: "4px solid",
               borderColor: "primary.main",
               backgroundColor: "background.paper",
@@ -161,8 +239,8 @@ export default function Hero() {
           >
             <Box
               sx={{
-                width: { xs: 80, sm: 100, md: 160 },
-                height: { xs: 80, sm: 100, md: 160 },
+                width: 160,
+                height: 160,
                 position: "relative",
               }}
             >

@@ -14,7 +14,6 @@ export default function ConstrainedContainer({
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        paddingTop: { xs: "64px", md: "80px", lg: "100px" },
         paddingX: { xs: 2, sm: 4, md: 6 },
         paddingBottom: 2,
         margin: "0 auto",

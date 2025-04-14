@@ -115,7 +115,7 @@ export default function ProofOfWorkPage({
             <Box
               sx={{
                 position: "relative",
-                padding: "3rem 4rem",
+                padding: { xs: "2rem 2rem", lg: "3rem 4rem" },
                 textAlign: "left",
                 color: "white",
                 overflow: "hidden",
@@ -223,7 +223,7 @@ export default function ProofOfWorkPage({
                   >
                     <Card
                       sx={{
-                        width: "80%",
+                        width: { xs: "100%", md: "80%" },
                         maxWidth: "900px",
                         border: "none",
                         boxShadow: "none",
@@ -329,6 +329,10 @@ export default function ProofOfWorkPage({
                   alt={shot.fields?.title ?? `Feature ${index + 1}`}
                   title={shot.fields?.title ?? `Feature ${index + 1}`}
                   description={shot.fields?.description ?? ""}
+                  images={safeScreenshots
+                    .map((s) => `https:${s.fields?.file?.url}`)
+                    .filter(Boolean)}
+                  priority={index === 0}
                 />
               )}
             </Box>

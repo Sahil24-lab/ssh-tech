@@ -1,6 +1,9 @@
 import { Entry, EntrySkeletonType } from "contentful";
 
-// Asset file structure
+//
+// Shared Asset & Rich Text Types
+//
+
 export interface ContentfulFile {
   url: string;
   details?: {
@@ -14,7 +17,6 @@ export interface ContentfulFile {
   contentType?: string;
 }
 
-// Asset structure
 export interface ContentfulImageAsset {
   metadata?: object;
   sys: { id: string };
@@ -25,14 +27,23 @@ export interface ContentfulImageAsset {
   };
 }
 
-// RichText type for 'github' field
 export interface RichTextNode {
   nodeType: string;
   content: RichTextNode[] | string;
+  value?: string;
   data?: any;
 }
 
-// Complete structure for ProofOfWork content
+export interface RichTextDocument {
+  nodeType: "document";
+  data: object;
+  content: RichTextNode[];
+}
+
+//
+// Proof of Work Types
+//
+
 export interface ProofOfWorkFields {
   title: string;
   subtitle?: string;
@@ -44,18 +55,62 @@ export interface ProofOfWorkFields {
   demo?: string;
   tags?: string[];
   screenshots?: ContentfulImageAsset[];
-  github?: {
-    data: object;
-    content: RichTextNode[];
-    nodeType: "document";
-  };
+  github?: RichTextDocument;
   demoVideo?: string;
 }
 
-// Skeleton for Contentful entry
 export interface ProofOfWorkSkeleton extends EntrySkeletonType {
   fields: ProofOfWorkFields;
   contentTypeId: "proofOfWork";
 }
 
 export type ProofOfWorkEntry = Entry<ProofOfWorkSkeleton>;
+
+/* ──────────────────────────────────────────────
+   2) SEO: Skeleton & Entry
+   ──────────────────────────────────────────────
+   If you have a `contentTypeId = "componentSeo"`,
+   define its fields + skeleton like so:
+────────────────────────────────────────────── */
+
+export interface SEOFields {
+  metaTitle?: string;
+  metaDescription?: string;
+  ogImage?: ContentfulImageAsset;
+}
+
+export interface SEOSkeleton extends EntrySkeletonType {
+  contentTypeId: "componentSeo";
+  fields: SEOFields;
+}
+
+export type SEOEntry = Entry<SEOSkeleton>;
+
+/* ──────────────────────────────────────────────
+   3) BLOG POST: Skeleton & Entry
+   ──────────────────────────────────────────────
+   If you have a `contentTypeId = "pageBlogPost"`,
+   define its fields + skeleton like so:
+────────────────────────────────────────────── */
+
+export interface BlogPostFields {
+  internalName?: string;
+  slug?: string;
+  seoFields?: SEOEntry;
+  domainScope?: string[];
+  publishedDate?: string;
+  title?: string;
+  shortDescription?: string; // renamed from subtitle to match Contentful
+  featuredImage?: ContentfulImageAsset;
+  content?: RichTextDocument;
+  relatedBlogPosts?: BlogPostEntry[];
+  featured?: boolean;
+  tags?: string[];
+}
+
+export interface BlogPostSkeleton extends EntrySkeletonType {
+  contentTypeId: "pageBlogPost";
+  fields: BlogPostFields;
+}
+
+export type BlogPostEntry = Entry<BlogPostSkeleton>;
