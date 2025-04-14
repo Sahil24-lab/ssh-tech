@@ -1,6 +1,4 @@
-// src/app/blog/[slug]/page.tsx
-
-import { getBlogPostBySlug } from "@/app/lib/contentful/blog";
+import { getAllBlogPosts, getBlogPostBySlug } from "@/app/lib/contentful/blog";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import {
   BLOCKS,
@@ -22,23 +20,38 @@ import Image from "next/image";
 import { Options } from "@contentful/rich-text-react-renderer";
 import { unwrapStringField, unwrapRichTextField } from "@/utils/unwrapFields";
 import { ContentfulImageAsset, SEOEntry } from "@/app/types/contentful";
+import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import TableOfContentsWrapper from "@/components/table-of-contents/TableOfContentsWrapper";
 
-export const revalidate = 3600;
+export const revalidate = 3600; // 1 hour revalidation
 export const dynamic = "force-static";
 
+// Generates all slugs at build time
+export async function generateStaticParams() {
+  const posts = await getAllBlogPosts();
+  return posts.map((post) => ({
+    slug: post.fields.slug,
+  }));
+}
+
+// Generates SEO metadata for each slug
 export async function generateMetadata({
   params,
 }: {
-  params: { slug: string };
-}): Promise<Metadata> {
-  const post = await getBlogPostBySlug(params.slug);
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+  const post = await getBlogPostBySlug(slug);
 
-  const title = unwrapStringField(post?.fields?.title);
-  const seoEntry = post?.fields?.seoFields as SEOEntry | undefined;
+  if (!post) {
+    // For missing slugs
+    notFound();
+  }
+
+  const title = unwrapStringField(post.fields.title);
+  const seoEntry = post.fields.seoFields as SEOEntry | undefined;
   const description = unwrapStringField(seoEntry?.fields?.metaDescription);
-
   const ogImage = (
     seoEntry?.fields?.ogImage as ContentfulImageAsset | undefined
   )?.fields?.file?.url;
@@ -54,13 +67,22 @@ export async function generateMetadata({
   };
 }
 
+// Page component
+type BlogPostPageProps = {
+  params: { slug: string };
+};
+
 export default async function BlogPostPage({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
-  const post = await getBlogPostBySlug(params.slug);
-  if (!post) return <Typography>Not found</Typography>;
+  const { slug } = await params; // <--- WAIT on 'params'
+  const post = await getBlogPostBySlug(slug);
+  if (!post) {
+    // Return 404
+    notFound();
+  }
 
   const { fields } = post;
   const title = unwrapStringField(fields.title);
