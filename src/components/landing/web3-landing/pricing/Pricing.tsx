@@ -40,14 +40,14 @@ export default function Pricing() {
       name: "Essential",
       price: "$6K /month",
       description:
-        "Lean, production-ready builds with a tight scope, perfect for smaller funded teams or new feature validation.",
+        "Tight scope, production ready builds for lean teams. Ideal for new feature validation or for smaller teams.",
       features: [
         "20 hrs/week dev time",
         "FREE Blueprint Call",
         "1–2 week POC with clear deliverables",
+        "Cancel anytime during POC phase (pay only for time used)",
         "Mainnet deployment included",
-        "Cancel anytime post-POC (pay only for work done)",
-        "3-month min (6-month discount)",
+        "2-month min (6-month discount available)",
       ],
     },
     {
@@ -59,7 +59,6 @@ export default function Pricing() {
         "30 hrs/week dev & product input",
         "Everything in Essential",
         "Subgraph + analytics for real-time insights",
-        "Multi-chain/bridging capabilities",
         "Testnet pipelines + iterative security reviews",
         "Dedicated Discord for collaboration",
       ],
@@ -75,7 +74,6 @@ export default function Pricing() {
         "Everything in Growth",
         "24/7 priority Discord suppport",
         "Auto security scans and testing CI/CD pipelines",
-        "Complex integrations (bridging, yield, tokens)",
         "Performance optimization & monitoring",
         "Team handoffs + internal training",
       ],
@@ -174,6 +172,7 @@ export default function Pricing() {
                     xs: "100%",
                     md: "460px",
                     lg: "500px",
+                    xl: "600px",
                   },
                   backgroundColor:
                     plan.tag === "Most Popular"
