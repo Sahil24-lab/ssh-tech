@@ -1,5 +1,4 @@
-// components/BookCallModal.tsx
-
+// BookCallModal.tsx
 import React, { useState, useEffect } from "react";
 import {
   Box,
@@ -21,13 +20,13 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
+import { getCalApi } from "@calcom/embed-react";
+import CalEmbed from "./CalEmbed";
 
-// Removes basic dangerous characters
 function sanitizeInput(input: string): string {
   return input.replace(/[<>]/g, "");
 }
 
-// Checks basic email format
 function isValidEmail(email: string): boolean {
   const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return re.test(email.toLowerCase());
@@ -47,20 +46,26 @@ export default function BookCallModal({
 
   const style = {
     position: "absolute" as const,
-    top: "0",
+    top: "50%",
     left: "50%",
-    transform: "translateX(-50%)",
+    transform: "translate(-50%, -50%)",
     width: "100%",
-    maxWidth: 840,
-    maxHeight: isMobile ? "100vh" : "90vh",
+    maxWidth: isMobile ? 360 : 920,
+    maxHeight: isMobile ? "100vh" : "95vh",
     bgcolor: "background.paper",
     borderRadius: 2,
     boxShadow: 24,
-    p: 5,
+    p: 4,
     overflowY: "auto",
-    mt: isMobile ? 0 : 4,
-    mb: isMobile ? 0 : 4,
   };
+
+  // Preload the Cal.com widget when the modal mounts
+  useEffect(() => {
+    (async function () {
+      const cal = await getCalApi({ namespace: "30min-call" });
+      cal("preload", { calLink: "ssh-tech/30min-call" });
+    })();
+  }, []);
 
   const [step, setStep] = useState(0);
   const [isRateLimited, setIsRateLimited] = useState(false);
@@ -75,6 +80,11 @@ export default function BookCallModal({
     overview: "",
   });
 
+  const isOver15K = ["$20K-$50K", "$50K-$100K", "+$100K"].includes(
+    formData.budget
+  );
+
+  // Reset form when modal closes
   useEffect(() => {
     if (!open) {
       setStep(0);
@@ -95,16 +105,13 @@ export default function BookCallModal({
     setFormData((prev) => ({ ...prev, [field]: sanitizeInput(value) }));
   };
 
-  const handleNext = async () => {
-    if (isRateLimited) {
-      return;
-    }
+  const handleNext = () => {
+    if (isRateLimited) return;
 
     if (!isValidEmail(formData.email)) {
       setErrorMessage("Please enter a valid email address.");
       return;
     }
-
     if (
       !formData.name ||
       !formData.email ||
@@ -121,17 +128,9 @@ export default function BookCallModal({
       setIsRateLimited(false);
     }, 3000);
 
-    try {
-      await fetch("/api/leads", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
-      setStep((prev) => prev + 1);
-      setErrorMessage("");
-    } catch {
-      setErrorMessage("There was an error submitting your form.");
-    }
+    // Proceed to the next step without sending data to /api/leads.
+    setStep((prev) => prev + 1);
+    setErrorMessage("");
   };
 
   const handleBack = () => {
@@ -140,11 +139,8 @@ export default function BookCallModal({
     }
   };
 
-  const qualified =
-    formData.budget !== "<$5K" && formData.timeline !== "2+ months";
-
   return (
-    <Modal open={open} onClose={handleClose} aria-labelledby="book-call-modal">
+    <Modal open={open} onClose={handleClose}>
       <Box sx={style}>
         <Box display="flex" justifyContent="space-between" alignItems="center">
           <Typography variant="h5" fontWeight="700">
@@ -155,7 +151,7 @@ export default function BookCallModal({
           </IconButton>
         </Box>
 
-        <Stepper activeStep={step} alternativeLabel>
+        <Stepper activeStep={step} alternativeLabel sx={{ mt: 3, mb: 3 }}>
           {steps.map((label) => (
             <Step key={label}>
               <StepLabel
@@ -175,10 +171,6 @@ export default function BookCallModal({
                   "& .MuiStepLabel-label": {
                     color: theme.palette.text.secondary,
                   },
-                  "&.Mui-active .MuiStepLabel-label": {
-                    color: theme.palette.background.paper,
-                    fontWeight: 400,
-                  },
                 }}
               >
                 {label}
@@ -188,7 +180,7 @@ export default function BookCallModal({
         </Stepper>
 
         {step === 0 && (
-          <Box component="form" mt={4}>
+          <Box mt={4} component="form">
             <Grid container spacing={3}>
               <Grid item xs={12} sm={6}>
                 <TextField
@@ -200,7 +192,10 @@ export default function BookCallModal({
                   fullWidth
                   sx={{
                     fieldset: { borderColor: theme.palette.primary.main },
-                    height: 40,
+                    "& input:-webkit-autofill": {
+                      WebkitBoxShadow: `0 0 0 1000px ${theme.palette.background.paper} inset`,
+                      WebkitTextFillColor: theme.palette.text.primary,
+                    },
                   }}
                 />
               </Grid>
@@ -214,11 +209,15 @@ export default function BookCallModal({
                   fullWidth
                   sx={{
                     fieldset: { borderColor: theme.palette.primary.main },
-                    height: 40,
+                    "& input:-webkit-autofill": {
+                      WebkitBoxShadow: `0 0 0 1000px ${theme.palette.background.paper} inset`,
+                      WebkitTextFillColor: theme.palette.text.primary,
+                    },
                   }}
                 />
               </Grid>
-              <Grid item xs={12} marginTop={2}>
+
+              <Grid item xs={12}>
                 <FormControl component="fieldset" fullWidth>
                   <FormLabel
                     sx={{ color: theme.palette.text.primary, fontWeight: 600 }}
@@ -230,23 +229,28 @@ export default function BookCallModal({
                     onChange={(e) => handleChange("budget", e.target.value)}
                     row
                   >
-                    {["<$5K", "$5K–$10K", "$10K–$20K", "$20K+"].map(
-                      (option) => (
-                        <FormControlLabel
-                          key={option}
-                          value={option}
-                          control={
-                            <Radio
-                              sx={{ color: `${theme.palette.primary.main}AA` }}
-                            />
-                          }
-                          label={option}
-                        />
-                      )
-                    )}
+                    {[
+                      "$0–$10K",
+                      "$10K–$20K",
+                      "$20K-$50K",
+                      "$50K-$100K",
+                      "+$100K",
+                    ].map((option) => (
+                      <FormControlLabel
+                        key={option}
+                        value={option}
+                        control={
+                          <Radio
+                            sx={{ color: `${theme.palette.primary.main}AA` }}
+                          />
+                        }
+                        label={option}
+                      />
+                    ))}
                   </RadioGroup>
                 </FormControl>
               </Grid>
+
               <Grid item xs={12}>
                 <FormControl component="fieldset" fullWidth>
                   <FormLabel
@@ -259,23 +263,29 @@ export default function BookCallModal({
                     onChange={(e) => handleChange("timeline", e.target.value)}
                     row
                   >
-                    {["ASAP", "1–2 weeks", "1 month", "2+ months"].map(
-                      (option) => (
-                        <FormControlLabel
-                          key={option}
-                          value={option}
-                          control={
-                            <Radio
-                              sx={{ color: `${theme.palette.primary.main}AA` }}
-                            />
-                          }
-                          label={option}
-                        />
-                      )
-                    )}
+                    {[
+                      "ASAP",
+                      "1–2 weeks",
+                      "1 month",
+                      "1-3 months",
+                      "3-6 months",
+                      "6-12 months",
+                    ].map((option) => (
+                      <FormControlLabel
+                        key={option}
+                        value={option}
+                        control={
+                          <Radio
+                            sx={{ color: `${theme.palette.primary.main}AA` }}
+                          />
+                        }
+                        label={option}
+                      />
+                    ))}
                   </RadioGroup>
                 </FormControl>
               </Grid>
+
               <Grid item xs={12}>
                 <FormControl component="fieldset" fullWidth>
                   <FormLabel
@@ -291,10 +301,11 @@ export default function BookCallModal({
                     row
                   >
                     {[
-                      "DApp",
-                      "GameFi",
+                      "DeFi",
+                      "Stablecoin",
+                      "Exchange",
                       "Community Tool",
-                      "Risk Dashboard",
+                      "Analytics",
                       "Other",
                     ].map((option) => (
                       <FormControlLabel
@@ -311,8 +322,9 @@ export default function BookCallModal({
                   </RadioGroup>
                 </FormControl>
               </Grid>
+
               {formData.projectType === "Other" && (
-                <Grid item xs={12} sm={6} md={6}>
+                <Grid item xs={12} sm={6}>
                   <TextField
                     label="Custom Project Type"
                     value={formData.customType}
@@ -320,13 +332,11 @@ export default function BookCallModal({
                     fullWidth
                     sx={{
                       fieldset: { borderColor: theme.palette.primary.main },
-                      "& .MuiInputBase-root": {
-                        color: theme.palette.text.primary,
-                      },
                     }}
                   />
                 </Grid>
               )}
+
               <Grid item xs={12}>
                 <TextField
                   label="Overview or Link"
@@ -336,18 +346,6 @@ export default function BookCallModal({
                   onChange={(e) => handleChange("overview", e.target.value)}
                   fullWidth
                   sx={{
-                    textarea: {
-                      color: theme.palette.text.primary,
-                      resize: "vertical",
-                      minHeight: "40px",
-                      "&::-webkit-resizer": {
-                        borderWidth: "10px",
-                        borderRight: `8px solid ${theme.palette.primary.main}`,
-                        borderBottom: `8px solid ${theme.palette.primary.main}`,
-                        background: "transparent",
-                        clipPath: "polygon(0 100%, 100% 0, 100% 100%)",
-                      },
-                    },
                     fieldset: { borderColor: theme.palette.primary.main },
                   }}
                 />
@@ -358,6 +356,7 @@ export default function BookCallModal({
                   {errorMessage}
                 </Typography>
               )}
+
               <Grid item xs={12}>
                 <Button
                   variant="contained"
@@ -375,20 +374,22 @@ export default function BookCallModal({
 
         {step === 1 && (
           <Box mt={3}>
-            {qualified ? (
+            {isOver15K ? (
               <>
-                <Typography variant="h6" gutterBottom>
-                  Great fit! Let’s lock in your free Blueprint Call.
+                <Typography textAlign="center" variant="h6" gutterBottom>
+                  Perfect, lets lock in your Free Blueprint Call Below
                 </Typography>
-                <Box mt={2}>
-                  <iframe
-                    src={`https://cal.com/your-link-here?name=${encodeURIComponent(
-                      formData.name
-                    )}&email=${encodeURIComponent(formData.email)}`}
-                    width="100%"
-                    height="600px"
-                    style={{ border: "none" }}
-                    title="Cal Booking"
+                <Box
+                  mt={2}
+                  sx={{ width: "100%", height: isMobile ? "600px" : "700px" }}
+                >
+                  <CalEmbed
+                    formName={formData.name}
+                    formEmail={formData.email}
+                    formBudget={formData.budget}
+                    formTimeline={formData.timeline}
+                    formProjectType={formData.projectType}
+                    formProjectOverview={formData.overview}
                   />
                 </Box>
               </>
@@ -398,14 +399,13 @@ export default function BookCallModal({
                   Thanks for your submission!
                 </Typography>
                 <Typography variant="body1" mt={1}>
-                  Based on your input, here’s a free resource that might help
-                  you prep for your project.
+                  Based on your input, here’s a resource that might help.
                 </Typography>
                 <Button
                   variant="contained"
                   color="primary"
                   href="/your-pdf-guide.pdf"
-                  sx={{ mt: 2 }}
+                  sx={{ mt: 2, mr: 1 }}
                 >
                   Download Guide
                 </Button>
@@ -419,7 +419,15 @@ export default function BookCallModal({
                 </Button>
               </>
             )}
-            <Box mt={2}>
+
+            {/* Responsive Back Button Container */}
+            <Box
+              mt={2}
+              sx={{
+                display: "flex",
+                justifyContent: { xs: "center", md: "flex-start" },
+              }}
+            >
               <Button variant="outlined" color="secondary" onClick={handleBack}>
                 Back
               </Button>

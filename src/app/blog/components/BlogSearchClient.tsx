@@ -30,6 +30,7 @@ export default function BlogSearchClient({
   const [readTimeFilter, setReadTimeFilter] = useState<string>("All");
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
 
+  // Gather all available tags from the initialPosts array
   const allTags = useMemo(() => {
     const tagSet = new Set<string>();
     initialPosts.forEach((post) => {
@@ -40,9 +41,11 @@ export default function BlogSearchClient({
     return Array.from(tagSet);
   }, [initialPosts]);
 
+  // Apply search, filters, sorting
   const filteredPosts = useMemo(() => {
     let posts = [...initialPosts];
 
+    // Search
     if (searchTerm.trim()) {
       const lowerSearch = searchTerm.toLowerCase();
       posts = posts.filter((post) => {
@@ -52,6 +55,7 @@ export default function BlogSearchClient({
       });
     }
 
+    // Read Time Filter
     if (readTimeFilter !== "All") {
       posts = posts.filter((post) => {
         const time = post.fields.readTime || 0;
@@ -61,6 +65,7 @@ export default function BlogSearchClient({
       });
     }
 
+    // Tag Filters
     if (selectedTags.length > 0) {
       posts = posts.filter((post) => {
         const postTags = Array.isArray(post.fields.tags)
@@ -70,6 +75,7 @@ export default function BlogSearchClient({
       });
     }
 
+    // Sort
     posts.sort((a, b) => {
       const dateA = new Date(a.fields.publishedDate || 0).getTime();
       const dateB = new Date(b.fields.publishedDate || 0).getTime();
@@ -82,6 +88,7 @@ export default function BlogSearchClient({
   return (
     <Layout>
       <ConstrainedContainer>
+        {/* Page Heading */}
         <Box sx={{ textAlign: "center", mb: 6 }}>
           <Typography variant="h2" sx={{ mb: 1, mt: 5 }}>
             Blog
@@ -92,6 +99,7 @@ export default function BlogSearchClient({
           </Typography>
         </Box>
 
+        {/* Search Field */}
         <Box
           sx={{
             display: "flex",
@@ -129,6 +137,7 @@ export default function BlogSearchClient({
           />
         </Box>
 
+        {/* Filters / Sorting */}
         <Box
           sx={{
             display: "flex",
@@ -139,6 +148,7 @@ export default function BlogSearchClient({
             mb: 3,
           }}
         >
+          {/* Read Time Filter */}
           <Select
             size="small"
             value={readTimeFilter}
@@ -151,6 +161,7 @@ export default function BlogSearchClient({
             <MenuItem value="long">10+ min</MenuItem>
           </Select>
 
+          {/* Sort By Date */}
           <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
             <Typography variant="body2">Sort by Date:</Typography>
             <Select
@@ -166,6 +177,7 @@ export default function BlogSearchClient({
           </Box>
         </Box>
 
+        {/* Tag Filters */}
         <Box
           sx={{
             display: "flex",
@@ -219,13 +231,22 @@ export default function BlogSearchClient({
           })}
         </Box>
 
-        <Grid container spacing={4} justifyContent="center">
-          {filteredPosts.map((post) => (
-            <Grid item key={post.sys.id} xs={12} sm={6} md={4}>
-              <BlogCard post={post} />
-            </Grid>
-          ))}
-        </Grid>
+        {/* Posts Grid */}
+        {filteredPosts.length === 0 ? (
+          <Box textAlign="center" mt={4}>
+            <Typography variant="h6" color="text.secondary">
+              More Blogs coming soon!
+            </Typography>
+          </Box>
+        ) : (
+          <Grid container spacing={4} justifyContent="center">
+            {filteredPosts.map((post) => (
+              <Grid item key={post.sys.id} xs={12} sm={6} md={4}>
+                <BlogCard post={post} />
+              </Grid>
+            ))}
+          </Grid>
+        )}
       </ConstrainedContainer>
     </Layout>
   );

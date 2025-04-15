@@ -83,9 +83,10 @@ export default function Footer() {
 
       {/* Right */}
       <Box sx={{ flex: 1, textAlign: { xs: "center", sm: "right" } }}>
-        <Link href="/privacy-policy" underline="hover">
+        <Typography> Privacy Policy</Typography>
+        {/* <Link href="/privacy-policy" underline="hover">
           Privacy Policy
-        </Link>
+        </Link> */}
       </Box>
     </Box>
   );

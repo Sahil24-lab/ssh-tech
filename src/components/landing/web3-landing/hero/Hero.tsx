@@ -81,7 +81,7 @@ const Hero = () => {
           position: "relative",
           zIndex: 1,
           px: { xs: 3, sm: 6, md: 12, lg: 20, xl: 24, xxl: 30 },
-          pt: { xs: 12, sm: 14, md: 20, xl: 40, xxl: 48 },
+          pt: { xs: 6, sm: 14, md: 20, xl: 0 },
           pb: { xs: 6, sm: 8, md: 10, xl: 0, xxl: 0 },
           display: "flex",
           alignItems: { xs: "flex-start", xl: "center" },
@@ -188,7 +188,10 @@ const Hero = () => {
                 variant="outlined"
                 color="primary"
                 size="large"
-                sx={{ width: { xs: "100%", sm: "100%", md: "auto" } }}
+                sx={{
+                  width: { xs: "100%", sm: "100%", md: "auto" },
+                  fontWeight: 700,
+                }}
                 onClick={() => handleScroll("pricing")}
               >
                 View Plans

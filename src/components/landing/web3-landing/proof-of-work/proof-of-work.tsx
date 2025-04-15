@@ -197,6 +197,7 @@ const ProofOfWork = () => {
           variant="contained"
           size="large"
           onClick={() => router.push("/proof-of-work")}
+          sx={{ fontWeight: 700 }}
         >
           PROOF OF WORK
         </Button>

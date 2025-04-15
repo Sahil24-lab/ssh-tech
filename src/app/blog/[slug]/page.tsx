@@ -8,26 +8,27 @@ import {
 import Layout from "@/components/layout/Layout";
 import {
   Box,
-  Grid,
   Typography,
-  Chip,
   Stack,
+  Divider,
   Breadcrumbs,
   Link as MuiLink,
-  Divider,
+  Chip,
+  Grid,
 } from "@mui/material";
 import Image from "next/image";
 import { Options } from "@contentful/rich-text-react-renderer";
 import { unwrapStringField, unwrapRichTextField } from "@/utils/unwrapFields";
 import { ContentfulImageAsset, SEOEntry } from "@/app/types/contentful";
-import { notFound } from "next/navigation";
 import { Metadata } from "next";
-import TableOfContentsWrapper from "@/components/table-of-contents/TableOfContentsWrapper";
-
-export const revalidate = 3600; // 1 hour revalidation
+import { notFound } from "next/navigation";
+import TableOfContents from "@/components/table-of-contents/TableOfContents";
+import StickyWrapper from "@/components/table-of-contents/StickyWrapper";
+import GlassCardDark from "@/components/card/glass-card-dark/GlassCardDark";
+export const revalidate = 3600;
 export const dynamic = "force-static";
+import PostHeader from "../components/post-header/PostHeader";
 
-// Generates all slugs at build time
 export async function generateStaticParams() {
   const posts = await getAllBlogPosts();
   return posts.map((post) => ({
@@ -35,19 +36,14 @@ export async function generateStaticParams() {
   }));
 }
 
-// Generates SEO metadata for each slug
 export async function generateMetadata({
   params,
 }: {
   params: Promise<{ slug: string }>;
-}) {
+}): Promise<Metadata> {
   const { slug } = await params;
   const post = await getBlogPostBySlug(slug);
-
-  if (!post) {
-    // For missing slugs
-    notFound();
-  }
+  if (!post) notFound();
 
   const title = unwrapStringField(post.fields.title);
   const seoEntry = post.fields.seoFields as SEOEntry | undefined;
@@ -67,22 +63,14 @@ export async function generateMetadata({
   };
 }
 
-// Page component
-type BlogPostPageProps = {
-  params: { slug: string };
-};
-
 export default async function BlogPostPage({
   params,
 }: {
   params: Promise<{ slug: string }>;
 }) {
-  const { slug } = await params; // <--- WAIT on 'params'
+  const { slug } = await params;
   const post = await getBlogPostBySlug(slug);
-  if (!post) {
-    // Return 404
-    notFound();
-  }
+  if (!post) notFound();
 
   const { fields } = post;
   const title = unwrapStringField(fields.title);
@@ -94,6 +82,7 @@ export default async function BlogPostPage({
     fields.featuredImage as ContentfulImageAsset | undefined
   )?.fields?.file?.url;
 
+  // Rich text rendering options.
   const renderOptions: Options = {
     renderNode: {
       [BLOCKS.HEADING_2]: (node, children) => {
@@ -142,94 +131,66 @@ export default async function BlogPostPage({
   return (
     <Layout>
       <Box
-        px={{ xs: 2, md: 4 }}
-        py={6}
-        maxWidth="1200px"
-        mx="auto"
-        sx={{ scrollBehavior: "smooth", position: "relative" }}
+        sx={{
+          maxWidth: "1200px",
+          mx: "auto",
+          py: 6,
+          scrollBehavior: "smooth",
+        }}
       >
+        {/* Breadcrumb */}
         <Breadcrumbs sx={{ mb: 3 }}>
-          <MuiLink href="/">Home</MuiLink>
           <MuiLink href="/blog">Blog</MuiLink>
           <Typography color="text.primary">{title}</Typography>
         </Breadcrumbs>
+        {/*  PostHeader*/}
+        <PostHeader
+          title={unwrapStringField(fields.title) ?? "Untitled"}
+          subtitle={unwrapStringField(fields.shortDescription)}
+          featuredImage={
+            (fields.featuredImage as ContentfulImageAsset | undefined)?.fields
+              ?.file?.url
+          }
+          publishedDate={
+            unwrapStringField(fields.publishedDate) ?? new Date().toISOString()
+          }
+          tags={Array.isArray(fields.tags) ? fields.tags : []}
+        />
 
-        <Grid container spacing={4} alignItems="center" mb={6}>
-          {featuredImage && (
-            <Grid item xs={12} md={4}>
-              <Box sx={{ borderRadius: 2, overflow: "hidden" }}>
-                <Image
-                  src={`https:${featuredImage}`}
-                  alt={title ?? "Featured Image"}
-                  width={400}
-                  height={400}
-                  style={{
-                    width: "100%",
-                    height: "auto",
-                    objectFit: "contain",
-                  }}
-                />
+        {/* Main layout: Table of Contents and Content */}
+        <Box
+          sx={{
+            mt: 5,
+            padding: { xs: "1rem", md: "3rem" },
+            borderRadius: "16px",
+            border: `1px solid rgba(255, 255, 255, 0.15)`,
+            boxShadow: "0 8px 32px rgba(0, 0, 0, 0.2)",
+            backgroundColor: "background.paper",
+          }}
+        >
+          <Grid container spacing={4} alignItems="flex-start">
+            {/* Sidebar: Wrap the TOC in StickyWrapper.
+         The offset here should equal your header height plus any extra spacing.
+         In this example, 96px is used (e.g. 80px header + 16px extra). */}
+            <Grid
+              item
+              xs={12}
+              md={3.5}
+              sx={{ display: { xs: "none", md: "block" } }}
+            >
+              <StickyWrapper offset={96}>
+                <TableOfContents content={content} includeSubheadings />
+              </StickyWrapper>
+            </Grid>
+
+            {/* Main Content */}
+            <Grid item xs={12} md={8.5}>
+              <Box sx={{ typography: "body1" }}>
+                {content && documentToReactComponents(content, renderOptions)}
               </Box>
             </Grid>
-          )}
-          <Grid item xs={12} md={8}>
-            <Typography variant="h3" component="h1" gutterBottom>
-              {title}
-            </Typography>
-            {subtitle && (
-              <Typography variant="h6" color="text.secondary" gutterBottom>
-                {subtitle}
-              </Typography>
-            )}
-            <Stack
-              direction="row"
-              spacing={2}
-              alignItems="center"
-              mt={1}
-              mb={2}
-            >
-              <Typography variant="body2" color="text.secondary">
-                {new Date(publishedDate ?? "").toLocaleDateString()}
-              </Typography>
-              <Divider orientation="vertical" flexItem />
-              <Typography variant="body2" color="text.secondary">
-                15 min read
-              </Typography>
-            </Stack>
-            <Stack direction="row" spacing={1}>
-              {tags.map((tag) => (
-                <Chip key={tag} label={tag} size="small" />
-              ))}
-            </Stack>
           </Grid>
-        </Grid>
-
-        <Grid container spacing={6} alignItems="flex-start">
-          <Grid
-            item
-            xs={12}
-            md={3}
-            sx={{
-              display: { xs: "none", md: "block" },
-              position: "sticky",
-              top: 160,
-              alignSelf: "start",
-              maxHeight: "calc(100vh - 160px)",
-              overflowY: "auto",
-            }}
-          >
-            <TableOfContentsWrapper
-              content={content}
-              includeSubheadings={true}
-            />
-          </Grid>
-
-          <Grid item xs={12} md={9}>
-            <Box sx={{ typography: "body1" }}>
-              {content && documentToReactComponents(content, renderOptions)}
-            </Box>
-          </Grid>
-        </Grid>
+        </Box>
       </Box>
     </Layout>
   );
