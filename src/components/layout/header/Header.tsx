@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   AppBar,
   Toolbar,
@@ -17,40 +17,54 @@ import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import Link from "next/link";
 import { useTheme } from "@mui/material/styles";
+import { usePathname } from "next/navigation";
 import BookCallModal from "@/components/book-call-modal/BookCallModal";
 import { trackEvent } from "@/app/lib/umamiTrackEvent";
 
 export default function Header() {
   const theme = useTheme();
+  const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [open, setOpen] = useState(false);
 
   const handleDrawerToggle = () => {
     setMobileOpen((prev) => !prev);
   };
+
   const getSubdomain = () => {
     if (typeof window === "undefined") return null;
     const host = window.location.hostname;
-
-    if (host.endsWith(".localhost")) {
-      return host.split(".")[0];
-    }
-
+    if (host.endsWith(".localhost")) return host.split(".")[0];
     const parts = host.split(".");
-    if (parts.length >= 3) return parts[0];
-    return null;
+    return parts.length >= 3 ? parts[0] : null;
   };
 
   const handleCTAClick = () => {
     trackEvent("header_cta_click");
     const subdomain = getSubdomain();
-
     if (subdomain === "sahil") {
       window.open("https://cal.com/ssh-tech/30min-call", "_blank");
     } else {
       setOpen(true);
     }
   };
+
+  const scrollToSection = (id: string) => {
+    if (pathname === "/") {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: "smooth" });
+    } else {
+      window.location.href = `/#${id}`;
+    }
+  };
+
+  const navItems = [
+    { label: "Services", sectionId: "services" },
+    { label: "Process", sectionId: "process" },
+    { label: "Proof Of Work", href: "/proof-of-work" },
+    { label: "Pricing", sectionId: "pricing" },
+    { label: "FAQ", sectionId: "faq" },
+  ];
 
   return (
     <AppBar
@@ -94,15 +108,21 @@ export default function Header() {
 
           {/* Desktop Nav */}
           <Box sx={{ display: { xs: "none", md: "flex" }, gap: 2 }}>
-            {/* <Button component={Link} href="/blog" variant="text">
-              Blog
-            </Button> */}
-            <Button component={Link} href="/proof-of-work" variant="text">
-              Proof Of Work
-            </Button>
-            {/* <Button component={Link} href="/tools-and-resources" variant="text">
-              Tools & Resources
-            </Button> */}
+            {navItems.map(({ label, sectionId, href }) =>
+              href ? (
+                <Button key={label} component={Link} href={href} variant="text">
+                  {label}
+                </Button>
+              ) : (
+                <Button
+                  key={label}
+                  variant="text"
+                  onClick={() => scrollToSection(sectionId!)}
+                >
+                  {label}
+                </Button>
+              )
+            )}
           </Box>
         </Box>
 
@@ -115,6 +135,7 @@ export default function Header() {
         >
           Book a Call
         </Button>
+
         {/* Mobile Hamburger/X */}
         <IconButton
           edge="end"
@@ -129,7 +150,7 @@ export default function Header() {
         </IconButton>
       </Toolbar>
 
-      {/* Mobile Fullscreen Drawer */}
+      {/* Mobile Drawer */}
       <Drawer
         anchor="right"
         open={mobileOpen}
@@ -149,7 +170,6 @@ export default function Header() {
           },
         }}
       >
-        {/* Close Icon */}
         <IconButton
           onClick={handleDrawerToggle}
           sx={{
@@ -162,39 +182,62 @@ export default function Header() {
           <CloseIcon />
         </IconButton>
 
-        {/* Navigation Items */}
         <List sx={{ mt: 8, display: "flex", flexDirection: "column", gap: 2 }}>
-          {[
-            // { label: "Blog", href: "/blog" },
-            { label: "Proof Of Work", href: "/proof-of-work" },
-            // { label: "Tools & Resources", href: "/tools-and-resources" },
-          ].map(({ label, href }) => (
-            <ListItem
-              key={label}
-              component={Link}
-              href={href}
-              onClick={handleDrawerToggle}
-              sx={{
-                px: 2,
-                borderRadius: 2,
-                transition: "background-color 0.2s",
-                "&:hover": {
-                  backgroundColor: "rgba(255, 255, 255, 0.05)",
-                },
-                "&:active": {
-                  backgroundColor: "rgba(255, 255, 255, 0.08)",
-                },
-              }}
-            >
-              <ListItemText
-                primary={label}
-                primaryTypographyProps={{
-                  fontSize: "1.25rem",
-                  fontWeight: 400,
+          {navItems.map(({ label, sectionId, href }) =>
+            href ? (
+              <ListItem
+                key={label}
+                component={Link}
+                href={href}
+                onClick={handleDrawerToggle}
+                sx={{
+                  px: 2,
+                  borderRadius: 2,
+                  "&:hover": {
+                    backgroundColor: "rgba(255, 255, 255, 0.05)",
+                  },
+                  "&:active": {
+                    backgroundColor: "rgba(255, 255, 255, 0.08)",
+                  },
                 }}
-              />
-            </ListItem>
-          ))}
+              >
+                <ListItemText
+                  primary={label}
+                  primaryTypographyProps={{
+                    fontSize: "1.25rem",
+                    fontWeight: 400,
+                  }}
+                />
+              </ListItem>
+            ) : (
+              <ListItem
+                key={label}
+                button
+                onClick={() => {
+                  scrollToSection(sectionId!);
+                  handleDrawerToggle();
+                }}
+                sx={{
+                  px: 2,
+                  borderRadius: 2,
+                  "&:hover": {
+                    backgroundColor: "rgba(255, 255, 255, 0.05)",
+                  },
+                  "&:active": {
+                    backgroundColor: "rgba(255, 255, 255, 0.08)",
+                  },
+                }}
+              >
+                <ListItemText
+                  primary={label}
+                  primaryTypographyProps={{
+                    fontSize: "1.25rem",
+                    fontWeight: 400,
+                  }}
+                />
+              </ListItem>
+            )
+          )}
 
           {/* CTA */}
           <Box mt={4} px={2}>
@@ -202,11 +245,13 @@ export default function Header() {
               variant="contained"
               color="primary"
               fullWidth
-              onClick={handleCTAClick}
+              onClick={() => {
+                handleCTAClick();
+                handleDrawerToggle();
+              }}
               sx={{
                 fontWeight: "700",
                 textTransform: "none",
-
                 borderRadius: "8px",
               }}
             >
@@ -215,6 +260,7 @@ export default function Header() {
           </Box>
         </List>
       </Drawer>
+
       <BookCallModal open={open} handleClose={() => setOpen(false)} />
     </AppBar>
   );
