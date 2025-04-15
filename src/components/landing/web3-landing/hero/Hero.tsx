@@ -159,8 +159,8 @@ const Hero = () => {
               }}
             >
               {" "}
-              Not Just Here for the Hype. <br></br>
-              Web3 interfaces that feel like magic, not tech.
+              Not here for the hype. We build <br></br>
+              Web3 interfaces that feel like magic.
             </Typography>
 
             <Box
