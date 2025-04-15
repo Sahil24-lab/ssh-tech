@@ -59,7 +59,6 @@ export default function BookCallModal({
     overflowY: "auto",
   };
 
-  // Preload the Cal.com widget when the modal mounts
   useEffect(() => {
     (async function () {
       const cal = await getCalApi({ namespace: "30min-call" });
@@ -105,7 +104,7 @@ export default function BookCallModal({
     setFormData((prev) => ({ ...prev, [field]: sanitizeInput(value) }));
   };
 
-  const handleNext = () => {
+  const handleNext = async () => {
     if (isRateLimited) return;
 
     if (!isValidEmail(formData.email)) {
@@ -128,7 +127,18 @@ export default function BookCallModal({
       setIsRateLimited(false);
     }, 3000);
 
-    // Proceed to the next step without sending data to /api/leads.
+    // Save data to your Supabase DB
+    try {
+      await fetch("/api/leads", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+    } catch (error) {
+      console.log("Failed to save data:", error);
+      // rest of code here (handle error UI if desired)
+    }
+
     setStep((prev) => prev + 1);
     setErrorMessage("");
   };
@@ -399,9 +409,9 @@ export default function BookCallModal({
                   Thanks for your submission!
                 </Typography>
                 <Typography variant="body1" mt={1}>
-                  Based on your input, here’s a resource that might help.
+                  Our team will get back to you shortly
                 </Typography>
-                <Button
+                {/* <Button
                   variant="contained"
                   color="primary"
                   href="/your-pdf-guide.pdf"
@@ -416,11 +426,10 @@ export default function BookCallModal({
                   sx={{ mt: 2 }}
                 >
                   Join Our Discord
-                </Button>
+                </Button> */}
               </>
             )}
 
-            {/* Responsive Back Button Container */}
             <Box
               mt={2}
               sx={{

@@ -95,7 +95,7 @@ export default function Hero() {
             <Typography
               variant="h5"
               gutterBottom
-              sx={{ color: "secondary.main", fontWeight: 500 }}
+              sx={{ color: "secondary.light", fontWeight: 500, opacity: 0.7 }}
             >
               Engineering Leader | Blockchain Developer | Web3 Growth Architect
             </Typography>
@@ -108,11 +108,11 @@ export default function Hero() {
             </Box>
 
             <Typography variant="body1" paragraph sx={{ mb: 3 }}>
-              I’m Sahil Harriram — I help Web3 startups unlock capital,
-              traction, and growth through full-stack product execution. I lead
-              engineering strategy, build scalable dApps, and deliver real
-              outcomes. From GameFi loops to DeFi dashboards, I ship tech that
-              raises, retains, and scales.
+              I’m Sahil Harriram — I help Web3 startups create traction, and
+              growth through full-stack product execution. I have experience
+              leading engineering strategy to drive real outcomes. From GameFi
+              to DeFi dashboards, I ship tech that raises, retains, and scales.
+              Key highlights:
             </Typography>
 
             {/* Bullet List */}
@@ -128,12 +128,13 @@ export default function Hero() {
             >
               <Typography component="li" variant="body2" sx={{ mb: 1 }}>
                 <strong>Led 12-person global teams</strong> across Web3 &
-                robotics — scaled engineering 4x and shipped 3 full-stack
-                products in parallel
+                Robotics — scaled engineering teams 4x and managed teams
+                shipping 3 full-stack products in parallel
               </Typography>
               <Typography component="li" variant="body2" sx={{ mb: 1 }}>
-                Tech delivery directly enabled <strong>$4M+ in sales</strong>{" "}
-                and a <strong>$20M capital raise</strong>
+                Led development and delivery of flagship products, enabling{" "}
+                <strong>$4M+ in new revenue</strong> and a{" "}
+                <strong>$20M capital raise</strong>
               </Typography>
               <Typography component="li" variant="body2" sx={{ mb: 1 }}>
                 Secured over <strong>$600K</strong> through grants, token raises

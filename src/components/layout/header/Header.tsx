@@ -94,15 +94,15 @@ export default function Header() {
 
           {/* Desktop Nav */}
           <Box sx={{ display: { xs: "none", md: "flex" }, gap: 2 }}>
-            <Button component={Link} href="/blog" variant="text">
+            {/* <Button component={Link} href="/blog" variant="text">
               Blog
-            </Button>
+            </Button> */}
             <Button component={Link} href="/proof-of-work" variant="text">
               Proof Of Work
             </Button>
-            <Button component={Link} href="/tools-and-resources" variant="text">
+            {/* <Button component={Link} href="/tools-and-resources" variant="text">
               Tools & Resources
-            </Button>
+            </Button> */}
           </Box>
         </Box>
 
@@ -165,9 +165,9 @@ export default function Header() {
         {/* Navigation Items */}
         <List sx={{ mt: 8, display: "flex", flexDirection: "column", gap: 2 }}>
           {[
-            { label: "Blog", href: "/blog" },
+            // { label: "Blog", href: "/blog" },
             { label: "Proof Of Work", href: "/proof-of-work" },
-            { label: "Tools & Resources", href: "/tools-and-resources" },
+            // { label: "Tools & Resources", href: "/tools-and-resources" },
           ].map(({ label, href }) => (
             <ListItem
               key={label}

@@ -158,8 +158,9 @@ const Hero = () => {
                 textAlign: { xs: "center", md: "left" },
               }}
             >
-              At SSH Tech we are empowering the <br />
-              next generation of web3 Dapps
+              {" "}
+              Not Just Here for the Hype. <br></br>
+              Web3 interfaces that feel like magic, not tech.
             </Typography>
 
             <Box
