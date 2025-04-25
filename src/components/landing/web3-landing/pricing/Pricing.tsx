@@ -43,8 +43,7 @@ export default function Pricing() {
         "Tight scope, production ready builds for lean teams. Ideal for new feature validation or for smaller teams.",
       features: [
         "FREE Blueprint Call (risk & timeline mapping)",
-        "1–2 week POC with clear deliverables",
-        "Real-time staging builds for user testing",
+        "1–2 week POC with clear deliverables", 
         "Cancel anytime during POC phase (pay only for time used)",
         "Production-ready front-end integrated with your smart contracts",
         "Wallet connect & core transaction flows",
@@ -59,7 +58,8 @@ export default function Pricing() {
       features: [
         "Everything in Launch",
         "Secure Subgraph & API Integration",
-        "Analytics for real-time insights",
+        "Real-time staging builds for user testing",
+        "Real-time analytics dashboards for usage, transactions, and Users",
         "Frontend security review (CSP, XSS protection)",
         "Dedicated Discord for collaboration",
       ],
