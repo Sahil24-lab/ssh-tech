@@ -37,16 +37,17 @@ export default function Pricing() {
   const [open, setOpen] = useState(false);
   const pricingPlans = [
     {
-      name: "Essential",
+      name: "Launch",
       price: "$6K /month",
       description:
         "Tight scope, production ready builds for lean teams. Ideal for new feature validation or for smaller teams.",
       features: [
-        "20 hrs/week dev time",
-        "FREE Blueprint Call",
+        "FREE Blueprint Call (risk & timeline mapping)",
         "1–2 week POC with clear deliverables",
+        "Real-time staging builds for user testing",
         "Cancel anytime during POC phase (pay only for time used)",
-        "Mainnet deployment included",
+        "Production-ready front-end integrated with your smart contracts",
+        "Wallet connect & core transaction flows",
         "2-month min (6-month discount available)",
       ],
     },
@@ -54,12 +55,12 @@ export default function Pricing() {
       name: "Growth",
       price: "$9K /month",
       description:
-        "Enhanced feature development, Multi-chain integrations, & faster iterations for post-fundraise scaling.",
+        "Continuous feature delivery and rapid iterations for scaling Web3 teams with evolving product needs.",
       features: [
-        "30 hrs/week dev & product input",
-        "Everything in Essential",
-        "Subgraph + analytics for real-time insights",
-        "Testnet pipelines + iterative security reviews",
+        "Everything in Launch",
+        "Secure Subgraph & API Integration",
+        "Analytics for real-time insights",
+        "Frontend security review (CSP, XSS protection)",
         "Dedicated Discord for collaboration",
       ],
       tag: "Most Popular",
@@ -72,9 +73,10 @@ export default function Pricing() {
       features: [
         "40 hrs/week dedicated dev + strategy",
         "Everything in Growth",
-        "24/7 priority Discord suppport",
-        "Auto security scans and testing CI/CD pipelines",
+        "24/7 private Discord channel for instant support",
+        "Proactive technical risk audits every 4 weeks",
         "Performance optimization & monitoring",
+        "Detailed API architecture & security design",
         "Team handoffs + internal training",
       ],
     },
