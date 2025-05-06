@@ -31,6 +31,12 @@ export default function Header() {
     setMobileOpen((prev) => !prev);
   };
 
+  const [subdomain, setSubdomain] = useState<string | null>(null);
+
+  useEffect(() => {
+    setSubdomain(getSubdomain());
+  }, []);
+
   const getSubdomain = () => {
     if (typeof window === "undefined") return null;
     const host = window.location.hostname;
@@ -58,13 +64,18 @@ export default function Header() {
     }
   };
 
-  const navItems = [
+  const allNavItems = [
     { label: "Services", sectionId: "services" },
     { label: "Process", sectionId: "process" },
     { label: "Proof Of Work", href: "/proof-of-work" },
     { label: "Pricing", sectionId: "pricing" },
     { label: "FAQ", sectionId: "faq" },
   ];
+
+  const navItems =
+    subdomain === "sahil"
+      ? allNavItems.filter((item) => item.label === "Proof Of Work")
+      : allNavItems;
 
   return (
     <AppBar

@@ -97,7 +97,7 @@ export default function Hero() {
               gutterBottom
               sx={{ color: "secondary.light", fontWeight: 500, opacity: 0.7 }}
             >
-              Engineering Leader | Blockchain Developer | Web3 Growth Architect
+              Engineering Leader | Frontend Blockchain Developer
             </Typography>
 
             <Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
@@ -112,9 +112,8 @@ export default function Hero() {
               growth through full-stack product execution. I have experience
               leading engineering strategy to drive real outcomes. From GameFi
               to DeFi dashboards, I ship tech that raises, retains, and scales.
-              Key highlights:
             </Typography>
-
+            <Typography variant="body2"> Key highlights:</Typography>
             {/* Bullet List */}
             <Box
               component="ul"
@@ -142,7 +141,7 @@ export default function Hero() {
               </Typography>
               <Typography component="li" variant="body2">
                 Launched GameFi product with <strong>5,000 NFTs minted</strong>{" "}
-                and <strong>3,000+ users in 14 days</strong>
+                and <strong>3,000+ users in 30 days</strong>
               </Typography>
             </Box>
 
