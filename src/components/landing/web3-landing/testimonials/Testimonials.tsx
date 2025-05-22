@@ -40,15 +40,15 @@ const testimonials: Testimonial[] = [
     rating: 5,
     image: "/testimonials/Mack.jpeg",
   },
-  {
-    preview: "Helping startups scale with deep technical expertise.",
-    quote:
-      "Sahil excels in propelling early-stage product development by combining his strong business acumen with his deep technical expertise. His quick decision-making and technical ability help lead Elite Robotics, a deep tech startup, to meet pivotal milestones. Sahil's business insight helps him swiftly address challenges and forge relationships with stakeholders. His commitment to team collaboration and understanding of early-stage startups has led to successful team expansion, fundraising, and product development.",
-    author: "James Whyman",
-    role: "Associate Director at KPMG",
-    rating: 5,
-    image: "/testimonials/James.jpeg",
-  },
+  // {
+  //   preview: "Helping startups scale with deep technical expertise.",
+  //   quote:
+  //     "Sahil excels in propelling early-stage product development by combining his strong business acumen with his deep technical expertise. His quick decision-making and technical ability help lead Elite Robotics, a deep tech startup, to meet pivotal milestones. Sahil's business insight helps him swiftly address challenges and forge relationships with stakeholders. His commitment to team collaboration and understanding of early-stage startups has led to successful team expansion, fundraising, and product development.",
+  //   author: "James Whyman",
+  //   role: "Associate Director at KPMG",
+  //   rating: 5,
+  //   image: "/testimonials/James.jpeg",
+  // },
 ];
 
 interface TestimonialCardProps {
@@ -147,7 +147,7 @@ const Testimonials = () => {
             key={index}
             xs={12}
             md={6}
-            lg={4}
+            lg={6}
             sx={{
               display: "flex",
               flexDirection: "column",
