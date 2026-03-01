@@ -12,8 +12,8 @@ const baseUrlBySite: Record<string, string> = {
   embedded: "https://embedded.ssh-tech.xyz",
 };
 
-function getBaseUrlFromHeaders() {
-  const hdrs = headers();
+async function getBaseUrlFromHeaders() {
+  const hdrs = await headers();
   const host =
     hdrs.get("x-forwarded-host") ?? hdrs.get("host") ?? "";
   if (!host) {
@@ -26,7 +26,7 @@ function getBaseUrlFromHeaders() {
 }
 
 export async function GET() {
-  const baseUrl = getBaseUrlFromHeaders();
+  const baseUrl = await getBaseUrlFromHeaders();
   const body = [
     "User-agent: *",
     "Allow: /",

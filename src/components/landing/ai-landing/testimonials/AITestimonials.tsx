@@ -136,7 +136,7 @@ const AITestimonials = () => {
           mb: 2,
         }}
       >
-        // trusted by
+        Trusted by
       </Typography>
 
       <Typography

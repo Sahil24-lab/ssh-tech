@@ -65,7 +65,7 @@ const AIFAQ = () => {
             mb: 2,
           }}
         >
-          // faq
+          FAQ
         </Typography>
 
         <Typography

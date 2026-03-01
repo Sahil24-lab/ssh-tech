@@ -366,7 +366,7 @@ const AIHero = () => {
                 },
               }}
             >
-              // Your AI Systems Integrator
+              Your AI Systems Integrator
             </Typography>
 
             <Typography

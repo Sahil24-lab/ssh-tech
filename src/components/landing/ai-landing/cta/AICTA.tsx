@@ -54,7 +54,7 @@ const AICTA = () => {
             mb: 3,
           }}
         >
-          // let&apos;s talk
+          Let&apos;s talk
         </Typography>
 
         <Typography

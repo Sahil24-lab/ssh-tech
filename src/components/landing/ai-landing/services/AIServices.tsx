@@ -67,7 +67,7 @@ const AIServices = () => {
           mb: 2,
         }}
       >
-        // what we build
+        What we build
       </Typography>
 
       <Typography

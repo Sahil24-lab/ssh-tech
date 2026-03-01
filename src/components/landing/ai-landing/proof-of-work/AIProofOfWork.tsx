@@ -53,7 +53,7 @@ const AIProofOfWork = () => {
           mb: 2,
         }}
       >
-        // proof of work
+        Proof of work
       </Typography>
 
       <Typography
