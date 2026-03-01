@@ -13,6 +13,7 @@ import { Options } from "@contentful/rich-text-react-renderer";
 import { unwrapStringField, unwrapRichTextField } from "@/utils/unwrapFields";
 import { ContentfulImageAsset, SEOEntry } from "@/app/types/contentful";
 import { Metadata } from "next";
+import { headers } from "next/headers";
 import { notFound } from "next/navigation";
 import TableOfContents from "@/components/table-of-contents/TableOfContents";
 import StickyWrapper from "@/components/table-of-contents/StickyWrapper";
@@ -21,10 +22,17 @@ export const dynamic = "force-static";
 import PostHeader from "../components/post-header/PostHeader";
 
 export async function generateStaticParams() {
-  const posts = await getAllBlogPosts();
-  return posts.map((post) => ({
-    slug: post.fields.slug,
-  }));
+  try {
+    const posts = await getAllBlogPosts();
+    return posts
+      .map((post) => ({
+        slug: post.fields.slug,
+      }))
+      .filter((post) => typeof post.slug === "string");
+  } catch (err) {
+    console.error("Failed to load blog slugs.", err);
+    return [];
+  }
 }
 
 export async function generateMetadata({
@@ -33,6 +41,11 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
+  const hdrs = await headers();
+  const host =
+    hdrs.get("x-forwarded-host") ?? hdrs.get("host") ?? "ai.ssh-tech.xyz";
+  const proto = hdrs.get("x-forwarded-proto") ?? "https";
+  const baseUrl = `${proto}://${host}`;
   const post = await getBlogPostBySlug(slug);
   if (!post) notFound();
 
@@ -46,9 +59,13 @@ export async function generateMetadata({
   return {
     title,
     description,
+    alternates: {
+      canonical: `${baseUrl}/blog/${slug}`,
+    },
     openGraph: {
       title,
       description,
+      url: `${baseUrl}/blog/${slug}`,
       images: ogImage ? [`https:${ogImage}`] : [],
     },
   };

@@ -28,6 +28,26 @@ export async function fetchAllSlugs(): Promise<string[]> {
     .filter((slug): slug is string => Boolean(slug));
 }
 
+export async function fetchAllSlugsWithUpdatedAt(): Promise<
+  { slug: string; updatedAt: string }[]
+> {
+  const response = await client.getEntries<ProofOfWorkSkeleton>({
+    content_type: "proofOfWork",
+  });
+
+  const results: { slug: string; updatedAt: string }[] = [];
+  for (const item of response.items) {
+    const slug = (item.fields as { slug?: string }).slug;
+    if (typeof slug === "string" && slug.length > 0) {
+      results.push({
+        slug,
+        updatedAt: item.sys.updatedAt,
+      });
+    }
+  }
+  return results;
+}
+
 export async function fetchEntryBySlug(
   slug: string
 ): Promise<ProofOfWorkEntry | null> {

@@ -1,7 +1,7 @@
 import { headers } from "next/headers";
 import { NextResponse } from "next/server";
-import { fetchAllSlugs } from "@/app/lib/contentful/contentful";
-import { getAllBlogPosts } from "@/app/lib/contentful/blog";
+import { fetchAllSlugsWithUpdatedAt } from "@/app/lib/contentful/contentful";
+import { getAllBlogPostsWithUpdatedAt } from "@/app/lib/contentful/blog";
 
 export const runtime = "nodejs";
 export const revalidate = 3600;
@@ -28,24 +28,27 @@ async function getBaseUrlFromHeaders() {
 }
 
 async function getDynamicPaths() {
-  const paths: string[] = [];
+  const paths: { path: string; lastmod: string }[] = [];
 
   try {
-    const proofSlugs = await fetchAllSlugs();
-    for (const slug of proofSlugs) {
-      paths.push(`/proof-of-work/${slug}`);
+    const proofSlugs = await fetchAllSlugsWithUpdatedAt();
+    for (const entry of proofSlugs) {
+      paths.push({
+        path: `/proof-of-work/${entry.slug}`,
+        lastmod: entry.updatedAt,
+      });
     }
   } catch (err) {
     console.error("Failed to load Proof of Work slugs for sitemap.", err);
   }
 
   try {
-    const posts = await getAllBlogPosts();
-    for (const post of posts) {
-      const slug = (post.fields as { slug?: string }).slug;
-      if (typeof slug === "string" && slug.length > 0) {
-        paths.push(`/blog/${slug}`);
-      }
+    const posts = await getAllBlogPostsWithUpdatedAt();
+    for (const entry of posts) {
+      paths.push({
+        path: `/blog/${entry.slug}`,
+        lastmod: entry.updatedAt,
+      });
     }
   } catch (err) {
     console.error("Failed to load blog slugs for sitemap.", err);
@@ -56,25 +59,26 @@ async function getDynamicPaths() {
 
 export async function GET() {
   const baseUrl = await getBaseUrlFromHeaders();
-  const staticPaths = [
-    "/",
-    "/proof-of-work",
-    "/blog",
-    "/consulting",
-    "/tools-and-resources",
+  const staticPages = [
+    { path: "/", lastmod: "2026-03-01" },
+    { path: "/proof-of-work", lastmod: "2026-03-01" },
+    { path: "/blog", lastmod: "2026-03-01" },
+    { path: "/tools-and-resources", lastmod: "2026-03-01" },
   ];
 
   const dynamicPaths = await getDynamicPaths();
-  const allPaths = Array.from(new Set([...staticPaths, ...dynamicPaths]));
-  const now = new Date().toISOString();
+  const allPaths = [
+    ...staticPages,
+    ...dynamicPaths.filter((entry) => entry.path),
+  ];
 
   const body =
     `<?xml version="1.0" encoding="UTF-8"?>\n` +
     `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">` +
     allPaths
       .map(
-        (path) =>
-          `<url><loc>${baseUrl}${path}</loc><lastmod>${now}</lastmod></url>`
+        (entry) =>
+          `<url><loc>${baseUrl}${entry.path}</loc><lastmod>${entry.lastmod}</lastmod></url>`
       )
       .join("") +
     `</urlset>`;

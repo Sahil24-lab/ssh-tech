@@ -31,9 +31,6 @@ export async function GET() {
     "User-agent: *",
     "Allow: /",
     `Sitemap: ${baseUrl}/sitemap.xml`,
-    "Content-Signal: search=yes",
-    "Content-Signal: ai-input=no",
-    "Content-Signal: ai-train=no",
     "",
   ].join("\n");
 

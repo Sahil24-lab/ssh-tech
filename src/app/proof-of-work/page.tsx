@@ -22,9 +22,40 @@ import FullWidthContainer from "@/components/layout/container/full-width-contain
 import GlassCardDark from "@/components/card/glass-card-dark/GlassCardDark";
 import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
 import RocketLaunchIcon from "@mui/icons-material/RocketLaunch";
+import type { Metadata } from "next";
+import { headers } from "next/headers";
+
+async function getBaseUrl() {
+  const hdrs = await headers();
+  const host =
+    hdrs.get("x-forwarded-host") ?? hdrs.get("host") ?? "ai.ssh-tech.xyz";
+  const proto = hdrs.get("x-forwarded-proto") ?? "https";
+  return `${proto}://${host}`;
+}
+
+export async function generateMetadata(): Promise<Metadata> {
+  const baseUrl = await getBaseUrl();
+  return {
+    title: "AI Case Studies & Portfolio",
+    description:
+      "See how SSH Tech has delivered production AI systems with measurable outcomes across operations, automation, and analytics.",
+    alternates: {
+      canonical: `${baseUrl}/proof-of-work`,
+    },
+    openGraph: {
+      url: `${baseUrl}/proof-of-work`,
+      title: "AI Case Studies & Portfolio — SSH Tech",
+    },
+  };
+}
 
 export default async function ProofOfWorkList() {
-  const projects: ProofOfWorkEntry[] = await fetchEntries();
+  let projects: ProofOfWorkEntry[] = [];
+  try {
+    projects = await fetchEntries();
+  } catch (err) {
+    console.error("Failed to load Proof of Work entries.", err);
+  }
 
   return (
     <Layout>

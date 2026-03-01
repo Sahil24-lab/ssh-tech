@@ -27,6 +27,23 @@ export async function getAllBlogPosts(): Promise<BlogPostEntry[]> {
   return res.items;
 }
 
+export async function getAllBlogPostsWithUpdatedAt(): Promise<
+  { slug: string; updatedAt: string }[]
+> {
+  const posts = await getAllBlogPosts();
+  const results: { slug: string; updatedAt: string }[] = [];
+  for (const post of posts) {
+    const slug = (post.fields as { slug?: string }).slug;
+    if (typeof slug === "string" && slug.length > 0) {
+      results.push({
+        slug,
+        updatedAt: post.sys.updatedAt,
+      });
+    }
+  }
+  return results;
+}
+
 export async function getBlogPostBySlug(
   slug: string
 ): Promise<BlogPostEntry | undefined> {

@@ -1,4 +1,4 @@
-import { Box, Typography, IconButton } from "@mui/material";
+import { Box, Typography, IconButton, Link } from "@mui/material";
 import { GitHub, LinkedIn, Twitter } from "@mui/icons-material";
 import ArticleIcon from "@mui/icons-material/Article";
 import { useTheme } from "@mui/material/styles";
@@ -87,10 +87,11 @@ export default function Footer({ mt = 4 }: FooterProps) {
 
       {/* Right */}
       <Box sx={{ flex: 1, textAlign: { xs: "center", sm: "right" } }}>
-        <Typography> Privacy Policy</Typography>
-        {/* <Link href="/privacy-policy" underline="hover">
-          Privacy Policy
-        </Link> */}
+        <Typography>
+          <Link href="/privacy-policy" underline="hover">
+            Privacy Policy
+          </Link>
+        </Typography>
       </Box>
     </Box>
   );

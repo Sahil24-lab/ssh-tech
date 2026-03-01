@@ -127,6 +127,8 @@ export default function Header() {
               ) : (
                 <Button
                   key={label}
+                  component="a"
+                  href={pathname === "/" ? `#${sectionId}` : `/#${sectionId}`}
                   variant="text"
                   onClick={() => scrollToSection(sectionId!)}
                 >
@@ -223,6 +225,8 @@ export default function Header() {
             ) : (
               <ListItem
                 key={label}
+                component="a"
+                href={pathname === "/" ? `#${sectionId}` : `/#${sectionId}`}
                 button
                 onClick={() => {
                   scrollToSection(sectionId!);
