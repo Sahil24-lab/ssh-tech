@@ -1,6 +1,6 @@
 import Layout from "@/components/layout/Layout";
 
-export default function RoboticsLanding() {
+export default function EmbeddedLanding() {
   return (
     <Layout>
       <h1 className="text-4xl font-bold mb-4">

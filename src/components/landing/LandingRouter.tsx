@@ -3,7 +3,7 @@
 import { useSubdomain } from "@/contexts/SubdomainContext";
 import ProfileLanding from "./ProfileLanding";
 import Web3Landing from "./Web3Landing";
-import RoboticsLanding from "./RoboticsLanding";
+import EmbeddedLanding from "./EmbeddedLanding";
 import AILanding from "./ai-landing/AILanding";
 
 export default function LandingRouter() {
@@ -14,7 +14,7 @@ export default function LandingRouter() {
   }
 
   if (subdomain === "sahil") return <ProfileLanding />;
-  if (subdomain === "robotics") return <RoboticsLanding />;
+  if (subdomain === "embedded") return <EmbeddedLanding />;
   if (subdomain === "ai") return <AILanding />;
   return <Web3Landing />;
 }

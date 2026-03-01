@@ -11,14 +11,14 @@ SSH-Tech operates three subdomain sites to keep messaging focused per audience, 
 | Subdomain               | Focus                      | Landing Component                                           |
 | ----------------------- | -------------------------- | ----------------------------------------------------------- |
 | `web3.ssh-tech.xyz`     | Web3 & Product Engineering | `Web3Landing` (also default fallback)                       |
-| `embedded.ssh-tech.xyz` | Embedded, Robotics & IoT   | `EmbeddedLanding` (currently `RoboticsLanding` placeholder) |
+| `embedded.ssh-tech.xyz` | Embedded, Robotics & IoT   | `EmbeddedLanding` (currently `EmbeddedLanding` placeholder) |
 | `ai.ssh-tech.xyz`       | AI Systems & Automation    | `AILanding` (not yet built)                                 |
 | `sahil.ssh-tech.xyz`    | Personal Profile           | `ProfileLanding`                                            |
 
-**Rename note:** The current codebase uses `robotics.ssh-tech.xyz` and `RoboticsLanding`. This should be migrated to `embedded.ssh-tech.xyz` and `EmbeddedLanding`. "Embedded" is the correct umbrella term — it covers firmware, IoT, sensor integration, telemetry, industrial systems, EVs, _and_ robotics. A customer arriving with an IoT monitoring project or EV telemetry system shouldn't land on a "robotics" URL. The rename involves:
+**Rename note:** The current codebase uses `robotics.ssh-tech.xyz` and `EmbeddedLanding`. This should be migrated to `embedded.ssh-tech.xyz` and `EmbeddedLanding`. "Embedded" is the correct umbrella term — it covers firmware, IoT, sensor integration, telemetry, industrial systems, EVs, _and_ robotics. A customer arriving with an IoT monitoring project or EV telemetry system shouldn't land on a "robotics" URL. The rename involves:
 
 1. Update `LandingRouter.tsx` — change the `robotics` case to `embedded`
-2. Rename the component from `RoboticsLanding` to `EmbeddedLanding`
+2. Rename the component from `EmbeddedLanding` to `EmbeddedLanding`
 3. Update `getUmamiWebsiteId()` in `layout.tsx` — add `embedded` key (can reuse the robotics Umami ID or create a new one)
 4. DNS/hosting — add `embedded.ssh-tech.xyz` subdomain, consider a redirect from `robotics.ssh-tech.xyz` → `embedded.ssh-tech.xyz` for any existing links
 5. Update `Header.tsx` subdomain logic if it has robotics-specific behaviour
