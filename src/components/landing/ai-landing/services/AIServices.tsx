@@ -1,6 +1,7 @@
 "use client";
 
-import { Typography, Grid, Box, Chip, useTheme } from "@mui/material";
+import { Typography, Grid, Box, useTheme } from "@mui/material";
+import { alpha } from "@mui/material/styles";
 import GlassCard from "@/components/card/glass-card/GlassCard";
 
 const services = [
@@ -8,22 +9,37 @@ const services = [
     label: "01 — AUTOMATE",
     title: "Operational Automation",
     description:
-      "Eliminate repetitive manual processes across your organisation. We build AI-powered workflows that handle intake, classification, document processing, and routing at scale. Your team focuses on decisions. The system handles everything else.",
-    tags: ["Process Automation", "Document Processing", "Data Extraction", "Intake & Routing"],
+      "Automate intake, classification, document handling, and routing so your team spends time on decisions, not admin.",
+    tags: [
+      "Process Automation",
+      "Document Parsing",
+      "Data Extraction",
+      "Intake Routing",
+    ],
   },
   {
     label: "02 — SEARCH",
     title: "Enterprise Knowledge Systems",
     description:
-      "Give every team instant, accurate answers from your internal data. We connect AI to your existing documentation, policies, CRM records, and operational history. Staff find what they need in seconds instead of hours.",
-    tags: ["Knowledge Base", "Intelligent Search", "Document Q&A", "Internal Assistant"],
+      "Turn internal docs, policies, CRM, and operations history into fast, reliable answers for every team.",
+    tags: [
+      "Knowledge Base",
+      "Intelligent Search",
+      "Document Q&A",
+      "Internal Assistant",
+    ],
   },
   {
     label: "03 — AGENTS",
     title: "AI Agents & Reporting",
     description:
-      "Deploy AI agents that handle multi-step workflows autonomously. Aggregate data across systems, generate executive reports, route decisions, and flag exceptions. Full audit trails and human oversight where it matters.",
-    tags: ["Executive Reporting", "Multi-system Workflows", "Decision Routing", "Audit & Compliance"],
+      "Run multi-step workflows, unify cross-system data, and deliver leadership reporting with audit-ready controls.",
+    tags: [
+      "Exec Reporting",
+      "Cross-System Flows",
+      "Decision Routing",
+      "Audit & Controls",
+    ],
   },
 ];
 
@@ -65,7 +81,7 @@ const AIServices = () => {
           mb: 2,
         }}
       >
-        AI systems that integrate into how your business runs.
+        AI systems built into your operations.
       </Typography>
 
       <Typography
@@ -73,8 +89,8 @@ const AIServices = () => {
         align="center"
         sx={{ mb: 8, color: "text.secondary" }}
       >
-        Not standalone tools. Not chatbot demos. Systems engineered to work
-        inside your existing infrastructure and scale with your operations.
+        Not demos. Production-grade systems that plug into your stack and
+        scale with your team.
       </Typography>
 
       <Grid container spacing={4} justifyContent="center">
@@ -89,25 +105,14 @@ const AIServices = () => {
                 justifyContent: "space-between",
                 position: "relative",
                 overflow: "hidden",
-                transition: "all 0.3s ease",
+                backgroundImage:
+                  "linear-gradient(180deg, rgba(31,226,196,0.06) 0%, rgba(31,226,196,0.02) 26%, rgba(255,255,255,0.01) 100%)",
+                transition:
+                  "transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease",
                 "&:hover": {
-                  transform: "translateY(-3px)",
-                  boxShadow: `0px 0px 20px 4px ${theme.palette.primary.main}35`,
-                  borderColor: `${theme.palette.primary.main}40`,
-                },
-                "&::before": {
-                  content: '""',
-                  position: "absolute",
-                  top: 0,
-                  left: 0,
-                  right: 0,
-                  height: "2px",
-                  background: `linear-gradient(90deg, ${theme.palette.primary.main}, transparent)`,
-                  opacity: 0,
-                  transition: "opacity 0.3s ease",
-                },
-                "&:hover::before": {
-                  opacity: 1,
+                  transform: "translateY(-2px)",
+                  boxShadow: `0 14px 30px -16px ${theme.palette.primary.main}66`,
+                  borderColor: `${theme.palette.primary.main}33`,
                 },
               }}
             >
@@ -115,21 +120,17 @@ const AIServices = () => {
               <Typography
                 variant="body2"
                 sx={{
-                  fontFamily: "monospace",
-                  fontSize: "0.72rem",
+                  fontFamily: "'JetBrains Mono', monospace",
+                  fontSize: "0.74rem",
                   letterSpacing: "0.1em",
-                  color: theme.palette.primary.main,
+                  color: alpha(theme.palette.primary.main, 0.62),
                   textTransform: "uppercase",
-                  backgroundColor: `${theme.palette.primary.main}18`,
                   display: "inline-block",
-                  px: 1.5,
-                  py: 0.5,
-                  borderRadius: "4px",
-                  mb: 3,
+                  mb: 2.5,
                   alignSelf: "flex-start",
                 }}
               >
-                {service.label}
+                {`// ${service.label}`}
               </Typography>
 
               <Box sx={{ flex: 1 }}>
@@ -143,29 +144,52 @@ const AIServices = () => {
 
                 <Typography
                   variant="body1"
-                  sx={{ color: "text.primary", lineHeight: 1.7 }}
+                  sx={{ color: "text.primary", lineHeight: 1.65 }}
                 >
                   {service.description}
                 </Typography>
               </Box>
 
               {/* Tech stack tags */}
-              <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1, mt: 4 }}>
+              <Box
+                sx={{
+                  display: "grid",
+                  gridTemplateColumns: {
+                    xs: "1fr",
+                    sm: "repeat(2, minmax(0, 1fr))",
+                  },
+                  gap: 1,
+                  mt: 3.5,
+                  alignItems: "stretch",
+                }}
+              >
                 {service.tags.map((tag) => (
-                  <Chip
+                  <Box
                     key={tag}
-                    label={tag}
-                    size="small"
-                    variant="outlined"
                     sx={{
-                      fontFamily: "monospace",
-                      fontSize: "0.7rem",
+                      width: "100%",
+                      minHeight: 30,
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      fontFamily: "'JetBrains Mono', monospace",
+                      fontSize: "0.64rem",
+                      letterSpacing: "0.02em",
                       color: "text.secondary",
-                      borderColor: "secondary.dark",
-                      borderRadius: "4px",
-                      height: 24,
+                      borderColor: `${theme.palette.primary.main}45`,
+                      backgroundColor: `${theme.palette.primary.main}12`,
+                      border: `1px solid ${theme.palette.primary.main}45`,
+                      borderRadius: "8px",
+                      px: 1.25,
+                      py: 0.45,
+                      textAlign: "center",
+                      lineHeight: 1.25,
+                      whiteSpace: "normal",
+                      overflowWrap: "anywhere",
                     }}
-                  />
+                  >
+                    {tag}
+                  </Box>
                 ))}
               </Box>
             </GlassCard>

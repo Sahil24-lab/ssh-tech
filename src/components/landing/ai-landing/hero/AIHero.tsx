@@ -12,25 +12,25 @@ import GlassCard from "@/components/card/glass-card/GlassCard";
 import BookCallModal from "@/components/book-call-modal/BookCallModal";
 import LatticeBg from "./LatticeBg";
 import { useState, useRef, useCallback } from "react";
-import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
-import StorageIcon from "@mui/icons-material/Storage";
-import AccountTreeIcon from "@mui/icons-material/AccountTree";
+import SearchIcon from "@mui/icons-material/Search";
+import BuildCircleOutlinedIcon from "@mui/icons-material/BuildCircleOutlined";
+import RocketLaunchIcon from "@mui/icons-material/RocketLaunch";
 
 const capabilities = [
   {
-    icon: <AutoAwesomeIcon sx={{ fontSize: 28 }} />,
-    label: "Operational Automation",
-    detail: "AI-powered workflows that eliminate manual processes at scale",
+    icon: <SearchIcon sx={{ fontSize: 28 }} />,
+    label: "Assess",
+    detail: "Fixed-fee diagnostic to find your highest-ROI workflow.",
   },
   {
-    icon: <StorageIcon sx={{ fontSize: 28 }} />,
-    label: "Enterprise Knowledge Systems",
-    detail: "Instant, accurate answers from your internal data and documents",
+    icon: <BuildCircleOutlinedIcon sx={{ fontSize: 28 }} />,
+    label: "Build",
+    detail: "Production build with clear milestones and sign-off criteria.",
   },
   {
-    icon: <AccountTreeIcon sx={{ fontSize: 28 }} />,
-    label: "AI Agents & Reporting",
-    detail: "Autonomous agents that handle multi-step workflows end to end",
+    icon: <RocketLaunchIcon sx={{ fontSize: 28 }} />,
+    label: "Operate",
+    detail: "Ongoing monitoring and optimisation to keep gains compounding.",
   },
 ];
 
@@ -61,7 +61,11 @@ const AIHero = () => {
 
   const handleScroll = (id: string) => {
     const element = document.getElementById(id);
-    if (element) element.scrollIntoView({ behavior: "smooth" });
+    if (!element) return;
+    const headerOffset = 92;
+    const targetTop =
+      element.getBoundingClientRect().top + window.scrollY - headerOffset;
+    window.scrollTo({ top: targetTop, behavior: "smooth" });
   };
 
   return (
@@ -254,7 +258,7 @@ const AIHero = () => {
                     letterSpacing: "0.04em",
                   }}
                 >
-                  What we ship
+                  How we work
                 </Typography>
 
                 <Box
@@ -295,7 +299,11 @@ const AIHero = () => {
                         </Typography>
                         <Typography
                           variant="body2"
-                          sx={{ color: "text.secondary", fontSize: "0.85rem" }}
+                          sx={{
+                            color: "text.secondary",
+                            fontSize: "0.84rem",
+                            whiteSpace: { xs: "normal", md: "nowrap" },
+                          }}
                         >
                           {cap.detail}
                         </Typography>
@@ -327,7 +335,7 @@ const AIHero = () => {
                     variant="body2"
                     sx={{ color: "text.secondary", fontSize: "0.8rem" }}
                   >
-                    Production-grade delivery. Discovery call is free.
+                    Assess. Build. Operate. Start with a discovery call.
                   </Typography>
                 </Box>
               </GlassCard>
@@ -370,7 +378,7 @@ const AIHero = () => {
                 textAlign: { xs: "center", md: "left" },
               }}
             >
-              AI that works in your operations, not just a demo.
+              Production AI for real operations.
             </Typography>
 
             <Typography
@@ -383,9 +391,7 @@ const AIHero = () => {
                 textAlign: { xs: "center", md: "left" },
               }}
             >
-              We integrate AI into your existing infrastructure to automate
-              operations, reduce overhead, and give your leadership team full
-              visibility. Production-grade systems, not proofs of concept.
+              We integrate with your stack and automate high-impact workflows.
             </Typography>
 
             <Box
@@ -418,7 +424,7 @@ const AIHero = () => {
                   width: { xs: "100%", sm: "100%", md: "auto" },
                   fontWeight: 700,
                 }}
-                onClick={() => handleScroll("services")}
+                onClick={() => handleScroll("process")}
               >
                 How We Work
               </Button>

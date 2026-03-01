@@ -1,142 +1,211 @@
 "use client";
 
-import { Typography, Box, Grid, useTheme } from "@mui/material";
+import { useState } from "react";
+import {
+  Typography,
+  Box,
+  Grid,
+  useTheme,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  Button,
+} from "@mui/material";
+import { CheckCircleOutlineRounded } from "@mui/icons-material";
 import GlassCard from "@/components/card/glass-card/GlassCard";
+import BookCallModal from "@/components/book-call-modal/BookCallModal";
 
-const codeLines = [
-  { ln: "01", comment: true, content: "// SSH-Tech: transparent by default" },
-  { ln: "02", content: "const system = sshTech.deploy({" },
-  { ln: "03", content: "  ..." },
-  { ln: "04", content: "  humanReview: 'edge-cases'," },
-  { ln: "05", content: "  compliance: 'audit-ready'," },
-  { ln: "06", content: "});" },
-  { ln: "07", content: "" },
-  { ln: "08", comment: true, content: "// You see: accuracy, cost, ROI" },
-  { ln: "09", comment: true, content: "// We see: what to optimise next" },
+const keyUsps = [
+  "Deploy into your current stack without rip-and-replace projects",
+  "Track quality, latency, and cost with real operational visibility",
+  "Add guardrails and ongoing optimisation so value keeps compounding",
 ];
 
 const AIWhyUs = () => {
   const theme = useTheme();
+  const [open, setOpen] = useState(false);
 
   return (
     <Box
       sx={{
-        px: { xs: 4, sm: 4, md: 8, lg: 8, xl: 8, xxl: 30 },
-        py: { xs: 10, sm: 14, md: 20 },
-        backgroundColor: "background.paper",
-        borderTop: `1px solid ${theme.palette.secondary.dark}40`,
-        borderBottom: `1px solid ${theme.palette.secondary.dark}40`,
+        px: { xs: 2, sm: 3, md: 4, lg: 6, xl: 8 },
+        py: { xs: 11, sm: 15, md: 22 },
       }}
     >
-      <Grid
-        container
-        spacing={{ xs: 6, md: 8 }}
-        alignItems="center"
-        justifyContent="center"
+      <Box
+        sx={{
+          maxWidth: "1280px",
+          mx: "auto",
+          minHeight: { xs: "auto", md: 760 },
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          gap: { xs: 5, md: 5 },
+        }}
       >
-        {/* Left — text */}
-        <Grid item xs={12} md={6}>
-          <Typography
-            variant="body2"
-            sx={{
-              fontFamily: "'JetBrains Mono', monospace",
-              fontSize: "0.73rem",
-              color: "primary.main",
-              letterSpacing: "0.1em",
-              textTransform: "uppercase",
-              mb: 2,
-            }}
-          >
-            // why ssh-tech
-          </Typography>
+        <Grid
+          container
+          rowSpacing={{ xs: 5, md: 0 }}
+          columnSpacing={{ xs: 0, sm: 0, md: 4, lg: 6 }}
+          alignItems="stretch"
+          justifyContent="center"
+        >
+          <Grid item xs={12} md={5}>
+            <Typography
+              variant="body2"
+              sx={{
+                fontFamily: "'JetBrains Mono', monospace",
+                fontSize: "0.73rem",
+                color: "primary.main",
+                letterSpacing: "0.1em",
+                textTransform: "uppercase",
+                mb: 2,
+              }}
+            >
+              PRICING
+            </Typography>
 
-          <Typography
-            variant="h2"
-            component="h2"
-            sx={{
-              fontWeight: 700,
-              color: "primary.light",
-              mb: 3,
-              letterSpacing: "-0.03em",
-              lineHeight: 1.15,
-            }}
-          >
-            We integrate the system,
-            <br />
-            not just build the demo.
-          </Typography>
+            <Typography
+              variant="h2"
+              component="h2"
+              sx={{
+                fontWeight: 700,
+                color: "primary.light",
+                mb: 2.5,
+                letterSpacing: "-0.03em",
+                lineHeight: 1.14,
+              }}
+            >
+              Built for operational outcomes
+            </Typography>
 
-          <Typography
-            variant="body1"
-            sx={{
-              color: "text.primary",
-              lineHeight: 1.75,
-              mb: 2,
-              fontSize: "0.95rem",
-            }}
-          >
-            Most AI vendors deliver a polished demo and leave you to figure out
-            production. We start with your existing infrastructure and build
-            systems that integrate into your daily operations from day one. No
-            rip-and-replace. No vendor lock-in.
-          </Typography>
+            <Typography
+              variant="body1"
+              sx={{
+                color: "text.primary",
+                lineHeight: 1.72,
+                mb: 2.5,
+                fontSize: "0.98rem",
+                maxWidth: { md: "96%" },
+              }}
+            >
+              We design and deploy AI systems inside your existing workflows so
+              the end result is usable, reliable, and easier to adopt in
+              day-to-day operations.
+            </Typography>
 
-          <Typography
-            variant="body1"
-            sx={{
-              color: "text.primary",
-              lineHeight: 1.75,
-              fontSize: "0.95rem",
-            }}
-          >
-            Every system we deliver includes full monitoring so your leadership
-            team sees exactly what the AI is doing, how accurate it is, and
-            what it costs to run. Complete transparency at every level.
-          </Typography>
-        </Grid>
+            <List sx={{ py: 0 }}>
+              {keyUsps.map((item) => (
+                <ListItem key={item} disablePadding sx={{ mb: 1.3 }}>
+                  <ListItemIcon sx={{ minWidth: "auto", mr: 1 }}>
+                    <CheckCircleOutlineRounded
+                      fontSize="small"
+                      sx={{ color: "primary.main" }}
+                    />
+                  </ListItemIcon>
+                  <ListItemText
+                    primary={item}
+                    primaryTypographyProps={{
+                      sx: {
+                        color: "text.primary",
+                        lineHeight: 1.5,
+                        fontSize: "0.98rem",
+                      },
+                    }}
+                  />
+                </ListItem>
+              ))}
+            </List>
+          </Grid>
 
-        {/* Right — code block */}
-        <Grid item xs={12} md={6}>
-          <GlassCard
-            sx={{
-              p: { xs: 3, md: 4 },
-              backgroundColor: "rgba(9, 31, 44, 0.9)",
-              border: `1px solid ${theme.palette.secondary.dark}`,
-              fontFamily: "'JetBrains Mono', monospace",
-              fontSize: { xs: "0.72rem", md: "0.76rem" },
-              lineHeight: 1.9,
-              overflowX: "auto",
-            }}
-          >
-            {codeLines.map((line, i) => (
-              <Box key={i} sx={{ display: "flex", whiteSpace: "pre" }}>
-                <Box
-                  component="span"
-                  sx={{
-                    color: "rgba(145, 254, 230, 0.3)",
-                    userSelect: "none",
-                    mr: 2,
-                    minWidth: 20,
-                  }}
-                >
-                  {line.ln}
+          <Grid item xs={12} md={7} sx={{ display: "flex" }}>
+            <GlassCard
+              sx={{
+                p: { xs: 3, md: 4 },
+                backgroundColor: "rgba(4, 20, 31, 0.94)",
+                border: `1px solid ${theme.palette.secondary.dark}`,
+                boxShadow: "0 14px 30px rgba(0, 0, 0, 0.28)",
+                width: "100%",
+                maxWidth: { md: 760 },
+                ml: { md: "auto" },
+                display: "flex",
+                flexDirection: "column",
+              }}
+            >
+              <Typography
+                variant="body2"
+                sx={{
+                  fontFamily: "'JetBrains Mono', monospace",
+                  fontSize: "0.72rem",
+                  color: "primary.main",
+                  letterSpacing: "0.1em",
+                  textTransform: "uppercase",
+                  mb: 1.5,
+                }}
+              >
+                How pricing works
+              </Typography>
+
+              <Box sx={{ mb: 2.2 }}>
+                <Box sx={{ mb: 2.1 }}>
+                  <Typography sx={{ color: "text.primary", fontWeight: 700 }}>
+                    1. Fixed-fee assessment
+                  </Typography>
+                  <Typography sx={{ color: "text.secondary", lineHeight: 1.65 }}>
+                    We assess one workflow or bottleneck and define the
+                    opportunity.
+                  </Typography>
                 </Box>
+
                 <Box
-                  component="span"
                   sx={{
-                    color: line.comment
-                      ? "rgba(145, 254, 230, 0.35)"
-                      : "text.primary",
-                    fontStyle: line.comment ? "italic" : "normal",
+                    mb: 2.1,
+                    pt: 2.1,
+                    borderTop: `1px solid ${theme.palette.secondary.dark}50`,
                   }}
                 >
-                  {line.content}
+                  <Typography sx={{ color: "text.primary", fontWeight: 700 }}>
+                    2. Scoped implementation
+                  </Typography>
+                  <Typography sx={{ color: "text.secondary", lineHeight: 1.65 }}>
+                    If the business case is strong, we quote and deliver a
+                    defined project.
+                  </Typography>
+                </Box>
+
+                <Box
+                  sx={{
+                    pt: 2.1,
+                    borderTop: `1px solid ${theme.palette.secondary.dark}50`,
+                  }}
+                >
+                  <Typography sx={{ color: "text.primary", fontWeight: 700 }}>
+                    3. Optional ongoing support
+                  </Typography>
+                  <Typography sx={{ color: "text.secondary", lineHeight: 1.65 }}>
+                    After launch, we provide maintenance, optimisation, and
+                    operational support as needed.
+                  </Typography>
                 </Box>
               </Box>
-            ))}
-          </GlassCard>
+
+              <Box sx={{ mt: "auto" }}>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={() => setOpen(true)}
+                  sx={{ fontWeight: 700, px: 4 }}
+                >
+                  Start with an assessment
+                </Button>
+              </Box>
+            </GlassCard>
+          </Grid>
         </Grid>
-      </Grid>
+      </Box>
+
+      <BookCallModal open={open} handleClose={() => setOpen(false)} />
     </Box>
   );
 };

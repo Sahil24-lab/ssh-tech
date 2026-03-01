@@ -26,25 +26,25 @@ const processes = [
     phase: "Stage 1",
     title: "Assess",
     description:
-      "We run a fixed-fee diagnostic on one business process or bottleneck to identify the highest-value automation opportunity and define a practical path to implementation.",
+      "We run a fixed-fee diagnostic on one workflow or bottleneck to identify the highest-value automation opportunity and map a practical implementation path.",
     deliverables: [
       "Workflow diagnostic and baseline metrics",
-      "Prioritised opportunity and ROI map",
-      "Technical scope for implementation",
+      "Prioritised opportunities with ROI",
+      "Technical scope and delivery plan",
     ],
     outcome:
-      "Low-risk entry with a clear commercial and technical next step.",
+      "Low-risk first step with a clear commercial and technical decision.",
     icon: <Search sx={{ fontSize: 72 }} />,
   },
   {
     phase: "Stage 2",
     title: "Build",
     description:
-      "We implement a fixed-scope solution for production use in your environment, with clear milestones and acceptance criteria.",
+      "We deliver a fixed-scope solution for production in your environment, with clear milestones, acceptance criteria, and launch readiness.",
     deliverables: [
-      "Production-ready automation, workflow, or internal tool",
-      "Defined milestones and implementation boundaries",
-      "Launch readiness checks and handover",
+      "Production-ready automation or internal tool",
+      "Milestones, boundaries, and delivery plan",
+      "Readiness checks, handover, and docs",
     ],
     outcome:
       "Defined scope and timeline instead of open-ended consulting.",
@@ -54,11 +54,11 @@ const processes = [
     phase: "Stage 3",
     title: "Operate",
     description:
-      "Once live, we provide ongoing operational ownership through maintenance, monitoring, and optimisation so the system continues to deliver value over time.",
+      "Once live, we provide operational ownership through monitoring, maintenance, and optimisation so value keeps compounding over time.",
     deliverables: [
-      "Monitoring, maintenance, and issue response",
+      "Monitoring, maintenance, and incident response",
       "Monthly optimisation and performance reviews",
-      "Iteration roadmap based on live usage data",
+      "Iteration roadmap from live usage data",
     ],
     outcome:
       "Long-term operational leverage after go-live, not post-project decay.",
@@ -113,6 +113,7 @@ const AIProcess = () => {
         rowSpacing={{ xs: 4, lg: 8 }}
         columnSpacing={{ xs: 4, lg: 4 }}
         justifyContent="center"
+        alignItems="stretch"
         minWidth="100%"
       >
         {processes.map((process, index) => (
@@ -125,11 +126,15 @@ const AIProcess = () => {
             sx={{ display: "flex", justifyContent: "center" }}
             key={index}
           >
-            <Box sx={{ width: "100%" }}>
+            <Box sx={{ width: "100%", height: "100%", display: "flex" }}>
               <Fade
                 in
                 timeout={600}
-                style={{ transitionDelay: `${index * 200}ms` }}
+                style={{
+                  transitionDelay: `${index * 200}ms`,
+                  width: "100%",
+                  height: "100%",
+                }}
               >
                 <Box
                   sx={{
@@ -137,6 +142,8 @@ const AIProcess = () => {
                     flexDirection: "column",
                     alignItems: "center",
                     position: "relative",
+                    width: "100%",
+                    height: "100%",
                     "&:hover .glow-icon": {
                       boxShadow: `0 0 48px ${theme.palette.primary.main}`,
                       transform: "scale(1.05)",
@@ -171,11 +178,13 @@ const AIProcess = () => {
                       mt: { xs: 8, sm: 9 },
                       minHeight: {
                         xs: 520,
-                        sm: 500,
-                        md: 560,
+                        sm: 520,
+                        md: 590,
                         lg: 620,
-                        xl: 640,
+                        xl: 620,
                       },
+                      height: "100%",
+                      flexGrow: 1,
                       width: "100%",
                       maxWidth: "100%",
                       display: "flex",
@@ -186,7 +195,14 @@ const AIProcess = () => {
                       textAlign: "left",
                     }}
                   >
-                    <Box sx={{ width: "100%" }}>
+                    <Box
+                      sx={{
+                        width: "100%",
+                        display: "flex",
+                        flexDirection: "column",
+                        flexGrow: 1,
+                      }}
+                    >
                       <Typography
                         variant="h3"
                         sx={{
@@ -201,7 +217,12 @@ const AIProcess = () => {
 
                       <Typography
                         variant="body1"
-                        sx={{ color: "text.primary", mb: 2.5, lineHeight: 1.75 }}
+                        sx={{
+                          color: "text.primary",
+                          fontSize: "0.99rem",
+                          mb: 2.5,
+                          lineHeight: 1.7,
+                        }}
                       >
                         {process.description}
                       </Typography>
@@ -220,7 +241,7 @@ const AIProcess = () => {
                         Key deliverables
                       </Typography>
 
-                      <List sx={{ py: 0, mb: 2.5 }}>
+                      <List sx={{ py: 0, mb: 2.5, flexGrow: 1 }}>
                         {process.deliverables.map((deliverable) => (
                           <ListItem key={deliverable} disablePadding sx={{ mb: 1 }}>
                             <ListItemIcon sx={{ minWidth: "auto", mr: 1 }}>
@@ -232,14 +253,27 @@ const AIProcess = () => {
                             <ListItemText
                               primary={deliverable}
                               primaryTypographyProps={{
-                                sx: { color: "text.primary", fontSize: "0.93rem" },
+                                sx: {
+                                  color: "text.primary",
+                                  fontSize: "0.93rem",
+                                  lineHeight: 1.45,
+                                },
                               }}
                             />
                           </ListItem>
                         ))}
                       </List>
 
-                      <Typography variant="body2" sx={{ color: "primary.main", mb: 1 }}>
+                      <Typography
+                        variant="body2"
+                        sx={{
+                          color: "primary.main",
+                          fontSize: "0.97rem",
+                          lineHeight: 1.5,
+                          minHeight: 46,
+                          mb: 2,
+                        }}
+                      >
                         {process.outcome}
                       </Typography>
                     </Box>
@@ -253,7 +287,7 @@ const AIProcess = () => {
                         px: 6,
                         py: 2,
                         height: 32,
-                        mt: "auto",
+                        mt: 1.5,
                         alignSelf: "center",
                       }}
                     />

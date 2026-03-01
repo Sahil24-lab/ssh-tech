@@ -11,8 +11,13 @@ const AICTA = () => {
   return (
     <Box
       sx={{
+        width: "100%",
         position: "relative",
         overflow: "hidden",
+        minHeight: "86vh",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
         backgroundColor: "background.paper",
         borderTop: `1px solid ${theme.palette.secondary.dark}`,
         borderBottom: `1px solid ${theme.palette.secondary.dark}`,
@@ -63,7 +68,7 @@ const AICTA = () => {
             mx: "auto",
           }}
         >
-          Ready to integrate AI into your operations?
+          Ready to integrate AI?
         </Typography>
 
         <Typography
@@ -76,8 +81,8 @@ const AICTA = () => {
             lineHeight: 1.6,
           }}
         >
-          Book a Discovery Call. We&apos;ll assess where AI will deliver the
-          highest ROI for your organisation.
+          Book a Discovery Call. We&apos;ll assess the highest ROI for your
+          organisation and show you how to get there.
         </Typography>
 
         <Box
@@ -103,16 +108,6 @@ const AICTA = () => {
                 boxShadow: `0 0 40px ${theme.palette.primary.main}50`,
               },
             }}
-          >
-            Book a Discovery Call
-          </Button>
-
-          <Button
-            variant="outlined"
-            color="primary"
-            size="large"
-            sx={{ fontWeight: 700, px: 5 }}
-            onClick={() => setOpen(true)}
           >
             Book a Discovery Call
           </Button>

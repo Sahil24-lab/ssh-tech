@@ -4,7 +4,13 @@ import { Box } from "@mui/material";
 import Header from "./header/Header";
 import Footer from "./footer/Footer";
 
-export default function Layout({ children }: { children: React.ReactNode }) {
+export default function Layout({
+  children,
+  flushFooter = false,
+}: {
+  children: React.ReactNode;
+  flushFooter?: boolean;
+}) {
   return (
     <Box
       sx={{
@@ -32,16 +38,18 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             md: "74px",
             lg: "72px",
           },
-          mb: {
-            xs: "80px",
-            md: "100px",
-          },
+          mb: flushFooter
+            ? 0
+            : {
+                xs: "80px",
+                md: "100px",
+              },
         }}
       >
         {children}
       </Box>
 
-      <Footer />
+      <Footer mt={flushFooter ? 0 : 4} />
     </Box>
   );
 }

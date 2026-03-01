@@ -3,14 +3,18 @@ import { GitHub, LinkedIn, Twitter } from "@mui/icons-material";
 import ArticleIcon from "@mui/icons-material/Article";
 import { useTheme } from "@mui/material/styles";
 
-export default function Footer() {
+type FooterProps = {
+  mt?: number;
+};
+
+export default function Footer({ mt = 4 }: FooterProps) {
   const theme = useTheme();
 
   return (
     <Box
       component="footer"
       sx={{
-        mt: 4,
+        mt,
         py: 2,
         px: 4,
         backgroundColor: theme.palette.background.paper,

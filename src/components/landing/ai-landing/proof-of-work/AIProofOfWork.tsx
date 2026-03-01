@@ -1,12 +1,6 @@
 "use client";
 
-import {
-  Typography,
-  Grid,
-  Button,
-  Box,
-  useTheme,
-} from "@mui/material";
+import { Typography, Grid, Button, Box, useTheme } from "@mui/material";
 import GlassCard from "@/components/card/glass-card/GlassCard";
 
 const projects = [
@@ -39,7 +33,7 @@ const AIProofOfWork = () => {
   return (
     <Box
       sx={{
-        px: { xs: 4, sm: 4, md: 8, lg: 8, xl: 8, xxl: 30 },
+        px: { xs: 4, sm: 4, md: 8, lg: 8, xl: 8, xxl: 20 },
         py: { xs: 10, sm: 14, md: 20 },
         backgroundColor: "background.paper",
       }}
@@ -173,7 +167,13 @@ const AIProofOfWork = () => {
       </Grid>
 
       {/* CTA */}
-      <Box sx={{ mt: { xs: 8, md: 10 }, display: "flex", justifyContent: "center" }}>
+      <Box
+        sx={{
+          mt: { xs: 8, md: 10 },
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
         <Button
           variant="contained"
           size="large"
