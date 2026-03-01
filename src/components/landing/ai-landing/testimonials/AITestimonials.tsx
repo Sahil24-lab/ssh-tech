@@ -22,20 +22,22 @@ const truncateText = (text: string, limit: number) => {
 // [REPLACE WITH REAL TESTIMONIALS]
 const testimonials: Testimonial[] = [
   {
-    preview: "The only team that started with our operations, not a pitch.",
+    preview: "Bridging the gap between vision & execution",
     quote:
-      "We evaluated three AI consultancies. SSH-Tech was the only one that started by understanding our operations instead of pitching a product. The system they built processes our daily intake automatically and hasn't needed intervention in months.",
-    author: "Client Name", // [REPLACE WITH CLIENT]
-    role: "Director of Operations, Company", // [REPLACE WITH CLIENT]
+      "Working with Sahil was a game-changer. He was instrumental in bridging the gap between what we needed operationally and how to actually build it. His ability to translate complex requirements into production-ready systems ensured smooth execution and timely delivery. He played a critical role in designing and integrating multiple systems into a cohesive architecture that scaled with us. He thrives in high-pressure environments, tackling challenges head-on with a problem-solving approach that drives real results.",
+    author: "Ben Howen",
+    role: "Head of Product at Playlobby",
     rating: 5,
+    image: "/testimonials/Ben.jpeg",
   },
   {
-    preview: "Full visibility into accuracy, cost, and ROI from day one.",
+    preview: "Prioritizing What Matters Most",
     quote:
-      "Full visibility into accuracy, cost per query, and failure rates. That level of transparency let us justify the investment to our board within the first month. Most AI vendors can't give you that.",
-    author: "Client Name", // [REPLACE WITH CLIENT]
-    role: "CTO, Company", // [REPLACE WITH CLIENT]
+      "I've been fortunate to know Sahil for quite some time and I'm always eager to team up with him on new projects. Sahil's energy for crafting solutions is contagious. He strikes the perfect balance between focusing on business outcomes and tackling the technical complexity that comes with integrating AI into real operations. Sahil thrives on challenges and is always ready to dive into complex problems, determined to emerge with practical, production-ready solutions. His steadfast work ethic, coupled with his engaging personality, makes working together a smooth and enjoyable experience.",
+    author: "Mack Saraswat",
+    role: "Serial Entrepreneur",
     rating: 5,
+    image: "/testimonials/Mack.jpeg",
   },
 ];
 
@@ -100,10 +102,17 @@ const TestimonialCard = ({ testimonial }: { testimonial: Testimonial }) => {
           {testimonial.author.charAt(0)}
         </Avatar>
         <Box>
-          <Typography variant="subtitle1" sx={{ fontWeight: 500, lineHeight: 1.4 }}>
+          <Typography
+            variant="subtitle1"
+            sx={{ fontWeight: 500, lineHeight: 1.4 }}
+          >
             {testimonial.author}
           </Typography>
-          <Typography variant="body1" color="text.secondary" sx={{ fontWeight: 600, lineHeight: 1.4 }}>
+          <Typography
+            variant="body1"
+            color="text.secondary"
+            sx={{ fontWeight: 600, lineHeight: 1.4 }}
+          >
             {testimonial.role}
           </Typography>
         </Box>
@@ -141,7 +150,7 @@ const AITestimonials = () => {
           mb: 2,
         }}
       >
-        Organisations that needed systems, not experiments.
+        Organisations that needed systems
       </Typography>
 
       <Box sx={{ mb: 8 }} />

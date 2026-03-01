@@ -32,7 +32,7 @@ const testimonials: Testimonial[] = [
     image: "/testimonials/Ben.jpeg",
   },
   {
-    preview: "Maximising customer value by focussing features that matter.",
+    preview: "Maximising customer value by focussing on features that matter",
     quote:
       "I've been fortunate to know Sahil for quite some time and I'm always eager to team up with him on fresh projects. Sahil's energy for crafting solutions is contagious. He strikes the perfect balance between focusing on customer needs and tackling the technical intricacies that come with early-stage product development. Sahil thrives on challenges and is always ready to dive headfirst into complex issues, determined to emerge with practical solutions. His steadfast work ethic, coupled with his engaging personality, makes working together a smooth and enjoyable experience.",
     author: "Mack Saraswat",
