@@ -1,5 +1,6 @@
 export const trackEvent = (eventName: string) => {
-  if (typeof window !== "undefined" && (window as any).umami?.track) {
-    (window as any).umami.track(eventName);
-  }
+  if (typeof window === "undefined") return;
+  const umami = (window as Window & { umami?: { track?: (name: string) => void } })
+    .umami;
+  if (umami?.track) umami.track(eventName);
 };

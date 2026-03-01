@@ -21,7 +21,7 @@ import { trackEvent } from "@/app/lib/umamiTrackEvent";
 
 type InfoSectionProps = {
   title: string;
-  icon: React.ReactElement;
+  icon: React.ReactElement<any>;
   items: string[];
   iconColor?: string;
 };

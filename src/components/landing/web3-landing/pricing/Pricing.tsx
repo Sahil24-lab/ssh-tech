@@ -16,7 +16,6 @@ import {
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { Check, Whatshot } from "@mui/icons-material";
-import theme from "@/theme/theme";
 import BookCallModal from "@/components/book-call-modal/BookCallModal";
 import { useState } from "react";
 

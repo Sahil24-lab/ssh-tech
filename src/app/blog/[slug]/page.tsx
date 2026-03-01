@@ -1,22 +1,14 @@
 import { getAllBlogPosts, getBlogPostBySlug } from "@/app/lib/contentful/blog";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
-import {
-  BLOCKS,
-  INLINES,
-  Document as RichTextDocument,
-} from "@contentful/rich-text-types";
+import { BLOCKS, INLINES } from "@contentful/rich-text-types";
 import Layout from "@/components/layout/Layout";
 import {
   Box,
   Typography,
-  Stack,
-  Divider,
   Breadcrumbs,
   Link as MuiLink,
-  Chip,
   Grid,
 } from "@mui/material";
-import Image from "next/image";
 import { Options } from "@contentful/rich-text-react-renderer";
 import { unwrapStringField, unwrapRichTextField } from "@/utils/unwrapFields";
 import { ContentfulImageAsset, SEOEntry } from "@/app/types/contentful";
@@ -24,7 +16,6 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import TableOfContents from "@/components/table-of-contents/TableOfContents";
 import StickyWrapper from "@/components/table-of-contents/StickyWrapper";
-import GlassCardDark from "@/components/card/glass-card-dark/GlassCardDark";
 export const revalidate = 3600;
 export const dynamic = "force-static";
 import PostHeader from "../components/post-header/PostHeader";
@@ -74,13 +65,7 @@ export default async function BlogPostPage({
 
   const { fields } = post;
   const title = unwrapStringField(fields.title);
-  const subtitle = unwrapStringField(fields.shortDescription);
-  const publishedDate = unwrapStringField(fields.publishedDate);
-  const tags = Array.isArray(fields.tags) ? fields.tags : [];
   const content = unwrapRichTextField(fields.content);
-  const featuredImage = (
-    fields.featuredImage as ContentfulImageAsset | undefined
-  )?.fields?.file?.url;
 
   // Rich text rendering options.
   const renderOptions: Options = {

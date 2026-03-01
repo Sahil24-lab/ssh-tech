@@ -73,7 +73,11 @@ export default function PostHeader({
           mb={2}
         >
           <Typography variant="body2" color="text.secondary">
-            {new Date(publishedDate).toLocaleDateString()}
+            {new Date(publishedDate).toLocaleDateString("en-GB", {
+              year: "numeric",
+              month: "short",
+              day: "2-digit",
+            })}
           </Typography>
           <Divider orientation="vertical" flexItem />
           <Typography variant="body2" color="text.secondary">

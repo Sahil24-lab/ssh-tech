@@ -10,7 +10,7 @@ import {
   ListItemButton,
   ListItemText,
 } from "@mui/material";
-import { Document, BLOCKS } from "@contentful/rich-text-types";
+import { Document, BLOCKS, Text } from "@contentful/rich-text-types";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 
 interface TOCHeading {
@@ -45,7 +45,7 @@ export default function TableOfContents({
 
       if (isH2 || (includeSubheadings && isH3)) {
         const text = node.content
-          .map((c: any) => c.value || "")
+          .map((c) => (c.nodeType === "text" ? (c as Text).value : ""))
           .join("")
           .trim();
 

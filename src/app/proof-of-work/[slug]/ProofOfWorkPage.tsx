@@ -2,7 +2,6 @@
 
 "use client";
 
-import { useEffect, useState } from "react";
 import {
   ProofOfWorkEntry,
   ProofOfWorkFields,
@@ -15,11 +14,9 @@ import {
   Card,
   CardContent,
   Chip,
-  Link,
   Avatar,
   Stack,
 } from "@mui/material";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
 import Layout from "@/components/layout/Layout";
 import CenteredBackButton from "@/components/button/back-button/BackButton";
@@ -35,16 +32,6 @@ export default function ProofOfWorkPage({
 }: {
   project: ProofOfWorkEntry;
 }) {
-  const [isScrolled, setIsScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 100);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
   if (!project) {
     return (
       <Box className="flex items-center justify-center h-screen">

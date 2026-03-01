@@ -8,7 +8,6 @@ import {
   useTheme,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import GlassCardDark from "@/components/card/glass-card-dark/GlassCardDark";
 
 const faqs = [
   {

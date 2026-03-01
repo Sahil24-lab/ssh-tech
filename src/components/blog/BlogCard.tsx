@@ -1,7 +1,21 @@
 "use client";
 
 import Link from "next/link";
-import { BlogPostEntry } from "@/app/types/contentful";
+type BlogPostForCard = {
+  fields?: {
+    title?: string;
+    slug?: string;
+    shortDescription?: string;
+    publishedDate?: string;
+    tags?: string[];
+    featuredImage?: {
+      fields?: {
+        file?: { url?: string };
+        title?: string;
+      };
+    };
+  };
+};
 import {
   Box,
   Typography,
@@ -9,15 +23,14 @@ import {
   CardMedia,
   CardContent,
   Chip,
-  Stack,
 } from "@mui/material";
 import GlassCardDark from "@/components/card/glass-card-dark/GlassCardDark";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 
-export default function BlogCard({ post }: { post: BlogPostEntry }) {
+export default function BlogCard({ post }: { post: BlogPostForCard }) {
   const { title, slug, shortDescription, featuredImage, publishedDate, tags } =
-    post.fields;
+    post.fields ?? {};
 
   let imageUrl = "/placeholder.jpg";
   let imageAlt = "Blog image";
@@ -79,7 +92,7 @@ export default function BlogCard({ post }: { post: BlogPostEntry }) {
         },
       }}
     >
-      <Link href={`/blog/${slug}`} passHref legacyBehavior>
+      <Link href={`/blog/${slug ?? ""}`} passHref legacyBehavior>
         <CardActionArea
           sx={{ display: "flex", flexDirection: "column", height: "100%" }}
         >

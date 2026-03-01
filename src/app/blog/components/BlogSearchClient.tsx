@@ -10,18 +10,27 @@ import {
   Select,
   MenuItem,
   InputAdornment,
-  Stack,
   Chip,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import BlogCard from "@/components/blog/BlogCard";
 import Layout from "@/components/layout/Layout";
 import ConstrainedContainer from "@/components/layout/container/constrained-container";
+type BlogPostForSearch = {
+  sys: { id: string };
+  fields?: {
+    title?: string;
+    shortDescription?: string;
+    publishedDate?: string;
+    tags?: string[];
+    readTime?: number;
+  };
+};
 
 export default function BlogSearchClient({
   initialPosts,
 }: {
-  initialPosts: any[];
+  initialPosts: BlogPostForSearch[];
 }) {
   const [searchTerm, setSearchTerm] = useState("");
   const [sortOrder, setSortOrder] = useState<"dateAsc" | "dateDesc">(
@@ -34,7 +43,7 @@ export default function BlogSearchClient({
   const allTags = useMemo(() => {
     const tagSet = new Set<string>();
     initialPosts.forEach((post) => {
-      if (Array.isArray(post.fields.tags)) {
+      if (Array.isArray(post.fields?.tags)) {
         post.fields.tags.forEach((tag: string) => tagSet.add(tag));
       }
     });
@@ -49,8 +58,14 @@ export default function BlogSearchClient({
     if (searchTerm.trim()) {
       const lowerSearch = searchTerm.toLowerCase();
       posts = posts.filter((post) => {
-        const title = post.fields.title?.toLowerCase() || "";
-        const desc = post.fields.shortDescription?.toLowerCase() || "";
+        const title =
+          typeof post.fields?.title === "string"
+            ? post.fields.title.toLowerCase()
+            : "";
+        const desc =
+          typeof post.fields?.shortDescription === "string"
+            ? post.fields.shortDescription.toLowerCase()
+            : "";
         return title.includes(lowerSearch) || desc.includes(lowerSearch);
       });
     }
@@ -58,7 +73,7 @@ export default function BlogSearchClient({
     // Read Time Filter
     if (readTimeFilter !== "All") {
       posts = posts.filter((post) => {
-        const time = post.fields.readTime || 0;
+        const time = post.fields?.readTime || 0;
         if (readTimeFilter === "short") return time <= 5;
         if (readTimeFilter === "medium") return time > 5 && time <= 10;
         return time > 10;
@@ -68,7 +83,7 @@ export default function BlogSearchClient({
     // Tag Filters
     if (selectedTags.length > 0) {
       posts = posts.filter((post) => {
-        const postTags = Array.isArray(post.fields.tags)
+        const postTags = Array.isArray(post.fields?.tags)
           ? post.fields.tags
           : [];
         return selectedTags.every((tag) => postTags.includes(tag));
@@ -77,8 +92,8 @@ export default function BlogSearchClient({
 
     // Sort
     posts.sort((a, b) => {
-      const dateA = new Date(a.fields.publishedDate || 0).getTime();
-      const dateB = new Date(b.fields.publishedDate || 0).getTime();
+      const dateA = new Date(a.fields?.publishedDate || 0).getTime();
+      const dateB = new Date(b.fields?.publishedDate || 0).getTime();
       return sortOrder === "dateAsc" ? dateA - dateB : dateB - dateA;
     });
 

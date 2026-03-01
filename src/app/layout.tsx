@@ -36,6 +36,9 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
+      <head>
+        <meta name="emotion-insertion-point" content="" />
+      </head>
       <body
         className={`${montserrat.variable} ${poppins.variable} antialiased`}
       >

@@ -7,24 +7,10 @@ import {
   Box,
   Chip,
   Avatar,
-  useTheme,
 } from "@mui/material";
 import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
 import GlassCard from "@/components/card/glass-card/GlassCard";
 import { useRouter } from "next/navigation";
-
-type Project = {
-  title: string;
-  subtitle: string;
-  description: string;
-  highlights: string[];
-  logo?: string;
-  caseStudyHref?: string;
-  secondaryLink?: {
-    label: string;
-    href: string;
-  };
-};
 
 const projects = [
   {
@@ -60,7 +46,6 @@ const slugify = (title: string) =>
     .replace(/[^a-z0-9]/g, "");
 
 const ProofOfWork = () => {
-  const theme = useTheme();
   const router = useRouter();
 
   return (

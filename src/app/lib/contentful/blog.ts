@@ -1,6 +1,13 @@
 import { createClient } from "contentful";
 import { BlogPostSkeleton, BlogPostEntry } from "@/app/types/contentful";
 
+type EntriesQuery = NonNullable<
+  Parameters<typeof client.getEntries<BlogPostSkeleton>>[0]
+> & {
+  order?: string[];
+  "fields.slug"?: string;
+};
+
 
 // Create the Contentful client
 const client = createClient({
@@ -9,13 +16,13 @@ const client = createClient({
 });
 
 export async function getAllBlogPosts(): Promise<BlogPostEntry[]> {
-  const res = await client.getEntries<BlogPostSkeleton>({
+  const query: EntriesQuery = {
     content_type: "pageBlogPost",
-    // Cast order as any to bypass TS restrictions on allowed order keys.
-    order: ["-fields.publishedDate"] as any,
+    order: ["-fields.publishedDate"],
     // Specify the locale so that fields are returned as strings.
     locale: "en-US",
-  });
+  };
+  const res = await client.getEntries<BlogPostSkeleton>(query);
 
   return res.items;
 }
@@ -23,8 +30,7 @@ export async function getAllBlogPosts(): Promise<BlogPostEntry[]> {
 export async function getBlogPostBySlug(
   slug: string
 ): Promise<BlogPostEntry | undefined> {
-  // Using a query cast as any allows custom keys like "fields.slug"
-  const query: any = {
+  const query: EntriesQuery = {
     content_type: "pageBlogPost",
     limit: 1,
     "fields.slug": slug,

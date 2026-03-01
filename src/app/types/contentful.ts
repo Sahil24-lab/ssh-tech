@@ -31,7 +31,7 @@ export interface RichTextNode {
   nodeType: string;
   content: RichTextNode[] | string;
   value?: string;
-  data?: any;
+  data?: Record<string, unknown>;
 }
 
 export interface RichTextDocument {

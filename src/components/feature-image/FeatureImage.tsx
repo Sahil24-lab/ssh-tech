@@ -48,10 +48,16 @@ export default function FeatureImage({
 
   const touchStartX = React.useRef<number | null>(null);
   const isMobile = useMediaQuery("(max-width:768px)");
-  const isPortrait =
-    typeof window !== "undefined"
-      ? window.innerHeight > window.innerWidth
-      : true;
+  const [isPortrait, setIsPortrait] = React.useState(true);
+
+  React.useEffect(() => {
+    const updateOrientation = () => {
+      setIsPortrait(window.innerHeight > window.innerWidth);
+    };
+    updateOrientation();
+    window.addEventListener("resize", updateOrientation);
+    return () => window.removeEventListener("resize", updateOrientation);
+  }, []);
 
   const currentSrc = images[currentImageIndex] || src;
 
@@ -66,11 +72,15 @@ export default function FeatureImage({
     setShowInfo(false);
   };
 
-  const handleNext = () =>
-    setCurrentImageIndex((prev) => (prev + 1) % images.length);
+  const handleNext = React.useCallback(
+    () => setCurrentImageIndex((prev) => (prev + 1) % images.length),
+    [images.length]
+  );
 
-  const handlePrev = () =>
-    setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length);
+  const handlePrev = React.useCallback(
+    () => setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length),
+    [images.length]
+  );
 
   const onTouchStart = (e: React.TouchEvent) => {
     touchStartX.current = e.touches[0].clientX;
@@ -104,7 +114,7 @@ export default function FeatureImage({
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [isModalOpen]);
+  }, [handleNext, handlePrev, isModalOpen]);
 
   return (
     <>

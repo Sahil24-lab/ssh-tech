@@ -8,7 +8,6 @@ import Image from "next/image";
 import Link from "next/link";
 import {
   Typography,
-  Card,
   CardContent,
   CardMedia,
   Grid,
@@ -19,7 +18,6 @@ import {
   Stack,
 } from "@mui/material";
 import Layout from "@/components/layout/Layout";
-import ConstrainedContainer from "@/components/layout/container/constrained-container";
 import FullWidthContainer from "@/components/layout/container/full-width-container";
 import GlassCardDark from "@/components/card/glass-card-dark/GlassCardDark";
 import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
