@@ -1,29 +1,32 @@
 "use client";
 
-import { Typography, Grid, Button, Box, useTheme } from "@mui/material";
+import { Typography, Grid, Button, Box, Chip, useTheme } from "@mui/material";
 import GlassCard from "@/components/card/glass-card/GlassCard";
 
 const projects = [
   {
-    category: "Operations",
-    title: "Automated Intake & Routing",
+    category: "Financial Services",
+    title: "Talk to a Broker",
     description:
-      "An operations team was spending 4+ hours daily manually sorting and routing incoming requests across departments. We built an AI pipeline that reads, classifies, and distributes each request to the right team in real time. Edge cases escalate to a human reviewer.",
-    highlights: ["4hrs Saved daily", "95% Routing accuracy"],
+      "Built an AI-assisted lending workflow that extracts lender policy, evaluates borrower scenarios, and produces structured recommendations through a review-ready pipeline. Designed for speed, consistency, and operational scale.",
+    highlights: [
+      "Faster policy assessment",
+      "More consistent recommendations",
+    ],
   },
   {
-    category: "Support",
-    title: "Enterprise Knowledge Assistant",
+    category: "Member Platform",
+    title: "TEN",
     description:
-      "Support and compliance staff were spending hours searching across Notion, SharePoint, and legacy documentation to answer internal queries. We deployed an AI assistant that searches the full knowledge base and returns verified answers in seconds.",
-    highlights: ["65% Faster resolution", "40% Fewer escalations"],
+      "Structured TEN's legal content and member delivery workflows across restricted content, forms, product setup, and publishing operations to make launches more reliable and easier to manage.",
+    highlights: ["Improved content operations", "Cleaner member delivery flow"],
   },
   {
-    category: "Executive Reporting",
-    title: "Automated Weekly Reports",
+    category: "Gaming Platform",
+    title: "Playlobby",
     description:
-      "Leadership required weekly operational reports aggregated from 5 different platforms. A senior analyst spent a full day compiling them. We built an AI agent that gathers the data, writes the report, validates its own output, and delivers it by Monday morning.",
-    highlights: ["10hrs Saved weekly", "98% Quality pass rate"],
+      "Led technical delivery for a broader platform rebuild, supporting new game launches, partner integrations, and commercial optimisation that drove significant growth and paid conversion.",
+    highlights: ["400% user growth", "60% paid conversions"],
   },
 ];
 
@@ -129,37 +132,24 @@ const AIProofOfWork = () => {
                 {project.description}
               </Typography>
 
-              {/* Metrics */}
-              <Box sx={{ display: "flex", gap: 3, flexWrap: "wrap" }}>
-                {project.highlights.map((highlight, i) => {
-                  const [value, ...labelParts] = highlight.split(" ");
-                  const label = labelParts.join(" ");
-                  return (
-                    <Box key={i}>
-                      <Typography
-                        sx={{
-                          fontFamily: "'JetBrains Mono', monospace",
-                          fontSize: "1.1rem",
-                          fontWeight: 700,
-                          color: "primary.main",
-                          lineHeight: 1,
-                        }}
-                      >
-                        {value}
-                      </Typography>
-                      <Typography
-                        sx={{
-                          fontFamily: "'JetBrains Mono', monospace",
-                          fontSize: "0.65rem",
-                          color: "text.secondary",
-                          letterSpacing: "0.02em",
-                        }}
-                      >
-                        {label}
-                      </Typography>
-                    </Box>
-                  );
-                })}
+              {/* Highlights */}
+              <Box sx={{ display: "flex", gap: 1, flexWrap: "wrap" }}>
+                {project.highlights.map((highlight) => (
+                  <Chip
+                    key={highlight}
+                    label={highlight}
+                    color="primary"
+                    variant="outlined"
+                    sx={{
+                      fontWeight: 600,
+                      borderColor: "primary.main",
+                      color: "primary.main",
+                      "& .MuiChip-label": {
+                        px: 1.5,
+                      },
+                    }}
+                  />
+                ))}
               </Box>
             </GlassCard>
           </Grid>
