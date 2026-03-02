@@ -2,7 +2,7 @@
 
 **Effective date:** 2 March 2026
 
-These Terms of Use ("Terms") govern access to and use of the website located at www.ssh-tech.xyz ("Website").
+These Terms of Use ("Terms") govern access to and use of the websites, subdomains, and related online services operated by Sahil Harriram Tech Pty Ltd under the SSH-Tech brand that link to these Terms, including `www.ssh-tech.xyz`, `ai.ssh-tech.xyz`, `web3.ssh-tech.xyz`, `embedded.ssh-tech.xyz`, and related SSH-Tech pages, forms, and service interfaces (together, the "Website").
 
 The Website is operated by Sahil Harriram Tech Pty Ltd ("SSH-Tech", "we", "us", "our"), a company based in New South Wales, Australia.
 
@@ -10,7 +10,7 @@ By accessing or using the Website, you agree to be bound by these Terms. If you 
 
 ## 1. Purpose of the Website
 
-The Website provides information about SSH-Tech, including its capabilities, projects, services, technical content, insights, and contact channels.
+The Website provides information about SSH-Tech, including its capabilities, projects, services, technical content, insights, contact channels, and, where applicable, access points to service-specific tools, workflows, or interactive features.
 
 Unless expressly stated otherwise, content on this Website is provided for general informational purposes only and does not constitute professional, engineering, legal, financial, security, or other regulated advice.
 
@@ -45,7 +45,9 @@ We do not control and are not responsible for third-party services, content, sec
 
 The Website may allow users to contact us, submit enquiries, request proposals, subscribe to updates, or otherwise express interest in our services.
 
-Any future services, software, subscriptions, digital products, accounts, client portals, community access, or user-submitted content features may be subject to additional terms, policies, or agreements. If there is any inconsistency between these Terms and a specific signed agreement or service-specific terms, the signed agreement or service-specific terms will prevail to the extent of the inconsistency.
+Certain SSH-Tech websites, subdomains, or services may now or in the future include software features, subscriptions, digital products, accounts, client portals, community access, AI-enabled tools, or user-submitted content functionality.
+
+Those features may be subject to additional terms, policies, notices, or agreements. If there is any inconsistency between these Terms and any specific signed agreement or service-specific terms, the signed agreement or service-specific terms will prevail to the extent of the inconsistency.
 
 ## 6. No Reliance
 
@@ -71,7 +73,7 @@ Where liability cannot be excluded but can be limited, our liability is limited 
 
 ## 9. Privacy
 
-Your use of the Website is also subject to our Privacy Policy, which explains how we collect, use, store, and disclose personal information, including through analytics, enquiry forms, cookies, newsletters, and related technologies.
+Your use of the Website is also subject to our Privacy Policy, which explains how we collect, hold, use, and disclose personal information across SSH-Tech websites and related services, including through analytics, enquiry forms, cookies, newsletters, interactive features, and related technologies.
 
 ## 10. Security
 
@@ -94,6 +96,6 @@ You submit to the non-exclusive jurisdiction of the courts of New South Wales an
 ## 13. Contact
 
 **Sahil Harriram Tech Pty Ltd**  
-Website: www.ssh-tech.xyz
+Websites: `www.ssh-tech.xyz`, `ai.ssh-tech.xyz`, `web3.ssh-tech.xyz`, `embedded.ssh-tech.xyz`
 
-For enquiries regarding these Terms, please contact us via the contact details published on the Website.
+For enquiries regarding these Terms, please contact us through the relevant contact page or contact form on the SSH-Tech website or service you are using.

@@ -6,14 +6,7 @@ import Layout from "@/components/layout/Layout";
 import ConstrainedContainer from "@/components/layout/container/constrained-container";
 
 function formatInline(text: string) {
-  return text
-    .replace(/`([^`]+)`/g, "<code>$1</code>")
-    .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
-}
-
-function parseTableRow(line: string) {
-  const trimmed = line.trim().replace(/^\|/, "").replace(/\|$/, "");
-  return trimmed.split("|").map((cell) => formatInline(cell.trim()));
+  return text.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
 }
 
 function markdownToHtml(markdown: string) {
@@ -39,42 +32,11 @@ function markdownToHtml(markdown: string) {
     }
   };
 
-  for (let i = 0; i < lines.length; i += 1) {
-    const rawLine = lines[i];
+  for (const rawLine of lines) {
     const line = rawLine.trimEnd();
     if (!line.trim()) {
       flushParagraph();
       flushList();
-      continue;
-    }
-
-    const nextLine = lines[i + 1]?.trim() ?? "";
-    const isTableHeader = line.trim().startsWith("|") && /^\|?\s*:-?-+/.test(nextLine);
-    if (isTableHeader) {
-      flushParagraph();
-      flushList();
-
-      const headerCells = parseTableRow(line);
-      i += 1; // skip separator line
-      const bodyRows: string[] = [];
-
-      for (let j = i + 1; j < lines.length; j += 1) {
-        const rowLine = lines[j].trim();
-        if (!rowLine.startsWith("|")) {
-          i = j - 1;
-          break;
-        }
-        const cells = parseTableRow(rowLine)
-          .map((cell) => `<td>${cell}</td>`)
-          .join("");
-        bodyRows.push(`<tr>${cells}</tr>`);
-        i = j;
-      }
-
-      const headerHtml = headerCells.map((cell) => `<th>${cell}</th>`).join("");
-      blocks.push(
-        `<table><thead><tr>${headerHtml}</tr></thead><tbody>${bodyRows.join("")}</tbody></table>`,
-      );
       continue;
     }
 
@@ -114,8 +76,8 @@ function markdownToHtml(markdown: string) {
   return blocks.join("\n");
 }
 
-export default async function CookiesPage() {
-  const filePath = path.join(process.cwd(), "docs/legal/cookies.md");
+export default async function TermsPage() {
+  const filePath = path.join(process.cwd(), "docs/legal/TermsOfService.md");
   const raw = await fs.readFile(filePath, "utf8");
   const html = markdownToHtml(raw);
 

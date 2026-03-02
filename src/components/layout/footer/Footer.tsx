@@ -107,6 +107,11 @@ export default function Footer({ mt = 4 }: FooterProps) {
             Cookies
           </Link>
         </Typography>
+        <Typography variant="body2" sx={{ fontSize: "0.9rem" }}>
+          <Link href="/terms" underline="hover">
+            Terms of Service
+          </Link>
+        </Typography>
       </Box>
     </Box>
   );
