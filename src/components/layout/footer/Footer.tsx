@@ -86,10 +86,25 @@ export default function Footer({ mt = 4 }: FooterProps) {
       </Box>
 
       {/* Right */}
-      <Box sx={{ flex: 1, textAlign: { xs: "center", sm: "right" } }}>
-        <Typography>
+      <Box
+        sx={{
+          flex: 1,
+          textAlign: { xs: "center", md: "right" },
+          display: "flex",
+          justifyContent: { xs: "center", md: "flex-end" },
+          flexDirection: { xs: "column", sm: "row" },
+          flexWrap: "wrap",
+          gap: { xs: 0.5, sm: 2 },
+        }}
+      >
+        <Typography variant="body2" sx={{ fontSize: "0.9rem" }}>
           <Link href="/privacy-policy" underline="hover">
             Privacy Policy
+          </Link>
+        </Typography>
+        <Typography variant="body2" sx={{ fontSize: "0.9rem" }}>
+          <Link href="/cookies" underline="hover">
+            Cookies
           </Link>
         </Typography>
       </Box>

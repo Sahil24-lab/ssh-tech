@@ -5,7 +5,77 @@ import { Box } from "@mui/material";
 import Layout from "@/components/layout/Layout";
 import ConstrainedContainer from "@/components/layout/container/constrained-container";
 
-function cleanPrivacyHtml(raw: string) {
+function mergeAdjacentTables(html: string) {
+  const tableRegex = /<table[^>]*>[\s\S]*?<\/table>/gi;
+  const matches = [...html.matchAll(tableRegex)];
+  if (matches.length < 2) return html;
+
+  let output = "";
+  let lastIndex = 0;
+  let i = 0;
+
+  while (i < matches.length) {
+    const current = matches[i];
+    const currentIndex = current.index ?? 0;
+    output += html.slice(lastIndex, currentIndex);
+
+    let mergedTable = current[0];
+    const hasThead = /<thead[\s>]/i.test(mergedTable);
+    if (hasThead) {
+      let j = i + 1;
+      let tbodyRows = "";
+      const firstTbody = mergedTable.match(/<tbody[^>]*>([\s\S]*?)<\/tbody>/i);
+      if (firstTbody) {
+        tbodyRows += firstTbody[1];
+      }
+
+      while (j < matches.length) {
+        const between = html.slice(
+          (matches[j - 1].index ?? 0) + matches[j - 1][0].length,
+          matches[j].index ?? 0
+        );
+        const ignorable = /^[\s\u00a0]*(<div[^>]*>\s*(<br\s*\/?>)?\s*<\/div>\s*)*$/i.test(
+          between
+        );
+        if (!ignorable) break;
+
+        const nextTable = matches[j][0];
+        const nextHasThead = /<thead[\s>]/i.test(nextTable);
+        if (nextHasThead) break;
+
+        const nextTbody = nextTable.match(/<tbody[^>]*>([\s\S]*?)<\/tbody>/i);
+        if (nextTbody) {
+          tbodyRows += nextTbody[1];
+          j += 1;
+          continue;
+        }
+        break;
+      }
+
+      if (tbodyRows) {
+        mergedTable = mergedTable.replace(
+          /<tbody[^>]*>[\s\S]*?<\/tbody>/i,
+          `<tbody>${tbodyRows}</tbody>`
+        );
+        i = j;
+      } else {
+        i += 1;
+      }
+    } else {
+      i += 1;
+    }
+
+    output += mergedTable;
+    lastIndex =
+      (matches[i - 1]?.index ?? currentIndex) +
+      (matches[i - 1]?.[0]?.length ?? mergedTable.length);
+  }
+
+  output += html.slice(lastIndex);
+  return output;
+}
+
+function cleanLegalHtml(raw: string) {
   const cleaned = raw
     .replace(/<style[^>]*>[\s\S]*?<\/style>/gi, "")
     .replace(/\sstyle="[^"]*"/gi, "")
@@ -45,81 +115,10 @@ function fixInvalidHeadingNesting(html: string) {
     .replace(/<p>\s*(<(?:div|ul|ol|table)[^>]*>[\s\S]*?<\/(?:div|ul|ol|table)>)\s*<\/p>/gi, "$1");
 }
 
-function mergeAdjacentTables(html: string) {
-  const tableRegex = /<table[^>]*>[\s\S]*?<\/table>/gi;
-  const matches = [...html.matchAll(tableRegex)];
-  if (matches.length < 2) return html;
-
-  let output = "";
-  let lastIndex = 0;
-  let i = 0;
-
-  while (i < matches.length) {
-    const current = matches[i];
-    const currentIndex = current.index ?? 0;
-    output += html.slice(lastIndex, currentIndex);
-
-    let mergedTable = current[0];
-    const hasThead = /<thead[\s>]/i.test(mergedTable);
-    if (hasThead) {
-      let j = i + 1;
-      let tbodyRows = "";
-      const firstTbody = mergedTable.match(/<tbody[^>]*>([\s\S]*?)<\/tbody>/i);
-      if (firstTbody) {
-        tbodyRows += firstTbody[1];
-      }
-
-      while (j < matches.length) {
-        const between = html.slice(
-          (matches[j - 1].index ?? 0) + matches[j - 1][0].length,
-          matches[j].index ?? 0,
-        );
-        const ignorable =
-          /^[\s\u00a0]*(<div[^>]*>\s*(<br\s*\/?>)?\s*<\/div>\s*)*$/i.test(
-            between,
-          );
-        if (!ignorable) break;
-
-        const nextTable = matches[j][0];
-        const nextHasThead = /<thead[\s>]/i.test(nextTable);
-        if (nextHasThead) break;
-
-        const nextTbody = nextTable.match(/<tbody[^>]*>([\s\S]*?)<\/tbody>/i);
-        if (nextTbody) {
-          tbodyRows += nextTbody[1];
-          j += 1;
-          continue;
-        }
-        break;
-      }
-
-      if (tbodyRows) {
-        mergedTable = mergedTable.replace(
-          /<tbody[^>]*>[\s\S]*?<\/tbody>/i,
-          `<tbody>${tbodyRows}</tbody>`,
-        );
-        i = j;
-      } else {
-        i += 1;
-      }
-    } else {
-      i += 1;
-    }
-
-    output += mergedTable;
-    lastIndex =
-      (matches[i - 1]?.index ?? currentIndex) +
-      (matches[i - 1]?.[0]?.length ?? mergedTable.length);
-  }
-
-  output += html.slice(lastIndex);
-  return output;
-}
-
-export default async function PrivacyPolicyPage() {
-  const filePath = path.join(process.cwd(), "docs/legal/privacyPolicy.html");
+export default async function CookiesPage() {
+  const filePath = path.join(process.cwd(), "docs/legal/cookies.html");
   const rawHtml = await fs.readFile(filePath, "utf8");
-  const cleanedHtml = cleanPrivacyHtml(rawHtml);
+  const cleanedHtml = cleanLegalHtml(rawHtml);
 
   return (
     <Layout flushFooter>
@@ -133,8 +132,8 @@ export default async function PrivacyPolicyPage() {
             border: "1px solid rgba(7, 223, 193, 0.2)",
             backgroundColor: "rgba(9, 31, 44, 0.75)",
             boxShadow: "0 24px 60px rgba(0, 0, 0, 0.25)",
-            px: { xs: 3, md: 6, lg: 12 },
-            py: { xs: 4, md: 6, lg: 12 },
+            px: { xs: 3, md: 6 },
+            py: { xs: 4, md: 6 },
             "& h1": {
               fontSize: { xs: "2rem", md: "2.75rem" },
               fontWeight: 700,
