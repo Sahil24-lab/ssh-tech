@@ -14,10 +14,19 @@ const baseUrlBySite: Record<string, string> = {
   embedded: "https://embedded.ssh-tech.xyz",
 };
 
-async function getBaseUrlFromHeaders() {
+function escapeXml(str: string): string {
+  return str
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&apos;");
+}
+
+async function getBaseUrlFromHeaders(): Promise<string> {
   const hdrs = await headers();
-  const host =
-    hdrs.get("x-forwarded-host") ?? hdrs.get("host") ?? "";
+  const host = hdrs.get("x-forwarded-host") ?? hdrs.get("host") ?? "";
+
   if (!host) {
     const site = process.env.NEXT_PUBLIC_SITE ?? "web3";
     return baseUrlBySite[site] ?? baseUrlBySite.web3;
@@ -27,31 +36,35 @@ async function getBaseUrlFromHeaders() {
   return `${proto}://${host}`;
 }
 
-async function getDynamicPaths() {
+async function getDynamicPaths(): Promise<{ path: string; lastmod: string }[]> {
   const paths: { path: string; lastmod: string }[] = [];
 
   try {
     const proofSlugs = await fetchAllSlugsWithUpdatedAt();
     for (const entry of proofSlugs) {
-      paths.push({
-        path: `/proof-of-work/${entry.slug}`,
-        lastmod: entry.updatedAt,
-      });
+      if (entry.slug) {
+        paths.push({
+          path: `/proof-of-work/${entry.slug}`,
+          lastmod: entry.updatedAt,
+        });
+      }
     }
   } catch (err) {
-    console.error("Failed to load Proof of Work slugs for sitemap.", err);
+    console.error("[sitemap] Failed to load Proof of Work slugs:", err);
   }
 
   try {
     const posts = await getAllBlogPostsWithUpdatedAt();
     for (const entry of posts) {
-      paths.push({
-        path: `/blog/${entry.slug}`,
-        lastmod: entry.updatedAt,
-      });
+      if (entry.slug) {
+        paths.push({
+          path: `/blog/${entry.slug}`,
+          lastmod: entry.updatedAt,
+        });
+      }
     }
   } catch (err) {
-    console.error("Failed to load blog slugs for sitemap.", err);
+    console.error("[sitemap] Failed to load blog slugs:", err);
   }
 
   return paths;
@@ -59,33 +72,40 @@ async function getDynamicPaths() {
 
 export async function GET() {
   const baseUrl = await getBaseUrlFromHeaders();
+
   const staticPages = [
-    { path: "/", lastmod: "2026-03-01" },
-    { path: "/proof-of-work", lastmod: "2026-03-01" },
-    { path: "/blog", lastmod: "2026-03-01" },
-    { path: "/tools-and-resources", lastmod: "2026-03-01" },
+    { path: "/", lastmod: new Date().toISOString().split("T")[0] },
+    { path: "/proof-of-work", lastmod: new Date().toISOString().split("T")[0] },
+    { path: "/blog", lastmod: new Date().toISOString().split("T")[0] },
+    {
+      path: "/tools-and-resources",
+      lastmod: new Date().toISOString().split("T")[0],
+    },
   ];
 
   const dynamicPaths = await getDynamicPaths();
-  const allPaths = [
-    ...staticPages,
-    ...dynamicPaths.filter((entry) => entry.path),
-  ];
+  const allPaths = [...staticPages, ...dynamicPaths];
+
+  const urls = allPaths
+    .map(
+      (entry) =>
+        `  <url>\n` +
+        `    <loc>${escapeXml(baseUrl + entry.path)}</loc>\n` +
+        `    <lastmod>${entry.lastmod}</lastmod>\n` +
+        `  </url>`,
+    )
+    .join("\n");
 
   const body =
     `<?xml version="1.0" encoding="UTF-8"?>\n` +
-    `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">` +
-    allPaths
-      .map(
-        (entry) =>
-          `<url><loc>${baseUrl}${entry.path}</loc><lastmod>${entry.lastmod}</lastmod></url>`
-      )
-      .join("") +
-    `</urlset>`;
+    `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
+    urls +
+    `\n</urlset>`;
 
   return new NextResponse(body, {
     headers: {
       "Content-Type": "application/xml; charset=utf-8",
+      "Cache-Control": "public, s-maxage=3600, stale-while-revalidate=600",
     },
   });
 }

@@ -18,17 +18,17 @@ import RocketLaunchIcon from "@mui/icons-material/RocketLaunch";
 
 const capabilities = [
   {
-    icon: <SearchIcon sx={{ fontSize: 28 }} />,
+    icon: <SearchIcon />,
     label: "Assess",
     detail: "Fixed-fee diagnostic to find your highest-ROI workflow.",
   },
   {
-    icon: <BuildCircleOutlinedIcon sx={{ fontSize: 28 }} />,
+    icon: <BuildCircleOutlinedIcon />,
     label: "Build",
     detail: "Production build with clear milestones and sign-off criteria.",
   },
   {
-    icon: <RocketLaunchIcon sx={{ fontSize: 28 }} />,
+    icon: <RocketLaunchIcon />,
     label: "Operate",
     detail: "Ongoing monitoring and optimisation to keep gains compounding.",
   },
@@ -38,10 +38,9 @@ const AIHero = () => {
   const [open, setOpen] = useState(false);
   const theme = useTheme();
   const isXLUp = useMediaQuery(theme.breakpoints.up("xl"));
-  const isLargeUp = useMediaQuery(theme.breakpoints.up("lg"));
-  const variantSubtitle = isXLUp ? "h4" : isLargeUp ? "h6" : "body1";
+  const isHeroDesktop = useMediaQuery("(min-width:1280px)");
+  const variantSubtitle = isXLUp ? "h5" : isHeroDesktop ? "h6" : "body1";
 
-  // Spotlight refs — direct DOM mutation so no re-render on every mousemove
   const heroRef = useRef<HTMLDivElement | null>(null);
   const spotlightRef = useRef<HTMLDivElement | null>(null);
 
@@ -77,18 +76,17 @@ const AIHero = () => {
       sx={{
         position: "relative",
         width: "100%",
-        // Pull up behind the fixed semi-transparent header
         mt: { xs: "-72px", md: "-74px", lg: "-72px" },
         minHeight: {
           xs: "auto",
           sm: "calc(60vh + 72px)",
           md: "calc(50vh + 74px)",
-          lg: "calc(80vh + 72px)",
-          xl: "calc(100vh + 72px)",
-          xxl: "calc(100vh + 72px)",
+          lg: "calc(70vh + 72px)",
+          xl: "calc(80vh + 72px)",
+          xxl: "calc(80vh + 72px)",
         },
+        maxHeight: { xl: "920px", xxl: "1000px" },
         overflow: "hidden",
-        // Blob-like base matching hero-background.png teal hue
         background: `
           radial-gradient(ellipse 78% 68% at 24% 56%,
             rgba(14, 58, 72, 0.90) 0%,
@@ -119,10 +117,9 @@ const AIHero = () => {
         `,
       }}
     >
-      {/* Animated lattice / particle network background */}
       <LatticeBg />
 
-      {/* Dither overlay — reduces gradient banding once canvas animates */}
+      {/* Dither overlay */}
       <Box
         sx={{
           position: "absolute",
@@ -141,7 +138,7 @@ const AIHero = () => {
         }}
       />
 
-      {/* Vignette — darkens corners and edges, keeps centre light */}
+      {/* Vignette */}
       <Box
         sx={{
           position: "absolute",
@@ -162,7 +159,7 @@ const AIHero = () => {
         }}
       />
 
-      {/* Subtle teal accent glow top-right — very faint so it doesn't overpower blobs */}
+      {/* Teal accent glow */}
       <Box
         sx={{
           position: "absolute",
@@ -177,7 +174,7 @@ const AIHero = () => {
         }}
       />
 
-      {/* Mouse-tracked spotlight — z-index 1, behind content at z-index 2 */}
+      {/* Mouse spotlight */}
       <Box
         ref={spotlightRef}
         sx={{
@@ -189,7 +186,7 @@ const AIHero = () => {
         }}
       />
 
-      {/* Fade-to-body gradient */}
+      {/* Fade-to-body */}
       <Box
         sx={{
           position: "absolute",
@@ -210,59 +207,89 @@ const AIHero = () => {
         }}
       />
 
-      {/* Content — z-index 2 so it sits above the spotlight layer */}
+      {/* ── Content ── */}
       <Box
         sx={{
           position: "relative",
           zIndex: 2,
-          px: { xs: 3, sm: 6, md: 12, lg: 20, xl: 24, xxl: 30 },
-          pt: { xs: "120px", sm: "184px", md: "234px", xl: "72px" },
-          pb: { xs: 6, sm: 8, md: 10, xl: 0, xxl: 0 },
+          // Generous padding on tablet+, tight on mobile
+          px: { xs: 2.5, sm: 4, md: 6, lg: 10, xl: 10, xxl: 12 },
+          // Cap the content width and centre it
+          maxWidth: { xs: "100%", lg: "1240px", xl: "1360px", xxl: "1440px" },
+          mx: "auto",
+          pt: {
+            xs: "108px",
+            sm: "128px",
+            md: "140px",
+            lg: "140px",
+            xl: "140px",
+            xxl: "160px",
+          },
+          pb: { xs: 5, sm: 6, md: 6, xl: 8, xxl: 10 },
           display: "flex",
-          alignItems: { xs: "flex-start", xl: "center" },
-          justifyContent: { xs: "start", xl: "center" },
+          alignItems: "center",
+          justifyContent: "center",
           flexDirection: "column",
           minHeight: "100%",
         }}
       >
         <Grid
           container
-          spacing={6}
-          direction={{ xs: "column", md: "row" }}
+          spacing={{ xs: 3, sm: 4, md: 4, lg: 4, xl: 4 }}
+          direction={isHeroDesktop ? "row" : "column"}
           alignItems="center"
           justifyContent="center"
         >
-          {/* Right — capability showcase card (GlassCard is semi-transparent so spotlight bleeds through) */}
-          <Grid item xs={12} md={6} order={{ xs: 1, md: 2 }}>
+          {/* Right — capability card */}
+          <Grid
+            item
+            xs={12}
+            lg={6}
+            order={{ xs: 2, lg: 2 }}
+            sx={{
+              px: 0,
+              display: "flex",
+              justifyContent: "center",
+            }}
+          >
             <Box
               sx={{
+                width: "100%",
                 maxWidth: {
-                  xs: 340,
-                  sm: 360,
-                  md: 500,
-                  lg: 580,
-                  xl: 680,
-                  xxl: 780,
+                  xs: 520,
+                  sm: 580,
+                  md: 640,
+                  lg: 700,
+                  xl: 760,
+                  xxl: 820,
                 },
-                mx: { xs: "auto", md: "unset" },
+                mx: "auto",
+                display: "flex",
+                justifyContent: "center",
               }}
             >
-              <GlassCard sx={{ p: { xs: 3, md: 4 } }}>
+              <GlassCard
+                sx={{
+                  width: "100%",
+                  p: { xs: 2.5, md: 3 },
+                }}
+              >
                 <Typography
                   variant="body2"
                   sx={{
                     color: "primary.main",
                     fontWeight: 700,
-                    mb: 3,
-                    fontSize: "0.85rem",
-                    letterSpacing: "0.04em",
+                    mb: 2,
+                    fontSize: "0.8rem",
+                    letterSpacing: "0.06em",
+                    textTransform: "uppercase",
                   }}
                 >
                   How we work
                 </Typography>
 
                 <Box
-                  sx={{ display: "flex", flexDirection: "column", gap: 2.5 }}
+                  sx={{ display: "flex", flexDirection: "column", gap: 1.5 }}
                 >
                   {capabilities.map((cap, i) => (
                     <Box
@@ -270,8 +297,8 @@ const AIHero = () => {
                       sx={{
                         display: "flex",
                         alignItems: "flex-start",
-                        gap: 2,
-                        p: 2,
+                        gap: 1.75,
+                        p: 1.5,
                         borderRadius: "10px",
                         backgroundColor: "rgba(255,255,255,0.04)",
                         border: "1px solid rgba(255,255,255,0.07)",
@@ -282,17 +309,34 @@ const AIHero = () => {
                       }}
                     >
                       <Box
-                        sx={{ color: "primary.main", mt: 0.25, flexShrink: 0 }}
+                        sx={{
+                          width: 32,
+                          minWidth: 32,
+                          height: 32,
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          color: "primary.main",
+                          flexShrink: 0,
+                          mt: 0.15,
+                          "& svg": {
+                            display: "block",
+                            fontSize: 28,
+                          },
+                        }}
                       >
                         {cap.icon}
                       </Box>
-                      <Box>
+
+                      <Box sx={{ minWidth: 0, pt: 0.1 }}>
                         <Typography
                           variant="body1"
                           sx={{
                             fontWeight: 700,
                             color: "text.primary",
-                            mb: 0.5,
+                            mb: 0.35,
+                            fontSize: "0.92rem",
+                            lineHeight: 1.15,
                           }}
                         >
                           {cap.label}
@@ -301,8 +345,8 @@ const AIHero = () => {
                           variant="body2"
                           sx={{
                             color: "text.secondary",
-                            fontSize: "0.84rem",
-                            whiteSpace: { xs: "normal", md: "nowrap" },
+                            fontSize: "0.82rem",
+                            lineHeight: 1.45,
                           }}
                         >
                           {cap.detail}
@@ -314,8 +358,8 @@ const AIHero = () => {
 
                 <Box
                   sx={{
-                    mt: 3,
-                    pt: 2.5,
+                    mt: 2,
+                    pt: 1.5,
                     borderTop: "1px solid rgba(255,255,255,0.08)",
                     display: "flex",
                     alignItems: "center",
@@ -324,16 +368,17 @@ const AIHero = () => {
                 >
                   <Box
                     sx={{
-                      width: 8,
-                      height: 8,
+                      width: 7,
+                      height: 7,
                       borderRadius: "50%",
                       backgroundColor: "primary.main",
                       boxShadow: `0 0 8px ${theme.palette.primary.main}`,
+                      flexShrink: 0,
                     }}
                   />
                   <Typography
                     variant="body2"
-                    sx={{ color: "text.secondary", fontSize: "0.8rem" }}
+                    sx={{ color: "text.secondary", fontSize: "0.78rem" }}
                   >
                     Assess. Build. Operate. Start with a discovery call.
                   </Typography>
@@ -343,7 +388,19 @@ const AIHero = () => {
           </Grid>
 
           {/* Left — headline + CTA */}
-          <Grid item xs={12} md={6} order={{ xs: 2, md: 1 }}>
+          <Grid
+            item
+            xs={12}
+            md={6}
+            order={{ xs: 1, md: 1 }}
+            sx={{
+              pl: { xs: 0, md: 1, lg: 2 },
+              pr: { xs: 0, md: 1, lg: 1 },
+              display: "flex",
+              flexDirection: "column",
+              alignItems: { xs: "center", xl: "flex-start" },
+            }}
+          >
             <Typography
               variant="body2"
               sx={{
@@ -351,18 +408,20 @@ const AIHero = () => {
                 fontSize: "0.78rem",
                 color: "primary.main",
                 letterSpacing: "0.08em",
-                mb: 2,
-                textAlign: { xs: "center", md: "left" },
+                mb: 1.5,
+                textAlign: { xs: "center", xl: "left" },
                 display: "flex",
                 alignItems: "center",
-                justifyContent: { xs: "center", md: "flex-start" },
-                gap: 1,
+                justifyContent: { xs: "center", xl: "flex-start" },
+                gap: 0,
                 "&::before": {
-                  content: '""',
+                  content: '"//"',
                   display: "inline-block",
-                  width: 24,
-                  height: 1,
-                  backgroundColor: "primary.main",
+                  marginLeft: 0,
+                  marginRight: "0.45rem",
+                  color: "#FFFFFF",
+                  opacity: 0.95,
+                  transform: "translateY(-0.02em)",
                 },
               }}
             >
@@ -375,33 +434,38 @@ const AIHero = () => {
               sx={{
                 fontWeight: "bold",
                 color: "primary.main",
-                textAlign: { xs: "center", md: "left" },
+                textAlign: { xs: "center", xl: "left" },
+                lineHeight: 1.15,
               }}
             >
-              Production AI for real operations.
+              Production AI for <br /> real operations.
             </Typography>
 
             <Typography
               variant={variantSubtitle}
               component="p"
               sx={{
-                color: "#ffffff",
-                mt: 2,
-                mb: { xs: 4, lg: 10, xl: 10, xxl: 12 },
-                textAlign: { xs: "center", md: "left" },
+                color: "rgba(255,255,255,0.85)",
+                mt: 1.5,
+                mb: { xs: 3, sm: 3, lg: 4, xl: 4, xxl: 5 },
+                textAlign: { xs: "center", xl: "left" },
+                lineHeight: 1.55,
+                fontWeight: 400,
               }}
             >
-              We integrate with your stack and automate high-impact workflows.
+              We integrate with your stack and <br />
+              automate high-impact workflows.
             </Typography>
 
             <Box
               sx={{
                 display: "flex",
-                flexDirection: { xs: "column", sm: "row" },
+                flexDirection: { xs: "column", lg: "row" },
                 gap: 2,
-                justifyContent: { xs: "center", md: "flex-start" },
-                maxWidth: { xs: 360, sm: "none" },
-                mx: { xs: "auto", sm: 0 },
+                justifyContent: { xs: "center", xl: "flex-start" },
+                alignItems: { xs: "stretch", lg: "center" },
+                maxWidth: { xs: 360, md: 420, lg: "none" },
+                mx: { xs: "auto", xl: 0 },
               }}
             >
               <Button
@@ -410,7 +474,7 @@ const AIHero = () => {
                 size="large"
                 sx={{
                   fontWeight: "700",
-                  width: { xs: "100%", sm: "100%", md: "auto" },
+                  width: { xs: "100%", lg: "auto" },
                 }}
                 onClick={() => setOpen(true)}
               >
@@ -421,7 +485,7 @@ const AIHero = () => {
                 color="primary"
                 size="large"
                 sx={{
-                  width: { xs: "100%", sm: "100%", md: "auto" },
+                  width: { xs: "100%", lg: "auto" },
                   fontWeight: 700,
                 }}
                 onClick={() => handleScroll("process")}
