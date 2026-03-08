@@ -72,10 +72,21 @@ export default function Header() {
     { label: "FAQ", sectionId: "faq" },
   ];
 
+  const aiNavItems = [
+    { label: "Services", sectionId: "services" },
+    { label: "Process", sectionId: "process" },
+    { label: "Products", href: "/products" },
+    { label: "Proof Of Work", href: "/proof-of-work" },
+    { label: "Pricing", sectionId: "pricing" },
+    { label: "FAQ", sectionId: "faq" },
+  ];
+
   const navItems =
     subdomain === "sahil"
       ? allNavItems.filter((item) => item.label === "Proof Of Work")
-      : allNavItems;
+      : subdomain === "ai"
+        ? aiNavItems
+        : allNavItems;
 
   return (
     <AppBar

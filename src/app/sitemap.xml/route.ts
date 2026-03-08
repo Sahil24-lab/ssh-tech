@@ -81,6 +81,11 @@ export async function GET() {
       path: "/tools-and-resources",
       lastmod: new Date().toISOString().split("T")[0],
     },
+    { path: "/products", lastmod: new Date().toISOString().split("T")[0] },
+    {
+      path: "/products/ssh-echo",
+      lastmod: new Date().toISOString().split("T")[0],
+    },
   ];
 
   const dynamicPaths = await getDynamicPaths();

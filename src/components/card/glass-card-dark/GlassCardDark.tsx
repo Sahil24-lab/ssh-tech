@@ -15,11 +15,11 @@ const GlassPane = styled(Paper, {
   shouldForwardProp: (prop) => prop !== "opacity",
 })<GlassCardProps>(
   ({ theme, opacity = 0.08 }: { theme: Theme; opacity?: number }) => ({
-    background: `rgba(255, 255, 255, ${opacity})`,
-    backdropFilter: "blur(15px)",
+    background: `rgba(8, 24, 36, ${0.9 + opacity})`,
+    backdropFilter: "blur(8px)",
     borderRadius: "16px",
-    border: `1px solid rgba(255, 255, 255, 0.15)`,
-    boxShadow: "0 8px 32px rgba(0, 0, 0, 0.2)",
+    border: `1px solid rgba(255, 255, 255, 0.08)`,
+    boxShadow: "0 12px 28px rgba(0, 0, 0, 0.28)",
     backgroundColor: theme.palette.background.paper,
   })
 );
