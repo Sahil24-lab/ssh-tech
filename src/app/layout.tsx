@@ -1,6 +1,6 @@
 // src/app/layout.tsx
 import React from "react";
-import { Montserrat, Poppins } from "next/font/google";
+import { Montserrat, Poppins, Play } from "next/font/google";
 import "./globals.css";
 import ThemeRegistry from "@/theme/ThemeRegistry";
 import { headers } from "next/headers";
@@ -19,6 +19,12 @@ const poppins = Poppins({
   variable: "--font-poppins",
   subsets: ["latin"],
   weight: ["400", "500", "600"],
+});
+
+const play = Play({
+  variable: "--font-play",
+  subsets: ["latin"],
+  weight: ["400", "700"],
 });
 
 const siteMetadataBySubdomain: Record<
@@ -164,7 +170,7 @@ export default async function RootLayout({
         />
       </head>
       <body
-        className={`${montserrat.variable} ${poppins.variable} antialiased`}
+        className={`${montserrat.variable} ${poppins.variable} ${play.variable} antialiased`}
       >
         <ThemeRegistry>
           <SubdomainProvider value={subdomain}>

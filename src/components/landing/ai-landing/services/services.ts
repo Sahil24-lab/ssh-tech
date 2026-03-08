@@ -3,7 +3,7 @@ export const services = [
     label: "01 — AUTOMATE",
     title: "Operational Automation",
     description:
-      "Automate intake, classification, document handling, and routing so your team spends time on decisions, not admin.",
+      "Automate intake, classification, document handling, and routing so your team focuses on decisions, not admin.",
     tags: [
       "Process Automation",
       "Document Parsing",
@@ -15,7 +15,7 @@ export const services = [
     label: "02 — SEARCH",
     title: "Enterprise Knowledge Systems",
     description:
-      "Turn internal docs, policies, CRM, and operations history into fast, reliable answers for every team.",
+      "Turn internal docs, policies, CRM, and ops history into fast, reliable answers for every team.",
     tags: [
       "Knowledge Base",
       "Intelligent Search",
@@ -29,7 +29,7 @@ export const services = [
     description:
       "Run multi-step workflows, unify cross-system data, and deliver leadership reporting with audit-ready controls.",
     tags: [
-      "Exec Reporting",
+      "Executive Reporting",
       "Cross-System Flows",
       "Decision Routing",
       "Audit & Controls",

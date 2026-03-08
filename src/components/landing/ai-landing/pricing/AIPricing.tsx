@@ -95,8 +95,8 @@ export default function AIPricing() {
   return (
     <Box
       sx={{
-        py: 8,
-        px: { xs: 2, sm: 4, md: 6, xl: 12 },
+        py: { xs: 9, sm: 10, md: 11 },
+        px: { xs: 4.5, sm: 5.5, md: 6, xl: 12 },
         animation: "fadeIn 0.8s ease-in-out",
         "@keyframes fadeIn": {
           from: { opacity: 0 },
@@ -125,7 +125,7 @@ export default function AIPricing() {
         gutterBottom
         align="center"
         sx={{
-          mb: 2,
+          mb: 2.5,
           fontWeight: "bold",
           letterSpacing: "-0.02em",
           color: "#FFFFFF",
@@ -138,7 +138,7 @@ export default function AIPricing() {
         variant="h5"
         align="center"
         gutterBottom
-        sx={{ mb: 1.5, color: "text.secondary" }}
+        sx={{ mb: 2, color: "text.secondary" }}
       >
         A simple engagement model for turning one clear operational problem into
         a production-ready AI system with ongoing support.
@@ -147,7 +147,7 @@ export default function AIPricing() {
       <Typography
         align="center"
         sx={{
-          mb: 1,
+          mb: 1.5,
           color: "primary.main",
           fontWeight: 700,
           fontSize: { xs: "0.98rem", md: "1.04rem" },
@@ -162,7 +162,7 @@ export default function AIPricing() {
         sx={{
           color: "text.secondary",
           fontSize: { xs: "0.92rem", md: "0.98rem" },
-          mb: 5,
+          mb: 6,
         }}
       >
         Every engagement starts with Assess. Build and Operate are quoted based
@@ -180,7 +180,7 @@ export default function AIPricing() {
       >
         <Grid
           container
-          spacing={4}
+          spacing={{ xs: 4.5, sm: 5.5, md: 7 }}
           alignItems="stretch"
           justifyContent="center"
         >
@@ -200,8 +200,8 @@ export default function AIPricing() {
             >
               <GlassCardDark
                 sx={{
-                  px: { xs: 3.5, md: 4.5 },
-                  py: { xs: 4, md: 5 },
+                  px: { xs: 4, md: 4.75 },
+                  py: { xs: 4.5, md: 5.25 },
                   minHeight: { xs: 560, md: 620, lg: 640 },
                   display: "flex",
                   flexDirection: "column",

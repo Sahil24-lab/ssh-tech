@@ -1,6 +1,6 @@
 "use client";
 
-import { Typography, Grid, Box, useTheme } from "@mui/material";
+import { Typography, Grid, Box, Container, useTheme } from "@mui/material";
 import { alpha } from "@mui/material/styles";
 import GlassCard from "@/components/card/glass-card/GlassCard";
 import { services } from "./services";
@@ -11,153 +11,208 @@ const AIServices = () => {
   return (
     <Box
       id="services"
+      component="section"
       sx={{
-        px: { xs: 2, sm: 4, md: 6 },
-        py: { xs: 8, sm: 10 },
         width: "100%",
+        minHeight: "76vh",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        py: { xs: 8, sm: 10, md: 12 },
       }}
     >
-      <Typography
-        variant="body2"
-        align="center"
-        sx={{
-          fontFamily: "'JetBrains Mono', monospace",
-          fontSize: "0.73rem",
-          color: "primary.main",
-          letterSpacing: "0.1em",
-          textTransform: "uppercase",
-          mb: 2,
-        }}
-      >
-        What we build
-      </Typography>
+      <Container maxWidth="xl">
+        <Box
+          sx={{
+            maxWidth: 1040,
+            mx: "auto",
+            textAlign: "center",
+            mb: { xs: 6, md: 8 },
+          }}
+        >
+          <Typography
+            variant="body2"
+            sx={{
+              fontFamily: "var(--font-play), sans-serif",
+              fontSize: "0.82rem",
+              color: "#FFFFFF",
+              letterSpacing: "0.1em",
+              textTransform: "uppercase",
+              fontWeight: 700,
+              mb: 2,
+              display: "inline-flex",
+              alignItems: "center",
+              justifyContent: "center",
+              "&::before": {
+                content: '"//"',
+                display: "inline-block",
+                marginLeft: 0,
+                marginRight: "0.45rem",
+                color: "#FFFFFF",
+                opacity: 1,
+                transform: "translateY(-0.02em)",
+              },
+            }}
+          >
+            What we build
+          </Typography>
 
-      <Typography
-        variant="h1"
-        component="h2"
-        align="center"
-        sx={{
-          fontWeight: "bold",
-          letterSpacing: "-0.02em",
-          color: "#FFFFFF",
-          mb: 2,
-        }}
-      >
-        AI systems built into your operations.
-      </Typography>
+          <Typography
+            variant="h1"
+            component="h2"
+            sx={{
+              fontWeight: 800,
+              letterSpacing: "-0.03em",
+              color: "#FFFFFF",
+              mb: 2,
+              fontSize: {
+                xs: "2.2rem",
+                sm: "2.8rem",
+                md: "3.4rem",
+              },
+              lineHeight: 1.08,
+            }}
+          >
+            AI systems built into your operations.
+          </Typography>
 
-      <Typography
-        variant="h5"
-        align="center"
-        sx={{ mb: 8, color: "text.secondary" }}
-      >
-        Not demos. Production-grade systems that plug into your stack and
-        scale with your team.
-      </Typography>
+          <Typography
+            variant="h5"
+            sx={{
+              color: "text.secondary",
+              maxWidth: 760,
+              mx: "auto",
+              lineHeight: 1.5,
+              fontSize: {
+                xs: "1rem",
+                sm: "1.1rem",
+                md: "1.2rem",
+              },
+            }}
+          >
+            Not demos. Production-grade systems that plug into your stack and
+            scale with your team.
+          </Typography>
+        </Box>
 
-      <Grid container spacing={4} justifyContent="center">
-        {services.map((service, index) => (
-          <Grid item key={index} xs={12} sm={12} md={6} lg={4}>
-            <GlassCard
-              sx={{
-                p: 5,
-                height: "100%",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "space-between",
-                position: "relative",
-                overflow: "hidden",
-                backgroundImage:
-                  "linear-gradient(180deg, rgba(31,226,196,0.06) 0%, rgba(31,226,196,0.02) 26%, rgba(255,255,255,0.01) 100%)",
-                transition:
-                  "transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease",
-                "&:hover": {
-                  transform: "translateY(-2px)",
-                  boxShadow: `0 14px 30px -16px ${theme.palette.primary.main}66`,
-                  borderColor: `${theme.palette.primary.main}33`,
-                },
-              }}
-            >
-              {/* Mono label */}
-              <Typography
-                variant="body2"
+        <Grid container spacing={{ xs: 3, md: 4 }} justifyContent="center">
+          {services.map((service) => (
+            <Grid item key={service.title} xs={12} md={6} lg={4}>
+              <GlassCard
                 sx={{
-                  fontFamily: "'JetBrains Mono', monospace",
-                  fontSize: "0.74rem",
-                  letterSpacing: "0.1em",
-                  color: alpha(theme.palette.primary.main, 0.62),
-                  textTransform: "uppercase",
-                  display: "inline-block",
-                  mb: 2.5,
-                  alignSelf: "flex-start",
+                  height: "100%",
+                  display: "flex",
+                  flexDirection: "column",
+                  p: { xs: 3, sm: 3.5, md: 4 },
+                  border: `1px solid ${alpha(theme.palette.primary.main, 0.26)}`,
+                  background: `linear-gradient(
+      180deg,
+      ${alpha(theme.palette.primary.main, 0.12)} 0%,
+      ${alpha(theme.palette.primary.main, 0.06)} 28%,
+      rgba(255,255,255,0.02) 100%
+    )`,
+                  transition:
+                    "transform 0.28s ease, border-color 0.28s ease, box-shadow 0.28s ease",
+                  "&:hover": {
+                    transform: "translateY(-2px)",
+                    borderColor: alpha(theme.palette.primary.main, 0.38),
+                    boxShadow: `0 18px 40px -22px ${alpha(theme.palette.primary.main, 0.5)}`,
+                  },
                 }}
               >
-                {`// ${service.label}`}
-              </Typography>
+                <Typography
+                  variant="body2"
+                  sx={{
+                    fontFamily: "var(--font-play), sans-serif",
+                    fontSize: "0.74rem",
+                    letterSpacing: "0.1em",
+                    color: "#FFFFFF",
+                    textTransform: "uppercase",
+                    fontWeight: 700,
+                    mb: 1.75,
+                    lineHeight: 1.1,
+                  }}
+                >
+                  {`// ${service.label}`}
+                </Typography>
 
-              <Box sx={{ flex: 1 }}>
                 <Typography
                   variant="h5"
-                  component="h2"
-                  sx={{ fontWeight: 800, color: "primary.main", mb: 2 }}
+                  component="h3"
+                  sx={{
+                    fontWeight: 800,
+                    color: "#FFFFFF",
+                    mb: 1.5,
+                    lineHeight: 1.22,
+                    letterSpacing: "-0.02em",
+                    fontSize: {
+                      xs: "1.45rem",
+                      sm: "1.55rem",
+                    },
+                    maxWidth: "18ch",
+                  }}
                 >
                   {service.title}
                 </Typography>
 
                 <Typography
                   variant="body1"
-                  sx={{ color: "text.primary", lineHeight: 1.65 }}
+                  sx={{
+                    color: alpha(theme.palette.common.white, 0.84),
+                    lineHeight: 1.66,
+                    fontSize: "1rem",
+                    mb: 3.25,
+                    maxWidth: "38ch",
+                  }}
                 >
                   {service.description}
                 </Typography>
-              </Box>
 
-              {/* Tech stack tags */}
-              <Box
-                sx={{
-                  display: "grid",
-                  gridTemplateColumns: {
-                    xs: "1fr",
-                    sm: "repeat(2, minmax(0, 1fr))",
-                  },
-                  gap: 1,
-                  mt: 3.5,
-                  alignItems: "stretch",
-                }}
-              >
-                {service.tags.map((tag) => (
-                  <Box
-                    key={tag}
-                    sx={{
-                      width: "100%",
-                      minHeight: 30,
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      fontFamily: "'JetBrains Mono', monospace",
-                      fontSize: "0.64rem",
-                      letterSpacing: "0.02em",
-                      color: "text.secondary",
-                      borderColor: `${theme.palette.primary.main}45`,
-                      backgroundColor: `${theme.palette.primary.main}12`,
-                      border: `1px solid ${theme.palette.primary.main}45`,
-                      borderRadius: "8px",
-                      px: 1.25,
-                      py: 0.45,
-                      textAlign: "center",
-                      lineHeight: 1.25,
-                      whiteSpace: "normal",
-                      overflowWrap: "anywhere",
-                    }}
-                  >
-                    {tag}
-                  </Box>
-                ))}
-              </Box>
-            </GlassCard>
-          </Grid>
-        ))}
-      </Grid>
+                <Box
+                  sx={{
+                    mt: "auto",
+                    pt: 0.25,
+                    display: "grid",
+                    gridTemplateColumns: {
+                      xs: "1fr",
+                      sm: "repeat(2, minmax(0, 1fr))",
+                    },
+                    gap: 1,
+                  }}
+                >
+                  {service.tags.map((tag) => (
+                    <Box
+                      key={tag}
+                      sx={{
+                        minHeight: 34,
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        fontFamily: "var(--font-play), sans-serif",
+                        fontSize: "0.72rem",
+                        letterSpacing: "0.05em",
+                        fontWeight: 700,
+                        color: "#FFFFFF",
+                        backgroundColor: alpha(theme.palette.primary.main, 0.24),
+                        border: `1.5px solid ${alpha(theme.palette.primary.main, 0.55)}`,
+                        borderRadius: 2,
+                        px: 1.25,
+                        py: 0.6,
+                        textAlign: "center",
+                        lineHeight: 1.25,
+                        whiteSpace: "normal",
+                        overflowWrap: "anywhere",
+                      }}
+                    >
+                      {tag}
+                    </Box>
+                  ))}
+                </Box>
+              </GlassCard>
+            </Grid>
+          ))}
+        </Grid>
+      </Container>
     </Box>
   );
 };
