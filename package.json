@@ -6,7 +6,12 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "gitleaks:scan": "gitleaks detect --source .",
+    "semgrep:scan": "semgrep scan --config p/ci --metrics=off",
+    "trivy:fs": "trivy fs .",
+    "trivy:config": "trivy config .",
+    "security:code": "npm run gitleaks:scan && npm run semgrep:scan && npm run trivy:fs && npm run trivy:config"
   },
   "dependencies": {
     "@calcom/embed-react": "^1.5.2",

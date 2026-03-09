@@ -1,36 +1,118 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# SSH Tech Lander
 
-## Getting Started
+Marketing site and content hub built with Next.js.
 
-First, run the development server:
+## Architecture
+
+- App Router pages under `src/app`
+- API routes under `src/app/api`
+- Contentful CMS integration under `src/app/lib/contentful`
+- Supabase client and leads endpoint under `src/app/lib/supabaseClient.ts` and `src/app/api/leads/route.ts`
+- Shared UI in `src/components`
+- App state in `src/contexts`
+- Hooks in `src/hooks`
+- Theme primitives in `src/theme`
+- Utilities in `src/utils`
+
+## Setup
+
+Requirements:
+
+- Node.js (LTS)
+- npm
+
+Install:
+
+```bash
+npm install
+```
+
+Run locally:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Build and start:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run build
+npm run start
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Lint:
 
-## Learn More
+```bash
+npm run lint
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Security Tooling
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Tools (installed via Homebrew):
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- semgrep (code patterns)
+- trivy (deps, filesystem, IaC, SBOM)
+- gitleaks (secrets)
+- owasp-zap (live app scanning)
+- nmap (port/service discovery)
+- testssl (TLS/SSL checks)
+- nikto (web server misconfig checks)
+- lynis (host hardening audit)
 
-## Deploy on Vercel
+Install on a new machine:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+brew install semgrep trivy gitleaks nmap testssl nikto lynis
+brew install --cask owasp-zap
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Pre-commit Hook
+
+This repo uses a local git hooks path at `.githooks`.
+
+On `git commit`, the following checks run and must pass:
+
+- `gitleaks protect --staged --redact`
+- `semgrep scan --config p/ci --metrics=off`
+
+If you cloned the repo on a new machine and commits are not being gated, run:
+
+```bash
+git config core.hooksPath .githooks
+```
+
+### Manual Security Runs
+
+Code + deps (run from repo root):
+
+```bash
+npm run security:code
+```
+
+Individual scans:
+
+```bash
+npm run gitleaks:scan
+npm run semgrep:scan
+npm run trivy:fs
+npm run trivy:config
+```
+
+Live app / infra (run against the deployed target):
+
+```bash
+testssl.sh yourdomain.com
+nmap -sV -Pn yourdomain.com
+nikto -h https://yourdomain.com
+```
+
+OWASP ZAP:
+
+1. Quick Start scan for a baseline.
+2. Manual explore + active scan for deeper checks.
+
+Host hardening (run on the host you control, not on Vercel):
+
+```bash
+lynis audit system
+```
