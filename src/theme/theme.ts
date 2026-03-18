@@ -10,8 +10,9 @@ import NavigationButtonStyles from "./navigation-button-styles/NavigationButtonS
 import ScrollbarStyles from "./scrollbar-styles/ScrollbarStyles";
 
 // Base theme options for palette, typography, breakpoints, and component overrides
-const themeOptions = {
+const themeOptions: ThemeOptions = {
   palette: {
+    mode: "dark",
     primary: {
       main: "#07DFC1", // Vibrant turquoise
       light: "#1FE2C4", // Lighter turquoise
@@ -31,6 +32,38 @@ const themeOptions = {
     text: {
       primary: "#EFFEEB", // Default text color
       secondary: "#91FEE6", // Softer light turquoise
+    },
+    error: {
+      main: "#FF5C6C",
+      light: "#FF8A96",
+      dark: "#CC3A48",
+      contrastText: "#EFFEEB",
+    },
+    warning: {
+      main: "#F0A04B",
+      light: "#F5BC7A",
+      dark: "#C07A2E",
+      contrastText: "#091F2C",
+    },
+    success: {
+      main: "#07DFC1",
+      light: "#1FE2C4",
+      dark: "#029F8C",
+      contrastText: "#003330",
+    },
+    info: {
+      main: "#52F6D7",
+      light: "#85F9E3",
+      dark: "#029F8C",
+      contrastText: "#091F2C",
+    },
+    divider: "rgba(7, 223, 193, 0.15)",
+    action: {
+      hover: "rgba(7, 223, 193, 0.08)",
+      selected: "rgba(7, 223, 193, 0.16)",
+      disabled: "rgba(239, 254, 235, 0.3)",
+      disabledBackground: "rgba(7, 223, 193, 0.08)",
+      focus: "rgba(7, 223, 193, 0.12)",
     },
   },
   typography: {

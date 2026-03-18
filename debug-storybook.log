@@ -1,16 +1,16 @@
-[03:04:21.105] [INFO] storybook v10.2.19
-[03:04:22.160] [DEBUG] Getting package.json info for /Users/sahil/Documents/projects/sahil24-lab/ssh-tech-lander/package.json...
-[03:04:23.052] [DEBUG] Serving static files from [36mpublic[39m at [36m/[39m
-[03:04:23.059] [INFO] Starting...
-[03:04:23.456] [DEBUG] Starting preview..
-[03:04:23.493] [INFO] Addon-docs: using MDX3
-[03:04:23.525] [INFO] Using implicit CSS loaders
-[03:04:23.690] [INFO] Using SWC as compiler
-[03:04:23.713] [INFO] Using default Webpack5 setup
-[03:04:24.337] [DEBUG] Using tsconfig paths for react-docgen
-[03:04:31.277] [ERROR] Failed to build the preview
-[03:04:31.282] [WARN] Force closed preview build
-[03:04:31.283] [ERROR] [38;2;241;97;97mSB_BUILDER-WEBPACK5_0003 (WebpackCompilationError): There were problems when compiling your code with Webpack.
+[04:34:48.527] [INFO] storybook v10.2.19
+[04:34:49.644] [DEBUG] Getting package.json info for /Users/sahil/Documents/projects/sahil24-lab/ssh-tech-lander/package.json...
+[04:34:50.613] [INFO] Starting...
+[04:34:50.634] [WARN] unable to find package.json for @fontsource/montserrat
+[04:34:51.061] [DEBUG] Starting preview..
+[04:34:51.099] [INFO] Addon-docs: using MDX3
+[04:34:51.124] [INFO] Using implicit CSS loaders
+[04:34:51.286] [INFO] Using SWC as compiler
+[04:34:51.310] [INFO] Using default Webpack5 setup
+[04:34:51.940] [DEBUG] Using tsconfig paths for react-docgen
+[04:34:58.713] [ERROR] Failed to build the preview
+[04:34:58.716] [WARN] Force closed preview build
+[04:34:58.717] [ERROR] [38;2;241;97;97mSB_BUILDER-WEBPACK5_0003 (WebpackCompilationError): There were problems when compiling your code with Webpack.
 Run Storybook with --debug-webpack for more information.[39m
     at starter (file://./node_modules/@storybook/builder-webpack5/dist/index.js:799:11)
     at starter.next (<anonymous>)
@@ -22,5 +22,5 @@ Run Storybook with --debug-webpack for more information.[39m
     at async withTelemetry (file://./node_modules/storybook/dist/_node-chunks/chunk-FJZ625UU.js:218:12)
     at async dev (file://./node_modules/storybook/dist/bin/core.js:2734:3)
     at async _Command.<anonymous> (file://./node_modules/storybook/dist/bin/core.js:2804:92)
-[03:04:31.288] [WARN] Broken build, fix the error above.
+[04:34:58.725] [WARN] Broken build, fix the error above.
 You may need to refresh the browser.

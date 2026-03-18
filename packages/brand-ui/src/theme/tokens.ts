@@ -21,6 +21,40 @@ export const brandTokens = {
       secondary: "#91FEE6",
       muted: "#EEEEEE",
     },
+    error: {
+      main: "#FF5C6C",
+      light: "#FF8A96",
+      dark: "#CC3A48",
+      contrast: "#EFFEEB",
+    },
+    warning: {
+      main: "#F0A04B",
+      light: "#F5BC7A",
+      dark: "#C07A2E",
+      contrast: "#091F2C",
+    },
+    success: {
+      main: "#07DFC1",
+      light: "#1FE2C4",
+      dark: "#029F8C",
+      contrast: "#003330",
+    },
+    info: {
+      main: "#52F6D7",
+      light: "#85F9E3",
+      dark: "#029F8C",
+      contrast: "#091F2C",
+    },
+    divider: {
+      default: "rgba(7, 223, 193, 0.15)",
+    },
+    action: {
+      hover: "rgba(7, 223, 193, 0.08)",
+      selected: "rgba(7, 223, 193, 0.16)",
+      disabled: "rgba(239, 254, 235, 0.3)",
+      disabledBackground: "rgba(7, 223, 193, 0.08)",
+      focus: "rgba(7, 223, 193, 0.12)",
+    },
     derived: {
       accentDim: "#07DFC130",
       accentGlow: "#07DFC118",

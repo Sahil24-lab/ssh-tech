@@ -13,6 +13,12 @@ type Story = StoryObj;
 const colorGroups = [
   ["Primary", brandTokens.color.primary],
   ["Secondary", brandTokens.color.secondary],
+  ["Error", brandTokens.color.error],
+  ["Warning", brandTokens.color.warning],
+  ["Success", brandTokens.color.success],
+  ["Info", brandTokens.color.info],
+  ["Divider", brandTokens.color.divider],
+  ["Action", brandTokens.color.action],
   ["Background", brandTokens.color.background],
   ["Text", brandTokens.color.text],
 ] as const;
