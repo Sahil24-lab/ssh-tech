@@ -75,7 +75,7 @@ export default function Projects() {
       <Grid container spacing={4} sx={{ mb: 4 }}>
         {projects.map((proj) => (
           <Grid item xs={12} md={6} key={proj.title}>
-            <ProjectCard {...proj} />
+            <ProjectCard {...proj} linkComponent={Link} />
           </Grid>
         ))}
       </Grid>

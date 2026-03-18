@@ -1,25 +1,16 @@
 # SSH Tech Lander
 
-Marketing site and content hub built with Next.js.
+Next.js monorepo with:
 
-## Architecture
+- `apps/new-site`: the current frontend app
+- `packages/brand-ui`: reusable brand theme + components/templates
 
-- App Router pages under `src/app`
-- API routes under `src/app/api`
-- Contentful CMS integration under `src/app/lib/contentful`
-- Supabase client and leads endpoint under `src/app/lib/supabaseClient.ts` and `src/app/api/leads/route.ts`
-- Shared UI in `src/components`
-- App state in `src/contexts`
-- Hooks in `src/hooks`
-- Theme primitives in `src/theme`
-- Utilities in `src/utils`
-
-## Setup
+## Quick Start
 
 Requirements:
 
-- Node.js (LTS)
-- npm
+- Node.js 22 LTS (recommended)
+- npm 10+
 
 Install:
 
@@ -27,92 +18,107 @@ Install:
 npm install
 ```
 
-Run locally:
+Run the app:
 
 ```bash
 npm run dev
 ```
 
-Build and start:
+Then open [http://localhost:3000](http://localhost:3000).
+
+## How It Is Set Up
+
+- Root `package.json` uses npm workspaces for `apps/*` and `packages/*`.
+- `npm run dev`, `npm run build`, `npm run start` are routed to `apps/new-site`.
+- `apps/new-site` consumes `@ssh/brand-ui` from `packages/brand-ui`.
+- Keep app-specific routing/data-fetching in `apps/new-site`.
+- Keep reusable UI and tokens in `packages/brand-ui`.
+
+## Runbook
+
+Run app in dev:
+
+```bash
+npm run dev
+```
+
+Build app:
 
 ```bash
 npm run build
+```
+
+Run production server:
+
+```bash
 npm run start
 ```
 
-Lint:
+Run lint for app + package:
 
 ```bash
 npm run lint
 ```
 
+Run Storybook:
+
+```bash
+npm run storybook
+```
+
+Build Storybook static:
+
+```bash
+npm run build-storybook
+```
+
+Regenerate visual baselines:
+
+```bash
+npm run visual:baseline
+```
+
+Run visual regression tests:
+
+```bash
+npm run visual:test
+```
+
+## CI Visual Regression
+
+- Workflow: `/Users/sahil/Documents/projects/sahil24-lab/ssh-tech-lander/.github/workflows/visual-regression.yml`
+- Trigger: pull requests and manual dispatch
+- Gate: PR should fail when visual diffs are detected
+
+Recommended branch protection required check name:
+
+- `Visual Regression / visual-regression`
+
+## Repo Structure
+
+- `/Users/sahil/Documents/projects/sahil24-lab/ssh-tech-lander/apps/new-site`
+- `/Users/sahil/Documents/projects/sahil24-lab/ssh-tech-lander/packages/brand-ui`
+- `/Users/sahil/Documents/projects/sahil24-lab/ssh-tech-lander/.storybook`
+- `/Users/sahil/Documents/projects/sahil24-lab/ssh-tech-lander/tests/visual-regression`
+- `/Users/sahil/Documents/projects/sahil24-lab/ssh-tech-lander/docs/brand-ui-package.md`
+
 ## Security Tooling
 
-Tools (installed via Homebrew):
-
-- semgrep (code patterns)
-- trivy (deps, filesystem, IaC, SBOM)
-- gitleaks (secrets)
-- owasp-zap (live app scanning)
-- nmap (port/service discovery)
-- testssl (TLS/SSL checks)
-- nikto (web server misconfig checks)
-- lynis (host hardening audit)
-
-Install on a new machine:
+Install:
 
 ```bash
 brew install semgrep trivy gitleaks nmap testssl nikto lynis
 brew install --cask owasp-zap
 ```
 
-### Pre-commit Hook
-
-This repo uses a local git hooks path at `.githooks`.
-
-On `git commit`, the following checks run and must pass:
-
-- `gitleaks protect --staged --redact`
-- `semgrep scan --config p/ci --metrics=off`
-
-If you cloned the repo on a new machine and commits are not being gated, run:
+Enable local commit hooks:
 
 ```bash
 git config core.hooksPath .githooks
 ```
 
-### Manual Security Runs
-
-Code + deps (run from repo root):
+Run code/dependency security scans:
 
 ```bash
 npm run security:code
-```
-
-Individual scans:
-
-```bash
-npm run gitleaks:scan
-npm run semgrep:scan
-npm run trivy:fs
-npm run trivy:config
-```
-
-Live app / infra (run against the deployed target):
-
-```bash
-testssl.sh yourdomain.com
-nmap -sV -Pn yourdomain.com
-nikto -h https://yourdomain.com
-```
-
-OWASP ZAP:
-
-1. Quick Start scan for a baseline.
-2. Manual explore + active scan for deeper checks.
-
-Host hardening (run on the host you control, not on Vercel):
-
-```bash
-lynis audit system
 ```

@@ -12,17 +12,22 @@
 
 # testing
 /coverage
+/test-results
+/playwright-report
 
 # next.js
 /.next/
 /out/
+apps/**/.next/
 
 # production
 /build
+/storybook-static
 
 # misc
 .DS_Store
 *.pem
+/.storybook-home
 
 # debug
 npm-debug.log*

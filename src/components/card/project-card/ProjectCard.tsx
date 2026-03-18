@@ -4,7 +4,6 @@ import React from "react";
 import { Box, Typography, Chip, Avatar, Button } from "@mui/material";
 import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
 import GlassCard from "@/components/card/glass-card/GlassCard";
-import { useRouter } from "next/navigation";
 import { OpenInNew as ExternalLinkIcon } from "@mui/icons-material";
 import { trackEvent } from "@/app/lib/umamiTrackEvent";
 
@@ -17,6 +16,7 @@ type Project = {
   logo?: string;
   caseStudyHref?: string;
   secondaryLink?: { label: string; href: string };
+  linkComponent?: React.ElementType;
 };
 
 const slugify = (title: string) =>
@@ -31,12 +31,13 @@ export default function ProjectCard(props: Project) {
     subtitle,
     description,
     highlights,
-    tags,
-    logo,
-    caseStudyHref,
-    secondaryLink,
+  tags,
+  logo,
+  caseStudyHref,
+  secondaryLink,
+  linkComponent,
   } = props;
-  const router = useRouter();
+  const LinkComponent = linkComponent ?? "a";
 
   return (
     <GlassCard
@@ -144,9 +145,10 @@ export default function ProjectCard(props: Project) {
           <Button
             variant="contained"
             endIcon={<ExternalLinkIcon />}
+            component={LinkComponent}
+            href={caseStudyHref}
             onClick={() => {
               trackEvent(`project-${slugify(title)}-case-study`);
-              router.push(caseStudyHref);
             }}
           >
             View Case Study
@@ -157,11 +159,14 @@ export default function ProjectCard(props: Project) {
           <Button
             variant="outlined"
             endIcon={<ExternalLinkIcon />}
+            component={LinkComponent}
+            href={secondaryLink.href}
+            target="_blank"
+            rel="noopener noreferrer"
             onClick={() => {
               trackEvent(
                 `project-${slugify(title)}-${slugify(secondaryLink.label)}`
               );
-              window.open(secondaryLink.href, "_blank", "noopener,noreferrer");
             }}
           >
             {secondaryLink.label}
