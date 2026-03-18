@@ -46,6 +46,7 @@
     "type-check": "^0.4.0"
   },
   "devDependencies": {
+    "@fontsource/exo-2": "^5.2.8",
     "@fontsource/jetbrains-mono": "^5.2.8",
     "@fontsource/montserrat": "^5.2.8",
     "@fontsource/play": "^5.2.8",

@@ -8,7 +8,8 @@ const meta: Meta<typeof Footer> = {
   component: Footer,
   decorators: [withLegacyTheme],
   parameters: {
-    layout: "padded",
+    layout: "fullscreen",
+    contentPadding: false,
   },
   args: {
     mt: 0,
@@ -20,8 +21,18 @@ type Story = StoryObj<typeof Footer>;
 
 export const Default: Story = {
   render: (args) => (
-    <Box sx={{ minHeight: 240, display: "flex", alignItems: "flex-end" }}>
-      <Footer {...args} />
+    <Box
+      sx={{
+        width: "100%",
+        minHeight: "100vh",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "flex-end",
+      }}
+    >
+      <Box sx={{ width: "100%", mt: "auto" }}>
+        <Footer {...args} />
+      </Box>
     </Box>
   ),
 };
