@@ -7,6 +7,14 @@ const meta: Meta<typeof GlassCard> = {
   title: "Legacy/GlassCard",
   component: GlassCard,
   decorators: [withLegacyTheme],
+  parameters: {
+    docs: {
+      description: {
+        component:
+          "Status: `keep legacy`. Preserve as a visual reference only; new shared APIs should build on package primitives instead.",
+      },
+    },
+  },
   args: {
     sx: { p: 4, maxWidth: 640 },
   },

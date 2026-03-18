@@ -9,6 +9,12 @@ const meta: Meta<typeof BlogCard> = {
   decorators: [withLegacyTheme],
   parameters: {
     layout: "padded",
+    docs: {
+      description: {
+        component:
+          "Status: `keep legacy`. This card still assumes app blog content, but its spacing, surface, and typography informed the shared card primitives.",
+      },
+    },
   },
 };
 

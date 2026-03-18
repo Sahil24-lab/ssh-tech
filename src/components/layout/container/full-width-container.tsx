@@ -1,22 +1,11 @@
 "use client";
 
-import { Box } from "@mui/material";
+import { FullWidthSection } from "@ssh/brand-ui";
 
 export default function FullWidthContainer({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  return (
-    <Box
-      component="section"
-      sx={{
-        width: "100%",
-        display: "flex",
-        justifyContent: "center",
-      }}
-    >
-      {children}
-    </Box>
-  );
+  return <FullWidthSection>{children}</FullWidthSection>;
 }

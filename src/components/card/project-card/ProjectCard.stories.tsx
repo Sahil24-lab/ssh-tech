@@ -9,6 +9,12 @@ const meta: Meta<typeof ProjectCard> = {
   decorators: [withLegacyTheme],
   parameters: {
     layout: "padded",
+    docs: {
+      description: {
+        component:
+          "Status: `keep legacy`. Routing is now prop-driven and Storybook-safe, but the card still reflects profile-site content structure.",
+      },
+    },
   },
 };
 

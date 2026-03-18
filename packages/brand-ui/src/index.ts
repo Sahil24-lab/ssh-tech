@@ -2,6 +2,9 @@ export { BrandThemeProvider } from "./providers/BrandThemeProvider";
 export { brandTokens } from "./theme/tokens";
 export { createBrandTheme } from "./theme/createBrandTheme";
 
+export { Container } from "./primitives/Container";
+export type { ContainerProps } from "./primitives/Container";
+
 export { BrandButton } from "./components/BrandButton";
 export type { BrandButtonProps } from "./components/BrandButton";
 export { BrandChip } from "./components/BrandChip";
@@ -18,6 +21,10 @@ export { SectionShell } from "./patterns/SectionShell";
 export type { SectionShellProps } from "./patterns/SectionShell";
 export { SectionHeader } from "./patterns/SectionHeader";
 export type { SectionHeaderProps } from "./patterns/SectionHeader";
+export { FullWidthSection } from "./patterns/FullWidthSection";
+export type { FullWidthSectionProps } from "./patterns/FullWidthSection";
+export { SiteHeader } from "./patterns/SiteHeader";
+export type { HeaderNavItem, SiteHeaderProps } from "./patterns/SiteHeader";
 export { ProofCardGrid } from "./patterns/ProofCardGrid";
 export { ProcessSteps } from "./patterns/ProcessSteps";
 export { FAQList } from "./patterns/FAQList";

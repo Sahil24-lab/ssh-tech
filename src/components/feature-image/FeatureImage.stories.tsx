@@ -9,6 +9,12 @@ const meta: Meta<typeof FeatureImage> = {
   decorators: [withLegacyTheme],
   parameters: {
     layout: "fullscreen",
+    docs: {
+      description: {
+        component:
+          "Status: `keep legacy`. Revisit only after the shared media component API is stable enough to support multiple image treatments.",
+      },
+    },
   },
 };
 
