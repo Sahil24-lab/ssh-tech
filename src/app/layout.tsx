@@ -1,6 +1,6 @@
 // src/app/layout.tsx
 import React from "react";
-import { Montserrat, Poppins, Play } from "next/font/google";
+import { Exo_2, Play } from "next/font/google";
 import "./globals.css";
 import ThemeRegistry from "@/theme/ThemeRegistry";
 import { headers } from "next/headers";
@@ -9,22 +9,16 @@ import Script from "next/script";
 import { getUmamiWebsiteId } from "./lib/getUmamiWebsiteId";
 import type { Metadata } from "next";
 
-const montserrat = Montserrat({
-  variable: "--font-montserrat",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-});
-
-const poppins = Poppins({
-  variable: "--font-poppins",
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
-});
-
 const play = Play({
   variable: "--font-play",
   subsets: ["latin"],
   weight: ["400", "700"],
+});
+
+const exo2 = Exo_2({
+  variable: "--font-exo2",
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
 });
 
 const siteMetadataBySubdomain: Record<
@@ -169,9 +163,7 @@ export default async function RootLayout({
           }}
         />
       </head>
-      <body
-        className={`${montserrat.variable} ${poppins.variable} ${play.variable} antialiased`}
-      >
+      <body className={`${play.variable} ${exo2.variable} antialiased`}>
         <ThemeRegistry>
           <SubdomainProvider value={subdomain}>
             {children}

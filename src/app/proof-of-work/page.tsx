@@ -349,7 +349,7 @@ export default async function ProofOfWorkList() {
                           },
                         }}
                       >
-                        <Link href={`/proof-of-work/${fields.slug}`} passHref>
+                        <Link href={`/proof-of-work/${fields.slug}`}>
                           <Button
                             variant="contained"
                             color="primary"

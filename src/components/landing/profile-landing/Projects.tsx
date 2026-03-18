@@ -66,12 +66,10 @@ export default function Projects() {
       >
         Featured Projects
       </Typography>
-
       <Typography variant="body1" sx={{ mb: 3 }}>
         Highlighted projects showcasing technical expertise and problem-solving
         capabilities.
       </Typography>
-
       <Grid container spacing={4} sx={{ mb: 4 }}>
         {projects.map((proj) => (
           <Grid item xs={12} md={6} key={proj.title}>
@@ -79,9 +77,8 @@ export default function Projects() {
           </Grid>
         ))}
       </Grid>
-
       <Box textAlign="center">
-        <Link href="/proof-of-work" passHref>
+        <Link href="/proof-of-work">
           <Button
             variant="contained"
             color="primary"

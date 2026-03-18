@@ -115,17 +115,19 @@ export default function CenteredBackButton() {
 
   return (
     <BackButtonWrapper>
-      <Link href="/proof-of-work" passHref legacyBehavior>
-        <a className="no-underline border-none hover:border-none">
-          <BackButtonStyled className={scrolled ? "scrolled" : ""}>
-            <ArrowBack fontSize="small" />
-            {!scrolled && (
-              <span style={{ marginLeft: 8, textDecoration: "none" }}>
-                Back to Projects
-              </span>
-            )}
-          </BackButtonStyled>
-        </a>
+      <Link
+        href="/proof-of-work"
+        className="no-underline border-none hover:border-none">
+
+        <BackButtonStyled className={scrolled ? "scrolled" : ""}>
+          <ArrowBack fontSize="small" />
+          {!scrolled && (
+            <span style={{ marginLeft: 8, textDecoration: "none" }}>
+              Back to Projects
+            </span>
+          )}
+        </BackButtonStyled>
+
       </Link>
     </BackButtonWrapper>
   );
