@@ -99,12 +99,12 @@ export default function Pricing() {
         component="h1"
         gutterBottom
         align="center"
-        sx={{
+        sx={(theme) => ({
           mb: 2,
           fontWeight: "bold",
           letterSpacing: "0.5px",
-          color: "#FFFFFF",
-        }}
+          color: theme.palette.text.primary,
+        })}
       >
         Our Pricing
       </Typography>
@@ -255,7 +255,14 @@ export default function Pricing() {
 
                   {plan.tag && plan.tag !== "Most Popular" && (
                     <Chip
-                      icon={<Whatshot sx={{ color: "#fff", fontSize: 18 }} />}
+                      icon={
+                        <Whatshot
+                          sx={(theme) => ({
+                            color: theme.palette.common.white,
+                            fontSize: 18,
+                          })}
+                        />
+                      }
                       label={plan.tag}
                       color="secondary"
                       size="small"
@@ -273,7 +280,7 @@ export default function Pricing() {
                 <Typography
                   variant="h3"
                   component="p"
-                  color="#fff"
+                  sx={(theme) => ({ color: theme.palette.text.primary })}
                   gutterBottom
                 >
                   {plan.price}

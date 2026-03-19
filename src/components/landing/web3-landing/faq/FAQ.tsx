@@ -45,7 +45,6 @@ We review your existing codebase, identify gaps, and plan out new features witho
 
 const FAQ = () => {
   const theme = useTheme();
-  const darkBg = "#0E1A24";
 
   return (
     <Box id="faq" sx={{ py: 8 }}>
@@ -58,7 +57,7 @@ const FAQ = () => {
             mb: 4,
             fontWeight: "bold",
             letterSpacing: "0.5px",
-            color: "#FFFFFF",
+            color: theme.palette.text.primary,
           }}
         >
           Frequently Asked Questions
@@ -68,7 +67,7 @@ const FAQ = () => {
           sx={{
             borderRadius: 3,
             overflow: "hidden",
-            backgroundColor: darkBg,
+            backgroundColor: theme.palette.surface.elevated,
             boxShadow: "0 0 0 1px rgba(255,255,255,0.05)",
           }}
         >
@@ -82,7 +81,7 @@ const FAQ = () => {
                 disableGutters
                 elevation={0}
                 sx={{
-                  backgroundColor: darkBg,
+                  backgroundColor: theme.palette.surface.elevated,
                   "&:before": { display: "none" },
                   ...(isFirst && {
                     borderTopLeftRadius: 24,
@@ -105,14 +104,14 @@ const FAQ = () => {
                   sx={{
                     px: "3rem",
                     py: 2.5,
-                    backgroundColor: darkBg,
+                    backgroundColor: theme.palette.surface.elevated,
                   }}
                 >
                   <Typography
                     variant="h6"
                     sx={{
                       fontWeight: 700,
-                      color: "#ffffff",
+                      color: theme.palette.text.primary,
                     }}
                   >
                     {faq.question}
@@ -135,7 +134,7 @@ const FAQ = () => {
                   <Typography
                     variant="body1"
                     sx={{
-                      color: "#DDE3E9",
+                      color: theme.palette.text.muted,
                       lineHeight: 1.7,
                       whiteSpace: "pre-line",
                     }}

@@ -14,7 +14,6 @@ import { faqs } from "./faqs";
 
 const AIFAQ = () => {
   const theme = useTheme();
-  const darkBg = "#0E1A24";
 
   return (
     <Box id="faq" sx={{ py: 8 }}>
@@ -42,7 +41,7 @@ const AIFAQ = () => {
             mb: 2,
             fontWeight: "bold",
             letterSpacing: "-0.02em",
-            color: "#FFFFFF",
+            color: theme.palette.text.primary,
           }}
         >
           Common Questions
@@ -60,7 +59,7 @@ const AIFAQ = () => {
           sx={{
             borderRadius: 3,
             overflow: "hidden",
-            backgroundColor: darkBg,
+            backgroundColor: theme.palette.surface.elevated,
             boxShadow: "0 0 0 1px rgba(255,255,255,0.05)",
           }}
         >
@@ -74,7 +73,7 @@ const AIFAQ = () => {
                 disableGutters
                 elevation={0}
                 sx={{
-                  backgroundColor: darkBg,
+                  backgroundColor: theme.palette.surface.elevated,
                   "&:before": { display: "none" },
                   ...(isFirst && {
                     borderTopLeftRadius: 24,
@@ -95,10 +94,13 @@ const AIFAQ = () => {
                   sx={{
                     px: "3rem",
                     py: 2.5,
-                    backgroundColor: darkBg,
+                    backgroundColor: theme.palette.surface.elevated,
                   }}
                 >
-                  <Typography variant="h6" sx={{ fontWeight: 700, color: "#ffffff" }}>
+                  <Typography
+                    variant="h6"
+                    sx={{ fontWeight: 700, color: theme.palette.text.primary }}
+                  >
                     {faq.question}
                   </Typography>
                 </AccordionSummary>
@@ -119,7 +121,11 @@ const AIFAQ = () => {
                 >
                   <Typography
                     variant="body1"
-                    sx={{ color: "#DDE3E9", lineHeight: 1.7, whiteSpace: "pre-line" }}
+                    sx={{
+                      color: theme.palette.text.muted,
+                      lineHeight: 1.7,
+                      whiteSpace: "pre-line",
+                    }}
                   >
                     {faq.answer}
                   </Typography>

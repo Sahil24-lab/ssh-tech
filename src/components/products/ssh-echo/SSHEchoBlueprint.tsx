@@ -151,7 +151,7 @@ export default function SSHEchoBlueprint({
                 sx={{
                   fontWeight: 700,
                   maxWidth: 820,
-                  color: "#FFFFFF",
+                  color: theme.palette.text.primary,
                 }}
               >
                 A next-generation{" "}
@@ -196,7 +196,7 @@ export default function SSHEchoBlueprint({
                   sx={{
                     fontWeight: 700,
                     maxWidth: 820,
-                    color: "#FFFFFF",
+                    color: theme.palette.text.primary,
                   }}
                 >
                   A next-generation{" "}
@@ -266,7 +266,7 @@ export default function SSHEchoBlueprint({
                           textTransform: "uppercase",
                           opacity: 0.7,
                           borderColor: "rgba(255,255,255,0.2)",
-                          color: "#FFFFFF",
+                          color: theme.palette.text.primary,
                         }}
                       />
                     </Stack>

@@ -29,9 +29,15 @@ const themeOptions: ThemeOptions = {
       default: "#0E534C", // Base background
       paper: "#091F2C", // For cards and panels
     },
+    surface: {
+      hero: "#0b0c10",
+      elevated: "#0e1a24",
+      scrim: "#121212",
+    },
     text: {
       primary: "#EFFEEB", // Default text color
       secondary: "#91FEE6", // Softer light turquoise
+      muted: "#dde3e9",
     },
     error: {
       main: "#FF5C6C",

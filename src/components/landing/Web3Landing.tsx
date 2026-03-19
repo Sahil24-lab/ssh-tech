@@ -53,12 +53,12 @@ export default function Web3Landing() {
             component="h1"
             gutterBottom
             align="center"
-            sx={{
+            sx={(theme) => ({
               mb: 4,
               fontWeight: "bold",
               letterSpacing: "0.5px",
-              color: "#FFFFFF",
-            }}
+              color: theme.palette.text.primary,
+            })}
           >
             Trusted by Experts
           </Typography>

@@ -39,12 +39,12 @@ const OurServices = () => {
         variant="h1"
         component="h1"
         align="center"
-        sx={{
+        sx={(theme) => ({
           fontWeight: "bold",
           letterSpacing: "0.5px",
-          color: "#FFFFFF",
+          color: theme.palette.text.primary,
           mb: 6,
-        }}
+        })}
       >
         Our Services
       </Typography>

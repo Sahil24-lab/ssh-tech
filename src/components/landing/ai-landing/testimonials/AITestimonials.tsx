@@ -143,12 +143,12 @@ const AITestimonials = () => {
         variant="h1"
         component="h2"
         align="center"
-        sx={{
+        sx={(theme) => ({
           fontWeight: "bold",
           letterSpacing: "-0.02em",
-          color: "#FFFFFF",
+          color: theme.palette.text.primary,
           mb: 2,
-        }}
+        })}
       >
         Organisations that needed systems
       </Typography>

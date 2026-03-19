@@ -126,7 +126,7 @@ const AICTA = () => {
           component="h2"
           sx={{
             fontWeight: 700,
-            color: "#FFFFFF",
+            color: theme.palette.text.primary,
             mb: 3,
             maxWidth: 680,
             mx: "auto",

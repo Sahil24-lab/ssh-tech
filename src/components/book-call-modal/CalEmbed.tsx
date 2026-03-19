@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { useTheme } from "@mui/material";
 import Cal, { getCalApi } from "@calcom/embed-react";
 
 interface CalEmbedProps {
@@ -18,6 +19,8 @@ export default function CalEmbed({
   formProjectType,
   formProjectOverview,
 }: CalEmbedProps) {
+  const theme = useTheme();
+
   useEffect(() => {
     (async function () {
       const cal = await getCalApi({ namespace: "30min" });
@@ -26,8 +29,8 @@ export default function CalEmbed({
         hideEventTypeDetails: false,
         layout: "month_view",
         styles: {
-          body: { background: "#091F2C" },
-          eventTypeListItem: { background: "#091F2C" },
+          body: { background: theme.palette.background.paper },
+          eventTypeListItem: { background: theme.palette.background.paper },
         },
         cssVarsPerTheme: {
           light: {

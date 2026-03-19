@@ -43,7 +43,7 @@ const Hero = () => {
           xxl: "100vh",
         },
         overflow: "hidden",
-        backgroundColor: "#0b0c10",
+        backgroundColor: theme.palette.surface.hero,
       }}
     >
       {/* Background + overlay */}
@@ -152,7 +152,7 @@ const Hero = () => {
               variant={variantSubtitle}
               component="p"
               sx={{
-                color: "#ffffff",
+                color: theme.palette.text.primary,
                 mt: 2,
                 mb: { xs: 4, lg: 10, xl: 10, xxl: 12 },
                 textAlign: { xs: "center", md: "left" },

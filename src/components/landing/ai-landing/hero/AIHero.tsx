@@ -419,7 +419,7 @@ const AIHero = () => {
                   display: "inline-block",
                   marginLeft: 0,
                   marginRight: "0.45rem",
-                  color: "#FFFFFF",
+                  color: theme.palette.text.primary,
                   opacity: 0.95,
                   transform: "translateY(-0.02em)",
                 },

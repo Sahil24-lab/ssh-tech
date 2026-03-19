@@ -354,7 +354,7 @@ export default function FeatureImage({
               position: "fixed",
               top: 16,
               right: 16,
-              color: "#fff",
+              color: theme.palette.common.white,
               backgroundColor: "rgba(242,95,92,0.4)",
               zIndex: 11,
               "&:hover": {

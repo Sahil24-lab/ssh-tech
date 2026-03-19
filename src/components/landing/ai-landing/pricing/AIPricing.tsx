@@ -124,12 +124,12 @@ export default function AIPricing() {
         component="h2"
         gutterBottom
         align="center"
-        sx={{
+        sx={(theme) => ({
           mb: 2.5,
           fontWeight: "bold",
           letterSpacing: "-0.02em",
-          color: "#FFFFFF",
-        }}
+          color: theme.palette.text.primary,
+        })}
       >
         Assess. Build. Operate.
       </Typography>
@@ -347,7 +347,11 @@ export default function AIPricing() {
           <Typography
             variant="h5"
             align="center"
-            sx={{ color: "#fff", mb: 1.5, fontWeight: 700 }}
+            sx={(theme) => ({
+              color: theme.palette.text.primary,
+              mb: 1.5,
+              fontWeight: 700,
+            })}
           >
             Our Engagement Model
           </Typography>

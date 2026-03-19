@@ -35,7 +35,7 @@ const AIServices = () => {
             sx={{
               fontFamily: "var(--font-play), sans-serif",
               fontSize: "0.82rem",
-              color: "#FFFFFF",
+              color: theme.palette.text.primary,
               letterSpacing: "0.1em",
               textTransform: "uppercase",
               fontWeight: 700,
@@ -48,7 +48,7 @@ const AIServices = () => {
                 display: "inline-block",
                 marginLeft: 0,
                 marginRight: "0.45rem",
-                color: "#FFFFFF",
+                color: theme.palette.text.primary,
                 opacity: 1,
                 transform: "translateY(-0.02em)",
               },
@@ -63,7 +63,7 @@ const AIServices = () => {
             sx={{
               fontWeight: 800,
               letterSpacing: "-0.03em",
-              color: "#FFFFFF",
+              color: theme.palette.text.primary,
               mb: 2,
               fontSize: {
                 xs: "2.2rem",
@@ -126,7 +126,7 @@ const AIServices = () => {
                     fontFamily: "var(--font-play), sans-serif",
                     fontSize: "0.74rem",
                     letterSpacing: "0.1em",
-                    color: "#FFFFFF",
+                    color: theme.palette.text.primary,
                     textTransform: "uppercase",
                     fontWeight: 700,
                     mb: 1.75,
@@ -141,7 +141,7 @@ const AIServices = () => {
                   component="h3"
                   sx={{
                     fontWeight: 800,
-                    color: "#FFFFFF",
+                    color: theme.palette.text.primary,
                     mb: 1.5,
                     lineHeight: 1.22,
                     letterSpacing: "-0.02em",
@@ -192,7 +192,7 @@ const AIServices = () => {
                         fontSize: "0.72rem",
                         letterSpacing: "0.05em",
                         fontWeight: 700,
-                        color: "#FFFFFF",
+                        color: theme.palette.text.primary,
                         backgroundColor: alpha(theme.palette.primary.main, 0.24),
                         border: `1.5px solid ${alpha(theme.palette.primary.main, 0.55)}`,
                         borderRadius: 2,

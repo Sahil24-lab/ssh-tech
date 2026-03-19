@@ -80,7 +80,7 @@ const BackButtonStyled = styled(Button)(({ theme }) => ({
   },
 
   "&.scrolled": {
-    backgroundColor: alpha("#121212", 0.8),
+    backgroundColor: alpha(theme.palette.surface.scrim, 0.8),
     backdropFilter: "blur(8px)",
     borderRadius: 24,
     boxShadow: theme.shadows[4],
@@ -100,7 +100,7 @@ const BackButtonStyled = styled(Button)(({ theme }) => ({
   },
 
   "&.scrolled:hover": {
-    backgroundColor: alpha("#121212", 1),
+    backgroundColor: alpha(theme.palette.surface.scrim, 1),
   },
 }));
 

@@ -93,7 +93,7 @@ const AIProcess = () => {
           mb: 1,
           fontWeight: "bold",
           letterSpacing: "-0.02em",
-          color: "#FFFFFF",
+          color: theme.palette.text.primary,
         }}
       >
         A 3-stage model built for operational results.

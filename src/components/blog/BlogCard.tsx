@@ -82,7 +82,7 @@ export default function BlogCard({ post }: { post: BlogPostForCard }) {
         flexDirection: "column",
         overflow: "hidden",
         background: "none", // override the translucent background
-        backgroundColor: "#091F2C", // your darker paper color
+        backgroundColor: (theme) => theme.palette.background.paper, // your darker paper color
         transition:
           "transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease",
         "&:hover": {
@@ -159,12 +159,12 @@ export default function BlogCard({ post }: { post: BlogPostForCard }) {
             {safeSubtitle && (
               <Typography
                 variant="body2"
-                sx={{
-                  color: "#fff",
+                sx={(theme) => ({
+                  color: theme.palette.text.primary,
                   lineHeight: 1.6,
                   mt: 0.75,
                   mb: 1.5,
-                }}
+                })}
               >
                 {safeSubtitle}
               </Typography>

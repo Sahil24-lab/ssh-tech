@@ -88,7 +88,7 @@ const OurProcess = () => {
           mb: 1,
           fontWeight: "bold",
           letterSpacing: "0.5px",
-          color: "#FFFFFF",
+          color: theme.palette.text.primary,
         }}
       >
         Our Process
