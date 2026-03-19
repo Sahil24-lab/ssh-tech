@@ -57,7 +57,7 @@ export function BlogCard({
         height: "100%",
         display: "flex",
         flexDirection: "column",
-        borderRadius: 12,
+        borderRadius: 10,
         overflow: "hidden",
         background: "none",
         backgroundColor: "background.paper",

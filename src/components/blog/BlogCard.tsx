@@ -85,7 +85,7 @@ export default function BlogCard({ post }: { post: BlogPostForCard }) {
         height: "100%",
         display: "flex",
         flexDirection: "column",
-        borderRadius: "12px",
+        borderRadius: "10px",
         overflow: "hidden",
         background: "none", // override the translucent background
         backgroundColor: (theme) => theme.palette.background.paper, // your darker paper color
