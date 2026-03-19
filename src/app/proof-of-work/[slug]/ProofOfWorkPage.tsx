@@ -139,7 +139,10 @@ export default function ProofOfWorkPage({
                     {subtitle && (
                       <Typography
                         variant="h3"
-                        sx={{ fontWeight: 600, color: "#B0B0B0" }}
+                        sx={(theme) => ({
+                          fontWeight: 600,
+                          color: theme.palette.text.disabled,
+                        })}
                       >
                         {subtitle}
                       </Typography>

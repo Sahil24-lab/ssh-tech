@@ -24,6 +24,7 @@ import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
 import RocketLaunchIcon from "@mui/icons-material/RocketLaunch";
 import type { Metadata } from "next";
 import { headers } from "next/headers";
+import { themeTokens } from "@/theme/tokens";
 
 async function getBaseUrl() {
   const hdrs = await headers();
@@ -180,7 +181,7 @@ export default async function ProofOfWorkList() {
                             borderTopRightRadius: { xs: 12, md: 0 },
                             borderBottomLeftRadius: { xs: 0, md: 12 },
                             overflow: "hidden",
-                            background: `#003338`,
+                            background: themeTokens.palette.surface.imageBlend,
                           }}
                         >
                           <Box
@@ -254,7 +255,10 @@ export default async function ProofOfWorkList() {
                           {subtitle && (
                             <Typography
                               variant="h5"
-                              sx={{ fontWeight: 600, color: "#B0B0B0" }}
+                              sx={{
+                                fontWeight: 600,
+                                color: "#B0B0B0",
+                              }}
                             >
                               {subtitle}
                             </Typography>
@@ -283,7 +287,7 @@ export default async function ProofOfWorkList() {
                                   variant="filled"
                                   sx={{
                                     fontWeight: 500,
-                                    borderColor: "#00ffc2",
+                                    borderColor: "primary.main",
                                     opacity: 0.8,
                                   }}
                                 />
@@ -295,7 +299,7 @@ export default async function ProofOfWorkList() {
                       <Typography
                         variant="body2"
                         sx={{
-                          color: "#E0E0E0",
+                          color: "#B0B0B0",
                           lineHeight: 1.75,
                           mb: 2.5,
                           minHeight: { xs: "auto", md: 128 },

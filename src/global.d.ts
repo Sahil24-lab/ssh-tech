@@ -16,6 +16,8 @@ declare module "@mui/material/styles" {
       hero: string;
       elevated: string;
       scrim: string;
+      depth: string;
+      imageBlend: string;
     };
   }
   interface PaletteOptions {
@@ -23,10 +25,13 @@ declare module "@mui/material/styles" {
       hero?: string;
       elevated?: string;
       scrim?: string;
+      depth?: string;
+      imageBlend?: string;
     };
   }
   interface TypeText {
     muted: string;
+    disabled: string;
   }
 }
 

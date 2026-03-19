@@ -206,15 +206,15 @@ export default function BlogSearchClient({
             <Chip
               label="Clear Filters"
               onClick={() => setSelectedTags([])}
-              sx={{
-                border: "1px solid #5AF3DE",
-                color: "#5AF3DE",
+              sx={(theme) => ({
+                border: `1px solid ${theme.palette.secondary.light}`,
+                color: theme.palette.secondary.light,
                 backgroundColor: "transparent",
                 fontWeight: 500,
                 "&:hover": {
-                  backgroundColor: "#173540",
+                  backgroundColor: theme.palette.surface.depth,
                 },
-              }}
+              })}
             />
           )}
 
@@ -225,15 +225,21 @@ export default function BlogSearchClient({
                 key={tag}
                 label={tag}
                 clickable
-                sx={{
-                  border: "1px solid #5AF3DE",
-                  color: isSelected ? "#000" : "#5AF3DE",
-                  backgroundColor: isSelected ? "#5AF3DE" : "transparent",
+                sx={(theme) => ({
+                  border: `1px solid ${theme.palette.secondary.light}`,
+                  color: isSelected
+                    ? theme.palette.common.black
+                    : theme.palette.secondary.light,
+                  backgroundColor: isSelected
+                    ? theme.palette.secondary.light
+                    : "transparent",
                   fontWeight: isSelected ? 600 : 400,
                   "&:hover": {
-                    backgroundColor: isSelected ? "#4EE0CE" : "#0F2E3D",
+                    backgroundColor: isSelected
+                      ? theme.palette.secondary.light
+                      : theme.palette.surface.depth,
                   },
-                }}
+                })}
                 onClick={() => {
                   setSelectedTags((prev) =>
                     prev.includes(tag)

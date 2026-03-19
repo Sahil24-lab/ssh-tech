@@ -8,6 +8,7 @@ import ButtonStyles from "./button-styles/ButtonStyles";
 import ChipStyles from "./chip-styles/ChipStyles";
 import NavigationButtonStyles from "./navigation-button-styles/NavigationButtonStyles";
 import ScrollbarStyles from "./scrollbar-styles/ScrollbarStyles";
+import { themeTokens } from "./tokens";
 
 // Base theme options for palette, typography, breakpoints, and component overrides
 const themeOptions: ThemeOptions = {
@@ -33,11 +34,14 @@ const themeOptions: ThemeOptions = {
       hero: "#0b0c10",
       elevated: "#0e1a24",
       scrim: "#121212",
+      depth: "#0F2E3D",
+      imageBlend: themeTokens.palette.surface.imageBlend,
     },
     text: {
       primary: "#EFFEEB", // Default text color
       secondary: "#91FEE6", // Softer light turquoise
       muted: "#dde3e9",
+      disabled: "#B0B0B0",
     },
     error: {
       main: "#FF5C6C",

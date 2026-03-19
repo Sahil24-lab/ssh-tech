@@ -15,6 +15,7 @@ import Layout from "@/components/layout/Layout";
 import FullWidthContainer from "@/components/layout/container/full-width-container";
 import GlassCardDark from "@/components/card/glass-card-dark/GlassCardDark";
 import type { Metadata } from "next";
+import { themeTokens } from "@/theme/tokens";
 
 async function getBaseUrl() {
   const hdrs = await headers();
@@ -110,7 +111,7 @@ export default function ProductsPage() {
                       borderTopRightRadius: { xs: 12, md: 0 },
                       borderBottomLeftRadius: { xs: 0, md: 12 },
                       overflow: "hidden",
-                      background: "#003338",
+                      background: themeTokens.palette.surface.imageBlend,
                     }}
                   >
                     <Image
@@ -166,7 +167,10 @@ export default function ProductsPage() {
                         </Typography>
                         <Typography
                           variant="h5"
-                          sx={{ fontWeight: 600, color: "#B0B0B0" }}
+                          sx={{
+                            fontWeight: 600,
+                            color: "#B0B0B0",
+                          }}
                         >
                           {product.subtitle}
                         </Typography>
