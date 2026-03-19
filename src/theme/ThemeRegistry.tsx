@@ -1,6 +1,6 @@
 "use client";
 
-import { CssBaseline, ThemeProvider } from "@mui/material";
+import { CssBaseline, GlobalStyles, ThemeProvider } from "@mui/material";
 import { useServerInsertedHTML } from "next/navigation";
 import { useState } from "react";
 import createCache from "@emotion/cache";
@@ -56,6 +56,21 @@ export default function ThemeRegistry({
   return (
     <CacheProvider value={cache}>
       <ThemeProvider theme={theme}>
+        <GlobalStyles
+          styles={(theme) => ({
+            "html, body": {
+              backgroundColor: theme.palette.background.default,
+              backgroundImage: `
+                linear-gradient(rgba(5, 11, 43, 0.7), rgba(5, 11, 43, 0.1)),
+                conic-gradient(from -23.81deg at 72.82% 162.44%, #0e534c -44.57deg, #067f71 7.76deg, #029f8c 20.98deg, #067f71 52deg, #0b645c 88.68deg, #067f71 315.43deg, #029f8c 367.76deg)
+              `,
+              backgroundRepeat: "no-repeat",
+              backgroundSize: "100% auto",
+              backgroundPosition: "center top",
+              backgroundAttachment: "fixed",
+            },
+          })}
+        />
         <CssBaseline />
         {children}
       </ThemeProvider>

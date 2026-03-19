@@ -82,19 +82,11 @@ export default function SSHEchoBlueprint({
   const theme = useTheme();
   const isSnapshot = variant === "snapshot";
 
-  const backgroundImage =
-    "linear-gradient(rgba(5, 11, 43, 0.95), rgba(5, 11, 43, 0.7)), conic-gradient(from -23.81deg at 72.82% 162.44%, #0e534c -44.57deg, #067f71 7.76deg, #029f8c 20.98deg, #067f71 52deg, #0b645c 88.68deg, #067f71 315.43deg, #029f8c 367.76deg)";
-
   return (
     <Box
       sx={{
         position: "relative",
         width: "100%",
-
-        backgroundImage,
-        backgroundRepeat: "no-repeat",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
         borderRadius: isSnapshot ? 2 : 3,
         overflow: "hidden",
         px: isSnapshot ? 3 : { xs: 3, md: 6 },

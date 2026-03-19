@@ -113,7 +113,7 @@ const AIHero = () => {
             rgba(9, 31, 44, 0.00) 42%,
             rgba(9, 31, 44, 0.25) 100%
           ),
-          #091f2c
+          ${theme.palette.background.paper}
         `,
       }}
     >
