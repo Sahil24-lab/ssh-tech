@@ -1,3 +1,5 @@
+ "use client";
+
 import { useState } from "react";
 import { Avatar, Box, Rating, Stack, Typography } from "@mui/material";
 import { CardSurface } from "./CardSurface";

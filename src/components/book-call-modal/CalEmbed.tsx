@@ -72,6 +72,7 @@ export default function CalEmbed({
     formTimeline,
     formProjectType,
     formProjectOverview,
+    theme,
   ]);
 
   return (
