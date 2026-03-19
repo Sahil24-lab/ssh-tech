@@ -33,6 +33,11 @@ export type BlogPostPreview = {
   excerpt: string;
   href: string;
   tag?: string;
+  tags?: string[];
+  publishedDate?: string;
+  readTime?: number;
+  imageSrc?: string;
+  imageAlt?: string;
 };
 
 export type DocsSection = {

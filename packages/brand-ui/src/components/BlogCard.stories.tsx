@@ -21,8 +21,11 @@ export const Default: Story = {
         title="Shipping a reusable Next.js design system"
         description="How to move from app-specific sections to a stable internal package with Storybook, visual testing, and future extraction in mind."
         href="#"
-        tag="Design System"
-        imageSrc="/hero/hero-background.png"
+        tags={["Design System", "Next.js", "Storybook"]}
+        publishedDate="2026-03-01"
+        readTime={12}
+        imageSrc="/Hero/hero-background.png"
+        imageAlt="Feature image"
       />
     </Box>
   ),
@@ -35,7 +38,9 @@ export const MissingImage: Story = {
         title="Missing image fallback"
         description="Stories should still look intentional when the mock asset is unavailable or not yet provided."
         href="#"
-        tag="Fallback"
+        tags={["Fallback"]}
+        publishedDate="2026-02-10"
+        readTime={6}
       />
     </Box>
   ),

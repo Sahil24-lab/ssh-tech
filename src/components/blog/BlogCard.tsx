@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 type BlogPostForCard = {
   fields?: {
@@ -27,13 +28,15 @@ import {
 import GlassCardDark from "@/components/card/glass-card-dark/GlassCardDark";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
+import InsertPhotoIcon from "@mui/icons-material/InsertPhoto";
 
 export default function BlogCard({ post }: { post: BlogPostForCard }) {
   const { title, slug, shortDescription, featuredImage, publishedDate, tags } =
     post.fields ?? {};
 
-  let imageUrl = "/placeholder.jpg";
-  let imageAlt = "Blog image";
+  const [imageFailed, setImageFailed] = useState(false);
+  let imageUrl: string | undefined;
+  let imageAlt = "Feature image";
 
   if (
     featuredImage &&
@@ -74,12 +77,15 @@ export default function BlogCard({ post }: { post: BlogPostForCard }) {
         : subtitleField
       : "";
 
+  const showImage = typeof imageUrl === "string" && imageUrl.length > 0 && !imageFailed;
+
   return (
     <GlassCardDark
       sx={{
         height: "100%",
         display: "flex",
         flexDirection: "column",
+        borderRadius: "12px",
         overflow: "hidden",
         background: "none", // override the translucent background
         backgroundColor: (theme) => theme.palette.background.paper, // your darker paper color
@@ -98,20 +104,53 @@ export default function BlogCard({ post }: { post: BlogPostForCard }) {
         <CardActionArea
           sx={{ display: "flex", flexDirection: "column", height: "100%" }}
         >
-          <CardMedia
-            component="img"
-            image={imageUrl}
-            alt={imageAlt}
-            sx={{
-              width: "100%",
-              height: 260,
-              objectFit: "cover",
-              transition: "transform 0.7s ease",
-              "&:hover": {
-                transform: "scale(1.01)",
-              },
-            }}
-          />
+          {showImage ? (
+            <CardMedia
+              component="img"
+              image={imageUrl}
+              alt={imageAlt}
+              onError={() => setImageFailed(true)}
+              sx={{
+                width: "100%",
+                height: 260,
+                objectFit: "cover",
+                transition: "transform 0.7s ease",
+                "&:hover": {
+                  transform: "scale(1.01)",
+                },
+              }}
+            />
+          ) : (
+            <Box
+              role="img"
+              aria-label={imageAlt}
+              sx={(theme) => ({
+                width: "100%",
+                height: 260,
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: 1,
+                backgroundImage: "url(/Hero/hero-background.png)",
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                backgroundRepeat: "no-repeat",
+                backgroundColor: "rgba(9, 31, 44, 0.75)",
+                backgroundBlendMode: "overlay",
+                borderBottom: `1px solid ${theme.palette.divider}`,
+                color: theme.palette.text.secondary,
+              })}
+            >
+              <InsertPhotoIcon sx={{ fontSize: 34, color: "secondary.light" }} />
+              <Typography
+                variant="caption"
+                sx={{ letterSpacing: "0.12em", textTransform: "uppercase" }}
+              >
+                Feature image
+              </Typography>
+            </Box>
+          )}
 
           <CardContent
             sx={{

@@ -31,7 +31,9 @@ const samplePost = {
     tags: ["Design System", "Next.js", "Storybook"],
     featuredImage: {
       fields: {
-        file: { url: "/hero/hero-background.png" },
+        file: {
+          url: "//images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1400&q=80",
+        },
         title: "Feature image",
       },
     },
