@@ -1,4 +1,4 @@
- "use client";
+"use client";
 
 import React, { useState } from "react";
 import {
@@ -15,6 +15,8 @@ import {
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
+import { alpha } from "@mui/material/styles";
+import { DecodeText } from "../motion/DecodeText";
 
 export type HeaderNavItem = {
   label: string;
@@ -22,7 +24,7 @@ export type HeaderNavItem = {
   sectionId?: string;
 };
 
-export type SiteHeaderProps = {
+export type HeaderProps = {
   brandLabel: string;
   brandHref?: string;
   navItems: HeaderNavItem[];
@@ -33,7 +35,7 @@ export type SiteHeaderProps = {
   linkComponent?: React.ElementType;
 };
 
-export function SiteHeader({
+export function Header({
   brandLabel,
   brandHref = "/",
   navItems,
@@ -42,7 +44,7 @@ export function SiteHeader({
   onCtaClick,
   onSectionNavigate,
   linkComponent,
-}: SiteHeaderProps) {
+}: HeaderProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const LinkComponent = linkComponent ?? "a";
 
@@ -70,7 +72,15 @@ export function SiteHeader({
           sx={mobileItemSx}
         >
           <ListItemText
-            primary={item.label}
+            primary={
+              <DecodeText
+                text={item.label}
+                autoStart={false}
+                size="sm"
+                clipOverflow
+                measure="text"
+              />
+            }
             primaryTypographyProps={mobileTypographySx}
           />
         </ListItemButton>
@@ -80,8 +90,15 @@ export function SiteHeader({
           component={LinkComponent}
           href={item.href}
           variant="text"
+          sx={(theme) => desktopNavSx(theme)}
         >
-          {item.label}
+          <DecodeText
+            text={item.label}
+            autoStart={false}
+            size="sm"
+            clipOverflow
+            measure="text"
+          />
         </Button>
       );
     }
@@ -97,7 +114,15 @@ export function SiteHeader({
         sx={mobileItemSx}
       >
         <ListItemText
-          primary={item.label}
+          primary={
+            <DecodeText
+              text={item.label}
+              autoStart={false}
+              size="sm"
+              clipOverflow
+              measure="text"
+            />
+          }
           primaryTypographyProps={mobileTypographySx}
         />
       </ListItemButton>
@@ -108,8 +133,15 @@ export function SiteHeader({
         href={getSectionHref(item.sectionId)}
         variant="text"
         onClick={() => onSectionNavigate?.(item.sectionId!)}
+        sx={(theme) => desktopNavSx(theme)}
       >
-        {item.label}
+        <DecodeText
+          text={item.label}
+          autoStart={false}
+          size="sm"
+          clipOverflow
+          measure="text"
+        />
       </Button>
     );
   };
@@ -119,22 +151,23 @@ export function SiteHeader({
       position="fixed"
       elevation={0}
       sx={{
-        backdropFilter: "blur(10px)",
-        backgroundColor: "rgba(255, 255, 255, 0.1)",
-        borderBottom: "1px solid rgba(255, 255, 255, 0.2)",
-        boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
+        backdropFilter: "blur(14px)",
+        backgroundColor: (theme) => alpha(theme.palette.background.paper, 0.85),
+        borderBottom: (theme) =>
+          `1px solid ${alpha(theme.palette.primary.main, 0.2)}`,
+        boxShadow: "0px 4px 18px rgba(0, 0, 0, 0.25)",
       }}
     >
       <Toolbar
         sx={{
-          maxWidth: "1200px",
+          maxWidth: "1360px",
           width: "100%",
           mx: "auto",
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
-          px: 2,
-          py: 2,
+          px: { xs: 3, sm: 5, md: 8 },
+          py: 2.6,
         }}
       >
         <Box sx={{ display: "flex", alignItems: "center", gap: 3 }}>
@@ -143,7 +176,9 @@ export function SiteHeader({
             component={LinkComponent}
             href={brandHref}
             sx={{
-              fontWeight: 700,
+              fontWeight: 800,
+              fontSize: "1.15rem",
+              letterSpacing: "0.02em",
               color: "text.primary",
               textDecoration: "none",
               "&:hover": {
@@ -154,7 +189,7 @@ export function SiteHeader({
             {brandLabel}
           </Typography>
 
-          <Box sx={{ display: { xs: "none", md: "flex" }, gap: 2 }}>
+          <Box sx={{ display: { xs: "none", md: "flex" }, gap: 1.5 }}>
             {navItems.map((item) => renderNavItem(item))}
           </Box>
         </Box>
@@ -162,7 +197,16 @@ export function SiteHeader({
         <Button
           variant="contained"
           color="primary"
-          sx={{ fontWeight: 700, display: { xs: "none", md: "block" } }}
+          size="medium"
+          sx={{
+            fontWeight: 700,
+            textTransform: "uppercase",
+            letterSpacing: "0.12em",
+            fontSize: "0.8rem",
+            px: 3.5,
+            py: 1.2,
+            display: { xs: "none", md: "block" },
+          }}
           onClick={onCtaClick}
         >
           {ctaLabel}
@@ -190,9 +234,10 @@ export function SiteHeader({
           sx: {
             width: "100%",
             height: "100vh",
-            backgroundColor: "rgba(9, 31, 44, 0.85)",
+            backgroundColor: (theme) =>
+              alpha(theme.palette.background.paper, 0.85),
             backdropFilter: "blur(14px)",
-            color: "#ffffff",
+            color: "text.primary",
             px: 3,
             py: 4,
             display: "flex",
@@ -206,7 +251,7 @@ export function SiteHeader({
             position: "absolute",
             top: 16,
             right: 16,
-            color: "#ffffff",
+            color: "text.primary",
           }}
         >
           <CloseIcon />
@@ -227,7 +272,6 @@ export function SiteHeader({
               sx={{
                 fontWeight: 700,
                 textTransform: "none",
-                borderRadius: "8px",
               }}
             >
               {ctaLabel}
@@ -242,6 +286,8 @@ export function SiteHeader({
 const mobileItemSx = {
   px: 2,
   borderRadius: 2,
+  textTransform: "uppercase",
+  letterSpacing: "0.12em",
   "&:hover": {
     backgroundColor: "rgba(255, 255, 255, 0.05)",
   },
@@ -251,6 +297,40 @@ const mobileItemSx = {
 };
 
 const mobileTypographySx = {
-  fontSize: "1.25rem",
-  fontWeight: 400,
+  fontSize: "0.95rem",
+  fontWeight: 700,
 };
+
+const desktopNavSx = (theme: {
+  palette: {
+    primary: { main: string };
+    text: { primary: string; secondary: string };
+  };
+}) => ({
+  position: "relative",
+  textTransform: "uppercase",
+  letterSpacing: "0.1em",
+  fontWeight: 600,
+  fontSize: "0.95rem",
+  color: theme.palette.text.secondary,
+  "&:hover": {
+    color: theme.palette.text.primary,
+    backgroundColor: "transparent",
+    transform: "none",
+  },
+  "&:after": {
+    content: '""',
+    display: "block",
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    width: "100%",
+    height: "1px",
+    backgroundColor: alpha(theme.palette.primary.main, 0.35),
+    transform: "scaleX(0)",
+    transition: "transform 0.2s ease",
+  },
+  "&:hover:after": {
+    transform: "scaleX(1)",
+  },
+});

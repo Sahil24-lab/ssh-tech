@@ -2,7 +2,7 @@
 
 ## Promoted now
 
-- `src/components/layout/header/Header.tsx` -> `packages/brand-ui/src/patterns/SiteHeader.tsx`
+- `src/components/layout/header/Header.tsx` -> `packages/brand-ui/src/patterns/Header.tsx`
 - `src/components/layout/container/constrained-container.tsx` -> `packages/brand-ui/src/primitives/Container.tsx`
 - `src/components/layout/container/full-width-container.tsx` -> `packages/brand-ui/src/patterns/FullWidthSection.tsx`
 

@@ -5,6 +5,7 @@ const config: StorybookConfig = {
     "../packages/brand-ui/src/**/*.stories.@(ts|tsx)",
     "../src/components/**/*.stories.@(ts|tsx)",
   ],
+  staticDirs: ["../public"],
   addons: ["@storybook/addon-docs", "@storybook/addon-links", "@storybook/addon-a11y"],
   framework: {
     name: "@storybook/nextjs",

@@ -29,19 +29,32 @@ export const Palette: Story = {
       {colorGroups.map(([label, group]) => (
         <Stack key={label} spacing={1.5}>
           <Typography variant="h5">{label}</Typography>
-          <Box sx={{ display: "grid", gap: 2, gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))" }}>
+          <Box
+            sx={{
+              display: "grid",
+              gap: 2,
+              gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
+            }}
+          >
             {Object.entries(group).map(([name, value]) => (
               <Box
                 key={name}
                 sx={{
                   p: 2,
-                  borderRadius: 3,
+                  borderRadius: brandTokens.radius.xl,
                   border: "1px solid",
                   borderColor: "secondary.dark",
                   backgroundColor: "background.paper",
                 }}
               >
-                <Box sx={{ height: 88, borderRadius: 2, bgcolor: value, mb: 1.5 }} />
+                <Box
+                  sx={{
+                    height: 88,
+                    borderRadius: brandTokens.radius.xl,
+                    bgcolor: value,
+                    mb: 1.5,
+                  }}
+                />
                 <Typography variant="subtitle1">{name}</Typography>
                 <Typography variant="body2" sx={{ color: "text.secondary" }}>
                   {value}

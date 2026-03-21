@@ -1,20 +1,20 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Box, Typography } from "@mui/material";
-import { SiteHeader } from "./SiteHeader";
+import { Header } from "./Header";
 
-const meta: Meta<typeof SiteHeader> = {
-  title: "Patterns/SiteHeader",
-  component: SiteHeader,
+const meta: Meta<typeof Header> = {
+  title: "Patterns/Header",
+  component: Header,
   parameters: { layout: "fullscreen", contentPadding: false },
 };
 
 export default meta;
-type Story = StoryObj<typeof SiteHeader>;
+type Story = StoryObj<typeof Header>;
 
 export const Default: Story = {
   render: () => (
     <Box sx={{ width: "100%", minHeight: 420, position: "relative" }}>
-      <SiteHeader
+      <Header
         brandLabel="SSH Tech"
         navItems={[
           { label: "Services", sectionId: "services" },
@@ -40,7 +40,8 @@ export const Default: Story = {
           variant="body1"
           sx={{ color: "text.secondary", mt: 2, maxWidth: 720 }}
         >
-          Package-safe header shell with desktop and mobile navigation, prop-driven links, and no Next router dependency.
+          Package-safe header shell with desktop and mobile navigation,
+          prop-driven links, and no Next router dependency.
         </Typography>
       </Box>
     </Box>

@@ -8,62 +8,72 @@ import ButtonStyles from "./button-styles/ButtonStyles";
 import ChipStyles from "./chip-styles/ChipStyles";
 import NavigationButtonStyles from "./navigation-button-styles/NavigationButtonStyles";
 import ScrollbarStyles from "./scrollbar-styles/ScrollbarStyles";
+import { brandTokens } from "./tokens";
 
 // Base theme options for palette, typography, breakpoints, and component overrides
 const themeOptions: ThemeOptions = {
   palette: {
     mode: "dark",
     primary: {
-      main: "#07DFC1", // Vibrant turquoise
-      light: "#1FE2C4", // Lighter turquoise
-      dark: "#029F8C", // Darker turquoise
-      contrastText: "#003330", // Ensures text readability
+      main: brandTokens.color.primary.main, // Vibrant turquoise
+      light: brandTokens.color.primary.light, // Lighter turquoise
+      dark: brandTokens.color.primary.dark, // Darker turquoise
+      contrastText: brandTokens.color.primary.contrast, // Ensures text readability
     },
     secondary: {
-      main: "#067F71", // Deep greenish-blue
-      light: "#52F6D7", // Light cyan
-      dark: "#0B645C", // Darker shade
-      contrastText: "#EFFEEB", // Lightest color for contrast
+      main: brandTokens.color.secondary.main, // Deep greenish-blue
+      light: brandTokens.color.secondary.light, // Light cyan
+      dark: brandTokens.color.secondary.dark, // Darker shade
+      contrastText: brandTokens.color.secondary.contrast, // Lightest color for contrast
     },
     background: {
-      default: "#0E534C", // Base background
-      paper: "#091F2C", // For cards and panels
+      default: brandTokens.color.background.default, // Base background
+      paper: brandTokens.color.background.paper, // For cards and panels
+    },
+    surface: {
+      hero: brandTokens.color.surface.hero,
+      elevated: brandTokens.color.surface.elevated,
+      scrim: brandTokens.color.surface.scrim,
+      depth: brandTokens.color.surface.depth,
+      imageBlend: brandTokens.color.surface.imageBlend,
     },
     text: {
-      primary: "#EFFEEB", // Default text color
-      secondary: "#91FEE6", // Softer light turquoise
+      primary: brandTokens.color.text.primary, // Default text color
+      secondary: brandTokens.color.text.secondary, // Softer light turquoise
+      muted: brandTokens.color.text.muted,
+      disabled: brandTokens.color.text.disabled,
     },
     error: {
-      main: "#FF5C6C",
-      light: "#FF8A96",
-      dark: "#CC3A48",
-      contrastText: "#EFFEEB",
+      main: brandTokens.color.error.main,
+      light: brandTokens.color.error.light,
+      dark: brandTokens.color.error.dark,
+      contrastText: brandTokens.color.error.contrast,
     },
     warning: {
-      main: "#F0A04B",
-      light: "#F5BC7A",
-      dark: "#C07A2E",
-      contrastText: "#091F2C",
+      main: brandTokens.color.warning.main,
+      light: brandTokens.color.warning.light,
+      dark: brandTokens.color.warning.dark,
+      contrastText: brandTokens.color.warning.contrast,
     },
     success: {
-      main: "#07DFC1",
-      light: "#1FE2C4",
-      dark: "#029F8C",
-      contrastText: "#003330",
+      main: brandTokens.color.success.main,
+      light: brandTokens.color.success.light,
+      dark: brandTokens.color.success.dark,
+      contrastText: brandTokens.color.success.contrast,
     },
     info: {
-      main: "#52F6D7",
-      light: "#85F9E3",
-      dark: "#029F8C",
-      contrastText: "#091F2C",
+      main: brandTokens.color.info.main,
+      light: brandTokens.color.info.light,
+      dark: brandTokens.color.info.dark,
+      contrastText: brandTokens.color.info.contrast,
     },
-    divider: "rgba(7, 223, 193, 0.15)",
+    divider: brandTokens.color.divider.default,
     action: {
-      hover: "rgba(7, 223, 193, 0.08)",
-      selected: "rgba(7, 223, 193, 0.16)",
-      disabled: "rgba(239, 254, 235, 0.3)",
-      disabledBackground: "rgba(7, 223, 193, 0.08)",
-      focus: "rgba(7, 223, 193, 0.12)",
+      hover: brandTokens.color.action.hover,
+      selected: brandTokens.color.action.selected,
+      disabled: brandTokens.color.action.disabled,
+      disabledBackground: brandTokens.color.action.disabledBackground,
+      focus: brandTokens.color.action.focus,
     },
   },
   typography: {
@@ -73,56 +83,56 @@ const themeOptions: ThemeOptions = {
       fontWeight: 700,
       fontSize: "3rem",
       lineHeight: 1.2,
-      color: "#EFFEEB",
+      color: brandTokens.color.text.primary,
     },
     h2: {
       fontFamily: "var(--font-exo2), sans-serif",
       fontWeight: 600,
       fontSize: "2.5rem",
       lineHeight: 1.3,
-      color: "#1FE2C4",
+      color: brandTokens.color.primary.light,
     },
     h3: {
       fontFamily: "var(--font-exo2), sans-serif",
       fontWeight: 500,
       fontSize: "2rem",
       lineHeight: 1.4,
-      color: "#1FE2C4",
+      color: brandTokens.color.primary.light,
     },
     h4: {
       fontFamily: "var(--font-exo2), sans-serif",
       fontWeight: 500,
       fontSize: "1.75rem",
       lineHeight: 1.4,
-      color: "#EFFEEB",
+      color: brandTokens.color.text.primary,
     },
     h5: {
       fontFamily: "var(--font-exo2), sans-serif",
       fontWeight: 400,
       fontSize: "1.25rem",
       lineHeight: 1.5,
-      color: "#91FEE6",
+      color: brandTokens.color.text.secondary,
     },
     h6: {
       fontFamily: "var(--font-play), sans-serif",
       fontWeight: 400,
       fontSize: "1rem",
       lineHeight: 1.5,
-      color: "#91FEE6",
+      color: brandTokens.color.text.secondary,
     },
     body1: {
       fontFamily: "var(--font-play), sans-serif",
       fontWeight: 400,
       fontSize: "1.1rem",
       lineHeight: 1.6,
-      color: "#EFFEEB",
+      color: brandTokens.color.text.primary,
     },
     body2: {
       fontFamily: "var(--font-exo2), sans-serif",
       fontWeight: 400,
       fontSize: "1rem",
       lineHeight: 1.6,
-      color: "#91FEE6",
+      color: brandTokens.color.text.secondary,
     },
   },
   // Define breakpoints for responsive layouts
@@ -138,27 +148,15 @@ const themeOptions: ThemeOptions = {
   },
   // Component overrides to keep styling consistent
   components: {
-    MuiButton: {
-      styleOverrides: {
-        root: {
-          textTransform: "none",
-          borderRadius: "8px",
-          backgroundColor: "#07DFC1",
-          "&:hover": {
-            backgroundColor: "#029F8C",
-          },
-        },
-      },
-    },
     MuiCssBaseline: {
       styleOverrides: {
         body: {
-          backgroundColor: "#0E534C",
+          backgroundColor: brandTokens.color.background.default,
           backgroundImage: `
             linear-gradient(rgba(5, 11, 43, 0.7), rgba(5, 11, 43, 0.1)),
-            conic-gradient(from -23.81deg at 72.82% 162.44%, #0e534c -44.57deg, #067f71 7.76deg, #029f8c 20.98deg, #067f71 52deg, #0b645c 88.68deg, #067f71 315.43deg, #029f8c 367.76deg)
+            conic-gradient(from -23.81deg at 72.82% 162.44%, ${brandTokens.color.background.default} -44.57deg, ${brandTokens.color.secondary.main} 7.76deg, ${brandTokens.color.primary.dark} 20.98deg, ${brandTokens.color.secondary.main} 52deg, ${brandTokens.color.secondary.dark} 88.68deg, ${brandTokens.color.secondary.main} 315.43deg, ${brandTokens.color.primary.dark} 367.76deg)
           `,
-          color: "#EFFEEB", // Default text color for readability
+          color: brandTokens.color.text.primary, // Default text color for readability
         },
       },
     },

@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import BookCallModal from "@/components/book-call-modal/BookCallModal";
 import { trackEvent } from "@/app/lib/umamiTrackEvent";
-import { SiteHeader, type HeaderNavItem } from "@ssh/brand-ui";
+import { Header as BrandHeader, type HeaderNavItem } from "@ssh/brand-ui";
 
 export default function Header() {
   const pathname = usePathname();
@@ -70,7 +70,7 @@ export default function Header() {
 
   return (
     <>
-      <SiteHeader
+      <BrandHeader
         brandLabel="SSH Tech"
         brandHref="/"
         navItems={navItems}

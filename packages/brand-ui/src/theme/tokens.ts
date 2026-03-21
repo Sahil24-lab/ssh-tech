@@ -16,10 +16,23 @@ export const brandTokens = {
       default: "#0E534C",
       paper: "#091F2C",
     },
+    surface: {
+      hero: "#0b0c10",
+      elevated: "#0e1a24",
+      scrim: "#121212",
+      depth: "#0F2E3D",
+      imageBlend: "#003338",
+    },
     text: {
       primary: "#EFFEEB",
       secondary: "#91FEE6",
-      muted: "#EEEEEE",
+      muted: "#DDE3E9",
+      disabled: "#B0B0B0",
+    },
+    link: {
+      default: "#91FEE6",
+      hover: "#C8FFF1",
+      active: "#EFFEEB",
     },
     error: {
       main: "#FF5C6C",

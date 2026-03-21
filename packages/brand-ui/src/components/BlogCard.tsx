@@ -35,7 +35,8 @@ export function BlogCard({
   imageSrc,
   imageAlt,
 }: BlogCardProps) {
-  const safeTags = Array.isArray(tags) && tags.length > 0 ? tags : tag ? [tag] : [];
+  const safeTags =
+    Array.isArray(tags) && tags.length > 0 ? tags : tag ? [tag] : [];
   const formattedDate =
     typeof publishedDate === "string"
       ? new Date(publishedDate).toLocaleDateString("en-GB", {
@@ -57,7 +58,6 @@ export function BlogCard({
         height: "100%",
         display: "flex",
         flexDirection: "column",
-        borderRadius: 10,
         overflow: "hidden",
         background: "none",
         backgroundColor: "background.paper",
@@ -84,6 +84,7 @@ export function BlogCard({
               width: "100%",
               height: 260,
               objectFit: "cover",
+              display: "block",
               transition: "transform 0.7s ease",
               "&:hover": {
                 transform: "scale(1.01)",
@@ -135,7 +136,9 @@ export function BlogCard({
           }}
         >
           {safeTags.length > 0 ? (
-            <Box sx={{ display: "flex", flexWrap: "wrap", gap: "8px", mb: 1.5 }}>
+            <Box
+              sx={{ display: "flex", flexWrap: "wrap", gap: "8px", mb: 1.5 }}
+            >
               {safeTags.map((label, idx) => (
                 <Chip
                   key={`${label}-${idx}`}
@@ -151,7 +154,10 @@ export function BlogCard({
             </Box>
           ) : null}
 
-          <Typography variant="h5" sx={{ fontWeight: 700, lineHeight: 1.4, mb: 0.5 }}>
+          <Typography
+            variant="h5"
+            sx={{ fontWeight: 700, lineHeight: 1.4, mb: 0.5 }}
+          >
             {title}
           </Typography>
 
@@ -180,16 +186,21 @@ export function BlogCard({
               justifyContent: "space-between",
               alignItems: "center",
               flexWrap: "wrap",
+              gap: 1.5,
             }}
           >
-            <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
-              <CalendarMonthIcon fontSize="small" />
-              <Typography variant="caption">{formattedDate}</Typography>
+            <Box sx={{ display: "flex", alignItems: "center", gap: 0.75 }}>
+              <CalendarMonthIcon sx={{ fontSize: 17, flexShrink: 0 }} />
+              <Typography variant="caption" sx={{ lineHeight: 1, display: "block" }}>
+                {formattedDate}
+              </Typography>
             </Box>
 
-            <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
-              <AccessTimeIcon fontSize="small" />
-              <Typography variant="caption">{displayReadTime}</Typography>
+            <Box sx={{ display: "flex", alignItems: "center", gap: 0.75 }}>
+              <AccessTimeIcon sx={{ fontSize: 17, flexShrink: 0 }} />
+              <Typography variant="caption" sx={{ lineHeight: 1, display: "block" }}>
+                {displayReadTime}
+              </Typography>
             </Box>
           </Box>
         </CardContent>

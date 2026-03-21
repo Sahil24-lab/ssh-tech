@@ -65,7 +65,7 @@ const FAQ = () => {
 
         <Box
           sx={{
-            borderRadius: 3,
+            borderRadius: 14,
             overflow: "hidden",
             backgroundColor: theme.palette.surface.elevated,
             boxShadow: "0 0 0 1px rgba(255,255,255,0.05)",

@@ -5,13 +5,13 @@ const LinkStyles: Components<Omit<Theme, "components">> = {
     styleOverrides: {
       root: {
         textDecoration: "none",
-        color: "#91FEE6",
+        color: "text.secondary",
         transition: "color 0.2s ease-in-out",
         "&:hover": {
-          color: "#C8FFF1", // Brighter color when hovering
+          color: "text.primary", // Brighter color when hovering
         },
         "&:active": {
-          color: "#EFFEEB", // High contrast when clicked
+          color: "text.primary", // High contrast when clicked
         },
       },
     },

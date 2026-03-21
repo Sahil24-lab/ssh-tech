@@ -9,17 +9,18 @@ const ScrollbarStyles: Components<Omit<Theme, "components">> = {
       },
       // Set the track background using your dark paper color
       "*::-webkit-scrollbar-track": {
-        backgroundColor: "#091F2C", // Darker variation for cards & panels
+        backgroundColor: "background.paper", // Darker variation for cards & panels
       },
       // Customize the thumb with your primary color and border
       "*::-webkit-scrollbar-thumb": {
-        backgroundColor: "#07DFC1", // Primary vibrant turquoise
+        backgroundColor: "primary.main", // Primary vibrant turquoise
         borderRadius: "5px",
-        border: "2px solid #091F2C", // Matches the track background
+        border: "2px solid",
+        borderColor: "background.paper", // Matches the track background
       },
       // Change thumb color on hover using the darker primary tone
       "*::-webkit-scrollbar-thumb:hover": {
-        backgroundColor: "#029F8C", // Darker turquoise on hover
+        backgroundColor: "primary.dark", // Darker turquoise on hover
       },
     },
   },
@@ -27,13 +28,13 @@ const ScrollbarStyles: Components<Omit<Theme, "components">> = {
     styleOverrides: {
       root: {
         textDecoration: "none",
-        color: "#91FEE6",
+        color: "text.secondary",
         transition: "color 0.2s ease-in-out",
         "&:hover": {
-          color: "#C8FFF1", // Brighter color when hovering
+          color: "text.primary", // Brighter color when hovering
         },
         "&:active": {
-          color: "#EFFEEB", // High contrast when clicked
+          color: "text.primary", // High contrast when clicked
         },
       },
     },

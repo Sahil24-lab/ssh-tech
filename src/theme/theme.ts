@@ -146,13 +146,16 @@ const themeOptions: ThemeOptions = {
       xxl: 1800,
     },
   },
+  shape: {
+    borderRadius: 1,
+  },
   // Component overrides to keep styling consistent
   components: {
     MuiButton: {
       styleOverrides: {
         root: {
           textTransform: "none",
-          borderRadius: "8px",
+          borderRadius: 8,
           backgroundColor: "#07DFC1",
           "&:hover": {
             backgroundColor: "#029F8C",

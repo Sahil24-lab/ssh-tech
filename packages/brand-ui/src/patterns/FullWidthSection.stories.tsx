@@ -25,7 +25,7 @@ export const Default: Story = {
         <Box
           sx={{
             width: "100%",
-            borderRadius: 4,
+            borderRadius: 2,
             border: "1px solid rgba(255,255,255,0.12)",
             background: "rgba(255,255,255,0.04)",
             p: 4,
@@ -33,7 +33,8 @@ export const Default: Story = {
         >
           <Typography variant="h4">Full width wrapper</Typography>
           <Typography variant="body1" sx={{ color: "text.secondary", mt: 1 }}>
-            This is the shared outer wrapper used for full-bleed sections while the inner content stays constrained.
+            This is the shared outer wrapper used for full-bleed sections while
+            the inner content stays constrained.
           </Typography>
         </Box>
       </Container>

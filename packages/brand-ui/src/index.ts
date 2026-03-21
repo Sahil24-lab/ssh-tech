@@ -8,6 +8,11 @@ export type { ContainerProps } from "./primitives/Container";
 export { BrandButton } from "./components/BrandButton";
 export type { BrandButtonProps } from "./components/BrandButton";
 export { BrandChip } from "./components/BrandChip";
+export { AccordionList } from "./components/AccordionList";
+export type {
+  AccordionListItem,
+  AccordionListProps,
+} from "./components/AccordionList";
 export { LabelTag } from "./components/LabelTag";
 export { BlogCard } from "./components/BlogCard";
 export { CardSurface } from "./components/CardSurface";
@@ -16,6 +21,10 @@ export { MetricCard } from "./components/MetricCard";
 export type { MetricCardProps } from "./components/MetricCard";
 export { TestimonialCard } from "./components/TestimonialCard";
 export type { TestimonialCardProps } from "./components/TestimonialCard";
+export { DecodeText } from "./motion/DecodeText";
+export type { DecodeTextProps } from "./motion/DecodeText";
+export { useDecodeText } from "./motion/useDecodeText";
+export type { UseDecodeTextOptions, UseDecodeTextResult } from "./motion/useDecodeText";
 
 export { SectionShell } from "./patterns/SectionShell";
 export type { SectionShellProps } from "./patterns/SectionShell";
@@ -23,8 +32,8 @@ export { SectionHeader } from "./patterns/SectionHeader";
 export type { SectionHeaderProps } from "./patterns/SectionHeader";
 export { FullWidthSection } from "./patterns/FullWidthSection";
 export type { FullWidthSectionProps } from "./patterns/FullWidthSection";
-export { SiteHeader } from "./patterns/SiteHeader";
-export type { HeaderNavItem, SiteHeaderProps } from "./patterns/SiteHeader";
+export { Header } from "./patterns/Header";
+export type { HeaderNavItem, HeaderProps } from "./patterns/Header";
 export { ProofCardGrid } from "./patterns/ProofCardGrid";
 export { ProcessSteps } from "./patterns/ProcessSteps";
 export { FAQList } from "./patterns/FAQList";

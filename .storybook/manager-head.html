@@ -1,0 +1,515 @@
+<!--
+  Injected into the Storybook manager frame <head>.
+
+  Responsibilities:
+  1. Load brand fonts (Play + Exo 2) — fonts.css is preview-only,
+     the manager never processes it, so fallback to system sans-serif.
+  2. Apply brand conical gradient to the page.
+  3. Glass-card styling for the docs story canvas and args table.
+  4. Brand-consistent controls, typography, toolbar, sidebar.
+
+  CSS custom properties mirror packages/brand-ui/src/theme/tokens.ts.
+  All hex values here match that file exactly.
+-->
+
+<!-- Brand fonts for the manager frame -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Play:wght@400;700&family=Exo+2:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap"
+  rel="stylesheet"
+/>
+
+<style>
+/* ─── Token mirror ─────────────────────────────────────────────────────────── */
+:root {
+  --ssh-primary:           #07DFC1;
+  --ssh-primary-light:     #1FE2C4;
+  --ssh-primary-dark:      #029F8C;
+  --ssh-primary-contrast:  #003330;
+  --ssh-secondary:         #067F71;
+  --ssh-secondary-light:   #52F6D7;
+  --ssh-secondary-dark:    #0B645C;
+  --ssh-bg-base:           #0E534C;
+  --ssh-bg-paper:          #091F2C;
+  --ssh-surface-hero:      #0b0c10;
+  --ssh-surface-elevated:  #0e1a24;
+  --ssh-surface-depth:     #0F2E3D;
+  --ssh-text-primary:      #EFFEEB;
+  --ssh-text-secondary:    #91FEE6;
+  --ssh-text-muted:        #DDE3E9;
+  --ssh-text-disabled:     #B0B0B0;
+  --ssh-divider:           rgba(7, 223, 193, 0.15);
+  --ssh-border:            #0B645C;
+  --ssh-accent-dim:        rgba(7, 223, 193, 0.12);
+  --ssh-accent-tint:       rgba(7, 223, 193, 0.08);
+  --ssh-glass-bg:          rgba(255, 255, 255, 0.05);
+  --ssh-glass-border:      rgba(255, 255, 255, 0.09);
+  --ssh-glass-blur:        blur(16px);
+  --ssh-panel-bg:          rgba(9, 31, 44, 0.88);
+  --ssh-font-base:         'Play', 'Exo 2', sans-serif;
+  --ssh-font-mono:         'JetBrains Mono', ui-monospace, monospace;
+  --ssh-radius:            12px;
+  --ssh-shadow-soft:       0 8px 24px rgba(0,0,0,0.16);
+  --ssh-shadow-glow:       0 0 18px rgba(7, 223, 193, 0.28);
+}
+
+/* ─── 1. Page gradient ─────────────────────────────────────────────────────── */
+html, body, #root {
+  font-family: var(--ssh-font-base) !important;
+  color: var(--ssh-text-primary) !important;
+  background-color: var(--ssh-bg-base) !important;
+  background-image:
+    linear-gradient(rgba(5, 11, 43, 0.72), rgba(5, 11, 43, 0.20)),
+    conic-gradient(
+      from -23.81deg at 72.82% 162.44%,
+      var(--ssh-bg-base)          -44.57deg,
+      var(--ssh-secondary)          7.76deg,
+      var(--ssh-primary-dark)      20.98deg,
+      var(--ssh-secondary)         52.00deg,
+      var(--ssh-secondary-dark)    88.68deg,
+      var(--ssh-secondary)        315.43deg,
+      var(--ssh-primary-dark)     367.76deg
+    ) !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  background-attachment: fixed !important;
+}
+
+/* ─── 1b. Scrollbars (match brand theme) ───────────────────────────────────── */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--ssh-primary) var(--ssh-bg-paper);
+}
+
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background-color: var(--ssh-bg-paper);
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--ssh-primary);
+  border-radius: 5px;
+  border: 2px solid var(--ssh-bg-paper);
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: var(--ssh-primary-dark);
+}
+
+/* ─── 2. Font inheritance ──────────────────────────────────────────────────── */
+*, *::before, *::after {
+  font-family: var(--ssh-font-base) !important;
+  box-sizing: border-box;
+}
+
+/* ─── 3. Transparent layout shells (let gradient show through) ─────────────── */
+[class*="Content"],
+[class*="Page-"],
+[class*="Wrapper-"],
+[class*="Inner-"],
+[class*="ScrollArea"],
+[class*="Scroll-"],
+.os-viewport,
+.os-content {
+  background: transparent !important;
+}
+
+/* ─── 4. Sidebar ───────────────────────────────────────────────────────────── */
+[class*="Sidebar"],
+aside,
+nav[aria-label] {
+  background: var(--ssh-panel-bg) !important;
+  backdrop-filter: var(--ssh-glass-blur) !important;
+  -webkit-backdrop-filter: var(--ssh-glass-blur) !important;
+  border-right: 1px solid var(--ssh-divider) !important;
+}
+
+/* Sidebar links */
+[class*="Sidebar"] a,
+[class*="Sidebar"] button,
+aside a,
+aside button {
+  color: var(--ssh-text-muted) !important;
+  font-weight: 400 !important;
+}
+
+[class*="Sidebar"] a:hover,
+aside a:hover,
+[class*="Sidebar"] [class*="selected"],
+[class*="Sidebar"] [aria-current="page"] {
+  color: var(--ssh-primary) !important;
+  background: var(--ssh-accent-tint) !important;
+}
+
+/* ─── 5. Top toolbar (zoom, actions bar) ──────────────────────────────────── */
+[class*="Toolbar-"],
+[class*="Bar-"][role],
+[role="toolbar"],
+[class*="ActionBar"] {
+  background: var(--ssh-panel-bg) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border-bottom: 1px solid var(--ssh-divider) !important;
+}
+
+[class*="Toolbar-"] button,
+[class*="Bar-"] button,
+[role="toolbar"] button,
+[class*="ActionBar"] button {
+  color: var(--ssh-text-primary) !important;
+  background: transparent !important;
+  border: none !important;
+  transition: color 0.15s ease !important;
+}
+
+[class*="Toolbar-"] button:hover,
+[role="toolbar"] button:hover {
+  color: var(--ssh-primary) !important;
+}
+
+/* ─── 6. Docs main headings ────────────────────────────────────────────────── */
+h1, h2, h3 {
+  color: var(--ssh-text-primary) !important;
+  font-family: var(--ssh-font-base) !important;
+}
+
+h1 { font-weight: 700 !important; font-size: 2rem !important; }
+h2 { font-weight: 600 !important; color: var(--ssh-primary-light) !important; }
+h3 { font-weight: 500 !important; color: var(--ssh-text-secondary) !important; }
+
+p, span, div, td, th, li, label {
+  color: inherit !important;
+}
+
+/* ─── 7. Story canvas / preview block in docs ─────────────────────────────── */
+.docs-story,
+[class*="PreviewWrapper"],
+[class*="StoryWrapper"],
+[class*="Canvas-"] {
+  background: var(--ssh-panel-bg) !important;
+  border: 1px solid var(--ssh-divider) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border-radius: var(--ssh-radius) !important;
+  overflow: hidden !important;
+  box-shadow: var(--ssh-shadow-soft) !important;
+}
+
+.docs-story {
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+/* "Show code" / "Copy" button inside story canvas */
+.docs-story button,
+[class*="PreviewWrapper"] button,
+[class*="ActionBar"] button {
+  background: var(--ssh-accent-tint) !important;
+  border: 1px solid var(--ssh-divider) !important;
+  border-radius: var(--ssh-radius) !important;
+  color: var(--ssh-text-secondary) !important;
+  font-size: 0.75rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.04em !important;
+  padding: 4px 12px !important;
+  transition: all 0.15s ease !important;
+  cursor: pointer !important;
+}
+
+.docs-story button:hover {
+  background: var(--ssh-accent-dim) !important;
+  border-color: var(--ssh-primary) !important;
+  color: var(--ssh-primary) !important;
+}
+
+/* ─── 7b. Source / code blocks ────────────────────────────────────────────── */
+.docblock-source,
+.sbdocs pre,
+.sbdocs code,
+pre.prismjs,
+code.prismjs {
+  font-family: var(--ssh-font-mono) !important;
+}
+
+/* Canvas "Show code" snippet (often not wrapped in .docblock-source) */
+.docs-story pre,
+.docs-story pre.prismjs {
+  margin: 0 !important;
+  padding: 14px 16px !important;
+  background: rgba(14, 26, 36, 0.96) !important;
+  color: var(--ssh-text-secondary) !important;
+  border-top: 1px solid rgba(7, 223, 193, 0.26) !important;
+  border-radius: 0 0 var(--ssh-radius) var(--ssh-radius) !important;
+}
+
+.docblock-source,
+.sbdocs pre,
+pre.prismjs {
+  background: linear-gradient(
+    135deg,
+    rgba(7, 223, 193, 0.10) 0%,
+    rgba(9, 31, 44, 0.96) 55%,
+    rgba(14, 26, 36, 0.96) 100%
+  ) !important;
+  border: 1px solid rgba(7, 223, 193, 0.16) !important;
+  border-radius: var(--ssh-radius) !important;
+  box-shadow: none !important;
+}
+
+.docs-story .docblock-source {
+  margin: 0 !important;
+  border-radius: 0 0 var(--ssh-radius) var(--ssh-radius) !important;
+  border: none !important;
+  border-top: 1px solid rgba(7, 223, 193, 0.26) !important;
+}
+
+.docs-story .docblock-source pre {
+  margin: 0 !important;
+  padding: 14px 16px !important;
+}
+
+.docblock-source pre,
+.sbdocs pre code,
+pre.prismjs code {
+  color: var(--ssh-text-secondary) !important;
+}
+
+/* Prism-ish token colours (Storybook uses Prism classes in many themes) */
+.docblock-source .token.tag,
+.docblock-source .token.selector,
+.sbdocs pre .token.tag,
+.sbdocs pre .token.selector {
+  color: var(--ssh-primary-light) !important;
+}
+
+.docblock-source .token.attr-name,
+.sbdocs pre .token.attr-name {
+  color: var(--ssh-secondary-light) !important;
+}
+
+.docblock-source .token.attr-value,
+.docblock-source .token.string,
+.sbdocs pre .token.attr-value,
+.sbdocs pre .token.string {
+  color: var(--ssh-text-primary) !important;
+}
+
+.docblock-source .token.punctuation,
+.sbdocs pre .token.punctuation {
+  color: var(--ssh-text-muted) !important;
+}
+
+/* ─── 8. Args / props table — glass card ─────────────────────────────────── */
+.docblock-argstable,
+[class*="ArgstableBlock"],
+[class*="ArgsTable"] {
+  background: var(--ssh-glass-bg) !important;
+  border: 1px solid rgba(7, 223, 193, 0.18) !important;
+  border-radius: var(--ssh-radius) !important;
+  backdrop-filter: var(--ssh-glass-blur) !important;
+  -webkit-backdrop-filter: var(--ssh-glass-blur) !important;
+  overflow: hidden !important;
+  border-collapse: separate !important;
+  border-spacing: 0 !important;
+  width: 100% !important;
+  box-shadow: var(--ssh-shadow-soft) !important;
+}
+
+/* Reset every cell to transparent */
+.docblock-argstable th,
+.docblock-argstable td {
+  background: transparent !important;
+  color: var(--ssh-text-primary) !important;
+  border-bottom: 1px solid rgba(7, 223, 193, 0.28) !important;
+  padding: 12px 16px !important;
+  vertical-align: middle !important;
+  font-size: 0.875rem !important;
+}
+
+/* Continuous horizontal separators (not per-cell) */
+.docblock-argstable thead tr {
+  box-shadow: inset 0 -1px rgba(7, 223, 193, 0.28) !important;
+}
+
+.docblock-argstable tbody tr {
+  box-shadow: inset 0 -1px rgba(7, 223, 193, 0.24) !important;
+}
+
+.docblock-argstable tbody tr:last-child {
+  box-shadow: none !important;
+}
+
+/* Column separators */
+.docblock-argstable th:not(:last-child),
+.docblock-argstable td:not(:last-child) {
+  border-right: 1px solid rgba(7, 223, 193, 0.12) !important;
+}
+
+/* Header row */
+.docblock-argstable thead th,
+.docblock-argstable-head th {
+  background: rgba(7, 223, 193, 0.10) !important;
+  color: var(--ssh-primary) !important;
+  font-weight: 700 !important;
+  font-size: 0.72rem !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.08em !important;
+  border-bottom: 1px solid rgba(7, 223, 193, 0.28) !important;
+}
+
+/* Body rows */
+.docblock-argstable-body tr,
+.docblock-argstable tbody tr {
+  transition: background 0.15s ease !important;
+}
+
+.docblock-argstable-body tr:hover td,
+.docblock-argstable tbody tr:hover td {
+  background: var(--ssh-accent-tint) !important;
+}
+
+/* Prop name — bold */
+.docblock-argstable td:first-child {
+  font-weight: 700 !important;
+  color: var(--ssh-text-primary) !important;
+}
+
+/* Required asterisk */
+.docblock-argstable [class*="required"],
+.docblock-argstable span[title*="required"] {
+  color: var(--ssh-primary) !important;
+}
+
+/* Type badge / code chips inside table */
+.docblock-argstable code,
+.docblock-argstable [class*="Code"],
+.docblock-argstable [class*="code"] {
+  background: rgba(7, 223, 193, 0.10) !important;
+  color: var(--ssh-secondary-light) !important;
+  border: 1px solid rgba(7, 223, 193, 0.18) !important;
+  border-radius: 3px !important;
+  padding: 1px 7px !important;
+  font-family: var(--ssh-font-mono) !important;
+  font-size: 0.78rem !important;
+}
+
+/* Default value */
+.docblock-argstable td:nth-child(3) {
+  color: var(--ssh-text-muted) !important;
+}
+
+/* ─── 9. Controls ─────────────────────────────────────────────────────────── */
+/* Text / textarea inputs */
+.docblock-argstable input[type="text"],
+.docblock-argstable input[type="number"],
+.docblock-argstable textarea {
+  background: rgba(15, 46, 61, 0.85) !important;
+  border: 1px solid rgba(7, 223, 193, 0.22) !important;
+  border-radius: 4px !important;
+  color: var(--ssh-text-primary) !important;
+  padding: 6px 10px !important;
+  font-family: var(--ssh-font-mono) !important;
+  font-size: 0.82rem !important;
+  width: 100% !important;
+  transition: border-color 0.15s, box-shadow 0.15s !important;
+  outline: none !important;
+}
+
+.docblock-argstable input:focus,
+.docblock-argstable textarea:focus {
+  border-color: var(--ssh-primary) !important;
+  box-shadow: 0 0 0 3px rgba(7, 223, 193, 0.12) !important;
+}
+
+/* Select dropdowns */
+.docblock-argstable select {
+  background: rgba(15, 46, 61, 0.85) !important;
+  border: 1px solid rgba(7, 223, 193, 0.22) !important;
+  border-radius: 4px !important;
+  color: var(--ssh-text-primary) !important;
+  padding: 6px 10px !important;
+  appearance: auto !important;
+  width: 100% !important;
+}
+
+/* Boolean pill toggles (False | True) */
+[class*="BooleanControl"],
+[class*="boolean-control"] {
+  display: flex !important;
+  gap: 6px !important;
+}
+
+[class*="BooleanControl"] button,
+[class*="boolean-control"] button {
+  background: transparent !important;
+  border: 1px solid rgba(7, 223, 193, 0.22) !important;
+  border-radius: 4px !important;
+  color: var(--ssh-text-disabled) !important;
+  padding: 4px 14px !important;
+  font-size: 0.78rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.04em !important;
+  transition: all 0.15s ease !important;
+  cursor: pointer !important;
+}
+
+/* ─── 10. OverlayScrollbars (sidebar scroll) ─────────────────────────────── */
+.os-scrollbar,
+.os-scrollbar-track,
+.os-scrollbar-handle {
+  background: transparent !important;
+}
+
+.os-scrollbar-handle {
+  background: rgba(7, 223, 193, 0.55) !important;
+  border-radius: 999px !important;
+  border: 1px solid rgba(9, 31, 44, 0.7) !important;
+}
+
+.os-scrollbar-handle:hover {
+  background: rgba(7, 223, 193, 0.8) !important;
+}
+
+[class*="BooleanControl"] button[class*="active"],
+[class*="BooleanControl"] button[class*="selected"],
+[class*="BooleanControl"] button[aria-pressed="true"],
+[class*="boolean-control"] button[class*="active"] {
+  background: rgba(7, 223, 193, 0.15) !important;
+  border-color: var(--ssh-primary) !important;
+  color: var(--ssh-primary) !important;
+}
+
+/* Reset icon button in controls */
+[class*="ResetWrapper"] button,
+[title*="Reset"] {
+  color: var(--ssh-text-disabled) !important;
+  transition: color 0.15s !important;
+}
+[class*="ResetWrapper"] button:hover {
+  color: var(--ssh-primary) !important;
+}
+
+/* ─── 10. Dividers and separators ─────────────────────────────────────────── */
+hr {
+  border-color: var(--ssh-divider) !important;
+  border-style: solid !important;
+}
+
+/* ─── 11. Scrollbars ─────────────────────────────────────────────────────── */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--ssh-border) transparent;
+}
+*::-webkit-scrollbar { width: 5px; height: 5px; }
+*::-webkit-scrollbar-track { background: transparent; }
+*::-webkit-scrollbar-thumb {
+  background: var(--ssh-border);
+  border-radius: 10px;
+}
+*::-webkit-scrollbar-thumb:hover { background: var(--ssh-primary-dark); }
+</style>

@@ -15,6 +15,7 @@ import { useState, useRef, useCallback } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import BuildCircleOutlinedIcon from "@mui/icons-material/BuildCircleOutlined";
 import RocketLaunchIcon from "@mui/icons-material/RocketLaunch";
+import { DecodeText } from "@ssh/brand-ui";
 
 const capabilities = [
   {
@@ -438,7 +439,27 @@ const AIHero = () => {
                 lineHeight: 1.15,
               }}
             >
-              Production AI for <br /> real operations.
+              <DecodeText
+                text="Production AI for"
+                size="lg"
+                measure="text"
+                trimMeasure
+                clipOverflow
+                revealFrames={34}
+                speed={30}
+                scrambleOpacityRange={[0.08, 0.9]}
+              />
+              <br />
+              <DecodeText
+                text="real operations."
+                size="lg"
+                measure="text"
+                trimMeasure
+                revealFrames={34}
+                speed={30}
+                scrambleOpacityRange={[0.08, 0.9]}
+                clipOverflow
+              />
             </Typography>
 
             <Typography
@@ -453,8 +474,21 @@ const AIHero = () => {
                 fontWeight: 400,
               }}
             >
-              We integrate with your stack and <br />
-              automate high-impact workflows.
+              <DecodeText
+                text="We integrate with your stack and"
+                size="sm"
+                measure="text"
+                trimMeasure
+                clipOverflow
+              />
+              <br />
+              <DecodeText
+                text="automate high-impact workflows."
+                size="sm"
+                measure="text"
+                trimMeasure
+                clipOverflow
+              />
             </Typography>
 
             <Box
