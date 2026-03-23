@@ -1,26 +1,18 @@
-[04:34:48.527] [INFO] storybook v10.2.19
-[04:34:49.644] [DEBUG] Getting package.json info for /Users/sahil/Documents/projects/sahil24-lab/ssh-tech-lander/package.json...
-[04:34:50.613] [INFO] Starting...
-[04:34:50.634] [WARN] unable to find package.json for @fontsource/montserrat
-[04:34:51.061] [DEBUG] Starting preview..
-[04:34:51.099] [INFO] Addon-docs: using MDX3
-[04:34:51.124] [INFO] Using implicit CSS loaders
-[04:34:51.286] [INFO] Using SWC as compiler
-[04:34:51.310] [INFO] Using default Webpack5 setup
-[04:34:51.940] [DEBUG] Using tsconfig paths for react-docgen
-[04:34:58.713] [ERROR] Failed to build the preview
-[04:34:58.716] [WARN] Force closed preview build
-[04:34:58.717] [ERROR] [38;2;241;97;97mSB_BUILDER-WEBPACK5_0003 (WebpackCompilationError): There were problems when compiling your code with Webpack.
-Run Storybook with --debug-webpack for more information.[39m
-    at starter (file://./node_modules/@storybook/builder-webpack5/dist/index.js:799:11)
-    at starter.next (<anonymous>)
-    at Module.start (file://./node_modules/@storybook/builder-webpack5/dist/index.js:857:34)
-    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-    at async storybookDevServer (file://./node_modules/storybook/dist/core-server/index.js:7295:83)
-    at async buildOrThrow (file://./node_modules/storybook/dist/core-server/index.js:4506:12)
-    at async buildDevStandalone (file://./node_modules/storybook/dist/core-server/index.js:7710:41)
-    at async withTelemetry (file://./node_modules/storybook/dist/_node-chunks/chunk-FJZ625UU.js:218:12)
-    at async dev (file://./node_modules/storybook/dist/bin/core.js:2734:3)
-    at async _Command.<anonymous> (file://./node_modules/storybook/dist/bin/core.js:2804:92)
-[04:34:58.725] [WARN] Broken build, fix the error above.
+[17:44:43.114] [INFO] storybook v10.2.19
+[17:44:44.151] [DEBUG] Getting package.json info for /Users/sahil/Documents/projects/sahil24-lab/ssh-tech-lander/package.json...
+[17:44:45.114] [DEBUG] Serving static files from [36mpublic[39m at [36m/[39m
+[17:44:45.122] [INFO] Starting...
+[17:44:45.570] [DEBUG] Starting preview..
+[17:44:45.604] [INFO] Addon-docs: using MDX3
+[17:44:45.628] [INFO] Using implicit CSS loaders
+[17:44:45.783] [INFO] Using SWC as compiler
+[17:44:45.805] [INFO] Using default Webpack5 setup
+[17:44:46.429] [DEBUG] Using tsconfig paths for react-docgen
+[17:44:53.563] [WARN] Force closed preview build
+[17:44:53.564] [ERROR] [38;2;241;97;97mError: listen EADDRINUSE: address already in use 127.0.0.1:6006[39m
+    at Server.setupListenHandle [as _listen2] (node:net:1940:16)
+    at listenInCluster (node:net:1997:12)
+    at node:net:2206:7
+    at process.processTicksAndRejections (node:internal/process/task_queues:90:21)
+[17:44:53.566] [WARN] Broken build, fix the error above.
 You may need to refresh the browser.

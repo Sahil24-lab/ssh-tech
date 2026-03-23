@@ -2,9 +2,12 @@ import {
   Container as MuiContainer,
   type ContainerProps as MuiContainerProps,
 } from "@mui/material";
+import { containerSx } from "../theme/tokens/layoutHelpers";
+import type { ContainerVariant } from "../theme/tokens/layout";
 
-export type ContainerProps = MuiContainerProps & {
-  size?: "content" | "wide";
+export type ContainerProps = Omit<MuiContainerProps, "maxWidth"> & {
+  /** Layout variant — controls max-width cap and horizontal padding. */
+  size?: ContainerVariant;
 };
 
 export function Container({
@@ -16,26 +19,7 @@ export function Container({
   return (
     <MuiContainer
       maxWidth={false}
-      sx={[
-        {
-          flexGrow: 1,
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          px: { xs: 2, sm: 4, md: 6 },
-          pb: 2,
-          mx: "auto",
-          width: "100%",
-          maxWidth: {
-            xs: "95%",
-            sm: "90%",
-            md: "100%",
-            lg: size === "wide" ? "1320px" : "1200px",
-            xl: size === "wide" ? "1480px" : "1400px",
-          },
-        },
-        ...(Array.isArray(sx) ? sx : [sx]),
-      ]}
+      sx={[containerSx(size), ...(Array.isArray(sx) ? sx : [sx])]}
       {...props}
     >
       {children}

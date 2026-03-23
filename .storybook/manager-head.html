@@ -21,495 +21,851 @@
 />
 
 <style>
-/* ─── Token mirror ─────────────────────────────────────────────────────────── */
-:root {
-  --ssh-primary:           #07DFC1;
-  --ssh-primary-light:     #1FE2C4;
-  --ssh-primary-dark:      #029F8C;
-  --ssh-primary-contrast:  #003330;
-  --ssh-secondary:         #067F71;
-  --ssh-secondary-light:   #52F6D7;
-  --ssh-secondary-dark:    #0B645C;
-  --ssh-bg-base:           #0E534C;
-  --ssh-bg-paper:          #091F2C;
-  --ssh-surface-hero:      #0b0c10;
-  --ssh-surface-elevated:  #0e1a24;
-  --ssh-surface-depth:     #0F2E3D;
-  --ssh-text-primary:      #EFFEEB;
-  --ssh-text-secondary:    #91FEE6;
-  --ssh-text-muted:        #DDE3E9;
-  --ssh-text-disabled:     #B0B0B0;
-  --ssh-divider:           rgba(7, 223, 193, 0.15);
-  --ssh-border:            #0B645C;
-  --ssh-accent-dim:        rgba(7, 223, 193, 0.12);
-  --ssh-accent-tint:       rgba(7, 223, 193, 0.08);
-  --ssh-glass-bg:          rgba(255, 255, 255, 0.05);
-  --ssh-glass-border:      rgba(255, 255, 255, 0.09);
-  --ssh-glass-blur:        blur(16px);
-  --ssh-panel-bg:          rgba(9, 31, 44, 0.88);
-  --ssh-font-base:         'Play', 'Exo 2', sans-serif;
-  --ssh-font-mono:         'JetBrains Mono', ui-monospace, monospace;
-  --ssh-radius:            12px;
-  --ssh-shadow-soft:       0 8px 24px rgba(0,0,0,0.16);
-  --ssh-shadow-glow:       0 0 18px rgba(7, 223, 193, 0.28);
-}
+  /* ─── Token mirror ─────────────────────────────────────────────────────────── */
+  :root {
+    /* ── Core palette ─────────────────────────────────────────────────────────── */
+    --ssh-primary: #07dfc1;
+    --ssh-primary-light: #1fe2c4;
+    --ssh-primary-dark: #029f8c;
+    --ssh-primary-contrast: #003330;
+    --ssh-secondary: #067f71;
+    --ssh-secondary-light: #52f6d7;
+    --ssh-secondary-dark: #0b645c;
+    --ssh-bg-base: #0e534c;
+    --ssh-bg-paper: #091f2c;
+    --ssh-surface-hero: #0b0c10;
+    --ssh-surface-elevated: #0e1a24;
+    --ssh-surface-depth: #0f2e3d;
+    --ssh-text-primary: #effeeb;
+    --ssh-text-secondary: #91fee6;
+    --ssh-text-muted: #dde3e9;
+    --ssh-text-disabled: #b0b0b0;
+    --ssh-border: #0b645c;
+    --ssh-font-base: "Play", "Exo 2", sans-serif;
+    --ssh-font-mono: "JetBrains Mono", ui-monospace, monospace;
+    --ssh-radius: 12px;
 
-/* ─── 1. Page gradient ─────────────────────────────────────────────────────── */
-html, body, #root {
-  font-family: var(--ssh-font-base) !important;
-  color: var(--ssh-text-primary) !important;
-  background-color: var(--ssh-bg-base) !important;
-  background-image:
-    linear-gradient(rgba(5, 11, 43, 0.72), rgba(5, 11, 43, 0.20)),
-    conic-gradient(
-      from -23.81deg at 72.82% 162.44%,
-      var(--ssh-bg-base)          -44.57deg,
-      var(--ssh-secondary)          7.76deg,
-      var(--ssh-primary-dark)      20.98deg,
-      var(--ssh-secondary)         52.00deg,
-      var(--ssh-secondary-dark)    88.68deg,
-      var(--ssh-secondary)        315.43deg,
-      var(--ssh-primary-dark)     367.76deg
-    ) !important;
-  background-size: cover !important;
-  background-repeat: no-repeat !important;
-  background-attachment: fixed !important;
-}
+    /* ── Semantic alpha tokens (primary / teal) ───────────────────────────────── */
+    --ssh-divider: rgba(
+      7,
+      223,
+      193,
+      0.15
+    ); /* row separators, thin lines      */
+    --ssh-accent-tint: rgba(
+      7,
+      223,
+      193,
+      0.08
+    ); /* hover fill, sidebar active bg   */
+    --ssh-accent-dim: rgba(
+      7,
+      223,
+      193,
+      0.12
+    ); /* stronger hover fill             */
+    --ssh-primary-18: rgba(
+      7,
+      223,
+      193,
+      0.18
+    ); /* outer table border, badge border*/
+    --ssh-primary-22: rgba(
+      7,
+      223,
+      193,
+      0.22
+    ); /* control borders                 */
+    --ssh-primary-24: rgba(
+      7,
+      223,
+      193,
+      0.24
+    ); /* row shadow subtle               */
+    --ssh-primary-28: rgba(
+      7,
+      223,
+      193,
+      0.28
+    ); /* row shadow / header border      */
+    --ssh-primary-30: rgba(
+      7,
+      223,
+      193,
+      0.3
+    ); /* code block top border           */
+    --ssh-primary-55: rgba(
+      7,
+      223,
+      193,
+      0.55
+    ); /* scrollbar handle at rest        */
+    --ssh-primary-80: rgba(
+      7,
+      223,
+      193,
+      0.8
+    ); /* scrollbar handle hover          */
+    --ssh-badge-bg: rgba(
+      7,
+      223,
+      193,
+      0.1
+    ); /* type badge / code chip bg       */
 
-/* ─── 1b. Scrollbars (match brand theme) ───────────────────────────────────── */
-* {
-  scrollbar-width: thin;
-  scrollbar-color: var(--ssh-primary) var(--ssh-bg-paper);
-}
+    /* ── Semantic alpha tokens (panel / dark navy) ────────────────────────────── */
+    --ssh-panel-bg: rgba(9, 31, 44, 0.88); /* sidebar, toolbar, canvas panel  */
+    --ssh-panel-70: rgba(9, 31, 44, 0.7); /* scrollbar border inset          */
+    --ssh-panel-80: rgba(9, 31, 44, 0.8); /* code block scrollbar track      */
+    --ssh-panel-92: rgba(9, 31, 44, 0.92); /* table header row                */
 
-*::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
-}
+    /* ── Gradient overlay ─────────────────────────────────────────────────────── */
+    --ssh-overlay-dark: rgba(
+      5,
+      11,
+      43,
+      0.72
+    ); /* top linear-gradient dark stop  */
+    --ssh-overlay-mid: rgba(
+      5,
+      11,
+      43,
+      0.2
+    ); /* top linear-gradient light stop */
 
-*::-webkit-scrollbar-track {
-  background-color: var(--ssh-bg-paper);
-}
+    /* ── Shadows ──────────────────────────────────────────────────────────────── */
+    --ssh-glass-bg: rgba(255, 255, 255, 0.05);
+    --ssh-glass-border: rgba(255, 255, 255, 0.09);
+    --ssh-glass-blur: blur(16px);
+    --ssh-shadow-soft: 0 8px 24px rgba(0, 0, 0, 0.16);
+    --ssh-shadow-glow: 0 0 18px var(--ssh-primary-28);
+  }
 
-*::-webkit-scrollbar-thumb {
-  background-color: var(--ssh-primary);
-  border-radius: 5px;
-  border: 2px solid var(--ssh-bg-paper);
-}
+  /* ─── 1. Page gradient ─────────────────────────────────────────────────────── */
+  html,
+  body,
+  #root {
+    font-family: var(--ssh-font-base) !important;
+    color: var(--ssh-text-primary) !important;
+    background-color: var(--ssh-bg-base) !important;
+    background-image:
+      linear-gradient(var(--ssh-overlay-dark), var(--ssh-overlay-mid)),
+      conic-gradient(
+        from -23.81deg at 72.82% 162.44%,
+        var(--ssh-bg-base) -44.57deg,
+        var(--ssh-secondary) 7.76deg,
+        var(--ssh-primary-dark) 20.98deg,
+        var(--ssh-secondary) 52deg,
+        var(--ssh-secondary-dark) 88.68deg,
+        var(--ssh-secondary) 315.43deg,
+        var(--ssh-primary-dark) 367.76deg
+      ) !important;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+    background-attachment: fixed !important;
+  }
 
-*::-webkit-scrollbar-thumb:hover {
-  background-color: var(--ssh-primary-dark);
-}
+  /* ─── 1b. Scrollbars (match brand theme) ───────────────────────────────────── */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--ssh-primary) var(--ssh-bg-paper);
+  }
 
-/* ─── 2. Font inheritance ──────────────────────────────────────────────────── */
-*, *::before, *::after {
-  font-family: var(--ssh-font-base) !important;
-  box-sizing: border-box;
-}
+  *::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
 
-/* ─── 3. Transparent layout shells (let gradient show through) ─────────────── */
-[class*="Content"],
-[class*="Page-"],
-[class*="Wrapper-"],
-[class*="Inner-"],
-[class*="ScrollArea"],
-[class*="Scroll-"],
-.os-viewport,
-.os-content {
-  background: transparent !important;
-}
+  *::-webkit-scrollbar-track {
+    background-color: var(--ssh-bg-paper);
+  }
 
-/* ─── 4. Sidebar ───────────────────────────────────────────────────────────── */
-[class*="Sidebar"],
-aside,
-nav[aria-label] {
-  background: var(--ssh-panel-bg) !important;
-  backdrop-filter: var(--ssh-glass-blur) !important;
-  -webkit-backdrop-filter: var(--ssh-glass-blur) !important;
-  border-right: 1px solid var(--ssh-divider) !important;
-}
+  *::-webkit-scrollbar-thumb {
+    background-color: var(--ssh-primary);
+    border-radius: 5px;
+    border: 2px solid var(--ssh-bg-paper);
+  }
 
-/* Sidebar links */
-[class*="Sidebar"] a,
-[class*="Sidebar"] button,
-aside a,
-aside button {
-  color: var(--ssh-text-muted) !important;
-  font-weight: 400 !important;
-}
+  *::-webkit-scrollbar-thumb:hover {
+    background-color: var(--ssh-primary-dark);
+  }
 
-[class*="Sidebar"] a:hover,
-aside a:hover,
-[class*="Sidebar"] [class*="selected"],
-[class*="Sidebar"] [aria-current="page"] {
-  color: var(--ssh-primary) !important;
-  background: var(--ssh-accent-tint) !important;
-}
+  /* ─── 2. Font inheritance ──────────────────────────────────────────────────── */
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
 
-/* ─── 5. Top toolbar (zoom, actions bar) ──────────────────────────────────── */
-[class*="Toolbar-"],
-[class*="Bar-"][role],
-[role="toolbar"],
-[class*="ActionBar"] {
-  background: var(--ssh-panel-bg) !important;
-  backdrop-filter: blur(12px) !important;
-  -webkit-backdrop-filter: blur(12px) !important;
-  border-bottom: 1px solid var(--ssh-divider) !important;
-}
+  html,
+  body,
+  #root,
+  button,
+  input,
+  select,
+  textarea {
+    font-family: var(--ssh-font-base) !important;
+  }
 
-[class*="Toolbar-"] button,
-[class*="Bar-"] button,
-[role="toolbar"] button,
-[class*="ActionBar"] button {
-  color: var(--ssh-text-primary) !important;
-  background: transparent !important;
-  border: none !important;
-  transition: color 0.15s ease !important;
-}
+  /* ─── 3. Manager layout shells ─────────────────────────────────────────────── */
+  /*
+  The previous rule made too many manager internals transparent.
+  That causes layered/glass duplication and makes the sidebar/app shell look doubled.
+*/
+  [class*="Content"],
+  [class*="Page-"],
+  [class*="Wrapper-"],
+  [class*="Inner-"] {
+    background: transparent !important;
+  }
 
-[class*="Toolbar-"] button:hover,
-[role="toolbar"] button:hover {
-  color: var(--ssh-primary) !important;
-}
+  /* Do NOT force the sidebar scroller internals transparent */
+  .os-viewport,
+  .os-content {
+    background: inherit !important;
+  }
 
-/* ─── 6. Docs main headings ────────────────────────────────────────────────── */
-h1, h2, h3 {
-  color: var(--ssh-text-primary) !important;
-  font-family: var(--ssh-font-base) !important;
-}
+  /* ─── 4. Sidebar ───────────────────────────────────────────────────────────── */
+  /*
+  Use a solid surface. No glass blur here.
+  The blur + transparent shell combination is causing the doubled/stacked look.
+*/
+  [class*="Sidebar"],
+  aside,
+  nav[aria-label] {
+    background: var(--ssh-surface-hero) !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    border-right: 1px solid var(--ssh-divider) !important;
+    box-shadow: none !important;
+  }
 
-h1 { font-weight: 700 !important; font-size: 2rem !important; }
-h2 { font-weight: 600 !important; color: var(--ssh-primary-light) !important; }
-h3 { font-weight: 500 !important; color: var(--ssh-text-secondary) !important; }
+  /* Sidebar links */
+  [class*="Sidebar"] a,
+  [class*="Sidebar"] button,
+  aside a,
+  aside button {
+    color: var(--ssh-text-muted) !important;
+    font-weight: 400 !important;
+    background: transparent !important;
+  }
 
-p, span, div, td, th, li, label {
-  color: inherit !important;
-}
+  /* Hover */
+  [class*="Sidebar"] a:hover,
+  aside a:hover {
+    color: var(--ssh-primary) !important;
+    background: var(--ssh-accent-tint) !important;
+  }
 
-/* ─── 7. Story canvas / preview block in docs ─────────────────────────────── */
-.docs-story,
-[class*="PreviewWrapper"],
-[class*="StoryWrapper"],
-[class*="Canvas-"] {
-  background: var(--ssh-panel-bg) !important;
-  border: 1px solid var(--ssh-divider) !important;
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
-  border-radius: var(--ssh-radius) !important;
-  overflow: hidden !important;
-  box-shadow: var(--ssh-shadow-soft) !important;
-}
+  /* Selected item */
+  [class*="Sidebar"] [class*="selected"],
+  [class*="Sidebar"] [aria-current="page"],
+  aside [aria-current="page"] {
+    background: #7be0c1 !important;
+    color: #062b27 !important;
+  }
 
-.docs-story {
-  display: flex !important;
-  flex-direction: column !important;
-}
+  /* Force selected-row children to dark text/icons */
+  [class*="Sidebar"] [class*="selected"] *,
+  [class*="Sidebar"] [aria-current="page"] *,
+  aside [aria-current="page"] * {
+    color: #062b27 !important;
+    fill: #062b27 !important;
+    opacity: 1 !important;
+  }
 
-/* "Show code" / "Copy" button inside story canvas */
-.docs-story button,
-[class*="PreviewWrapper"] button,
-[class*="ActionBar"] button {
-  background: var(--ssh-accent-tint) !important;
-  border: 1px solid var(--ssh-divider) !important;
-  border-radius: var(--ssh-radius) !important;
-  color: var(--ssh-text-secondary) !important;
-  font-size: 0.75rem !important;
-  font-weight: 600 !important;
-  letter-spacing: 0.04em !important;
-  padding: 4px 12px !important;
-  transition: all 0.15s ease !important;
-  cursor: pointer !important;
-}
+  /* Context menu button inside selected sidebar row */
+  [class*="Sidebar"] [class*="selected"] button[title="Open context menu"],
+  [class*="Sidebar"] [aria-current="page"] button[title="Open context menu"],
+  aside [aria-current="page"] button[title="Open context menu"],
+  [class*="Sidebar"] [class*="selected"] button[aria-label="Open context menu"],
+  [class*="Sidebar"]
+    [aria-current="page"]
+    button[aria-label="Open context menu"],
+  aside [aria-current="page"] button[aria-label="Open context menu"] {
+    background: transparent !important;
+    color: #062b27 !important;
+    fill: #062b27 !important;
+    border: 1px solid rgba(6, 43, 39, 0.18) !important;
+    box-shadow: none !important;
+    opacity: 1 !important;
+  }
 
-.docs-story button:hover {
-  background: var(--ssh-accent-dim) !important;
-  border-color: var(--ssh-primary) !important;
-  color: var(--ssh-primary) !important;
-}
+  /* Hover/active state for that button */
+  [class*="Sidebar"]
+    [class*="selected"]
+    button[title="Open context menu"]:hover,
+  [class*="Sidebar"]
+    [aria-current="page"]
+    button[title="Open context menu"]:hover,
+  aside [aria-current="page"] button[title="Open context menu"]:hover,
+  [class*="Sidebar"]
+    [class*="selected"]
+    button[aria-label="Open context menu"]:hover,
+  [class*="Sidebar"]
+    [aria-current="page"]
+    button[aria-label="Open context menu"]:hover,
+  aside [aria-current="page"] button[aria-label="Open context menu"]:hover {
+    background: rgba(6, 43, 39, 0.1) !important;
+    color: #062b27 !important;
+    fill: #062b27 !important;
+    border-color: rgba(6, 43, 39, 0.28) !important;
+  }
 
-/* ─── 7b. Source / code blocks ────────────────────────────────────────────── */
-.docblock-source,
-.sbdocs pre,
-.sbdocs code,
-pre.prismjs,
-code.prismjs {
-  font-family: var(--ssh-font-mono) !important;
-}
+  /* Ensure the dots icon itself matches */
+  [class*="Sidebar"] [class*="selected"] button[title="Open context menu"] svg,
+  [class*="Sidebar"]
+    [aria-current="page"]
+    button[title="Open context menu"]
+    svg,
+  aside [aria-current="page"] button[title="Open context menu"] svg,
+  [class*="Sidebar"]
+    [class*="selected"]
+    button[aria-label="Open context menu"]
+    svg,
+  [class*="Sidebar"]
+    [aria-current="page"]
+    button[aria-label="Open context menu"]
+    svg,
+  aside [aria-current="page"] button[aria-label="Open context menu"] svg {
+    color: #062b27 !important;
+    fill: currentColor !important;
+  }
 
-/* Canvas "Show code" snippet (often not wrapped in .docblock-source) */
-.docs-story pre,
-.docs-story pre.prismjs {
-  margin: 0 !important;
-  padding: 14px 16px !important;
-  background: rgba(14, 26, 36, 0.96) !important;
-  color: var(--ssh-text-secondary) !important;
-  border-top: 1px solid rgba(7, 223, 193, 0.26) !important;
-  border-radius: 0 0 var(--ssh-radius) var(--ssh-radius) !important;
-}
+  /* ─── 5. Top toolbar (zoom, actions bar) ──────────────────────────────────── */
+  [class*="Toolbar-"],
+  [class*="Bar-"][role],
+  [role="toolbar"],
+  [class*="ActionBar"] {
+    background: var(--ssh-panel-bg) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+    border-bottom: 1px solid var(--ssh-divider) !important;
+  }
 
-.docblock-source,
-.sbdocs pre,
-pre.prismjs {
-  background: linear-gradient(
-    135deg,
-    rgba(7, 223, 193, 0.10) 0%,
-    rgba(9, 31, 44, 0.96) 55%,
-    rgba(14, 26, 36, 0.96) 100%
-  ) !important;
-  border: 1px solid rgba(7, 223, 193, 0.16) !important;
-  border-radius: var(--ssh-radius) !important;
-  box-shadow: none !important;
-}
+  [class*="Toolbar-"] button,
+  [class*="Bar-"] button,
+  [role="toolbar"] button,
+  [class*="ActionBar"] button {
+    color: var(--ssh-text-primary) !important;
+    background: transparent !important;
+    border: none !important;
+    transition: color 0.15s ease !important;
+  }
 
-.docs-story .docblock-source {
-  margin: 0 !important;
-  border-radius: 0 0 var(--ssh-radius) var(--ssh-radius) !important;
-  border: none !important;
-  border-top: 1px solid rgba(7, 223, 193, 0.26) !important;
-}
+  [class*="Toolbar-"] button:hover,
+  [role="toolbar"] button:hover {
+    color: var(--ssh-primary) !important;
+  }
 
-.docs-story .docblock-source pre {
-  margin: 0 !important;
-  padding: 14px 16px !important;
-}
+  /* ─── 6. Docs main headings ────────────────────────────────────────────────── */
+  h1,
+  h2,
+  h3 {
+    color: var(--ssh-text-primary) !important;
+    font-family: var(--ssh-font-base) !important;
+  }
 
-.docblock-source pre,
-.sbdocs pre code,
-pre.prismjs code {
-  color: var(--ssh-text-secondary) !important;
-}
+  h1 {
+    font-weight: 700 !important;
+    font-size: 2rem !important;
+  }
+  h2 {
+    font-weight: 600 !important;
+    color: var(--ssh-primary-light) !important;
+  }
+  h3 {
+    font-weight: 500 !important;
+    color: var(--ssh-text-secondary) !important;
+  }
 
-/* Prism-ish token colours (Storybook uses Prism classes in many themes) */
-.docblock-source .token.tag,
-.docblock-source .token.selector,
-.sbdocs pre .token.tag,
-.sbdocs pre .token.selector {
-  color: var(--ssh-primary-light) !important;
-}
+  /* Keep typography inherited in docs content, but do not globally override every div/span in manager UI */
+  .sbdocs p,
+  .sbdocs span,
+  .sbdocs li,
+  .sbdocs label,
+  .docblock-argstable td,
+  .docblock-argstable th {
+    color: inherit !important;
+  }
 
-.docblock-source .token.attr-name,
-.sbdocs pre .token.attr-name {
-  color: var(--ssh-secondary-light) !important;
-}
+  /* ─── 7. Story canvas / preview block in docs ─────────────────────────────── */
+  .docs-story,
+  [class*="PreviewWrapper"],
+  [class*="StoryWrapper"],
+  [class*="Canvas-"] {
+    background: var(--ssh-panel-bg) !important;
+    border: 1px solid var(--ssh-divider) !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    border-radius: var(--ssh-radius) !important;
+    overflow: hidden !important;
+    box-shadow: var(--ssh-shadow-soft) !important;
+  }
 
-.docblock-source .token.attr-value,
-.docblock-source .token.string,
-.sbdocs pre .token.attr-value,
-.sbdocs pre .token.string {
-  color: var(--ssh-text-primary) !important;
-}
+  .docs-story {
+    display: flex !important;
+    flex-direction: column !important;
+  }
 
-.docblock-source .token.punctuation,
-.sbdocs pre .token.punctuation {
-  color: var(--ssh-text-muted) !important;
-}
+  /* "Show code" / "Copy" button inside story canvas */
+  .docs-story button,
+  [class*="PreviewWrapper"] button,
+  [class*="ActionBar"] button {
+    background: var(--ssh-accent-tint) !important;
+    border: 1px solid var(--ssh-divider) !important;
+    border-radius: var(--ssh-radius) !important;
+    color: var(--ssh-text-secondary) !important;
+    font-size: 0.75rem !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.04em !important;
+    padding: 4px 12px !important;
+    transition: all 0.15s ease !important;
+    cursor: pointer !important;
+  }
 
-/* ─── 8. Args / props table — glass card ─────────────────────────────────── */
-.docblock-argstable,
-[class*="ArgstableBlock"],
-[class*="ArgsTable"] {
-  background: var(--ssh-glass-bg) !important;
-  border: 1px solid rgba(7, 223, 193, 0.18) !important;
-  border-radius: var(--ssh-radius) !important;
-  backdrop-filter: var(--ssh-glass-blur) !important;
-  -webkit-backdrop-filter: var(--ssh-glass-blur) !important;
-  overflow: hidden !important;
-  border-collapse: separate !important;
-  border-spacing: 0 !important;
-  width: 100% !important;
-  box-shadow: var(--ssh-shadow-soft) !important;
-}
+  .docs-story button:hover {
+    background: var(--ssh-accent-dim) !important;
+    border-color: var(--ssh-primary) !important;
+    color: var(--ssh-primary) !important;
+  }
 
-/* Reset every cell to transparent */
-.docblock-argstable th,
-.docblock-argstable td {
-  background: transparent !important;
-  color: var(--ssh-text-primary) !important;
-  border-bottom: 1px solid rgba(7, 223, 193, 0.28) !important;
-  padding: 12px 16px !important;
-  vertical-align: middle !important;
-  font-size: 0.875rem !important;
-}
+  /* ─── 7b. Source / code blocks ────────────────────────────────────────────── */
+  .docblock-source,
+  .sbdocs pre,
+  .sbdocs code,
+  pre.prismjs,
+  code.prismjs {
+    font-family: var(--ssh-font-mono) !important;
+  }
 
-/* Continuous horizontal separators (not per-cell) */
-.docblock-argstable thead tr {
-  box-shadow: inset 0 -1px rgba(7, 223, 193, 0.28) !important;
-}
+  /* Canvas "Show code" snippet (often not wrapped in .docblock-source) */
+  .docs-story pre,
+  .docs-story pre.prismjs {
+    margin: 0 !important;
+    padding: 14px 16px !important;
+    background: var(--ssh-surface-depth) !important;
+    color: var(--ssh-text-secondary) !important;
+    border-top: 1px solid var(--ssh-primary-30) !important;
+    border-radius: 0 0 var(--ssh-radius) var(--ssh-radius) !important;
+  }
 
-.docblock-argstable tbody tr {
-  box-shadow: inset 0 -1px rgba(7, 223, 193, 0.24) !important;
-}
+  .docblock-source,
+  .sbdocs pre,
+  pre.prismjs {
+    background: var(--ssh-surface-depth) !important;
+    border: 1px solid var(--ssh-primary-22) !important;
+    border-radius: var(--ssh-radius) !important;
+    box-shadow: none !important;
+  }
 
-.docblock-argstable tbody tr:last-child {
-  box-shadow: none !important;
-}
+  .docs-story .docblock-source {
+    margin: 0 !important;
+    border-radius: 0 0 var(--ssh-radius) var(--ssh-radius) !important;
+    border: none !important;
+    border-top: 1px solid var(--ssh-primary-30) !important;
+  }
 
-/* Column separators */
-.docblock-argstable th:not(:last-child),
-.docblock-argstable td:not(:last-child) {
-  border-right: 1px solid rgba(7, 223, 193, 0.12) !important;
-}
+  .docs-story .docblock-source pre {
+    margin: 0 !important;
+    padding: 14px 16px !important;
+  }
 
-/* Header row */
-.docblock-argstable thead th,
-.docblock-argstable-head th {
-  background: rgba(7, 223, 193, 0.10) !important;
-  color: var(--ssh-primary) !important;
-  font-weight: 700 !important;
-  font-size: 0.72rem !important;
-  text-transform: uppercase !important;
-  letter-spacing: 0.08em !important;
-  border-bottom: 1px solid rgba(7, 223, 193, 0.28) !important;
-}
+  .docblock-source pre,
+  .sbdocs pre code,
+  pre.prismjs code {
+    color: var(--ssh-text-secondary) !important;
+  }
 
-/* Body rows */
-.docblock-argstable-body tr,
-.docblock-argstable tbody tr {
-  transition: background 0.15s ease !important;
-}
+  /* Code block scrollbar — brand teal thumb on dark track */
+  .docblock-source,
+  .docblock-source pre,
+  .docs-story pre,
+  .docs-story pre.prismjs,
+  .sbdocs pre {
+    scrollbar-width: thin;
+    scrollbar-color: var(--ssh-primary) var(--ssh-panel-80);
+  }
 
-.docblock-argstable-body tr:hover td,
-.docblock-argstable tbody tr:hover td {
-  background: var(--ssh-accent-tint) !important;
-}
+  .docblock-source::-webkit-scrollbar,
+  .docblock-source pre::-webkit-scrollbar,
+  .docs-story pre::-webkit-scrollbar,
+  .sbdocs pre::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+  }
 
-/* Prop name — bold */
-.docblock-argstable td:first-child {
-  font-weight: 700 !important;
-  color: var(--ssh-text-primary) !important;
-}
+  .docblock-source::-webkit-scrollbar-track,
+  .docblock-source pre::-webkit-scrollbar-track,
+  .docs-story pre::-webkit-scrollbar-track,
+  .sbdocs pre::-webkit-scrollbar-track {
+    background: var(--ssh-panel-80);
+    border-radius: 0 0 var(--ssh-radius) var(--ssh-radius);
+  }
 
-/* Required asterisk */
-.docblock-argstable [class*="required"],
-.docblock-argstable span[title*="required"] {
-  color: var(--ssh-primary) !important;
-}
+  .docblock-source::-webkit-scrollbar-thumb,
+  .docblock-source pre::-webkit-scrollbar-thumb,
+  .docs-story pre::-webkit-scrollbar-thumb,
+  .sbdocs pre::-webkit-scrollbar-thumb {
+    background: var(--ssh-primary-55);
+    border-radius: 10px;
+    border: 1px solid var(--ssh-panel-70);
+  }
 
-/* Type badge / code chips inside table */
-.docblock-argstable code,
-.docblock-argstable [class*="Code"],
-.docblock-argstable [class*="code"] {
-  background: rgba(7, 223, 193, 0.10) !important;
-  color: var(--ssh-secondary-light) !important;
-  border: 1px solid rgba(7, 223, 193, 0.18) !important;
-  border-radius: 3px !important;
-  padding: 1px 7px !important;
-  font-family: var(--ssh-font-mono) !important;
-  font-size: 0.78rem !important;
-}
+  .docblock-source::-webkit-scrollbar-thumb:hover,
+  .docblock-source pre::-webkit-scrollbar-thumb:hover,
+  .docs-story pre::-webkit-scrollbar-thumb:hover,
+  .sbdocs pre::-webkit-scrollbar-thumb:hover {
+    background: var(--ssh-primary);
+  }
 
-/* Default value */
-.docblock-argstable td:nth-child(3) {
-  color: var(--ssh-text-muted) !important;
-}
+  /* Prism token colours */
+  .docblock-source .token.tag,
+  .docblock-source .token.selector,
+  .sbdocs pre .token.tag,
+  .sbdocs pre .token.selector {
+    color: var(--ssh-primary-light) !important;
+  }
 
-/* ─── 9. Controls ─────────────────────────────────────────────────────────── */
-/* Text / textarea inputs */
-.docblock-argstable input[type="text"],
-.docblock-argstable input[type="number"],
-.docblock-argstable textarea {
-  background: rgba(15, 46, 61, 0.85) !important;
-  border: 1px solid rgba(7, 223, 193, 0.22) !important;
-  border-radius: 4px !important;
-  color: var(--ssh-text-primary) !important;
-  padding: 6px 10px !important;
-  font-family: var(--ssh-font-mono) !important;
-  font-size: 0.82rem !important;
-  width: 100% !important;
-  transition: border-color 0.15s, box-shadow 0.15s !important;
-  outline: none !important;
-}
+  .docblock-source .token.attr-name,
+  .sbdocs pre .token.attr-name {
+    color: var(--ssh-secondary-light) !important;
+  }
 
-.docblock-argstable input:focus,
-.docblock-argstable textarea:focus {
-  border-color: var(--ssh-primary) !important;
-  box-shadow: 0 0 0 3px rgba(7, 223, 193, 0.12) !important;
-}
+  .docblock-source .token.attr-value,
+  .docblock-source .token.string,
+  .sbdocs pre .token.attr-value,
+  .sbdocs pre .token.string {
+    color: var(--ssh-text-primary) !important;
+  }
 
-/* Select dropdowns */
-.docblock-argstable select {
-  background: rgba(15, 46, 61, 0.85) !important;
-  border: 1px solid rgba(7, 223, 193, 0.22) !important;
-  border-radius: 4px !important;
-  color: var(--ssh-text-primary) !important;
-  padding: 6px 10px !important;
-  appearance: auto !important;
-  width: 100% !important;
-}
+  .docblock-source .token.punctuation,
+  .sbdocs pre .token.punctuation {
+    color: var(--ssh-text-muted) !important;
+  }
 
-/* Boolean pill toggles (False | True) */
-[class*="BooleanControl"],
-[class*="boolean-control"] {
-  display: flex !important;
-  gap: 6px !important;
-}
+  /* ─── 8. Args / props table ──────────────────────────────────────────────── */
+  .docblock-argstable,
+  [class*="ArgstableBlock"],
+  [class*="ArgsTable"] {
+    background: var(--ssh-glass-bg) !important;
+    border: 1px solid var(--ssh-primary-18) !important;
+    border-radius: var(--ssh-radius) !important;
+    backdrop-filter: var(--ssh-glass-blur) !important;
+    -webkit-backdrop-filter: var(--ssh-glass-blur) !important;
+    overflow: hidden !important;
+    border-collapse: separate !important;
+    border-spacing: 0 !important;
+    width: 100% !important;
+    box-shadow: var(--ssh-shadow-soft) !important;
+  }
 
-[class*="BooleanControl"] button,
-[class*="boolean-control"] button {
-  background: transparent !important;
-  border: 1px solid rgba(7, 223, 193, 0.22) !important;
-  border-radius: 4px !important;
-  color: var(--ssh-text-disabled) !important;
-  padding: 4px 14px !important;
-  font-size: 0.78rem !important;
-  font-weight: 600 !important;
-  letter-spacing: 0.04em !important;
-  transition: all 0.15s ease !important;
-  cursor: pointer !important;
-}
+  /* Reset every cell to transparent */
+  .docblock-argstable th,
+  .docblock-argstable td {
+    background: transparent !important;
+    color: var(--ssh-text-primary) !important;
+    border-bottom: 1px solid var(--ssh-primary-28) !important;
+    padding: 12px 16px !important;
+    vertical-align: middle !important;
+    font-size: 0.875rem !important;
+  }
 
-/* ─── 10. OverlayScrollbars (sidebar scroll) ─────────────────────────────── */
-.os-scrollbar,
-.os-scrollbar-track,
-.os-scrollbar-handle {
-  background: transparent !important;
-}
+  /* Continuous horizontal separators */
+  .docblock-argstable thead tr {
+    box-shadow: inset 0 -1px var(--ssh-primary-28) !important;
+  }
 
-.os-scrollbar-handle {
-  background: rgba(7, 223, 193, 0.55) !important;
-  border-radius: 999px !important;
-  border: 1px solid rgba(9, 31, 44, 0.7) !important;
-}
+  .docblock-argstable tbody tr {
+    box-shadow: inset 0 -1px var(--ssh-primary-24) !important;
+  }
 
-.os-scrollbar-handle:hover {
-  background: rgba(7, 223, 193, 0.8) !important;
-}
+  .docblock-argstable tbody tr:last-child {
+    box-shadow: none !important;
+  }
 
-[class*="BooleanControl"] button[class*="active"],
-[class*="BooleanControl"] button[class*="selected"],
-[class*="BooleanControl"] button[aria-pressed="true"],
-[class*="boolean-control"] button[class*="active"] {
-  background: rgba(7, 223, 193, 0.15) !important;
-  border-color: var(--ssh-primary) !important;
-  color: var(--ssh-primary) !important;
-}
+  /* Column separators */
+  .docblock-argstable th:not(:last-child),
+  .docblock-argstable td:not(:last-child) {
+    border-right: 1px solid var(--ssh-accent-dim) !important;
+  }
 
-/* Reset icon button in controls */
-[class*="ResetWrapper"] button,
-[title*="Reset"] {
-  color: var(--ssh-text-disabled) !important;
-  transition: color 0.15s !important;
-}
-[class*="ResetWrapper"] button:hover {
-  color: var(--ssh-primary) !important;
-}
+  /* Header row — solid dark navy matching the canvas toolbar */
+  .docblock-argstable thead th,
+  .docblock-argstable-head th {
+    background: var(--ssh-panel-92) !important;
+    color: var(--ssh-text-secondary) !important;
+    font-weight: 700 !important;
+    font-size: 0.72rem !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.08em !important;
+    border-bottom: 1px solid var(--ssh-primary-28) !important;
+  }
 
-/* ─── 10. Dividers and separators ─────────────────────────────────────────── */
-hr {
-  border-color: var(--ssh-divider) !important;
-  border-style: solid !important;
-}
+  /* Body rows */
+  .docblock-argstable-body tr,
+  .docblock-argstable tbody tr {
+    transition: background 0.15s ease !important;
+  }
 
-/* ─── 11. Scrollbars ─────────────────────────────────────────────────────── */
-* {
-  scrollbar-width: thin;
-  scrollbar-color: var(--ssh-border) transparent;
-}
-*::-webkit-scrollbar { width: 5px; height: 5px; }
-*::-webkit-scrollbar-track { background: transparent; }
-*::-webkit-scrollbar-thumb {
-  background: var(--ssh-border);
-  border-radius: 10px;
-}
-*::-webkit-scrollbar-thumb:hover { background: var(--ssh-primary-dark); }
+  .docblock-argstable-body tr:hover td,
+  .docblock-argstable tbody tr:hover td {
+    background: var(--ssh-accent-tint) !important;
+  }
+
+  /* Prop name — bold */
+  .docblock-argstable td:first-child {
+    font-weight: 700 !important;
+    color: var(--ssh-text-primary) !important;
+  }
+
+  /* Required asterisk */
+  .docblock-argstable [class*="required"],
+  .docblock-argstable span[title*="required"] {
+    color: var(--ssh-primary) !important;
+  }
+
+  /* Type badge / code chips inside table */
+  .docblock-argstable code,
+  .docblock-argstable [class*="Code"],
+  .docblock-argstable [class*="code"] {
+    background: var(--ssh-badge-bg) !important;
+    color: var(--ssh-secondary-light) !important;
+    border: 1px solid var(--ssh-primary-18) !important;
+    border-radius: 3px !important;
+    padding: 1px 7px !important;
+    font-family: var(--ssh-font-mono) !important;
+    font-size: 0.78rem !important;
+  }
+
+  /* Default value */
+  .docblock-argstable td:nth-child(3) {
+    color: var(--ssh-text-muted) !important;
+  }
+
+  /* ─── 9. Controls ─────────────────────────────────────────────────────────── */
+  /* Text / textarea inputs */
+  .docblock-argstable input[type="text"],
+  .docblock-argstable input[type="number"],
+  .docblock-argstable textarea {
+    background: var(--ssh-surface-depth) !important;
+    border: 1px solid var(--ssh-primary-22) !important;
+    border-radius: 4px !important;
+    color: var(--ssh-text-primary) !important;
+    padding: 6px 10px !important;
+    font-family: var(--ssh-font-mono) !important;
+    font-size: 0.82rem !important;
+    width: 100% !important;
+    transition:
+      border-color 0.15s,
+      box-shadow 0.15s !important;
+    outline: none !important;
+    box-shadow: none !important;
+    background-image: none !important;
+  }
+
+  .docblock-argstable textarea {
+    resize: vertical !important;
+  }
+
+  .docblock-argstable textarea::before,
+  .docblock-argstable textarea::after,
+  .docblock-argstable select::before,
+  .docblock-argstable select::after {
+    content: none !important;
+    display: none !important;
+  }
+
+  .docblock-argstable input:focus,
+  .docblock-argstable textarea:focus {
+    border-color: var(--ssh-primary) !important;
+    box-shadow: 0 0 0 3px var(--ssh-accent-dim) !important;
+  }
+
+  /* Select dropdowns */
+  .docblock-argstable select {
+    background: var(--ssh-surface-depth) !important;
+    border: 1px solid var(--ssh-primary-22) !important;
+    border-radius: 4px !important;
+    color: var(--ssh-text-primary) !important;
+    padding: 6px 36px 6px 10px !important;
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    appearance: none !important;
+    background-image: none !important;
+    box-shadow: none !important;
+    width: 100% !important;
+  }
+
+  .docblock-argstable select::-ms-expand {
+    display: none !important;
+  }
+
+  /* Boolean pill toggles (False | True) */
+  [class*="BooleanControl"],
+  [class*="boolean-control"] {
+    display: flex !important;
+    gap: 6px !important;
+  }
+
+  [class*="BooleanControl"] button,
+  [class*="boolean-control"] button {
+    background: transparent !important;
+    border: 1px solid var(--ssh-primary-22) !important;
+    border-radius: 4px !important;
+    color: var(--ssh-text-disabled) !important;
+    padding: 4px 14px !important;
+    font-size: 0.78rem !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.04em !important;
+    transition: all 0.15s ease !important;
+    cursor: pointer !important;
+  }
+
+  /* ─── 10. OverlayScrollbars (sidebar scroll) ─────────────────────────────── */
+  .os-scrollbar,
+  .os-scrollbar-track,
+  .os-scrollbar-handle {
+    background: transparent !important;
+  }
+
+  .os-scrollbar-handle {
+    background: var(--ssh-primary-55) !important;
+    border-radius: 999px !important;
+    border: 1px solid var(--ssh-panel-70) !important;
+  }
+
+  .os-scrollbar-handle:hover {
+    background: var(--ssh-primary-80) !important;
+  }
+
+  [class*="BooleanControl"] button[class*="active"],
+  [class*="BooleanControl"] button[class*="selected"],
+  [class*="BooleanControl"] button[aria-pressed="true"],
+  [class*="boolean-control"] button[class*="active"] {
+    background: var(--ssh-divider) !important;
+    border-color: var(--ssh-primary) !important;
+    color: var(--ssh-primary) !important;
+  }
+
+  /* Reset icon button in controls */
+  [class*="ResetWrapper"] button,
+  [title*="Reset"] {
+    color: var(--ssh-text-disabled) !important;
+    transition: color 0.15s !important;
+  }
+  [class*="ResetWrapper"] button:hover {
+    color: var(--ssh-primary) !important;
+  }
+  /* ─── 11. Toast notifications ─────────────────────────────────────────────── */
+  /*
+  Target only the actual Storybook "Story saved" toast content wrapper.
+  This avoids matching larger portal/layout ancestors and stops the sidebar
+  duplication artifacts.
+*/
+
+  /* Actual content wrapper of the save toast */
+  /* div.css-kkcbeh:has(> div[title="Story saved"]) {
+    background: #08131a !important;
+    border: 1px solid rgba(7, 223, 193, 0.3) !important;
+    border-left: 3px solid #07dfc1 !important;
+    border-radius: 8px !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.55) !important;
+    color: #effeeb !important;
+    opacity: 1 !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    padding: 14px 16px !important;
+  } */
+  div.css-kkcbeh:has(> div[title="Story saved"]) {
+    background: transparent !important;
+    border: none !important;
+    border-left: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    color: #effeeb !important;
+    opacity: 1 !important;
+    padding: 0 !important;
+  }
+
+  /* Style the actual outer Storybook toast shell */
+  div:has(> div.css-kkcbeh > div[title="Story saved"]) {
+    background: #08131a !important;
+    border: 1px solid rgba(7, 223, 193, 0.3) !important;
+    border-left: 3px solid #07dfc1 !important;
+    border-radius: 8px !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.55) !important;
+    color: #effeeb !important;
+    opacity: 1 !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  /* Keep immediate children transparent so the outer shell is the only card */
+  div:has(> div.css-kkcbeh > div[title="Story saved"]) > * {
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+  /* Title */
+  div.css-kkcbeh:has(> div[title="Story saved"]) > div[title="Story saved"] {
+    color: #effeeb !important;
+    font-weight: 700 !important;
+    background: transparent !important;
+  }
+
+  div:has(> div[title="Story saved"]) {
+    background: #08131a !important;
+    border: 1px solid rgba(7, 223, 193, 0.3) !important;
+    border-left: 3px solid #07dfc1 !important;
+    border-radius: 8px !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.55) !important;
+    color: #effeeb !important;
+    opacity: 1 !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    padding: 14px 16px !important;
+  }
+
+  div:has(> div[title="Story saved"]) > div[title="Story saved"] {
+    color: #effeeb !important;
+    font-weight: 700 !important;
+    background: transparent !important;
+  }
+
+  div:has(> div[title="Story saved"]) > div:not([title]) {
+    color: #b7d9d3 !important;
+    background: transparent !important;
+    opacity: 1 !important;
+  }
+
+  div:has(> div[title="Story saved"]) b,
+  div:has(> div[title="Story saved"]) strong {
+    color: #effeeb !important;
+    font-weight: 700 !important;
+  }
+  /* ─── 12. Dividers and separators ─────────────────────────────────────────── */
+  hr {
+    border-color: var(--ssh-divider) !important;
+    border-style: solid !important;
+  }
+
+  /* ─── 13. Scrollbars ─────────────────────────────────────────────────────── */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--ssh-border) transparent;
+  }
+  *::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+  }
+  *::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  *::-webkit-scrollbar-thumb {
+    background: var(--ssh-border);
+    border-radius: 10px;
+  }
+  *::-webkit-scrollbar-thumb:hover {
+    background: var(--ssh-primary-dark);
+  }
 </style>

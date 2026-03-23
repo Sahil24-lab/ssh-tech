@@ -180,20 +180,10 @@ export function BrandButton({
   // ── ghost styling override ─────────────────────────────────────────────────
   const ghostSx: SxProps<Theme> = isGhost
     ? {
-        border: `1px solid ${alpha(accent.main, 0.30)}`,
-        color: "text.secondary",
-        backgroundColor: "transparent",
-        boxShadow: `inset 0 1px 0 ${alpha(accent.main, 0.06)}`,
-        "&.Mui-disabled": {
-          opacity: "1 !important",
-          cursor: "not-allowed",
-          pointerEvents: "auto",
-          transform: "none",
-          border: `1px solid ${alpha(accent.main, 0.28)} !important`,
-          backgroundColor: `${alpha(accent.main, 0.08)} !important`,
-          color: "rgba(255, 255, 255, 0.38) !important",
-          boxShadow: "none !important",
-        },
+        border: `1px solid ${alpha(accent.main, 0.45)}`,
+        color: accent.light,
+        backgroundColor: alpha(accent.main, 0.05),
+        boxShadow: `inset 0 1px 0 ${alpha(accent.main, 0.08)}`,
         "&:hover": {
           border: `1px solid ${alpha(accent.main, 0.58)}`,
           color: `${accent.light}`,
@@ -209,6 +199,26 @@ export function BrandButton({
           backgroundColor: alpha(accent.main, 0.11),
           transform: "scale(0.97) translateY(0px)",
           boxShadow: "inset 0 1px 3px rgba(0,0,0,0.10)",
+        },
+      }
+    : {};
+
+  // ── disabled state — applied via sx so Emotion specificity beats MUI internals ──
+  // Uses the accent color for the border so each semantic colour gets its own tint.
+  // Applied to ALL variants (ghost included) — ghost has no special disabled treatment
+  // beyond this shared style.
+  const disabledSx: SxProps<Theme> = disabled && !showLoadingStyle
+    ? {
+        "&.Mui-disabled": {
+          opacity: "1 !important",
+          cursor: "not-allowed",
+          pointerEvents: "auto",
+          transform: "none",
+          background: "rgba(14, 26, 36, 0.75) !important",
+          backgroundImage: "none !important",
+          color: "rgba(239, 254, 235, 0.45) !important",
+          border: `1px solid ${alpha(accent.main, 0.38)} !important`,
+          boxShadow: "none !important",
         },
       }
     : {};
@@ -266,7 +276,7 @@ export function BrandButton({
       endIcon={showLoadingStyle ? undefined : endIcon}
       onClick={onClick}
       type={href ? undefined : type}
-      sx={[baseSx, glowSx, ghostSx, shimmerSx, sx].filter(Boolean) as SxProps<Theme>}
+      sx={[baseSx, glowSx, ghostSx, disabledSx, shimmerSx, sx].filter(Boolean) as SxProps<Theme>}
     >
       {/* Perimeter orbit trace — positioned outside the button bounds */}
       {idleDims && (

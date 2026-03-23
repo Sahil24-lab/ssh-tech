@@ -1,5 +1,6 @@
 import { createTheme, responsiveFontSizes, type ThemeOptions } from "@mui/material/styles";
 import { brandTokens } from "./tokens";
+import { layoutTokens } from "./tokens/layout";
 import ButtonStyles from "./button-styles/ButtonStyles";
 import ChipStyles from "./chip-styles/ChipStyles";
 import LinkStyles from "./link-styles/LinkStyles";
@@ -133,4 +134,5 @@ const baseThemeOptions: ThemeOptions = {
   },
 };
 
-export const createBrandTheme = () => responsiveFontSizes(createTheme(baseThemeOptions));
+export const createBrandTheme = () =>
+  responsiveFontSizes(createTheme({ ...baseThemeOptions, layout: layoutTokens }));

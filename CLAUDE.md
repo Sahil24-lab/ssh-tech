@@ -71,6 +71,81 @@ Choose a clear conceptual direction and execute with precision. Bold maximalism 
 
 Match implementation complexity to the vision. Maximalist designs need elaborate animation code. Minimal designs need extreme precision in spacing, typography, and subtle details.
 
+## Visual Feedback Loop
+
+When building or modifying UI components, use the screenshot loop to validate visually before considering a task done.
+
+### Finding Storybook story IDs
+
+Story IDs follow the pattern `[path]--[variant]` in kebab-case. To discover available IDs:
+
+```bash
+grep -r "export const" packages/brand-ui/src/**/*.stories.tsx src/**/*.stories.tsx 2>/dev/null | grep -v "^Binary"
+```
+
+A story exported as `export const Primary` in `components/BrandButton.stories.tsx` becomes `components-brandbutton--primary`.
+
+### Which server to use
+
+| What you're working on | Server | Start command |
+|---|---|---|
+| `packages/brand-ui` components/patterns | Storybook `localhost:6006` | `npm run storybook` |
+| `apps/new-site` pages | Next.js `localhost:3000` | `npm run dev` |
+| `src/` (root app / production) | Next.js `localhost:3000` | `npm run dev:legacy` |
+
+### Taking screenshots
+
+```bash
+# brand-ui component — isolated in Storybook (localhost:6006)
+node scripts/preview.mjs story components-brandbutton--primary
+
+# new-site page — full Next.js app (localhost:3000, npm run dev)
+node scripts/preview.mjs page http://localhost:3000
+node scripts/preview.mjs page http://localhost:3000/about
+
+# root app page — legacy Next.js app (localhost:3000, npm run dev:legacy)
+node scripts/preview.mjs page http://localhost:3000/blog
+
+# Mobile viewport (375px) — add --mobile to any command
+node scripts/preview.mjs page http://localhost:3000 --mobile
+node scripts/preview.mjs story components-hero--default --mobile
+
+# Custom output path
+node scripts/preview.mjs story components-hero--default /tmp/hero.png
+```
+
+The script will exit with an error if the required server isn't running, so a successful screenshot means you're looking at real UI.
+
+### Critical: always READ the screenshot file
+
+Running the script is not enough. After every screenshot, use the Read tool to open the saved image:
+
+```
+Read /tmp/preview.png
+```
+
+Do NOT skip this step. "Screenshot saved" in stdout only means the file was written — it does not mean the UI looks correct.
+
+### Iteration loop
+
+1. Make code changes.
+2. Run the screenshot command.
+3. **Read `/tmp/preview.png`** and assess against the checklist below.
+4. Fix issues and repeat until satisfied.
+5. For any layout work, take both desktop and `--mobile` screenshots before marking done.
+6. When done: `npm run visual:baseline` to lock in the new baseline.
+
+### Visual self-assessment checklist
+
+- **Contrast** — Is text legible against its background? Does the teal glow read clearly on dark navy?
+- **Hierarchy** — What draws the eye first? Is that the right element?
+- **Spacing** — Does padding feel intentional, or cramped/floaty?
+- **Brand fidelity** — Does it feel SSH Tech (dark, technical, refined) or generic?
+- **Interactive affordance** — Are buttons/links visually distinct from static content?
+- **Mobile** — On 375px: does anything overflow, collapse badly, or lose hierarchy?
+
+---
+
 ## Code Style Notes
 
 - `@typescript-eslint/no-explicit-any` is a warning, not an error

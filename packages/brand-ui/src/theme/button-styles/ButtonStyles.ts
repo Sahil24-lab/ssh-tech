@@ -12,7 +12,8 @@ const ButtonStyles: Components<Theme> = {
       disableElevation: true,
     },
     styleOverrides: {
-      root: {
+      // Convert to function so we can reference theme for focus-visible.
+      root: ({ theme }) => ({
         textTransform: "none",
         borderRadius: 6,
         fontWeight: 600,
@@ -38,21 +39,32 @@ const ButtonStyles: Components<Theme> = {
           boxShadow: "none !important",
         },
 
-        // Disabled — subtle raised surface + muted near-white text.
-        // Near-white text contrasts against the dark teal surface; teal border
-        // keeps brand cohesion while clearly signalling "unavailable".
+        // Keyboard focus ring — brand-teal by default, overridden per color variant below.
+        // 3px offset pushes the ring clear of the border so it's always visible.
+        // We only show it on :focus-visible (keyboard nav), not :focus (click).
+        "&:focus-visible": {
+          outline: `2px solid ${theme.palette.primary.main}`,
+          outlineOffset: "3px",
+          zIndex: 1,
+        },
+
+        // Disabled — dark navy surface so the button stays legible against the
+        // brand teal gradient background. A pure teal fill (rgba 7,223,193,0.08)
+        // blends into the gradient and becomes invisible.
+        // The muted near-white text + teal border signal "unavailable" while
+        // keeping the button clearly readable.
         "&.Mui-disabled": {
           opacity: 1,
           cursor: "not-allowed",
           pointerEvents: "auto",
           transform: "none",
           boxShadow: "none",
-          background: "rgba(7, 223, 193, 0.08) !important",
+          background: "rgba(14, 26, 36, 0.75) !important",
           backgroundImage: "none !important",
-          color: "rgba(255, 255, 255, 0.38) !important",
-          border: "1px solid rgba(7, 223, 193, 0.28) !important",
+          color: "rgba(239, 254, 235, 0.50) !important",
+          border: "1px solid rgba(7, 223, 193, 0.38) !important",
         },
-      },
+      }),
 
       sizeSmall: {
         fontSize: "0.78rem",
@@ -68,6 +80,37 @@ const ButtonStyles: Components<Theme> = {
         fontSize: "0.9375rem",
         padding: "11px 28px",
         letterSpacing: "0.025em",
+      },
+
+      // ── Disabled state — redeclared at slot level to beat MUI's higher-specificity
+      // .MuiButton-contained.Mui-disabled / .MuiButton-outlined.Mui-disabled rules.
+      // root-level &.Mui-disabled loses the cascade to these compound selectors.
+      contained: {
+        "&.Mui-disabled": {
+          background: "rgba(14, 26, 36, 0.75) !important",
+          backgroundImage: "none !important",
+          color: "rgba(239, 254, 235, 0.50) !important",
+          border: "1px solid rgba(7, 223, 193, 0.38) !important",
+          boxShadow: "none",
+        },
+      },
+      outlined: {
+        "&.Mui-disabled": {
+          background: "rgba(14, 26, 36, 0.75) !important",
+          backgroundImage: "none !important",
+          color: "rgba(239, 254, 235, 0.50) !important",
+          border: "1px solid rgba(7, 223, 193, 0.38) !important",
+          boxShadow: "none",
+        },
+      },
+      text: {
+        "&.Mui-disabled": {
+          background: "transparent !important",
+          backgroundImage: "none !important",
+          color: "rgba(239, 254, 235, 0.35) !important",
+          border: "none !important",
+          boxShadow: "none",
+        },
       },
     },
 
@@ -107,6 +150,7 @@ const ButtonStyles: Components<Theme> = {
             background: theme.palette.primary.dark,
             boxShadow: "inset 0 1px 0 rgba(0,0,0,0.12), inset 0 2px 4px rgba(0,0,0,0.10)",
           },
+          // Inherits teal focus ring from root — correct for primary.
         }),
       },
 
@@ -133,6 +177,9 @@ const ButtonStyles: Components<Theme> = {
           "&:active": {
             background: theme.palette.secondary.dark,
             boxShadow: "inset 0 1px 0 rgba(0,0,0,0.12)",
+          },
+          "&:focus-visible": {
+            outline: `2px solid ${theme.palette.secondary.light}`,
           },
         }),
       },
@@ -161,6 +208,9 @@ const ButtonStyles: Components<Theme> = {
             background: theme.palette.error.dark,
             boxShadow: "inset 0 1px 0 rgba(0,0,0,0.12)",
           },
+          "&:focus-visible": {
+            outline: `2px solid ${theme.palette.error.main}`,
+          },
         }),
       },
 
@@ -188,6 +238,9 @@ const ButtonStyles: Components<Theme> = {
             background: theme.palette.warning.dark,
             boxShadow: "inset 0 1px 0 rgba(0,0,0,0.12)",
           },
+          "&:focus-visible": {
+            outline: `2px solid ${theme.palette.warning.main}`,
+          },
         }),
       },
 
@@ -195,7 +248,7 @@ const ButtonStyles: Components<Theme> = {
       //
       // "Engineered precision" — 1px border reads as machined, not heavy.
       // Inset rim shadow creates a recessed-panel edge at rest.
-      // Hover: translucent teal wash floods inward + outer halo.
+      // Hover: translucent wash floods inward + outer halo.
 
       {
         props: { variant: "outlined", color: "primary" },
@@ -218,25 +271,35 @@ const ButtonStyles: Components<Theme> = {
             backgroundColor: "rgba(7,223,193,0.12)",
             boxShadow: "inset 0 1px 3px rgba(0,0,0,0.10)",
           },
+          // Inherits teal focus ring from root — correct for primary.
         }),
       },
 
       {
         props: { variant: "outlined", color: "secondary" },
         style: ({ theme }) => ({
-          border: `1px solid ${theme.palette.text.secondary}`,
-          color: theme.palette.text.secondary,
+          // secondary.light (#52F6D7) — visible on dark navy while staying in the
+          // secondary palette (secondary.main #067F71 is too dark to read as a border).
+          border: `1px solid ${theme.palette.secondary.light}`,
+          color: theme.palette.secondary.light,
           backgroundColor: "transparent",
-          boxShadow: "inset 0 1px 0 rgba(145,254,230,0.06)",
+          boxShadow: "inset 0 1px 0 rgba(82,246,215,0.06)",
           "&:hover": {
-            border: `1px solid ${theme.palette.primary.main}`,
-            color: theme.palette.primary.main,
-            backgroundColor: "rgba(7,223,193,0.06)",
-            boxShadow: "0 0 10px rgba(7,223,193,0.14)",
+            border: `1px solid ${theme.palette.secondary.light}`,
+            color: theme.palette.secondary.light,
+            backgroundColor: "rgba(82,246,215,0.07)",
+            boxShadow: [
+              "inset 0 0 20px rgba(82,246,215,0.05)",
+              "0 0 12px rgba(82,246,215,0.18)",
+              "0 2px 8px rgba(0,0,0,0.14)",
+            ].join(", "),
           },
           "&:active": {
-            backgroundColor: "rgba(7,223,193,0.10)",
+            backgroundColor: "rgba(82,246,215,0.12)",
             boxShadow: "inset 0 1px 3px rgba(0,0,0,0.10)",
+          },
+          "&:focus-visible": {
+            outline: `2px solid ${theme.palette.secondary.light}`,
           },
         }),
       },
@@ -256,6 +319,9 @@ const ButtonStyles: Components<Theme> = {
           "&:active": {
             backgroundColor: "rgba(255,92,108,0.12)",
           },
+          "&:focus-visible": {
+            outline: `2px solid ${theme.palette.error.main}`,
+          },
         }),
       },
 
@@ -273,6 +339,9 @@ const ButtonStyles: Components<Theme> = {
           },
           "&:active": {
             backgroundColor: "rgba(240,160,75,0.12)",
+          },
+          "&:focus-visible": {
+            outline: `2px solid ${theme.palette.warning.main}`,
           },
         }),
       },
@@ -312,6 +381,7 @@ const ButtonStyles: Components<Theme> = {
           "&:active": {
             transform: "scale(0.97)",
           },
+          // Inherits teal focus ring from root.
         }),
       },
 
@@ -344,6 +414,9 @@ const ButtonStyles: Components<Theme> = {
           "&:active": {
             transform: "scale(0.97)",
           },
+          "&:focus-visible": {
+            outline: `2px solid ${theme.palette.text.secondary}`,
+          },
         }),
       },
 
@@ -375,6 +448,45 @@ const ButtonStyles: Components<Theme> = {
           },
           "&:active": {
             transform: "scale(0.97)",
+          },
+          "&:focus-visible": {
+            outline: `2px solid ${theme.palette.error.main}`,
+          },
+        }),
+      },
+
+      // Previously missing — text/warning fell back to raw MUI defaults.
+      {
+        props: { variant: "text", color: "warning" },
+        style: ({ theme }) => ({
+          color: theme.palette.warning.main,
+          backgroundColor: "transparent",
+          overflow: "visible",
+          "&::after": {
+            content: '""',
+            position: "absolute",
+            bottom: "7px",
+            left: "14px",
+            width: 0,
+            height: "1.5px",
+            borderRadius: "1px",
+            background: theme.palette.warning.main,
+            transition: `width 0.28s ${EASE}`,
+          },
+          "&:hover": {
+            color: theme.palette.warning.light,
+            backgroundColor: "rgba(240,160,75,0.07)",
+            transform: "none",
+            "&::after": {
+              width: "calc(100% - 28px)",
+              background: theme.palette.warning.light,
+            },
+          },
+          "&:active": {
+            transform: "scale(0.97)",
+          },
+          "&:focus-visible": {
+            outline: `2px solid ${theme.palette.warning.main}`,
           },
         }),
       },

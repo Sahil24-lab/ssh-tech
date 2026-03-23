@@ -6,7 +6,7 @@ export const docsTheme = {
   base: "dark",
   brandTitle: "SSH Design System",
 
-  // Transparent — let the conical gradient show through (we apply it in preview too).
+  // Docs can be transparent because they render inside docs/preview surfaces
   appBg: "transparent",
   appContentBg: "transparent",
   appPreviewBg: "transparent",
@@ -14,26 +14,24 @@ export const docsTheme = {
   appBorderColor: "transparent",
   appBorderRadius: 4,
 
-  // Toolbar — floats above the gradient as a distinct surface
-  barBg: t.surface.elevated + "F2",    // #0e1a24 at ~95% opacity
-  barTextColor: t.text.primary,        // #EFFEEB — legible on any background
-  barSelectedColor: t.primary.main,    // #07DFC1
-  barHoverColor: t.primary.light,      // #1FE2C4
+  barBg: t.surface.elevated,
+  barTextColor: t.text.primary,
+  barSelectedColor: t.primary.main,
+  barHoverColor: t.primary.light,
 
-  // Docs typography
-  textColor: t.text.primary,           // #EFFEEB
-  textMutedColor: t.text.muted,        // #DDE3E9
-  textInverseColor: t.primary.contrast,// #003330
+  textColor: t.text.primary,
+  textMutedColor: t.text.muted,
 
-  // Controls panel inputs
-  inputBg: t.surface.elevated + "CC",
+  // In docs, keep this readable, but do not reuse this object for manager UI
+  textInverseColor: "#08131a",
+
+  inputBg: t.surface.elevated,
   inputBorder: t.divider.default,
-  inputTextColor: t.text.primary,      // #EFFEEB
+  inputTextColor: t.text.primary,
   inputBorderRadius: 4,
 
-  // Accent used for links, focus rings, highlights
-  colorPrimary: t.primary.main,        // #07DFC1
-  colorSecondary: t.secondary.light,   // #52F6D7
+  colorPrimary: t.primary.main,
+  colorSecondary: t.secondary.light,
 
   fontBase: '"Play", sans-serif',
   fontCode: '"JetBrains Mono", monospace',
