@@ -1,5 +1,6 @@
 export { BrandThemeProvider } from "./providers/BrandThemeProvider";
-export { brandTokens } from "./theme/tokens";
+export { brandTokens, overlayTokens, surfaceTokens } from "./theme/tokens";
+export type { BrandTokens, OverlayTokens, SurfaceTokens } from "./theme/tokens";
 export { createBrandTheme } from "./theme/createBrandTheme";
 
 export {
