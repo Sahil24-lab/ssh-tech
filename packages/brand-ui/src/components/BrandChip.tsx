@@ -1,4 +1,5 @@
 import { Chip } from "@mui/material";
+import { brandTokens } from "../theme/tokens";
 
 export function BrandChip({ label }: { label: string }) {
   return (
@@ -8,7 +9,7 @@ export function BrandChip({ label }: { label: string }) {
         border: "1px solid",
         borderColor: "primary.main",
         color: "primary.main",
-        backgroundColor: "rgba(7, 223, 193, 0.08)",
+        backgroundColor: brandTokens.color.action.hover,
         fontWeight: 600,
       }}
     />

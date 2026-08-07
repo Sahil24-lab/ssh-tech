@@ -7,6 +7,7 @@ export type SectionHeaderProps = {
   description?: string;
   align?: "left" | "center";
   maxWidth?: number;
+  headingLevel?: "h1" | "h2" | "h3";
 };
 
 export function SectionHeader({
@@ -15,6 +16,7 @@ export function SectionHeader({
   description,
   align = "left",
   maxWidth = 720,
+  headingLevel = "h2",
 }: SectionHeaderProps) {
   return (
     <Stack
@@ -31,7 +33,11 @@ export function SectionHeader({
           <LabelTag>{label}</LabelTag>
         </Stack>
       ) : null}
-      <Typography variant="h2" sx={{ fontSize: { xs: "1.9rem", md: "2.8rem" } }}>
+      <Typography
+        component={headingLevel}
+        variant={headingLevel === "h1" ? "h1" : "h2"}
+        sx={{ fontSize: headingLevel === "h1" ? { xs: "2.7rem", md: "4.5rem" } : { xs: "1.9rem", md: "2.8rem" } }}
+      >
         {title}
       </Typography>
       {description ? (

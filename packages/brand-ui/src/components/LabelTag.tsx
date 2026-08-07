@@ -1,4 +1,5 @@
 import { Box, Typography } from "@mui/material";
+import { brandTokens } from "../theme/tokens";
 
 export function LabelTag({ children }: { children: React.ReactNode }) {
   return (
@@ -10,7 +11,7 @@ export function LabelTag({ children }: { children: React.ReactNode }) {
         px: 1.5,
         py: 0.65,
         borderRadius: 2,
-        backgroundColor: "rgba(7, 223, 193, 0.19)",
+        backgroundColor: brandTokens.color.derived.accentDim,
         border: "1px solid",
         borderColor: "secondary.dark",
       }}

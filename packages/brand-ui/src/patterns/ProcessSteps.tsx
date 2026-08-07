@@ -1,6 +1,6 @@
 import { Box, Grid, Stack, Typography } from "@mui/material";
-import { alpha } from "@mui/material/styles";
 import { CardSurface } from "../components/CardSurface";
+import { brandTokens } from "../theme/tokens";
 import type { ProcessStep } from "../types/content";
 
 export function ProcessSteps({ steps }: { steps: ProcessStep[] }) {
@@ -23,13 +23,13 @@ export function ProcessSteps({ steps }: { steps: ProcessStep[] }) {
                 top: 0,
                 left: "50%",
                 transform: "translateX(-50%)",
-                boxShadow: (theme) => `0 0 32px ${alpha(theme.palette.primary.main, 0.42)}`,
+                boxShadow: brandTokens.shadow.glow,
                 zIndex: 1,
               }}
             >
               {step.icon}
             </Box>
-            <CardSurface surface="glass" sx={{ p: 4, pt: 10, height: "100%", textAlign: "center" }}>
+            <CardSurface surface="panel" sx={{ p: 4, pt: 10, height: "100%", textAlign: "center" }}>
               <Stack spacing={1.5}>
                 <Typography variant="caption" sx={{ fontSize: "0.68rem" }}>
                   {step.phase}

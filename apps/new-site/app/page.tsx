@@ -7,48 +7,90 @@ import {
   PricingSection,
   ProofSection,
 } from "@ssh/brand-ui";
-import { Box, Container } from "@mui/material";
+import { Box, Container, Typography } from "@mui/material";
+
+const systemLayers = [
+  { label: "Tokens", detail: "Colour, type, spacing" },
+  { label: "Primitives", detail: "Accessible interaction" },
+  { label: "Patterns", detail: "Reusable product logic" },
+  { label: "Templates", detail: "Page-ready structure" },
+];
 
 export default function HomePage() {
   return (
-    <Box>
+    <>
+    <Box component="main">
       <HeroSection
-        label="// product engineering"
-        title="Build faster with reusable templates"
-        subtitle="This site consumes @ssh/brand-ui templates without app-specific routing or legacy complexity."
+        label="Product engineering"
+        title="One interface system. Every product surface."
+        subtitle="SSH Tech turns validated interaction patterns into accessible, responsive building blocks that can move across products without visual or behavioural drift."
         primaryCta={{ label: "Start project", href: "#pricing" }}
         secondaryCta={{ label: "Read docs", href: "/docs" }}
       />
 
+      <Box component="section" aria-labelledby="system-map-title" sx={{ py: { xs: 8, md: 10 } }}>
+        <Container>
+          <Box
+            component="figure"
+            sx={{ m: 0, py: { xs: 4, md: 6 }, borderBlock: "1px solid", borderColor: "divider" }}
+          >
+            <Typography id="system-map-title" component="h2" variant="h2" sx={{ mb: 1 }}>
+              A visible path from decisions to delivery
+            </Typography>
+            <Typography variant="body1" sx={{ color: "text.secondary", maxWidth: 720, mb: 5 }}>
+              Each layer narrows interpretation, so teams spend less time reconciling UI and more time shipping the product.
+            </Typography>
+            <Box sx={{ display: "grid", gridTemplateColumns: { xs: "1fr", md: "repeat(4, 1fr)" }, gap: { xs: 1, md: 0 } }}>
+              {systemLayers.map((layer, index) => (
+                <Box
+                  key={layer.label}
+                  sx={{
+                    position: "relative",
+                    p: { xs: 2.5, md: 3 },
+                    borderLeft: { xs: "3px solid", md: index === 0 ? "3px solid" : "1px solid" },
+                    borderColor: index === 0 ? "primary.main" : "secondary.dark",
+                    backgroundColor: index % 2 === 0 ? "action.hover" : "transparent",
+                  }}
+                >
+                  <Typography variant="caption" sx={{ color: "primary.main" }}>0{index + 1}</Typography>
+                  <Typography component="h3" variant="h5" sx={{ mt: 1 }}>{layer.label}</Typography>
+                  <Typography variant="body2" sx={{ mt: 0.5, color: "text.secondary" }}>{layer.detail}</Typography>
+                </Box>
+              ))}
+            </Box>
+          </Box>
+        </Container>
+      </Box>
+
       <FeatureSection
-        heading="Template-first sections"
-        subheading="Reusable blocks for landing pages, product marketing, and docs websites."
+        heading="A contract teams can actually use"
+        subheading="The system carries the decisions that are expensive to rediscover in every repository."
         items={[
           {
-            title: "Theme tokens",
-            description: "Palette, typography, spacing, and motion exposed by package.",
+            title: "One theme contract",
+            description: "Palette, typography, spacing, breakpoints, and semantic states travel through a single public theme entrypoint.",
           },
           {
-            title: "Consistent states",
-            description: "Buttons, chips, tags, and links keep one state model across projects.",
+            title: "Accessible interaction",
+            description: "Controls retain clear names, visible focus, usable touch targets, and reduced-motion behaviour by default.",
           },
           {
-            title: "Composable sections",
-            description: "Hero, features, proof, pricing, CTA, and footer with content props.",
+            title: "Release evidence",
+            description: "Consumer typechecks, linting, route coverage, and change-impact analysis turn polish into something verifiable.",
           },
         ]}
       />
 
       <ProofSection
-        heading="Proof"
+        heading="Checks built into the delivery path"
         quotes={[
           {
-            quote: "The reusable package cut setup time for our second project by over 60%.",
-            author: "Product Lead",
+            quote: "Theme augmentation is exposed through the package boundary and verified in the consumer application.",
+            author: "Type contract",
           },
           {
-            quote: "We can now ship style changes once and update apps via package versions.",
-            author: "Engineering Manager",
+            quote: "Every example action resolves to a real page, section, or contact pathway instead of a placeholder target.",
+            author: "Navigation contract",
           },
         ]}
       />
@@ -62,6 +104,7 @@ export default function HomePage() {
             price: "$2.5k",
             description: "Foundation theme and first templates.",
             features: ["Tokens", "Buttons/Chips", "Hero/CTA/Footer"],
+            href: "/contact?plan=launch",
           },
           {
             name: "Growth",
@@ -69,20 +112,22 @@ export default function HomePage() {
             description: "Landing + blog/docs templates.",
             features: ["Everything in Launch", "Pricing/Proof sections", "Docs layouts"],
             highlighted: true,
+            href: "/contact?plan=growth",
           },
           {
             name: "Scale",
             price: "$8k",
             description: "Release automation and hardening.",
             features: ["Versioning workflow", "Visual regression", "Consumer integration checks"],
+            href: "/contact?plan=scale",
           },
         ]}
       />
 
       <CTASection
-        heading="Use one UI system across repos"
-        body="Consume templates from @ssh/brand-ui and upgrade with semver releases."
-        cta={{ label: "See blog layout", href: "/blog" }}
+        heading="Make the next interface easier to trust"
+        body="Start with the shared contract, then adapt the content and composition to the product—not the other way around."
+        cta={{ label: "Start a conversation", href: "/contact" }}
       />
 
       <Container sx={{ py: 8 }}>
@@ -91,16 +136,19 @@ export default function HomePage() {
           description="A practical path from one-off frontend repos to reusable component systems."
           href="/blog"
           tag="Guide"
+          publishedDate="2026-08-08"
+          readTime={6}
         />
       </Container>
-
+    </Box>
       <FooterSection
-        leftText="© 2026 Your Company"
+        leftText="© 2026 SSH Tech"
         links={[
           { label: "Docs", href: "/docs" },
           { label: "Blog", href: "/blog" },
+          { label: "Contact", href: "/contact" },
         ]}
       />
-    </Box>
+    </>
   );
 }

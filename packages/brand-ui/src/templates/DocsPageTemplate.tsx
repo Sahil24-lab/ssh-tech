@@ -14,14 +14,15 @@ export function DocsPageTemplate({
   sections: DocsSection[];
 }) {
   return (
+    <Box component="main">
     <SectionShell>
-      <SectionHeader title={title} description={description} />
+      <SectionHeader title={title} description={description} headingLevel="h1" />
       <Stack spacing={2}>
         {sections.map((section) => (
           <Box key={section.heading}>
             <CardSurface surface="panel" sx={{ p: 3 }}>
               <Stack spacing={1}>
-                <Typography variant="h5">{section.heading}</Typography>
+                <Typography component="h2" variant="h5">{section.heading}</Typography>
                 <Typography variant="body2" sx={{ color: "text.secondary", lineHeight: 1.65 }}>
                   {section.body}
                 </Typography>
@@ -31,5 +32,6 @@ export function DocsPageTemplate({
         ))}
       </Stack>
     </SectionShell>
+    </Box>
   );
 }

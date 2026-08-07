@@ -12,18 +12,18 @@ const montserrat = Montserrat({
 const poppins = Poppins({
   variable: "--font-poppins",
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
+  weight: ["400"],
 });
 
 const jetbrainsMono = JetBrains_Mono({
   variable: "--font-jetbrains-mono",
   subsets: ["latin"],
-  weight: ["400", "500", "700"],
+  weight: ["500", "700"],
 });
 
 export const metadata: Metadata = {
-  title: "New Site",
-  description: "A reusable brand-template site powered by @ssh/brand-ui",
+  title: "SSH Tech Brand UI",
+  description: "Accessible, responsive product interfaces built from one reusable SSH Tech design system.",
 };
 
 export default function RootLayout({

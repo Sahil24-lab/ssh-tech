@@ -1,3 +1,5 @@
+"use client";
+
 import { Paper, type PaperProps } from "@mui/material";
 import { brandTokens } from "../theme/tokens";
 
@@ -7,7 +9,7 @@ export type CardSurfaceProps = PaperProps & {
 };
 
 export function CardSurface({
-  surface = "glass",
+  surface = "panel",
   glow = false,
   sx,
   ...props
@@ -18,32 +20,28 @@ export function CardSurface({
     <Paper
       elevation={0}
       sx={[
-        {
-          borderRadius: `${brandTokens.radius.xl}px`,
+        (theme) => ({
+          borderRadius: `${brandTokens.radius.lg}px`,
           border: `1px solid ${
             isGlass
-              ? "rgba(255, 255, 255, 0.12)"
+              ? theme.palette.surface.border.medium
               : brandTokens.color.secondary.dark
           }`,
           background: isGlass
-            ? "rgba(255, 255, 255, 0.08)"
-            : "rgba(8, 24, 36, 0.92)",
-          backgroundColor: isGlass
-            ? "transparent"
-            : brandTokens.color.background.paper,
-          backdropFilter: isGlass ? "blur(15px)" : "blur(8px)",
-          boxShadow: isGlass
-            ? brandTokens.shadow.soft
-            : brandTokens.shadow.raised,
+            ? theme.palette.surface.glass.light
+            : theme.palette.background.paper,
+          backgroundColor: isGlass ? "transparent" : brandTokens.color.background.paper,
+          backdropFilter: isGlass ? "blur(10px)" : "none",
+          boxShadow: "none",
           color: "text.primary",
           transition: `transform ${brandTokens.motion.base}, box-shadow ${brandTokens.motion.base}, border-color ${brandTokens.motion.fast}`,
           "&:hover": glow
             ? {
-                boxShadow: `${brandTokens.shadow.raised}, ${brandTokens.shadow.glow}`,
+                boxShadow: `0 4px 8px ${theme.palette.overlay.black["20"]}`,
                 borderColor: "primary.main",
               }
             : undefined,
-        },
+        }),
         ...(Array.isArray(sx) ? sx : [sx]),
       ]}
       {...props}

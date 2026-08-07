@@ -1,0 +1,89 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-08T00:00:00+10:00",
+  "title": "Design System: SSH Tech Brand UI",
+  "extensions": {
+    "colorMeta": {
+      "signal-teal": { "role": "primary", "displayName": "Signal Teal", "canonical": "#07DFC1", "tonalRamp": ["#003330", "#00564D", "#00796B", "#029F8C", "#07DFC1", "#52F6D7", "#91FEE6", "#EFFEEB"] },
+      "field-green": { "role": "secondary", "displayName": "Field Green", "canonical": "#0E534C", "tonalRamp": ["#061A18", "#092B28", "#0B3F3A", "#0E534C", "#27736A", "#5A9A90", "#9AC8C0", "#E8F5F2"] },
+      "deep-channel": { "role": "neutral", "displayName": "Deep Channel", "canonical": "#091F2C", "tonalRamp": ["#030A0F", "#06131B", "#091F2C", "#12374A", "#2B5264", "#607B89", "#A5B6BE", "#EFF4F6"] },
+      "near-white": { "role": "neutral", "displayName": "Near White", "canonical": "#EFFEEB", "tonalRamp": ["#1A2319", "#344033", "#566653", "#7E907A", "#A9BCA5", "#D1E1CD", "#E8F4E5", "#F7FFF5"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "One page headline and high-impact statements." },
+      "headline": { "displayName": "Headline", "purpose": "Section-level hierarchy." },
+      "body": { "displayName": "Body", "purpose": "Primary explanatory prose." },
+      "supporting": { "displayName": "Supporting", "purpose": "Secondary descriptions and metadata." },
+      "label": { "displayName": "Operational Label", "purpose": "Actions and compact technical metadata." }
+    },
+    "shadows": [
+      { "name": "interactive-lift", "value": "0 4px 8px rgba(0,0,0,0.20)", "purpose": "Short hover feedback on actionable surfaces." },
+      { "name": "signal-glow", "value": "0 0 18px rgba(7,223,193,0.28)", "purpose": "Rare, time-limited primary emphasis." }
+    ],
+    "motion": [
+      { "name": "ease-standard", "value": "cubic-bezier(0.4, 0, 0.2, 1)", "purpose": "Colour, opacity, and shadow transitions." },
+      { "name": "ease-out", "value": "cubic-bezier(0.22, 1, 0.36, 1)", "purpose": "Short transform transitions without overshoot." },
+      { "name": "duration-fast", "value": "180ms", "purpose": "Direct control feedback." },
+      { "name": "duration-base", "value": "260ms", "purpose": "Surface and content-state changes." }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "600px" },
+      { "name": "md", "value": "900px" },
+      { "name": "lg", "value": "1280px" },
+      { "name": "xl", "value": "1536px" },
+      { "name": "xxl", "value": "1800px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "High-emphasis action with a dependable touch target and visible focus.",
+      "html": "<button class=\"ds-btn-primary\">Start project</button>",
+      "css": ".ds-btn-primary{min-height:44px;padding:9px 20px;border:0;border-radius:8px;background:#07DFC1;color:#003330;font:700 .875rem/1.5 'JetBrains Mono',monospace;transition:background 180ms cubic-bezier(.4,0,.2,1),transform 180ms cubic-bezier(.22,1,.36,1)}.ds-btn-primary:hover{background:#029F8C;transform:translateY(-1px)}.ds-btn-primary:focus-visible{outline:2px solid #07DFC1;outline-offset:3px}.ds-btn-primary:active{transform:scale(.97)}"
+    },
+    {
+      "name": "Outlined Button",
+      "kind": "button",
+      "refersTo": "button-outlined",
+      "description": "Secondary action with transparent fill and Signal Teal boundary.",
+      "html": "<button class=\"ds-btn-outlined\">Read docs</button>",
+      "css": ".ds-btn-outlined{min-height:44px;padding:9px 20px;border:1px solid #07DFC1;border-radius:8px;background:transparent;color:#07DFC1;font:700 .875rem/1.5 'JetBrains Mono',monospace;transition:background 180ms ease,border-color 180ms ease}.ds-btn-outlined:hover{background:rgba(7,223,193,.07);border-color:#1FE2C4;color:#1FE2C4}.ds-btn-outlined:focus-visible{outline:2px solid #07DFC1;outline-offset:3px}"
+    },
+    {
+      "name": "Panel",
+      "kind": "card",
+      "refersTo": "card-panel",
+      "description": "Flat-by-default content surface with tonal depth and a structural border.",
+      "html": "<article class=\"ds-panel\"><h3>One theme contract</h3><p>Tokens and semantic states travel through one public entrypoint.</p></article>",
+      "css": ".ds-panel{padding:32px;border:1px solid #0B645C;border-radius:16px;background:#091F2C;color:#EFFEEB}.ds-panel h3{margin:0 0 8px;font:600 1.25rem/1.5 Montserrat,sans-serif;color:#91FEE6}.ds-panel p{margin:0;font:400 1rem/1.6 Poppins,sans-serif;color:#91FEE6}.ds-panel:focus-within{outline:2px solid #07DFC1;outline-offset:3px}"
+    },
+    {
+      "name": "Operational Chip",
+      "kind": "chip",
+      "description": "Compact metadata label that supports content instead of decorating it.",
+      "html": "<span class=\"ds-chip\">Verified</span>",
+      "css": ".ds-chip{display:inline-flex;align-items:center;min-height:28px;padding:3px 10px;border:1px solid #0B645C;border-radius:8px;background:rgba(7,223,193,.08);color:#91FEE6;font:500 .75rem/1.4 'JetBrains Mono',monospace}.ds-chip:hover{border-color:#07DFC1;color:#EFFEEB}.ds-chip:focus-visible{outline:2px solid #07DFC1;outline-offset:2px}"
+    },
+    {
+      "name": "Navigation Link",
+      "kind": "nav",
+      "description": "Plain-language navigation with a transform-based underline and full keyboard focus.",
+      "html": "<a class=\"ds-nav-link\" href=\"#\">Proof of work</a>",
+      "css": ".ds-nav-link{position:relative;display:inline-flex;align-items:center;min-height:44px;color:#91FEE6;font:600 .95rem/1.5 Montserrat,sans-serif;text-decoration:none}.ds-nav-link:after{content:'';position:absolute;right:0;bottom:6px;left:0;height:1px;background:#07DFC1;transform:scaleX(0);transform-origin:left;transition:transform 180ms ease}.ds-nav-link:hover{color:#EFFEEB}.ds-nav-link:hover:after{transform:scaleX(1)}.ds-nav-link:focus-visible{outline:2px solid #07DFC1;outline-offset:3px}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Signal Workshop",
+    "overview": "A precise, tactile, dark-first system where hierarchy and evidence carry more weight than decoration. Signal Teal directs attention while flat tonal surfaces keep the product legible.",
+    "keyCharacteristics": ["Single teal-led brand", "Semantic hierarchy first", "Flat surfaces with state-driven depth", "Accessible interaction by default"],
+    "rules": [
+      { "name": "The Signal Rule", "body": "Use Signal Teal for hierarchy, focus, state, or action—not as a screen-wide wash.", "section": "colors" },
+      { "name": "The Plain-Language Rule", "body": "Mono may label technical facts but must not turn ordinary content into terminal cosplay.", "section": "typography" },
+      { "name": "The Flat-by-Default Rule", "body": "Bordered surfaces at rest have no broad shadow.", "section": "elevation" }
+    ],
+    "dos": ["Use one visible h1 and a main landmark on every page.", "Keep touch targets at least 44px.", "Provide a reduced-motion path for every non-essential animation."],
+    "donts": ["Do not create generic SaaS glass dashboards.", "Do not repeat equal card grids when a list or diagram is clearer.", "Do not use bounce easing, layout-dimension animation, or endless ambient motion."]
+  }
+}

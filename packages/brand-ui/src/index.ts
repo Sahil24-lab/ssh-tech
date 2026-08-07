@@ -1,3 +1,5 @@
+import "./types/mui";
+
 export { BrandThemeProvider } from "./providers/BrandThemeProvider";
 export { brandTokens, overlayTokens, surfaceTokens } from "./theme/tokens";
 export type { BrandTokens, OverlayTokens, SurfaceTokens } from "./theme/tokens";
@@ -38,8 +40,13 @@ export type {
 } from "./components/AccordionList";
 export { LabelTag } from "./components/LabelTag";
 export { BlogCard } from "./components/BlogCard";
+export type { BlogCardProps } from "./components/BlogCard";
 export { CardSurface } from "./components/CardSurface";
 export type { CardSurfaceProps } from "./components/CardSurface";
+export { GlassCard } from "./components/GlassCard";
+export type { GlassCardProps, GlassCardVariant } from "./components/GlassCard";
+export { FeatureImage } from "./components/FeatureImage";
+export type { FeatureImageProps } from "./components/FeatureImage";
 export { MetricCard } from "./components/MetricCard";
 export type { MetricCardProps } from "./components/MetricCard";
 export { TestimonialCard } from "./components/TestimonialCard";

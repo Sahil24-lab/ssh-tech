@@ -1,5 +1,4 @@
 import { Components, Theme } from "@mui/material/styles";
-import { alpha } from "@mui/material/styles";
 
 const NavigationButtonStyles: Components<Omit<Theme, "components">> = {
   MuiButton: {
@@ -24,7 +23,7 @@ const NavigationButtonStyles: Components<Omit<Theme, "components">> = {
           bottom: -2,
           width: "100%",
           height: "1px",
-          backgroundColor: alpha("#C8FFF1", 0.7),
+          backgroundColor: "rgba(200, 255, 241, 0.7)",
           transform: "scaleX(0)",
           transformOrigin: "right",
           transition: "transform 0.2s ease-in-out",

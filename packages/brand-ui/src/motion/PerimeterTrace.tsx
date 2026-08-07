@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { Box } from "@mui/material";
+import { Box, useMediaQuery } from "@mui/material";
+import { keyframes } from "@emotion/react";
 import type { ShimmerPhase } from "./useDecodeShimmer";
+import { brandTokens } from "../theme/tokens";
 
 export type PerimeterTraceProps = {
   /** Measured button width in px */
@@ -21,6 +22,11 @@ export type PerimeterTraceProps = {
   color?: string;
 };
 
+const orbit = keyframes`
+  from { stroke-dashoffset: 0; }
+  to { stroke-dashoffset: -1; }
+`;
+
 export function PerimeterTrace({
   width,
   height,
@@ -28,35 +34,12 @@ export function PerimeterTrace({
   borderRadius: br = 6,
   orbitDuration = 5,
   traceLength = 0.22,
-  color = "#07DFC1",
+  color = brandTokens.color.primary.main,
 }: PerimeterTraceProps) {
-  const [progress, setProgress] = useState(0);
-  const rafRef = useRef<number | null>(null);
-
   const active = phase === "loading" || phase === "settling";
+  const reduceMotion = useMediaQuery("(prefers-reduced-motion: reduce)", { noSsr: true });
 
-  useEffect(() => {
-    if (!active) {
-      setProgress(0);
-      if (rafRef.current) cancelAnimationFrame(rafRef.current);
-      return;
-    }
-    const ms = orbitDuration * 1000;
-    const animate = (ts: number) => {
-      setProgress((ts % ms) / ms);
-      rafRef.current = requestAnimationFrame(animate);
-    };
-    rafRef.current = requestAnimationFrame(animate);
-    return () => {
-      if (rafRef.current) cancelAnimationFrame(rafRef.current);
-    };
-  }, [active, orbitDuration]);
-
-  if (!active || !width || !height) return null;
-
-  const perimeter =
-    2 * (width - 2 * br) + 2 * (height - 2 * br) + 2 * Math.PI * br;
-  const segLen = perimeter * traceLength;
+  if (!active || !width || !height || reduceMotion) return null;
   const opacity = phase === "settling" ? 0.25 : 0.55;
 
   return (
@@ -85,10 +68,13 @@ export function PerimeterTrace({
         fill="none"
         stroke={color}
         strokeWidth={1}
-        strokeDasharray={`${segLen} ${perimeter - segLen}`}
-        strokeDashoffset={-progress * perimeter}
+        pathLength={1}
+        strokeDasharray={`${traceLength} ${1 - traceLength}`}
         strokeLinecap="round"
-        style={{ filter: `drop-shadow(0 0 2px ${color}4D)` }}
+        style={{
+          animation: `${orbit} ${orbitDuration}s linear infinite`,
+          filter: `drop-shadow(0 0 2px ${color}4D)`,
+        }}
       />
     </Box>
   );

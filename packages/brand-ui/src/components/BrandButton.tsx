@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import { Button, SxProps, Theme } from "@mui/material";
+import { Button, SxProps, Theme, useTheme } from "@mui/material";
 import { alpha } from "@mui/material/styles";
 import { keyframes } from "@emotion/react";
 import Link from "next/link";
@@ -107,6 +107,7 @@ export function BrandButton({
   type = "button",
   sx,
 }: BrandButtonProps) {
+  const theme = useTheme();
   const isGhost = variant === "ghost";
   const isContained = variant === "contained";
   const accent = getAccentTokens(color);
@@ -144,21 +145,24 @@ export function BrandButton({
         0 0  4px ${alpha(accent.main, 0.26)},
         0 0 10px ${alpha(accent.main, 0.14)},
         0 0 20px ${alpha(accent.main, 0.06)},
-        0 4px 12px rgba(0, 0, 0, 0.30);
+        0 4px 12px ${theme.palette.overlay.black["30"]};
     }
     50% {
       box-shadow:
         0 0  6px ${alpha(accent.main, 0.34)},
         0 0 14px ${alpha(accent.main, 0.20)},
         0 0 28px ${alpha(accent.main, 0.10)},
-        0 4px 16px rgba(0, 0, 0, 0.30);
+        0 4px 16px ${theme.palette.overlay.black["30"]};
     }
   `;
 
   const glowSx: SxProps<Theme> =
     glow && isContained
       ? {
-          animation: `${glowPulse} 2.6s ease-in-out infinite`,
+          animation: `${glowPulse} 2.6s ease-in-out 2`,
+          "@media (prefers-reduced-motion: reduce)": {
+            animation: "none",
+          },
           "&:hover": {
             animation: "none",
             transform: "none !important",
@@ -172,7 +176,7 @@ export function BrandButton({
           "&:active": {
             animation: "none",
             transform: "scale(0.97) translateY(0px)",
-            boxShadow: `0 0 6px ${alpha(accent.main, 0.16)}, 0 2px 6px rgba(0,0,0,0.28)`,
+            boxShadow: `0 0 6px ${alpha(accent.main, 0.16)}, 0 2px 6px ${theme.palette.overlay.black["28"]}`,
           },
         }
       : {};
@@ -191,14 +195,14 @@ export function BrandButton({
           boxShadow: [
             `inset 0 0 16px ${alpha(accent.main, 0.05)}`,
             `0 0 12px ${alpha(accent.main, 0.18)}`,
-            "0 2px 8px rgba(0, 0, 0, 0.14)",
+            `0 2px 8px ${theme.palette.overlay.black["14"]}`,
           ].join(", "),
           transform: "translateY(-1px)",
         },
         "&:active": {
           backgroundColor: alpha(accent.main, 0.11),
           transform: "scale(0.97) translateY(0px)",
-          boxShadow: "inset 0 1px 3px rgba(0,0,0,0.10)",
+          boxShadow: `inset 0 1px 3px ${theme.palette.overlay.black["10"]}`,
         },
       }
     : {};
@@ -214,9 +218,9 @@ export function BrandButton({
           cursor: "not-allowed",
           pointerEvents: "auto",
           transform: "none",
-          background: "rgba(14, 26, 36, 0.75) !important",
+          background: `${theme.palette.surface.glass.scrim} !important`,
           backgroundImage: "none !important",
-          color: "rgba(239, 254, 235, 0.45) !important",
+          color: `${alpha(theme.palette.text.primary, 0.45)} !important`,
           border: `1px solid ${alpha(accent.main, 0.38)} !important`,
           boxShadow: "none !important",
         },
@@ -271,6 +275,8 @@ export function BrandButton({
       color={muiColor}
       size={size}
       disabled={disabled || showLoadingStyle}
+      aria-busy={loading || undefined}
+      aria-label={loading ? `${label}: ${loadingLabel ?? "Loading"}` : label}
       fullWidth={fullWidth}
       startIcon={showLoadingStyle ? undefined : startIcon}
       endIcon={showLoadingStyle ? undefined : endIcon}

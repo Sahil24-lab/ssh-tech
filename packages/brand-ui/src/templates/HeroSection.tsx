@@ -1,4 +1,4 @@
-import { Box, Stack, Typography } from "@mui/material";
+import { Box, Stack } from "@mui/material";
 import { BrandButton, type BrandButtonProps } from "../components/BrandButton";
 import { CardSurface } from "../components/CardSurface";
 import { SectionShell } from "../patterns/SectionShell";
@@ -21,10 +21,8 @@ export function HeroSection({ label, title, subtitle, primaryCta, secondaryCta }
             label={label}
             title={title}
             description={subtitle}
+            headingLevel="h1"
           />
-          <Typography variant="h1" sx={{ display: "none" }}>
-            {title}
-          </Typography>
           <Stack direction={{ xs: "column", sm: "row" }} spacing={2}>
             <BrandButton {...primaryCta} />
             {secondaryCta ? <BrandButton {...secondaryCta} variant="outlined" /> : null}

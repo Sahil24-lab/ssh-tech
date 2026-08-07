@@ -26,6 +26,7 @@ export type PricingPlan = {
   features: string[];
   highlighted?: boolean;
   tag?: string;
+  href?: string;
 };
 
 export type BlogPostPreview = {

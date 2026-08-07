@@ -28,7 +28,7 @@ export function PricingSummary({ plans }: { plans: PricingPlan[] }) {
                   />
                 </Box>
               ) : null}
-              <Typography variant="h5">{plan.name}</Typography>
+              <Typography component="h3" variant="h5">{plan.name}</Typography>
               <Typography
                 sx={{
                   fontFamily: "var(--font-jetbrains-mono), monospace",
@@ -51,7 +51,7 @@ export function PricingSummary({ plans }: { plans: PricingPlan[] }) {
               <Box sx={{ mt: "auto", pt: 2 }}>
                 <BrandButton
                   label={plan.highlighted ? "Start project" : "View details"}
-                  href="#"
+                  href={plan.href ?? "/contact"}
                   variant={plan.highlighted ? "contained" : "outlined"}
                 />
               </Box>

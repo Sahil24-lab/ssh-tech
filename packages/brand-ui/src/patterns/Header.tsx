@@ -15,7 +15,7 @@ import {
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
-import { alpha } from "@mui/material/styles";
+import { alpha, type Theme } from "@mui/material/styles";
 import { DecodeText } from "../motion/DecodeText";
 
 export type HeaderNavItem = {
@@ -150,13 +150,12 @@ export function Header({
     <AppBar
       position="fixed"
       elevation={0}
-      sx={{
+      sx={(theme) => ({
         backdropFilter: "blur(14px)",
-        backgroundColor: (theme) => alpha(theme.palette.background.paper, 0.85),
-        borderBottom: (theme) =>
-          `1px solid ${alpha(theme.palette.primary.main, 0.2)}`,
-        boxShadow: "0px 4px 18px rgba(0, 0, 0, 0.25)",
-      }}
+        backgroundColor: alpha(theme.palette.background.paper, 0.85),
+        borderBottom: `1px solid ${alpha(theme.palette.primary.main, 0.2)}`,
+        boxShadow: `0px 4px 18px ${theme.palette.overlay.black["25"]}`,
+      })}
     >
       <Toolbar
         sx={{
@@ -214,6 +213,9 @@ export function Header({
 
         <IconButton
           edge="end"
+          aria-label={mobileOpen ? "Close navigation menu" : "Open navigation menu"}
+          aria-expanded={mobileOpen}
+          aria-controls="mobile-navigation"
           onClick={handleDrawerToggle}
           sx={{
             display: { md: "none" },
@@ -226,6 +228,7 @@ export function Header({
       </Toolbar>
 
       <Drawer
+        id="mobile-navigation"
         anchor="right"
         open={mobileOpen}
         onClose={handleDrawerToggle}
@@ -246,6 +249,7 @@ export function Header({
         }}
       >
         <IconButton
+          aria-label="Close navigation menu"
           onClick={handleDrawerToggle}
           sx={{
             position: "absolute",
@@ -283,18 +287,18 @@ export function Header({
   );
 }
 
-const mobileItemSx = {
+const mobileItemSx = (theme: Theme) => ({
   px: 2,
   borderRadius: 2,
   textTransform: "uppercase",
   letterSpacing: "0.12em",
   "&:hover": {
-    backgroundColor: "rgba(255, 255, 255, 0.05)",
+    backgroundColor: theme.palette.overlay.white["5"],
   },
   "&:active": {
-    backgroundColor: "rgba(255, 255, 255, 0.08)",
+    backgroundColor: theme.palette.overlay.white["8"],
   },
-};
+});
 
 const mobileTypographySx = {
   fontSize: "0.95rem",

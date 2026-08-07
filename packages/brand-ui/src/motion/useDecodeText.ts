@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import { useMediaQuery } from "@mui/material";
 
 export type DecodeSize = "sm" | "lg";
 export type DecodeGlyphSet = "matrix" | "runes" | "katakana" | "braille";
@@ -134,6 +135,7 @@ export function useDecodeText(
     size = "sm",
     glyphSet = "runes",
   } = options;
+  const reduceMotion = useMediaQuery("(prefers-reduced-motion: reduce)", { noSsr: true });
 
   const [displayChars, setDisplayChars] = useState(() => target.split(""));
   const [charMeta, setCharMeta] = useState<CharMeta[]>(() =>
@@ -161,6 +163,11 @@ export function useDecodeText(
   const triggerDecode = useCallback(() => {
     clearDecodeInterval();
     const chars = target.split("");
+    if (reduceMotion) {
+      setDisplayChars(chars);
+      setCharMeta(chars.map(() => ({ settled: true, settleProximity: 1, flash: false, scale: 1, ripple: 1 })));
+      return;
+    }
     const nonSpaceIndices = chars
       .map((char, index) => (char === " " ? null : index))
       .filter((index): index is number => index !== null);
@@ -272,7 +279,7 @@ export function useDecodeText(
       frame += 1;
       updateFrame(frame);
     }, speed);
-  }, [clearDecodeInterval, target, speed, revealFrames, symbolPool]);
+  }, [clearDecodeInterval, target, speed, revealFrames, symbolPool, reduceMotion]);
 
   useEffect(() => {
     if (!autoStart) return clearDecodeInterval;

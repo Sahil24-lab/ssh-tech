@@ -12,7 +12,6 @@ export function FooterSection({ leftText, links }: { leftText: string; links: Li
         backgroundColor: "background.paper",
         borderTop: "1px solid",
         borderColor: "secondary.dark",
-        boxShadow: "0 -6px 24px rgba(0, 0, 0, 0.18)",
       }}
     >
       <Container>
@@ -42,6 +41,11 @@ export function FooterSection({ leftText, links }: { leftText: string; links: Li
               sx={{
                 fontFamily: "var(--font-jetbrains-mono), monospace",
                 color: "text.secondary",
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+                minWidth: 44,
+                minHeight: 44,
                 "&:hover": { color: "primary.light" },
               }}
               >

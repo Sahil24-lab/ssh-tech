@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import { useMediaQuery } from "@mui/material";
 
 /* ──────────────────────────────────────────────────────────────
    Rune pool + seeded PRNG
@@ -70,6 +71,7 @@ export function useDecodeShimmer(
     swapRate = 0.45,
     settleFrames = 16,
   } = options;
+  const reduceMotion = useMediaQuery("(prefers-reduced-motion: reduce)", { noSsr: true });
 
   const [chars, setChars] = useState<string[]>(label.split(""));
   const [tick, setTick] = useState(0);
@@ -89,12 +91,22 @@ export function useDecodeShimmer(
   }, []);
 
   useEffect(() => {
-    if (loading) setPhase("loading");
+    if (reduceMotion) setPhase(loading ? "loading" : "idle");
+    else if (loading) setPhase("loading");
     else if (phase === "loading") setPhase("settling");
-  }, [loading]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [loading, phase, reduceMotion]);
 
   useEffect(() => {
     clearTimer();
+
+    if (reduceMotion) {
+      const stableChars = label.split("");
+      charsRef.current = stableChars;
+      setChars(stableChars);
+      setLockedPositions(new Set());
+      setHintActive(false);
+      return;
+    }
 
     if (phase === "idle") {
       charsRef.current = label.split("");
@@ -247,6 +259,7 @@ export function useDecodeShimmer(
     settleInterval,
     swapRate,
     settleFrames,
+    reduceMotion,
   ]);
 
   const isSettled = useCallback(

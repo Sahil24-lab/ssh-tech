@@ -1,9 +1,9 @@
 import { Components, Theme } from "@mui/material/styles";
 
 // ─── Shared timing ─────────────────────────────────────────────────────────────
-// Spring for transform — fast out, gentle overshoot settle.
+// Decelerating ease for transforms; it settles cleanly without overshoot.
 // Ease for color/opacity/shadow — smooth and neutral.
-const SPRING = "cubic-bezier(0.34, 1.26, 0.64, 1)";
+const EASE_OUT = "cubic-bezier(0.22, 1, 0.36, 1)";
 const EASE   = "cubic-bezier(0.4, 0, 0.2, 1)";
 
 const ButtonStyles: Components<Theme> = {
@@ -19,13 +19,14 @@ const ButtonStyles: Components<Theme> = {
         fontWeight: 600,
         letterSpacing: "0.03em",
         lineHeight: 1.5,
+        minHeight: 44,
         position: "relative",
         transition: [
           `background 0.22s ${EASE}`,
           `box-shadow 0.22s ${EASE}`,
           `border-color 0.22s ${EASE}`,
           `color 0.22s ${EASE}`,
-          `transform 0.18s ${SPRING}`,
+          `transform 0.18s ${EASE_OUT}`,
         ].join(", "),
         boxShadow: "none",
 
@@ -68,16 +69,19 @@ const ButtonStyles: Components<Theme> = {
 
       sizeSmall: {
         fontSize: "0.78rem",
-        padding: "5px 14px",
+        minHeight: 44,
+        padding: "8px 14px",
         borderRadius: 5,
         letterSpacing: "0.035em",
       },
       sizeMedium: {
         fontSize: "0.875rem",
-        padding: "8px 20px",
+        minHeight: 44,
+        padding: "9px 20px",
       },
       sizeLarge: {
         fontSize: "0.9375rem",
+        minHeight: 48,
         padding: "11px 28px",
         letterSpacing: "0.025em",
       },
@@ -363,18 +367,20 @@ const ButtonStyles: Components<Theme> = {
             position: "absolute",
             bottom: "7px",
             left: "14px",
-            width: 0,
+            width: "calc(100% - 28px)",
             height: "1.5px",
             borderRadius: "1px",
             background: theme.palette.primary.main,
-            transition: `width 0.28s ${EASE}, background-color 0.22s ${EASE}`,
+            transform: "scaleX(0)",
+            transformOrigin: "left",
+            transition: `transform 0.28s ${EASE}, background-color 0.22s ${EASE}`,
           },
           "&:hover": {
             color: theme.palette.primary.light,
             backgroundColor: "rgba(7,223,193,0.07)",
             transform: "none",
             "&::after": {
-              width: "calc(100% - 28px)",
+              transform: "scaleX(1)",
               background: theme.palette.primary.light,
             },
           },
@@ -396,18 +402,20 @@ const ButtonStyles: Components<Theme> = {
             position: "absolute",
             bottom: "7px",
             left: "14px",
-            width: 0,
+            width: "calc(100% - 28px)",
             height: "1.5px",
             borderRadius: "1px",
             background: theme.palette.text.secondary,
-            transition: `width 0.28s ${EASE}, background-color 0.22s ${EASE}`,
+            transform: "scaleX(0)",
+            transformOrigin: "left",
+            transition: `transform 0.28s ${EASE}, background-color 0.22s ${EASE}`,
           },
           "&:hover": {
             color: theme.palette.primary.main,
             backgroundColor: "rgba(7,223,193,0.05)",
             transform: "none",
             "&::after": {
-              width: "calc(100% - 28px)",
+              transform: "scaleX(1)",
               background: theme.palette.primary.main,
             },
           },
@@ -431,18 +439,20 @@ const ButtonStyles: Components<Theme> = {
             position: "absolute",
             bottom: "7px",
             left: "14px",
-            width: 0,
+            width: "calc(100% - 28px)",
             height: "1.5px",
             borderRadius: "1px",
             background: theme.palette.error.main,
-            transition: `width 0.28s ${EASE}`,
+            transform: "scaleX(0)",
+            transformOrigin: "left",
+            transition: `transform 0.28s ${EASE}`,
           },
           "&:hover": {
             color: theme.palette.error.light,
             backgroundColor: "rgba(255,92,108,0.07)",
             transform: "none",
             "&::after": {
-              width: "calc(100% - 28px)",
+              transform: "scaleX(1)",
               background: theme.palette.error.light,
             },
           },
@@ -467,18 +477,20 @@ const ButtonStyles: Components<Theme> = {
             position: "absolute",
             bottom: "7px",
             left: "14px",
-            width: 0,
+            width: "calc(100% - 28px)",
             height: "1.5px",
             borderRadius: "1px",
             background: theme.palette.warning.main,
-            transition: `width 0.28s ${EASE}`,
+            transform: "scaleX(0)",
+            transformOrigin: "left",
+            transition: `transform 0.28s ${EASE}`,
           },
           "&:hover": {
             color: theme.palette.warning.light,
             backgroundColor: "rgba(240,160,75,0.07)",
             transform: "none",
             "&::after": {
-              width: "calc(100% - 28px)",
+              transform: "scaleX(1)",
               background: theme.palette.warning.light,
             },
           },

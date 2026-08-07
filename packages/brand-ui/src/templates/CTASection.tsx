@@ -1,7 +1,12 @@
+"use client";
+
 import { Box, Container, Stack, Typography } from "@mui/material";
+import { alpha } from "@mui/material/styles";
+import { useTheme } from "@mui/material/styles";
 import { BrandButton, type BrandButtonProps } from "../components/BrandButton";
 
 export function CTASection({ heading, body, cta }: { heading: string; body: string; cta: BrandButtonProps }) {
+  const theme = useTheme();
   return (
     <Box
       component="section"
@@ -14,7 +19,7 @@ export function CTASection({ heading, body, cta }: { heading: string; body: stri
         sx={{
           position: "absolute",
           inset: 0,
-          background: "radial-gradient(ellipse 45% 30% at 50% 40%, rgba(7,223,193,0.09) 0%, transparent 75%)",
+          background: `radial-gradient(ellipse 45% 30% at 50% 40%, ${alpha(theme.palette.primary.main, 0.09)} 0%, transparent 75%)`,
           pointerEvents: "none",
         }}
       />

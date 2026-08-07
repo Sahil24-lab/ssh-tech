@@ -49,6 +49,7 @@ export function DecodeShimmerLabel({
   return (
     <Box
       component="span"
+      aria-hidden="true"
       sx={{ position: "relative", display: "inline-block" }}
     >
       {/* Invisible measure — real label in real font defines width */}
