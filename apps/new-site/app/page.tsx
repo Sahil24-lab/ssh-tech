@@ -40,14 +40,25 @@ export default function HomePage() {
             <Typography variant="body1" sx={{ color: "text.secondary", maxWidth: 720, mb: 5 }}>
               Each layer narrows interpretation, so teams spend less time reconciling UI and more time shipping the product.
             </Typography>
-            <Box sx={{ display: "grid", gridTemplateColumns: { xs: "1fr", md: "repeat(4, 1fr)" }, gap: { xs: 1, md: 0 } }}>
+            <Box
+              component="ol"
+              sx={{
+                display: "grid",
+                gridTemplateColumns: { xs: "1fr", md: "repeat(4, 1fr)" },
+                gap: { xs: 1, md: 0 },
+                p: 0,
+                m: 0,
+                listStyle: "none",
+              }}
+            >
               {systemLayers.map((layer, index) => (
                 <Box
+                  component="li"
                   key={layer.label}
                   sx={{
                     position: "relative",
                     p: { xs: 2.5, md: 3 },
-                    borderLeft: { xs: "3px solid", md: index === 0 ? "3px solid" : "1px solid" },
+                    borderTop: index === 0 ? "2px solid" : "1px solid",
                     borderColor: index === 0 ? "primary.main" : "secondary.dark",
                     backgroundColor: index % 2 === 0 ? "action.hover" : "transparent",
                   }}
