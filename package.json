@@ -22,7 +22,13 @@
     "security:code": "npm run gitleaks:scan && npm run semgrep:scan && npm run trivy:fs && npm run trivy:config",
     "storybook": "HOME=.storybook-home STORYBOOK_DISABLE_TELEMETRY=1 CI=1 storybook dev --port 6006 --host 127.0.0.1 --ci --no-open",
     "build-storybook": "HOME=.storybook-home STORYBOOK_DISABLE_TELEMETRY=1 CI=1 storybook build",
+    "storybook:a11y": "npm run build-storybook && STORYBOOK_DISABLE_TELEMETRY=1 CI=1 playwright test --config tests/accessibility/playwright.config.cjs",
     "test:contracts": "tsc --noEmit -p tests/contracts/tsconfig.json && node --test tests/contracts/routes.test.mjs",
+    "ui:catalog:generate": "node --experimental-strip-types scripts/design-system/generate-component-catalog.mjs",
+    "ui:catalog:check": "node --experimental-strip-types scripts/design-system/check-component-catalog.mjs",
+    "ui:catalog": "node scripts/design-system/query-component-catalog.mjs",
+    "ui:impeccable": "node scripts/design-system/check-impeccable-changes.mjs",
+    "design-system:check": "npm run ui:catalog:check && npm run lint --workspace packages/brand-ui && npm run storybook:a11y && npm run ui:impeccable",
     "visual:test": "npm run build-storybook && STORYBOOK_DISABLE_TELEMETRY=1 CI=1 playwright test --config tests/visual-regression/playwright.config.cjs",
     "visual:baseline": "npm run build-storybook && STORYBOOK_DISABLE_TELEMETRY=1 CI=1 playwright test --config tests/visual-regression/playwright.config.cjs --update-snapshots"
   },

@@ -2,6 +2,7 @@ import { expect, test } from "@playwright/test";
 
 const stories = [
   "foundations-colors--palette",
+  "system-agent-component-catalog--overview",
   "primitives-box--surface-block",
   "primitives-container--default",
   "primitives-heading--default",

@@ -1,0 +1,64 @@
+name: Design System
+
+on:
+  pull_request:
+    paths:
+      - ".agents/skills/app-builder/**"
+      - ".agents/skills/impeccable/**"
+      - ".github/workflows/design-system.yml"
+      - ".storybook/**"
+      - "packages/brand-ui/**"
+      - "scripts/design-system/**"
+      - "tests/accessibility/**"
+      - "package.json"
+      - "package-lock.json"
+  workflow_dispatch:
+
+concurrency:
+  group: design-system-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  contracts-and-quality:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright browser
+        run: npx playwright install --with-deps chromium
+
+      - name: Validate generated component catalogue
+        run: npm run ui:catalog:check
+
+      - name: Typecheck design system
+        run: npm run lint --workspace packages/brand-ui
+
+      - name: Build Storybook and run accessibility contracts
+        run: npm run storybook:a11y
+
+      - name: Reject new Impeccable findings
+        run: npm run ui:impeccable
+
+      - name: Upload accessibility artifacts
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: design-system-accessibility-artifacts
+          path: |
+            test-results
+            playwright-report
+          if-no-files-found: ignore

@@ -1,0 +1,4 @@
+interface:
+  display_name: "SSH App Builder"
+  short_description: "Compose SSH frontend apps from the approved UI catalogue"
+  default_prompt: "Build or modify this frontend using the SSH component catalogue, design tokens, Storybook contracts, and Impeccable quality gates."

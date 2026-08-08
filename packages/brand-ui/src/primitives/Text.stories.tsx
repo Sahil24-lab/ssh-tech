@@ -38,7 +38,11 @@ export const Default: Story = {
             Supporting text adds context without competing with the primary message.
           </Typography>
           <Typography variant="body2">
-            Read the <Link href="#text-guidance">text guidance</Link> for implementation details.
+            Read the{" "}
+            <Link href="#text-guidance" sx={{ textDecoration: "underline", textUnderlineOffset: "0.2em" }}>
+              text guidance
+            </Link>{" "}
+            for implementation details.
           </Typography>
         </Stack>
       </Specimen>
