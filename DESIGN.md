@@ -25,6 +25,21 @@ typography:
     fontWeight: 700
     lineHeight: 1.15
     letterSpacing: "-0.025em"
+  title-large:
+    fontFamily: "Montserrat, sans-serif"
+    fontSize: "2rem"
+    fontWeight: 600
+    lineHeight: 1.25
+  title-medium:
+    fontFamily: "Montserrat, sans-serif"
+    fontSize: "1.75rem"
+    fontWeight: 600
+    lineHeight: 1.4
+  title-small:
+    fontFamily: "Montserrat, sans-serif"
+    fontSize: "1.25rem"
+    fontWeight: 600
+    lineHeight: 1.5
   body:
     fontFamily: "Montserrat, sans-serif"
     fontSize: "1.1rem"
@@ -41,10 +56,22 @@ typography:
     fontWeight: 700
     lineHeight: 1.5
     letterSpacing: "0.06em"
+  label-large:
+    fontFamily: "JetBrains Mono, monospace"
+    fontSize: "0.875rem"
+    fontWeight: 600
+    lineHeight: 1.5
+    letterSpacing: "0.04em"
+  navigation:
+    fontFamily: "Montserrat, sans-serif"
+    fontSize: "0.9rem"
+    fontWeight: 600
+    lineHeight: 1.5
 rounded:
   sm: "8px"
   md: "12px"
   lg: "16px"
+  pill: "9999px"
 spacing:
   xs: "8px"
   sm: "16px"
@@ -90,6 +117,12 @@ The system rejects generic SaaS glass dashboards, decorative code theatre, inter
 - Flat, bounded surfaces with visible interaction states.
 - Technical detail used sparingly and only when it carries meaning.
 - Accessibility and consumer verification treated as design quality.
+
+## Theme Setup
+
+`@ssh/brand-ui` exposes one canonical setup path: `BrandThemeProvider` for Next.js rendering and `createBrandTheme(overrides)` for tests, Storybook, and host-level customization. Consumers may extend semantic theme options, but shared font stacks, shape, motion, and layer values come from the exported foundation tokens.
+
+The font families include local CSS-variable hooks with installed-font and system fallbacks, so an absent Next.js font variable never collapses the theme to an invalid family. Storybook and application layouts both use the same provider; do not introduce a parallel registry or a module-level theme singleton.
 
 ## Colors
 

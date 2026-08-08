@@ -1,10 +1,19 @@
-import { createTheme, responsiveFontSizes, type ThemeOptions } from "@mui/material/styles";
+import { createTheme, type ThemeOptions } from "@mui/material/styles";
 import { brandTokens, overlayTokens, surfaceTokens } from "./tokens";
 import { layoutTokens } from "./tokens/layout";
+import {
+  fontFamilyTokens,
+  motionTokens,
+  shapeTokens,
+  surfaceTreatmentTokens,
+  typographyTokens,
+  zIndexTokens,
+} from "./foundation";
 import ButtonStyles from "./button-styles/ButtonStyles";
 import ChipStyles from "./chip-styles/ChipStyles";
 import LinkStyles from "./link-styles/LinkStyles";
-import ScrollbarStyles from "./scrollbar-styles/ScrollbarStyles";
+
+export type BrandThemeOptions = ThemeOptions;
 
 const baseThemeOptions: ThemeOptions = {
   palette: {
@@ -49,7 +58,7 @@ const baseThemeOptions: ThemeOptions = {
     action: brandTokens.color.action,
   },
   shape: {
-    borderRadius: brandTokens.radius.sm,
+    borderRadius: shapeTokens.control,
   },
   breakpoints: {
     values: {
@@ -61,89 +70,110 @@ const baseThemeOptions: ThemeOptions = {
       xxl: 1800,
     },
   },
+  transitions: {
+    duration: {
+      shortest: motionTokens.duration.instant,
+      shorter: motionTokens.duration.fast,
+      short: motionTokens.duration.short,
+      standard: motionTokens.duration.standard,
+    },
+    easing: {
+      easeInOut: motionTokens.easing.standard,
+      easeOut: motionTokens.easing.out,
+    },
+  },
+  zIndex: zIndexTokens,
   typography: {
-    fontFamily: "var(--font-montserrat), sans-serif",
+    fontFamily: fontFamilyTokens.body,
     h1: {
-      fontFamily: "var(--font-montserrat), sans-serif",
-      fontWeight: 700,
-      fontSize: "4.5rem",
-      lineHeight: 1.04,
-      letterSpacing: "-0.035em",
+      fontFamily: fontFamilyTokens.display,
+      ...typographyTokens.display,
       color: brandTokens.color.primary.light,
     },
     h2: {
-      fontFamily: "var(--font-montserrat), sans-serif",
-      fontWeight: 700,
-      fontSize: "2.6rem",
-      lineHeight: 1.15,
-      letterSpacing: "-0.025em",
+      fontFamily: fontFamilyTokens.display,
+      ...typographyTokens.headline,
       color: brandTokens.color.primary.light,
     },
     h3: {
-      fontFamily: "var(--font-montserrat), sans-serif",
-      fontWeight: 600,
-      fontSize: "2rem",
-      lineHeight: 1.25,
+      fontFamily: fontFamilyTokens.display,
+      ...typographyTokens.titleLarge,
       color: brandTokens.color.primary.light,
     },
     h4: {
-      fontFamily: "var(--font-montserrat), sans-serif",
-      fontWeight: 600,
-      fontSize: "1.75rem",
-      lineHeight: 1.4,
+      fontFamily: fontFamilyTokens.display,
+      ...typographyTokens.titleMedium,
       color: brandTokens.color.text.primary,
     },
     h5: {
-      fontFamily: "var(--font-montserrat), sans-serif",
-      fontWeight: 600,
-      fontSize: "1.25rem",
-      lineHeight: 1.5,
+      fontFamily: fontFamilyTokens.display,
+      ...typographyTokens.titleSmall,
       color: brandTokens.color.text.secondary,
     },
     h6: {
-      fontFamily: "var(--font-montserrat), sans-serif",
+      fontFamily: fontFamilyTokens.display,
+      ...typographyTokens.body,
       fontWeight: 600,
-      fontSize: "1rem",
-      lineHeight: 1.5,
       color: brandTokens.color.text.secondary,
     },
     body1: {
-      fontFamily: "var(--font-montserrat), sans-serif",
-      fontWeight: 400,
-      fontSize: "1.1rem",
+      fontFamily: fontFamilyTokens.body,
+      ...typographyTokens.bodyLarge,
       color: brandTokens.color.text.primary,
-      lineHeight: 1.6,
     },
     body2: {
-      fontFamily: "var(--font-poppins), sans-serif",
-      fontWeight: 400,
-      fontSize: "1rem",
+      fontFamily: fontFamilyTokens.supporting,
+      ...typographyTokens.body,
       color: brandTokens.color.text.secondary,
-      lineHeight: 1.6,
     },
     button: {
-      fontFamily: "var(--font-jetbrains-mono), monospace",
-      letterSpacing: "0.04em",
+      fontFamily: fontFamilyTokens.label,
+      ...typographyTokens.labelLarge,
       textTransform: "none",
-      fontWeight: 600,
     },
     caption: {
-      fontFamily: "var(--font-jetbrains-mono), monospace",
-      letterSpacing: "0.08em",
-      textTransform: "uppercase",
+      fontFamily: fontFamilyTokens.label,
+      ...typographyTokens.label,
       color: brandTokens.color.primary.main,
+      textTransform: "uppercase",
     },
   },
   components: {
     MuiCssBaseline: {
       styleOverrides: {
+        html: {
+          colorScheme: "dark",
+        },
         body: {
           backgroundColor: brandTokens.color.background.default,
           backgroundImage: `
-            linear-gradient(rgba(5, 11, 43, 0.7), rgba(5, 11, 43, 0.1)),
+            linear-gradient(${surfaceTreatmentTokens.canvasVeil.strong}, ${surfaceTreatmentTokens.canvasVeil.subtle}),
             conic-gradient(from -23.81deg at 72.82% 162.44%, ${brandTokens.color.background.default} -44.57deg, ${brandTokens.color.secondary.main} 7.76deg, ${brandTokens.color.primary.dark} 20.98deg, ${brandTokens.color.secondary.main} 52deg, ${brandTokens.color.secondary.dark} 88.68deg, ${brandTokens.color.secondary.main} 315.43deg, ${brandTokens.color.primary.dark} 367.76deg)
           `,
           color: brandTokens.color.text.primary,
+          minHeight: "100dvh",
+        },
+        "::selection": {
+          backgroundColor: `color-mix(in srgb, ${brandTokens.color.primary.main} 28%, transparent)`,
+          color: brandTokens.color.text.primary,
+        },
+        "*": {
+          scrollbarColor: `${brandTokens.color.primary.main} ${brandTokens.color.background.paper}`,
+          scrollbarWidth: "thin",
+        },
+        "*::-webkit-scrollbar": {
+          width: 10,
+        },
+        "*::-webkit-scrollbar-track": {
+          backgroundColor: brandTokens.color.background.paper,
+        },
+        "*::-webkit-scrollbar-thumb": {
+          backgroundColor: brandTokens.color.primary.main,
+          border: `2px solid ${brandTokens.color.background.paper}`,
+          borderRadius: shapeTokens.control,
+        },
+        "*::-webkit-scrollbar-thumb:hover": {
+          backgroundColor: brandTokens.color.primary.dark,
         },
         "@media (prefers-reduced-motion: reduce)": {
           "*, *::before, *::after": {
@@ -155,12 +185,30 @@ const baseThemeOptions: ThemeOptions = {
         },
       },
     },
+    MuiTypography: {
+      styleOverrides: {
+        root: {
+          overflowWrap: "anywhere",
+        },
+        h1: {
+          textWrap: "balance",
+        },
+        h2: {
+          textWrap: "balance",
+        },
+        body1: {
+          textWrap: "pretty",
+        },
+        body2: {
+          textWrap: "pretty",
+        },
+      },
+    },
     ...ButtonStyles,
     ...ChipStyles,
     ...LinkStyles,
-    ...ScrollbarStyles,
   },
 };
 
-export const createBrandTheme = () =>
-  responsiveFontSizes(createTheme({ ...baseThemeOptions, layout: layoutTokens }));
+export const createBrandTheme = (overrides: BrandThemeOptions = {}) =>
+  createTheme({ ...baseThemeOptions, layout: layoutTokens }, overrides);

@@ -5,10 +5,22 @@ import { CacheProvider } from "@emotion/react";
 import createCache from "@emotion/cache";
 import { useServerInsertedHTML } from "next/navigation";
 import { useMemo, useState } from "react";
-import { createBrandTheme } from "../theme/createBrandTheme";
+import type { ReactNode } from "react";
+import {
+  createBrandTheme,
+  type BrandThemeOptions,
+} from "../theme/createBrandTheme";
 
-export function BrandThemeProvider({ children }: { children: React.ReactNode }) {
-  const theme = useMemo(() => createBrandTheme(), []);
+export type BrandThemeProviderProps = {
+  children: ReactNode;
+  themeOptions?: BrandThemeOptions;
+};
+
+export function BrandThemeProvider({
+  children,
+  themeOptions,
+}: BrandThemeProviderProps) {
+  const theme = useMemo(() => createBrandTheme(themeOptions), [themeOptions]);
 
   const [cache] = useState(() => {
     const insertionPoint =

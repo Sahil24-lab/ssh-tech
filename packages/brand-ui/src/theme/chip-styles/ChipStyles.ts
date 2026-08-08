@@ -1,14 +1,16 @@
-import { Components, Theme } from "@mui/material/styles";
+import { alpha, type Components, type Theme } from "@mui/material/styles";
+import { fontFamilyTokens, shapeTokens, typographyTokens } from "../foundation";
 
 const ChipStyles: Components<Theme> = {
   MuiChip: {
     styleOverrides: {
       root: ({ theme }: { theme: Theme }) => ({
-        ...theme.typography.body2,
-        fontWeight: 400,
-        paddingLeft: theme.spacing(1.4),
-        paddingRight: theme.spacing(1.4),
-        borderRadius: "9999px",
+        ...typographyTokens.label,
+        borderRadius: shapeTokens.pill,
+        fontFamily: fontFamilyTokens.label,
+        minHeight: 28,
+        paddingLeft: theme.spacing(1.25),
+        paddingRight: theme.spacing(1.25),
       }),
 
       icon: ({ theme }: { theme: Theme }) => ({
@@ -33,12 +35,10 @@ const ChipStyles: Components<Theme> = {
       }),
 
       outlined: ({ theme }: { theme: Theme }) => ({
-        borderRadius: "9999px",
-        border: `1px solid ${theme.palette.primary.dark}`,
+        backgroundColor: alpha(theme.palette.primary.main, 0.08),
+        border: `1px solid ${theme.palette.secondary.dark}`,
+        borderRadius: shapeTokens.pill,
         color: theme.palette.primary.light,
-        paddingTop: theme.spacing(1.1),
-        paddingBottom: theme.spacing(1.4),
-        backgroundColor: "rgba(7, 223, 193, 0.2)",
         "& .MuiChip-icon": {
           color: theme.palette.primary.main,
         },

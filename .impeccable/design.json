@@ -12,10 +12,20 @@
     "typographyMeta": {
       "display": { "displayName": "Display", "purpose": "One page headline and high-impact statements." },
       "headline": { "displayName": "Headline", "purpose": "Section-level hierarchy." },
+      "title-large": { "displayName": "Large Title", "purpose": "Major content-group headings." },
+      "title-medium": { "displayName": "Medium Title", "purpose": "Subsection headings." },
+      "title-small": { "displayName": "Small Title", "purpose": "Component headings." },
       "body": { "displayName": "Body", "purpose": "Primary explanatory prose." },
       "supporting": { "displayName": "Supporting", "purpose": "Secondary descriptions and metadata." },
-      "label": { "displayName": "Operational Label", "purpose": "Actions and compact technical metadata." }
+      "label": { "displayName": "Operational Label", "purpose": "Compact technical metadata." },
+      "label-large": { "displayName": "Action Label", "purpose": "Buttons and prominent controls." },
+      "navigation": { "displayName": "Navigation", "purpose": "Plain-language navigation and wayfinding." }
     },
+    "shape": [
+      { "name": "control", "value": "8px", "purpose": "Buttons, fields, and compact interactive controls." },
+      { "name": "panel", "value": "16px", "purpose": "Broad cards and content surfaces." },
+      { "name": "pill", "value": "9999px", "purpose": "Chips and status labels only." }
+    ],
     "shadows": [
       { "name": "interactive-lift", "value": "0 4px 8px rgba(0,0,0,0.20)", "purpose": "Short hover feedback on actionable surfaces." },
       { "name": "signal-glow", "value": "0 0 18px rgba(7,223,193,0.28)", "purpose": "Rare, time-limited primary emphasis." }
@@ -24,7 +34,7 @@
       { "name": "ease-standard", "value": "cubic-bezier(0.4, 0, 0.2, 1)", "purpose": "Colour, opacity, and shadow transitions." },
       { "name": "ease-out", "value": "cubic-bezier(0.22, 1, 0.36, 1)", "purpose": "Short transform transitions without overshoot." },
       { "name": "duration-fast", "value": "180ms", "purpose": "Direct control feedback." },
-      { "name": "duration-base", "value": "260ms", "purpose": "Surface and content-state changes." }
+      { "name": "duration-base", "value": "280ms", "purpose": "Surface and content-state changes." }
     ],
     "breakpoints": [
       { "name": "sm", "value": "600px" },
@@ -64,7 +74,7 @@
       "kind": "chip",
       "description": "Compact metadata label that supports content instead of decorating it.",
       "html": "<span class=\"ds-chip\">Verified</span>",
-      "css": ".ds-chip{display:inline-flex;align-items:center;min-height:28px;padding:3px 10px;border:1px solid #0B645C;border-radius:8px;background:rgba(7,223,193,.08);color:#91FEE6;font:500 .75rem/1.4 'JetBrains Mono',monospace}.ds-chip:hover{border-color:#07DFC1;color:#EFFEEB}.ds-chip:focus-visible{outline:2px solid #07DFC1;outline-offset:2px}"
+      "css": ".ds-chip{display:inline-flex;align-items:center;min-height:28px;padding:3px 10px;border:1px solid #0B645C;border-radius:9999px;background:rgba(7,223,193,.08);color:#91FEE6;font:700 .8rem/1.5 'JetBrains Mono',monospace}.ds-chip:hover{border-color:#07DFC1;color:#EFFEEB}.ds-chip:focus-visible{outline:2px solid #07DFC1;outline-offset:2px}"
     },
     {
       "name": "Navigation Link",

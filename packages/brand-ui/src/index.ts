@@ -1,9 +1,27 @@
 import "./types/mui";
 
 export { BrandThemeProvider } from "./providers/BrandThemeProvider";
+export type { BrandThemeProviderProps } from "./providers/BrandThemeProvider";
 export { brandTokens, overlayTokens, surfaceTokens } from "./theme/tokens";
 export type { BrandTokens, OverlayTokens, SurfaceTokens } from "./theme/tokens";
 export { createBrandTheme } from "./theme/createBrandTheme";
+export type { BrandThemeOptions } from "./theme/createBrandTheme";
+export {
+  fontFamilyTokens,
+  motionTokens,
+  shapeTokens,
+  surfaceTreatmentTokens,
+  typographyTokens,
+  zIndexTokens,
+} from "./theme/foundation";
+export type {
+  FontFamilyTokens,
+  MotionTokens,
+  ShapeTokens,
+  SurfaceTreatmentTokens,
+  TypographyTokens,
+  ZIndexTokens,
+} from "./theme/foundation";
 
 export {
   layoutTokens,
