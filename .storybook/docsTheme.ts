@@ -1,38 +1,35 @@
-import { brandTokens } from "../packages/brand-ui/src/theme/tokens";
+import { create } from "storybook/theming";
+import { brandTokens, fontFamilyTokens, shapeTokens } from "@ssh/brand-ui";
 
-const t = brandTokens.color;
+const colors = brandTokens.color;
 
-export const docsTheme = {
+export const docsTheme = create({
   base: "dark",
   brandTitle: "SSH Design System",
 
-  // Docs can be transparent because they render inside docs/preview surfaces
   appBg: "transparent",
   appContentBg: "transparent",
   appPreviewBg: "transparent",
+  appBorderColor: colors.divider.default,
+  appBorderRadius: shapeTokens.control,
 
-  appBorderColor: "transparent",
-  appBorderRadius: 4,
+  barBg: colors.surface.elevated,
+  barTextColor: colors.text.primary,
+  barSelectedColor: colors.primary.main,
+  barHoverColor: colors.primary.light,
 
-  barBg: t.surface.elevated,
-  barTextColor: t.text.primary,
-  barSelectedColor: t.primary.main,
-  barHoverColor: t.primary.light,
+  textColor: colors.text.primary,
+  textMutedColor: colors.text.muted,
+  textInverseColor: colors.primary.contrast,
 
-  textColor: t.text.primary,
-  textMutedColor: t.text.muted,
+  inputBg: colors.surface.depth,
+  inputBorder: colors.divider.default,
+  inputTextColor: colors.text.primary,
+  inputBorderRadius: shapeTokens.control,
 
-  // In docs, keep this readable, but do not reuse this object for manager UI
-  textInverseColor: "#08131a",
+  colorPrimary: colors.primary.main,
+  colorSecondary: colors.secondary.light,
 
-  inputBg: t.surface.elevated,
-  inputBorder: t.divider.default,
-  inputTextColor: t.text.primary,
-  inputBorderRadius: 4,
-
-  colorPrimary: t.primary.main,
-  colorSecondary: t.secondary.light,
-
-  fontBase: '"Play", sans-serif',
-  fontCode: '"JetBrains Mono", monospace',
-};
+  fontBase: fontFamilyTokens.body,
+  fontCode: fontFamilyTokens.label,
+});

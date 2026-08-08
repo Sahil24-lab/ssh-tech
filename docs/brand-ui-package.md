@@ -62,6 +62,16 @@ npm run dev:legacy
 
 Storybook is configured with `@storybook/nextjs`.
 
+Primitive stories are usage specifications, not only visual samples. Each primitive documents:
+
+- when to use it and when to promote the pattern to a named component;
+- semantic and accessibility responsibilities the primitive does not provide automatically;
+- responsive behavior at narrow and wide viewports;
+- resilience under long, localized, right-to-left, and user-generated content;
+- token-driven styling with visible focus and reduced-motion behavior inherited from the canonical theme.
+
+Keep primitive stories flat, scannable, and honest about real layout pressure. Add a desktop overview baseline and a mobile stress-case baseline whenever a new primitive enters the system.
+
 ```bash
 npm run storybook
 npm run build-storybook

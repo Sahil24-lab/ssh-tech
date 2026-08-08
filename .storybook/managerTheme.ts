@@ -1,37 +1,34 @@
 import { create } from "storybook/theming";
-import { brandTokens } from "../packages/brand-ui/src/theme/tokens";
+import { brandTokens, fontFamilyTokens, shapeTokens } from "@ssh/brand-ui";
 
-const t = brandTokens.color;
+const colors = brandTokens.color;
 
 export const managerTheme = create({
   base: "dark",
   brandTitle: "SSH Design System",
 
-  // Fully opaque manager surfaces
-  appBg: t.surface.hero,
-  appContentBg: t.surface.elevated,
-  appPreviewBg: t.surface.hero,
+  appBg: colors.surface.hero,
+  appContentBg: colors.surface.elevated,
+  appPreviewBg: colors.surface.hero,
+  appBorderColor: colors.divider.default,
+  appBorderRadius: shapeTokens.control,
 
-  appBorderColor: t.divider.default,
-  appBorderRadius: 4,
+  barBg: colors.surface.elevated,
+  barTextColor: colors.text.primary,
+  barSelectedColor: colors.primary.main,
+  barHoverColor: colors.primary.light,
 
-  // Sidebar / toolbar
-  barBg: t.surface.elevated,
-  barTextColor: t.text.primary,
-  barSelectedColor: "#062b27", // dark text on selected/highlighted rows
-  barHoverColor: t.primary.main,
+  textColor: colors.text.primary,
+  textInverseColor: colors.primary.contrast,
 
-  textColor: t.text.primary,
-  textInverseColor: "#062b27",
+  inputBg: colors.surface.depth,
+  inputBorder: colors.divider.default,
+  inputTextColor: colors.text.primary,
+  inputBorderRadius: shapeTokens.control,
 
-  inputBg: t.surface.depth,
-  inputBorder: t.divider.default,
-  inputTextColor: t.text.primary,
-  inputBorderRadius: 4,
+  colorPrimary: colors.primary.main,
+  colorSecondary: colors.secondary.light,
 
-  colorPrimary: t.primary.main,
-  colorSecondary: t.primary.main,
-
-  fontBase: '"Play", sans-serif',
-  fontCode: '"JetBrains Mono", monospace',
+  fontBase: fontFamilyTokens.body,
+  fontCode: fontFamilyTokens.label,
 });

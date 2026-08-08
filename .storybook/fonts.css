@@ -5,20 +5,21 @@
 @import "@fontsource/poppins/400.css";
 @import "@fontsource/poppins/500.css";
 @import "@fontsource/poppins/600.css";
+@import "@fontsource/jetbrains-mono/400.css";
+@import "@fontsource/jetbrains-mono/500.css";
+@import "@fontsource/jetbrains-mono/700.css";
+/* Legacy stories retain their original typefaces until they leave the migration queue. */
 @import "@fontsource/play/400.css";
 @import "@fontsource/play/700.css";
 @import "@fontsource/exo-2/400.css";
 @import "@fontsource/exo-2/500.css";
 @import "@fontsource/exo-2/600.css";
 @import "@fontsource/exo-2/700.css";
-@import "@fontsource/jetbrains-mono/400.css";
-@import "@fontsource/jetbrains-mono/500.css";
-@import "@fontsource/jetbrains-mono/700.css";
 
 :root {
   --font-montserrat: "Montserrat";
   --font-poppins: "Poppins";
+  --font-jetbrains-mono: "JetBrains Mono";
   --font-play: "Play";
   --font-exo2: "Exo 2";
-  --font-jetbrains-mono: "JetBrains Mono";
 }
