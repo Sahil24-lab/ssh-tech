@@ -8,6 +8,12 @@ const entryPoints = [
   "Defined delivery",
   "Technical leadership",
 ] as const;
+const opaquePanelSx = {
+  backgroundColor: "rgba(9, 31, 44, 0.94)",
+  backgroundImage: "none",
+  backdropFilter: "none",
+} as const;
+
 
 export default function EngineeringEngagement() {
   return (
@@ -35,7 +41,13 @@ export default function EngineeringEngagement() {
           </Typography>
         </Box>
 
-        <GlassCard variant="darkElevated" sx={{ overflow: "hidden" }}>
+        <GlassCard
+          variant="darkElevated"
+          sx={{
+            overflow: "hidden",
+            ...opaquePanelSx,
+          }}
+        >
           <Box
             component="ol"
             sx={{

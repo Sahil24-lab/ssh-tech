@@ -19,6 +19,15 @@ export const engineeringTestimonials: TestimonialItem[] = [
     rating: 5,
     image: "/testimonials/Mack.jpeg",
   },
+  {
+    preview: "Helping deep-tech startups scale",
+    quote:
+      "Sahil excels in propelling early-stage product development by combining his strong business acumen with his deep technical expertise. His quick decision-making and technical ability help lead Elite Robotics, a deep tech startup, to meet pivotal milestones. Sahil's business insight helps him swiftly address challenges and forge robust relationships with stakeholders. His commitment to team collaboration and deep understanding of early-stage startups has led to successful team expansion, fundraising, and product development.",
+    author: "James Whyman",
+    role: "Associate Director at KPMG",
+    rating: 5,
+    image: "/testimonials/James.jpeg",
+  },
 ];
 
 export const selectedWork = [

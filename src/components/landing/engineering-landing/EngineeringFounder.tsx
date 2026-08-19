@@ -22,8 +22,9 @@ export default function EngineeringFounder() {
             gap: { xs: 6, md: 9 },
             alignItems: "start",
             p: { xs: 3.5, sm: 5, md: 6 },
-            background:
-              "linear-gradient(135deg, rgba(14, 83, 76, 0.26), rgba(9, 31, 44, 0.82) 52%, rgba(7, 223, 193, 0.05))",
+            backgroundColor: "rgba(9, 31, 44, 0.96)",
+            backgroundImage: "none",
+            backdropFilter: "none",
             "&::after": {
               content: '\"SH\"',
               position: "absolute",

@@ -4,7 +4,7 @@ import { useState } from "react";
 import ArrowForwardRounded from "@mui/icons-material/ArrowForwardRounded";
 import MailOutlineRounded from "@mui/icons-material/MailOutlineRounded";
 import { Box, Stack, Typography } from "@mui/material";
-import { BrandButton, Container, GlassCard } from "@ssh/brand-ui";
+import { BrandButton, Container } from "@ssh/brand-ui";
 import BookCallModal from "@/components/book-call-modal/BookCallModal";
 
 export default function EngineeringContact() {
@@ -40,18 +40,13 @@ export default function EngineeringContact() {
           py: { xs: 9, md: 14 },
         }}
       >
-        <GlassCard
-          variant="darkElevated"
+        <Box
           sx={{
             position: "relative",
-            overflow: "hidden",
             display: "grid",
             gridTemplateColumns: { xs: "1fr", md: "minmax(0, 1.2fr) minmax(280px, 0.8fr)" },
             gap: { xs: 5, md: 8 },
             alignItems: "end",
-            p: { xs: 3.5, sm: 5, md: 6.5 },
-            background:
-              "linear-gradient(135deg, rgba(14, 83, 76, 0.4), rgba(9, 31, 44, 0.86) 58%, rgba(7, 223, 193, 0.1))",
           }}
         >
           <Stack spacing={2.5}>
@@ -84,7 +79,7 @@ export default function EngineeringContact() {
               sx={{ minHeight: 52 }}
             />
           </Stack>
-        </GlassCard>
+        </Box>
       </Container>
 
       <BookCallModal open={contactOpen} handleClose={() => setContactOpen(false)} />
