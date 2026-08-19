@@ -18,6 +18,8 @@ export default function EngineeringHero() {
       sx={{
         position: "relative",
         overflow: "hidden",
+        height: { lg: "100%" },
+        minHeight: { lg: 0 },
         background:
           "radial-gradient(circle at 78% 26%, rgba(7, 223, 193, 0.08), transparent 32%), radial-gradient(circle at 18% 58%, rgba(18, 72, 82, 0.18), transparent 44%), linear-gradient(116deg, #0b2b37 0%, #091f2c 54%, #071b28 100%)",
         "&::before": {
@@ -42,8 +44,9 @@ export default function EngineeringHero() {
           minHeight: {
             xs: "calc(100dvh - 72px)",
             md: "calc(100dvh - 74px)",
-            lg: "calc(100dvh - 72px)",
+            lg: 0,
           },
+          height: { lg: "100%" },
           display: "grid",
           gridTemplateColumns: {
             xs: "1fr",
@@ -52,7 +55,7 @@ export default function EngineeringHero() {
           },
           alignItems: "center",
           gap: { xs: 5, md: 5, lg: 8 },
-          py: { xs: 8, sm: 10, md: 12, lg: 15 },
+          py: { xs: 8, sm: 10, md: 12, lg: "clamp(32px, 5dvh, 48px)" },
         }}
       >
         <Stack spacing={3} sx={{ position: "relative", zIndex: 1 }}>
@@ -122,7 +125,7 @@ export default function EngineeringHero() {
             position: "relative",
             zIndex: 1,
             width: "100%",
-            maxWidth: { xs: 520, md: 520, lg: 560 },
+            maxWidth: { xs: 520, md: 520, lg: "min(560px, 62dvh)" },
             justifySelf: "center",
             alignSelf: "center",
             mt: { xs: -2, md: 0 },

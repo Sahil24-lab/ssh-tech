@@ -40,8 +40,16 @@ export default function EngineeringLanding() {
           },
         }}
       >
-        <EngineeringHero />
-        <EngineeringCapabilities />
+        <Box
+          sx={{
+            display: { xs: "block", lg: "grid" },
+            height: { lg: "calc(100dvh - 72px)" },
+            gridTemplateRows: { lg: "minmax(0, 1fr) auto" },
+          }}
+        >
+          <EngineeringHero />
+          <EngineeringCapabilities />
+        </Box>
         <EngineeringIntelligenceFlow />
         <EngineeringSelectedWork />
         <EngineeringEngagement />

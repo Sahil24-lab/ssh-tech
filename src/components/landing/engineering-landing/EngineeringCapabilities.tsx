@@ -1,5 +1,5 @@
 import {
-  AccountTreeRounded,
+  CodeRounded,
   HubRounded,
   PrecisionManufacturingRounded,
   SensorsRounded,
@@ -9,10 +9,10 @@ import { Container } from "@ssh/brand-ui";
 
 const capabilities = [
   {
-    title: "Founder-led delivery",
+    title: "Engineering software",
     description:
-      "One technical lead from system architecture through delivery.",
-    icon: <AccountTreeRounded />,
+      "Operational tools, interfaces and workflow systems built around real work.",
+    icon: <CodeRounded />,
   },
   {
     title: "Embedded to cloud",
@@ -41,8 +41,6 @@ export default function EngineeringCapabilities() {
       id="capabilities"
       sx={{
         backgroundColor: "rgba(8, 24, 36, 0.92)",
-        borderBottom: "1px solid",
-        borderColor: "rgba(145, 254, 230, 0.08)",
       }}
     >
       <Container
