@@ -36,6 +36,14 @@ const steps = ["Project Info", "Next Steps"];
 
 // ── Dynamic project types per subdomain/site ──
 const projectTypesBySite: Record<string, string[]> = {
+  engineering: [
+    "Engineering Software",
+    "Connected Systems",
+    "Robotics & Controls",
+    "AI-Enabled Engineering",
+    "Prototype or Architecture",
+    "Other",
+  ],
   web3: [
     "DeFi",
     "Stablecoin",
@@ -81,8 +89,16 @@ function getCurrentSite(): string {
     const host = window.location.hostname;
     const sub = host.split(".")[0];
     if (sub in projectTypesBySite) return sub;
+    if (
+      host === "ssh-tech.xyz" ||
+      host === "www.ssh-tech.xyz" ||
+      host === "localhost" ||
+      host === "127.0.0.1"
+    ) {
+      return "engineering";
+    }
   }
-  return process.env.NEXT_PUBLIC_SITE ?? "web3";
+  return process.env.NEXT_PUBLIC_SITE ?? "engineering";
 }
 
 export default function BookCallModal({
@@ -99,6 +115,8 @@ export default function BookCallModal({
   const currentSite = useMemo(() => getCurrentSite(), []);
   const projectTypes =
     projectTypesBySite[currentSite] ?? projectTypesBySite.web3;
+  const modalTitle =
+    currentSite === "engineering" ? "Discuss a Project" : "Book a Call";
 
   const style = {
     position: "absolute" as const,
@@ -262,13 +280,18 @@ export default function BookCallModal({
       borderWidth: "8px",
       borderStyle: "solid",
       borderColor: `transparent ${primaryMain}80 ${primaryMain}80 transparent`,
-      borderRadius: "0 0 4px 0",
+      borderRadius: "0 0 8px 0",
     },
   };
 
   return (
     <Modal open={open} onClose={handleClose}>
-      <Box sx={style}>
+      <Box
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="book-call-modal-title"
+        sx={style}
+      >
         {/* Header */}
         <Box
           display="flex"
@@ -276,10 +299,15 @@ export default function BookCallModal({
           alignItems="center"
           mb={3}
         >
-          <Typography variant={isMobile ? "h6" : "h5"} fontWeight="700">
-            Book a Call
+          <Typography
+            id="book-call-modal-title"
+            variant={isMobile ? "h6" : "h5"}
+            fontWeight="700"
+          >
+            {modalTitle}
           </Typography>
           <IconButton
+            aria-label="Close contact form"
             onClick={handleClose}
             color="inherit"
             size={isMobile ? "medium" : "large"}

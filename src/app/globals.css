@@ -6,7 +6,7 @@
   --background: #ffffff;
   --foreground: #171717;
 
-  --header-height: 80px;
+  --header-height: 72px;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -17,6 +17,16 @@
 }
 html {
   scroll-behavior: smooth;
+}
+
+[id] {
+  scroll-margin-top: calc(var(--header-height) + 24px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
 
 body {

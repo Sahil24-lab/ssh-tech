@@ -45,41 +45,45 @@ export default function Footer({ mt = 4 }: FooterProps) {
         }}
       >
         <IconButton
+          aria-label="SSH Tech on X"
           component="a"
           href="https://x.com/sahil_harriram"
           target="_blank"
           rel="noopener noreferrer"
-          sx={{ color: theme.palette.primary.light }}
+          sx={{ color: theme.palette.primary.light, minWidth: 44, minHeight: 44 }}
         >
           <Twitter />
         </IconButton>
 
         <IconButton
+          aria-label="Sahil Harriram on Medium"
           component="a"
           href="https://medium.com/@sahilharriram"
           target="_blank"
           rel="noopener noreferrer"
-          sx={{ color: theme.palette.primary.light }}
+          sx={{ color: theme.palette.primary.light, minWidth: 44, minHeight: 44 }}
         >
           <ArticleIcon />
         </IconButton>
 
         <IconButton
+          aria-label="Sahil Harriram on LinkedIn"
           component="a"
           href="https://www.linkedin.com/in/sahil-harriram/"
           target="_blank"
           rel="noopener noreferrer"
-          sx={{ color: theme.palette.primary.light }}
+          sx={{ color: theme.palette.primary.light, minWidth: 44, minHeight: 44 }}
         >
           <LinkedIn />
         </IconButton>
 
         <IconButton
+          aria-label="Sahil Harriram on GitHub"
           component="a"
           href="https://github.com/Sahil24-lab"
           target="_blank"
           rel="noopener noreferrer"
-          sx={{ color: theme.palette.primary.light }}
+          sx={{ color: theme.palette.primary.light, minWidth: 44, minHeight: 44 }}
         >
           <GitHub />
         </IconButton>

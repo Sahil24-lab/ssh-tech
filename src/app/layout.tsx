@@ -53,6 +53,18 @@ const siteMetadataBySubdomain: Record<
     description: "Embedded systems engineering and product delivery.",
     keywords: ["embedded systems", "firmware", "hardware engineering"],
   },
+  engineering: {
+    title: "SSH Tech | Engineering Software & Intelligent Systems",
+    description:
+      "Engineering software, connected systems, robotics, controls and intelligent tooling for complex physical operations.",
+    keywords: [
+      "engineering software",
+      "intelligent systems",
+      "robotics engineering",
+      "embedded systems",
+      "industrial automation",
+    ],
+  },
 };
 
 async function getHostContext() {
@@ -68,7 +80,7 @@ async function getHostContext() {
 export async function generateMetadata(): Promise<Metadata> {
   const { baseUrl, subdomain } = await getHostContext();
   const meta =
-    siteMetadataBySubdomain[subdomain] ?? siteMetadataBySubdomain.ai;
+    siteMetadataBySubdomain[subdomain] ?? siteMetadataBySubdomain.engineering;
   const ogImage = `${baseUrl}/Logo.svg`;
 
   return {

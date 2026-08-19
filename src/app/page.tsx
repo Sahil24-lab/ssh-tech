@@ -4,6 +4,7 @@ import AILanding from "@/components/landing/ai-landing/AILanding";
 import Web3Landing from "@/components/landing/Web3Landing";
 import EmbeddedLanding from "@/components/landing/EmbeddedLanding";
 import ProfileLanding from "@/components/landing/ProfileLanding";
+import EngineeringLanding from "@/components/landing/engineering-landing/EngineeringLanding";
 import FAQSchema from "@/components/landing/ai-landing/faq/FAQSchema";
 import AIServicesSchema from "@/components/landing/ai-landing/services/AIServicesSchema";
 
@@ -39,9 +40,14 @@ export async function generateMetadata(): Promise<Metadata> {
         title: "SSH Tech — Embedded Systems",
         description: "Embedded systems engineering and product delivery.",
       },
+      engineering: {
+        title: "SSH Tech | Engineering Software & Intelligent Systems",
+        description:
+          "Engineering software, connected systems, robotics, controls and intelligent tooling for complex physical operations.",
+      },
     };
 
-  const meta = metaBySubdomain[subdomain] ?? metaBySubdomain.ai;
+  const meta = metaBySubdomain[subdomain] ?? metaBySubdomain.engineering;
 
   return {
     title: meta.title,
@@ -64,7 +70,8 @@ export default async function HomePage() {
     if (subdomain === "sahil") return <ProfileLanding />;
     if (subdomain === "embedded") return <EmbeddedLanding />;
     if (subdomain === "ai") return <AILanding />;
-    return <Web3Landing />;
+    if (subdomain === "web3") return <Web3Landing />;
+    return <EngineeringLanding />;
   })();
 
   return (

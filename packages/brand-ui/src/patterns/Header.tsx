@@ -66,6 +66,7 @@ export function Header({
       return mobile ? (
         <ListItemButton
           key={item.label}
+          aria-label={item.label}
           component={LinkComponent}
           href={item.href}
           onClick={handleDrawerToggle}
@@ -87,6 +88,7 @@ export function Header({
       ) : (
         <Button
           key={item.label}
+          aria-label={item.label}
           component={LinkComponent}
           href={item.href}
           variant="text"
@@ -108,6 +110,7 @@ export function Header({
     return mobile ? (
       <ListItemButton
         key={item.label}
+        aria-label={item.label}
         component="a"
         href={getSectionHref(item.sectionId)}
         onClick={() => handleSectionClick(item.sectionId)}
@@ -129,6 +132,7 @@ export function Header({
     ) : (
       <Button
         key={item.label}
+        aria-label={item.label}
         component="a"
         href={getSectionHref(item.sectionId)}
         variant="text"
@@ -176,7 +180,7 @@ export function Header({
             href={brandHref}
             sx={{
               fontWeight: 800,
-              fontSize: "1.15rem",
+              fontSize: "1.25rem",
               letterSpacing: "0.02em",
               color: "text.primary",
               textDecoration: "none",
@@ -220,6 +224,8 @@ export function Header({
           sx={{
             display: { md: "none" },
             color: "primary.main",
+            minWidth: 44,
+            minHeight: 44,
             transition: "transform 0.3s ease",
           }}
         >
@@ -256,6 +262,8 @@ export function Header({
             top: 16,
             right: 16,
             color: "text.primary",
+            minWidth: 44,
+            minHeight: 44,
           }}
         >
           <CloseIcon />
@@ -301,7 +309,7 @@ const mobileItemSx = (theme: Theme) => ({
 });
 
 const mobileTypographySx = {
-  fontSize: "0.95rem",
+  fontSize: "0.9rem",
   fontWeight: 700,
 };
 
@@ -315,7 +323,7 @@ const desktopNavSx = (theme: {
   textTransform: "uppercase",
   letterSpacing: "0.1em",
   fontWeight: 600,
-  fontSize: "0.95rem",
+  fontSize: "0.9rem",
   color: theme.palette.text.secondary,
   "&:hover": {
     color: theme.palette.text.primary,
