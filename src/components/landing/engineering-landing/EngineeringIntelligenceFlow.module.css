@@ -52,10 +52,10 @@
   width: 17px;
   height: 17px;
   margin: 0 auto clamp(40px, 4.5vw, 62px);
-  border: 1px solid rgba(145, 254, 230, 0.62);
+  border: 1px solid rgba(145, 254, 230, 0.34);
   border-radius: 50%;
   background: #091f2c;
-  box-shadow: 0 0 0 6px rgba(7, 223, 193, 0.06);
+  box-shadow: 0 0 0 6px rgba(7, 223, 193, 0.025);
 }
 
 .node::after {
@@ -63,7 +63,39 @@
   position: absolute;
   inset: 4px;
   border-radius: inherit;
-  background: #07dfc1;
+  background: rgba(145, 254, 230, 0.2);
+}
+
+.stage:nth-of-type(1) .node {
+  animation: node-hit-one 9s linear infinite;
+}
+
+.stage:nth-of-type(2) .node {
+  animation: node-hit-two 9s linear infinite;
+}
+
+.stage:nth-of-type(3) .node {
+  animation: node-hit-three 9s linear infinite;
+}
+
+.stage:nth-of-type(4) .node {
+  animation: node-hit-four 9s linear infinite;
+}
+
+.stage:nth-of-type(1) .node::after {
+  animation: node-core-one 9s linear infinite;
+}
+
+.stage:nth-of-type(2) .node::after {
+  animation: node-core-two 9s linear infinite;
+}
+
+.stage:nth-of-type(3) .node::after {
+  animation: node-core-three 9s linear infinite;
+}
+
+.stage:nth-of-type(4) .node::after {
+  animation: node-core-four 9s linear infinite;
 }
 
 .content {
@@ -71,12 +103,101 @@
 }
 
 @keyframes signal-travel {
-  from {
+  0% {
     transform: translateX(-100%);
+    opacity: 1;
   }
-  to {
-    transform: translateX(500%);
+  82% {
+    transform: translateX(455.556%);
+    opacity: 1;
   }
+  94% {
+    transform: translateX(455.556%);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(455.556%);
+    opacity: 0;
+  }
+}
+
+@keyframes node-hit-one {
+  0%, 94% {
+    border-color: rgba(145, 254, 230, 0.86);
+    box-shadow: 0 0 0 6px rgba(7, 223, 193, 0.09), 0 0 18px rgba(7, 223, 193, 0.34);
+  }
+  100% {
+    border-color: rgba(145, 254, 230, 0.34);
+    box-shadow: 0 0 0 6px rgba(7, 223, 193, 0.025);
+  }
+}
+
+@keyframes node-hit-two {
+  0%, 27.32% {
+    border-color: rgba(145, 254, 230, 0.34);
+    box-shadow: 0 0 0 6px rgba(7, 223, 193, 0.025);
+  }
+  27.33%, 94% {
+    border-color: rgba(145, 254, 230, 0.86);
+    box-shadow: 0 0 0 6px rgba(7, 223, 193, 0.09), 0 0 18px rgba(7, 223, 193, 0.34);
+  }
+  100% {
+    border-color: rgba(145, 254, 230, 0.34);
+    box-shadow: 0 0 0 6px rgba(7, 223, 193, 0.025);
+  }
+}
+
+@keyframes node-hit-three {
+  0%, 54.65% {
+    border-color: rgba(145, 254, 230, 0.34);
+    box-shadow: 0 0 0 6px rgba(7, 223, 193, 0.025);
+  }
+  54.66%, 94% {
+    border-color: rgba(145, 254, 230, 0.86);
+    box-shadow: 0 0 0 6px rgba(7, 223, 193, 0.09), 0 0 18px rgba(7, 223, 193, 0.34);
+  }
+  100% {
+    border-color: rgba(145, 254, 230, 0.34);
+    box-shadow: 0 0 0 6px rgba(7, 223, 193, 0.025);
+  }
+}
+
+@keyframes node-hit-four {
+  0%, 81.99% {
+    border-color: rgba(145, 254, 230, 0.34);
+    box-shadow: 0 0 0 6px rgba(7, 223, 193, 0.025);
+  }
+  82%, 94% {
+    border-color: rgba(145, 254, 230, 0.86);
+    box-shadow: 0 0 0 6px rgba(7, 223, 193, 0.09), 0 0 18px rgba(7, 223, 193, 0.34);
+  }
+  100% {
+    border-color: rgba(145, 254, 230, 0.34);
+    box-shadow: 0 0 0 6px rgba(7, 223, 193, 0.025);
+  }
+}
+
+@keyframes node-core-one {
+  0%, 94% { background: #07dfc1; }
+  100% { background: rgba(145, 254, 230, 0.2); }
+}
+
+@keyframes node-core-two {
+  0%, 27.32% { background: rgba(145, 254, 230, 0.2); }
+  27.33%, 94% { background: #07dfc1; }
+  100% { background: rgba(145, 254, 230, 0.2); }
+}
+
+@keyframes node-core-three {
+  0%, 54.65% { background: rgba(145, 254, 230, 0.2); }
+  54.66%, 94% { background: #07dfc1; }
+  100% { background: rgba(145, 254, 230, 0.2); }
+}
+
+@keyframes node-core-four {
+  0%, 81.99% { background: rgba(145, 254, 230, 0.2); }
+  82%, 94% { background: #07dfc1; }
+  100% { background: rgba(145, 254, 230, 0.2); }
 }
 
 @media (max-width: 899px) {
@@ -132,11 +253,21 @@
   }
 
   @keyframes signal-travel-mobile {
-    from {
+    0% {
       transform: translateY(-110%);
+      opacity: 1;
     }
-    to {
-      transform: translateY(560%);
+    82% {
+      transform: translateY(455.556%);
+      opacity: 1;
+    }
+    94% {
+      transform: translateY(455.556%);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(455.556%);
+      opacity: 0;
     }
   }
 }
@@ -145,5 +276,19 @@
   .track::after {
     animation: none;
     opacity: 0.68;
+  }
+
+  .node,
+  .node::after {
+    animation: none !important;
+  }
+
+  .node {
+    border-color: rgba(145, 254, 230, 0.62);
+    box-shadow: 0 0 0 6px rgba(7, 223, 193, 0.06);
+  }
+
+  .node::after {
+    background: #07dfc1;
   }
 }
