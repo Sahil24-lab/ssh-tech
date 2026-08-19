@@ -2,11 +2,7 @@
   position: relative;
   width: 100%;
   aspect-ratio: 1351 / 1164;
-  overflow: hidden;
-  border: 1px solid rgba(145, 254, 230, 0.1);
-  border-radius: 16px;
-  background: #091f2c;
-  box-shadow: 0 22px 56px rgba(9, 31, 44, 0.3);
+  overflow: visible;
   animation: scene-enter 900ms cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 

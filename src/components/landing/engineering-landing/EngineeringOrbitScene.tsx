@@ -7,7 +7,7 @@ export default function EngineeringOrbitScene() {
       <div className={styles.signalWash} />
       <Image
         className={styles.artwork}
-        src="/engineering/orbit-system-restored.png"
+        src="/engineering/orbit-system-transparent.png"
         alt=""
         width={1351}
         height={1164}
