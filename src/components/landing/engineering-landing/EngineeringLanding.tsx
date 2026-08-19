@@ -18,19 +18,12 @@ export default function EngineeringLanding() {
         sx={{
           backgroundColor: "background.default",
           backgroundImage: `
-            linear-gradient(rgba(9, 31, 44, 0.46), rgba(9, 31, 44, 0.12)),
-            conic-gradient(
-              from -23.81deg at 72.82% 162.44%,
-              #0E534C -44.57deg,
-              #067F71 7.76deg,
-              #029F8C 20.98deg,
-              #067F71 52deg,
-              #0B645C 88.68deg,
-              #067F71 315.43deg,
-              #029F8C 367.76deg
-            )
+            radial-gradient(ellipse 72% 42% at 14% 24%, rgba(14, 83, 76, 0.34), transparent 70%),
+            radial-gradient(ellipse 64% 46% at 88% 58%, rgba(6, 127, 113, 0.18), transparent 72%),
+            radial-gradient(ellipse 52% 34% at 38% 88%, rgba(11, 100, 92, 0.16), transparent 74%),
+            linear-gradient(120deg, #091f2c 0%, #0E534C 52%, #091f2c 100%)
           `,
-          backgroundAttachment: "fixed",
+          backgroundAttachment: { xs: "scroll", md: "fixed" },
           backgroundSize: "cover",
           isolation: "isolate",
           "& section[id]": {
