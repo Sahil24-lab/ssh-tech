@@ -3,9 +3,10 @@
 import { useState } from "react";
 import ArrowForwardRounded from "@mui/icons-material/ArrowForwardRounded";
 import { Box, Stack, Typography } from "@mui/material";
-import { BrandButton, Container, brandTokens } from "@ssh/brand-ui";
+import { BrandButton, Container } from "@ssh/brand-ui";
 import BookCallModal from "@/components/book-call-modal/BookCallModal";
 import EngineeringOrbitScene from "./EngineeringOrbitScene";
+import EngineeringSignalField from "./EngineeringSignalField";
 
 export default function EngineeringHero() {
   const [contactOpen, setContactOpen] = useState(false);
@@ -17,23 +18,36 @@ export default function EngineeringHero() {
       sx={{
         position: "relative",
         overflow: "hidden",
-        backgroundColor: "background.paper",
-        borderBottom: "1px solid",
-        borderColor: "divider",
+        background:
+          "radial-gradient(circle at 78% 28%, rgba(7, 223, 193, 0.11), transparent 30%), linear-gradient(180deg, rgba(9, 31, 44, 0.98), rgba(8, 24, 36, 0.92))",
+        "&::before": {
+          content: '\"\"',
+          position: "absolute",
+          width: { xs: 360, md: 620 },
+          height: { xs: 360, md: 620 },
+          top: { xs: "44%", md: "8%" },
+          right: { xs: "-42%", md: "-10%" },
+          borderRadius: "50%",
+          backgroundColor: "rgba(14, 83, 76, 0.34)",
+          filter: "blur(100px)",
+          pointerEvents: "none",
+        },
       }}
     >
+      <EngineeringSignalField />
+
       <Container
         size="wide"
         sx={{
-          minHeight: { xs: "auto", md: "calc(100svh - 72px)" },
+          minHeight: { xs: "auto", md: 560, lg: 600 },
           display: "grid",
-          gridTemplateColumns: { xs: "1fr", md: "minmax(0, 1.02fr) minmax(420px, 0.98fr)" },
+          gridTemplateColumns: { xs: "1fr", md: "minmax(0, 0.92fr) minmax(480px, 1.08fr)" },
           alignItems: "center",
-          gap: { xs: 4, md: 3, lg: 6 },
-          py: { xs: 8, sm: 10, md: 8, lg: 10 },
+          gap: { xs: 5, md: 5, lg: 8 },
+          py: { xs: 8, md: 6, lg: 8 },
         }}
       >
-        <Stack spacing={{ xs: 3, md: 3.5 }} sx={{ position: "relative", zIndex: 1 }}>
+        <Stack spacing={{ xs: 3, md: 4 }} sx={{ position: "relative", zIndex: 1 }}>
           <Box
             sx={{
               width: 56,
@@ -45,30 +59,30 @@ export default function EngineeringHero() {
           <Typography
             component="h1"
             sx={{
-              maxWidth: 780,
+              maxWidth: 650,
               fontFamily: "var(--font-exo2), sans-serif",
-              fontSize: { xs: "clamp(2.6rem, 12vw, 4rem)", md: "clamp(3.3rem, 5.25vw, 5.25rem)" },
+              fontSize: { xs: "clamp(2.55rem, 11vw, 3.7rem)", md: "clamp(3.15rem, 4.5vw, 3.9rem)" },
               fontWeight: 600,
-              lineHeight: 1.04,
-              letterSpacing: "-0.035em",
+              lineHeight: 1.06,
+              letterSpacing: "-0.03em",
               color: "text.primary",
               textWrap: "balance",
             }}
           >
-            Engineering software and intelligent systems for complex physical operations.
+            Intelligent systems for real operations.
           </Typography>
 
           <Typography
             variant="body1"
             sx={{
-              maxWidth: 660,
-              color: "text.secondary",
-              fontSize: { xs: "1.05rem", md: "1.18rem" },
-              lineHeight: 1.7,
+              maxWidth: 590,
+              color: "rgba(239, 254, 235, 0.74)",
+              fontSize: { xs: "1rem", md: "1.12rem" },
+              lineHeight: 1.65,
               textWrap: "pretty",
             }}
           >
-            SSH Tech combines software, embedded systems, controls and applied intelligence around the way an operation actually works.
+            We build software, robotics and connected systems that improve how complex work gets done.
           </Typography>
 
           <Stack direction={{ xs: "column", sm: "row" }} spacing={2} alignItems={{ sm: "center" }}>
@@ -81,37 +95,25 @@ export default function EngineeringHero() {
               sx={{ minHeight: 52, px: 3.5 }}
             />
             <BrandButton
-              label="See selected work"
+              label="See our work"
               href="#work"
               variant="outlined"
               size="large"
               sx={{ minHeight: 52, px: 3.5 }}
             />
           </Stack>
-
-          <Typography
-            variant="body2"
-            sx={{
-              maxWidth: 610,
-              pt: 1,
-              color: brandTokens.color.text.muted,
-              fontFamily: "var(--font-jetbrains-mono), monospace",
-              fontSize: { xs: "0.78rem", md: "0.84rem" },
-              lineHeight: 1.7,
-            }}
-          >
-            Mechatronics-led delivery across robotics, electric vehicles, industrial software and connected systems.
-          </Typography>
         </Stack>
 
         <Box
           sx={{
+            position: "relative",
+            zIndex: 1,
             width: "100%",
-            maxWidth: 760,
+            maxWidth: 740,
             justifySelf: "center",
             alignSelf: "center",
-            mt: { xs: -1, md: 0 },
-            mb: { xs: -4, md: 0 },
+            mt: { xs: -2, md: 0 },
+            mb: { xs: -5, md: -3 },
           }}
         >
           <EngineeringOrbitScene />

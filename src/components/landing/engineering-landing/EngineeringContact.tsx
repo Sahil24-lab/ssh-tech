@@ -4,7 +4,7 @@ import { useState } from "react";
 import ArrowForwardRounded from "@mui/icons-material/ArrowForwardRounded";
 import MailOutlineRounded from "@mui/icons-material/MailOutlineRounded";
 import { Box, Stack, Typography } from "@mui/material";
-import { BrandButton, Container, brandTokens } from "@ssh/brand-ui";
+import { BrandButton, Container, GlassCard } from "@ssh/brand-ui";
 import BookCallModal from "@/components/book-call-modal/BookCallModal";
 
 export default function EngineeringContact() {
@@ -15,47 +15,76 @@ export default function EngineeringContact() {
       component="section"
       id="contact"
       sx={{
-        backgroundColor: brandTokens.color.secondary.dark,
+        position: "relative",
+        overflow: "hidden",
+        backgroundColor: "rgba(8, 24, 36, 0.94)",
         borderTop: "1px solid",
         borderColor: "divider",
+        "&::before": {
+          content: '\"\"',
+          position: "absolute",
+          width: 520,
+          height: 520,
+          right: "-12%",
+          bottom: "-70%",
+          borderRadius: "50%",
+          backgroundColor: "rgba(7, 223, 193, 0.12)",
+          filter: "blur(100px)",
+          pointerEvents: "none",
+        },
       }}
     >
       <Container
         size="wide"
         sx={{
-          display: "grid",
-          gridTemplateColumns: { xs: "1fr", md: "minmax(0, 1.25fr) minmax(260px, 0.75fr)" },
-          gap: { xs: 5, md: 8 },
-          alignItems: "end",
-          py: { xs: 8, md: 12, lg: 14 },
+          py: { xs: 9, md: 14 },
         }}
       >
-        <Stack spacing={2.5}>
-          <Typography component="h2" variant="h2" sx={{ color: "text.primary", maxWidth: 820, textWrap: "balance" }}>
-            Bring the awkward system problem.
-          </Typography>
-          <Typography variant="body1" sx={{ color: "text.secondary", maxWidth: 670 }}>
-            If the challenge sits between software, hardware and the way people actually operate, that is a useful place to start.
-          </Typography>
-        </Stack>
+        <GlassCard
+          variant="darkElevated"
+          sx={{
+            position: "relative",
+            overflow: "hidden",
+            display: "grid",
+            gridTemplateColumns: { xs: "1fr", md: "minmax(0, 1.2fr) minmax(280px, 0.8fr)" },
+            gap: { xs: 5, md: 8 },
+            alignItems: "end",
+            p: { xs: 3.5, sm: 5, md: 6.5 },
+            background:
+              "linear-gradient(135deg, rgba(14, 83, 76, 0.4), rgba(9, 31, 44, 0.86) 58%, rgba(7, 223, 193, 0.1))",
+          }}
+        >
+          <Stack spacing={2.5}>
+            <Typography
+              component="h2"
+              variant="h2"
+              sx={{ color: "text.primary", maxWidth: 820, textWrap: "balance" }}
+            >
+              Bring us the hard system problem.
+            </Typography>
+            <Typography variant="body1" sx={{ color: "rgba(239, 254, 235, 0.7)", maxWidth: 670 }}>
+              If it sits between software, hardware and the way people work, we should talk.
+            </Typography>
+          </Stack>
 
-        <Stack spacing={2} alignItems={{ xs: "stretch", sm: "flex-start", md: "stretch" }}>
-          <BrandButton
-            label="Discuss a project"
-            size="large"
-            endIcon={<ArrowForwardRounded />}
-            onClick={() => setContactOpen(true)}
-            sx={{ minHeight: 52 }}
-          />
-          <BrandButton
-            label="Email Sahil"
-            href="mailto:sahil.harriram@gmail.com"
-            variant="outlined"
-            size="large"
-            startIcon={<MailOutlineRounded />}
-            sx={{ minHeight: 52 }}
-          />
-        </Stack>
+          <Stack spacing={2} alignItems={{ xs: "stretch", sm: "flex-start", md: "stretch" }}>
+            <BrandButton
+              label="Discuss a project"
+              size="large"
+              endIcon={<ArrowForwardRounded />}
+              onClick={() => setContactOpen(true)}
+              sx={{ minHeight: 52 }}
+            />
+            <BrandButton
+              label="Email Sahil"
+              href="mailto:sahil.harriram@gmail.com"
+              variant="outlined"
+              size="large"
+              startIcon={<MailOutlineRounded />}
+              sx={{ minHeight: 52 }}
+            />
+          </Stack>
+        </GlassCard>
       </Container>
 
       <BookCallModal open={contactOpen} handleClose={() => setContactOpen(false)} />

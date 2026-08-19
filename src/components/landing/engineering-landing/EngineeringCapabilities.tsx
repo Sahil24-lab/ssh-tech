@@ -1,126 +1,191 @@
 import {
+  AccountTreeRounded,
   DataObjectRounded,
   HubRounded,
+  MemoryRounded,
   PrecisionManufacturingRounded,
   SensorsRounded,
 } from "@mui/icons-material";
 import { Box, Stack, Typography } from "@mui/material";
-import { Container, SectionShell } from "@ssh/brand-ui";
+import { Container } from "@ssh/brand-ui";
+
+const proofPoints = [
+  {
+    value: "Founder-led",
+    label: "One technical lead across the system",
+    icon: <AccountTreeRounded />,
+  },
+  {
+    value: "Embedded to cloud",
+    label: "Full-stack systems delivery",
+    icon: <MemoryRounded />,
+  },
+  {
+    value: "Robotics and EVs",
+    label: "Physical systems experience",
+    icon: <PrecisionManufacturingRounded />,
+  },
+  {
+    value: "AI in context",
+    label: "Intelligence inside engineered controls",
+    icon: <HubRounded />,
+  },
+] as const;
 
 const capabilities = [
   {
     title: "Engineering software",
     description:
-      "Operator tools, automation platforms and technical applications built around real workflows.",
+      "Tools and platforms for operators, engineers and technical teams.",
     icon: <DataObjectRounded />,
   },
   {
     title: "Connected systems",
     description:
-      "Firmware, sensor networks and integrations that move reliable data between field assets and software.",
+      "Reliable data between field assets, devices and software.",
     icon: <SensorsRounded />,
   },
   {
     title: "Robotics and controls",
     description:
-      "Embedded control, perception and autonomy for machines that have to behave predictably.",
+      "Embedded control, perception and autonomy for physical systems.",
     icon: <PrecisionManufacturingRounded />,
   },
   {
-    title: "AI-enabled engineering tools",
+    title: "Applied AI",
     description:
-      "Perception, retrieval and planning tools used inside a wider engineering system.",
+      "Perception, retrieval and planning inside controlled engineering workflows.",
     icon: <HubRounded />,
   },
 ] as const;
 
 export default function EngineeringCapabilities() {
   return (
-    <SectionShell sectionProps={{ id: "capabilities" }}>
+    <Box
+      component="section"
+      id="capabilities"
+      sx={{
+        backgroundColor: "rgba(8, 24, 36, 0.92)",
+        borderTop: "1px solid",
+        borderBottom: "1px solid",
+        borderColor: "divider",
+      }}
+    >
       <Container
         size="wide"
-        disableGutters
         sx={{
-          display: "grid",
-          gridTemplateColumns: { xs: "1fr", md: "minmax(260px, 0.72fr) minmax(0, 1.28fr)" },
-          gap: { xs: 6, md: 9, lg: 13 },
-          alignItems: "start",
+          position: "relative",
+          py: 0,
         }}
       >
-        <Stack spacing={2.5} sx={{ position: { md: "sticky" }, top: { md: 116 } }}>
-          <Typography
-            component="h2"
-            variant="h2"
-            sx={{ color: "text.primary", maxWidth: 440, textWrap: "balance" }}
-          >
-            Systems built around the operation.
-          </Typography>
-          <Typography variant="body1" sx={{ color: "text.secondary", maxWidth: 500 }}>
-            Some projects begin with an operator workflow. Others begin on a controller, a vehicle or a sensor network. We work across that boundary.
-          </Typography>
-          <Typography
-            variant="body2"
-            sx={{
-              pt: 1,
-              maxWidth: 460,
-              color: "text.muted",
-              fontFamily: "var(--font-jetbrains-mono), monospace",
-              fontSize: "0.82rem",
-            }}
-          >
-            For industrial, infrastructure, robotics and technical product teams.
-          </Typography>
-        </Stack>
+        <Typography
+          component="h2"
+          sx={{
+            position: "absolute",
+            width: 1,
+            height: 1,
+            p: 0,
+            m: -1,
+            overflow: "hidden",
+            clip: "rect(0, 0, 0, 0)",
+            whiteSpace: "nowrap",
+            border: 0,
+          }}
+        >
+          Engineering capabilities
+        </Typography>
 
-        <Box sx={{ borderTop: "1px solid", borderColor: "divider" }}>
-          {capabilities.map((capability) => (
-            <Box
-              key={capability.title}
+        <Box
+          aria-label="SSH Tech engineering background"
+          sx={{
+            display: "grid",
+            gridTemplateColumns: { xs: "1fr", sm: "repeat(2, minmax(0, 1fr))", lg: "repeat(4, minmax(0, 1fr))" },
+            borderBottom: "1px solid",
+            borderColor: "divider",
+          }}
+        >
+          {proofPoints.map((point, index) => (
+            <Stack
+              key={point.value}
+              direction="row"
+              spacing={2}
+              alignItems="flex-start"
               sx={{
-                display: "grid",
-                gridTemplateColumns: { xs: "48px minmax(0, 1fr)", sm: "64px minmax(180px, 0.7fr) minmax(0, 1.3fr)" },
-                gap: { xs: 2, sm: 3.5 },
-                alignItems: "start",
-                py: { xs: 3.5, md: 4.5 },
-                borderBottom: "1px solid",
+                minHeight: 126,
+                px: { xs: 2.5, md: 3.5 },
+                py: 3,
+                borderRight: {
+                  xs: 0,
+                  sm: index % 2 === 0 ? "1px solid" : 0,
+                  lg: index < proofPoints.length - 1 ? "1px solid" : 0,
+                },
+                borderBottom: { xs: index < proofPoints.length - 1 ? "1px solid" : 0, sm: index < 2 ? "1px solid" : 0, lg: 0 },
                 borderColor: "divider",
               }}
             >
-              <Box
-                sx={{
-                  width: 44,
-                  height: 44,
-                  display: "grid",
-                  placeItems: "center",
-                  color: "primary.main",
-                  border: "1px solid",
-                  borderColor: "divider",
-                  borderRadius: 2,
-                }}
-              >
+              <Box sx={{ color: "primary.main", opacity: 0.78, pt: 0.25, "& svg": { fontSize: 27 } }}>
+                {point.icon}
+              </Box>
+              <Stack spacing={0.75}>
+                <Typography
+                  sx={{
+                    color: "text.primary",
+                    fontFamily: "var(--font-exo2), sans-serif",
+                    fontSize: "1.1rem",
+                    fontWeight: 600,
+                  }}
+                >
+                  {point.value}
+                </Typography>
+                <Typography variant="body2" sx={{ color: "rgba(239, 254, 235, 0.58)", fontSize: "0.9rem" }}>
+                  {point.label}
+                </Typography>
+              </Stack>
+            </Stack>
+          ))}
+        </Box>
+
+        <Box
+          aria-label="Engineering capabilities"
+          sx={{
+            display: "grid",
+            gridTemplateColumns: { xs: "1fr", sm: "repeat(2, minmax(0, 1fr))", lg: "repeat(4, minmax(0, 1fr))" },
+          }}
+        >
+          {capabilities.map((capability, index) => (
+            <Box
+              key={capability.title}
+              sx={{
+                minHeight: 162,
+                px: { xs: 2.5, md: 3.5 },
+                py: 3,
+                display: "grid",
+                gridTemplateColumns: "36px minmax(0, 1fr)",
+                gap: 2,
+                borderRight: {
+                  xs: 0,
+                  sm: index % 2 === 0 ? "1px solid" : 0,
+                  lg: index < capabilities.length - 1 ? "1px solid" : 0,
+                },
+                borderBottom: { xs: index < capabilities.length - 1 ? "1px solid" : 0, sm: index < 2 ? "1px solid" : 0, lg: 0 },
+                borderColor: "divider",
+              }}
+            >
+              <Box sx={{ color: "primary.main", opacity: 0.76, "& svg": { fontSize: 28 } }}>
                 {capability.icon}
               </Box>
-              <Typography
-                component="h3"
-                variant="h5"
-                sx={{ color: "text.primary", fontWeight: 600, pt: 0.75 }}
-              >
-                {capability.title}
-              </Typography>
-              <Typography
-                variant="body1"
-                sx={{
-                  gridColumn: { xs: "2", sm: "auto" },
-                  color: "text.secondary",
-                  maxWidth: 620,
-                }}
-              >
-                {capability.description}
-              </Typography>
+              <Stack spacing={1.25}>
+                <Typography component="h3" variant="h5" sx={{ color: "text.primary", fontWeight: 600 }}>
+                  {capability.title}
+                </Typography>
+                <Typography variant="body2" sx={{ color: "rgba(239, 254, 235, 0.58)", fontSize: "0.9rem" }}>
+                  {capability.description}
+                </Typography>
+              </Stack>
             </Box>
           ))}
         </Box>
       </Container>
-    </SectionShell>
+    </Box>
   );
 }

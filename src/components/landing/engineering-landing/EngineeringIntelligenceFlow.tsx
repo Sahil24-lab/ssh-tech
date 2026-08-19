@@ -1,46 +1,52 @@
-import ArrowForwardRounded from "@mui/icons-material/ArrowForwardRounded";
 import { Box, Stack, Typography } from "@mui/material";
-import { Container, SectionShell } from "@ssh/brand-ui";
+import { Container, GlassCard, SectionShell } from "@ssh/brand-ui";
 
 const stages = [
   {
-    title: "Physical operation",
+    title: "Operation",
     detail: "Assets, people, constraints",
   },
   {
-    title: "Signals and software",
+    title: "Signals",
     detail: "Sensors, workflows, controls",
   },
   {
-    title: "Applied intelligence",
+    title: "Intelligence",
     detail: "Perception, retrieval, planning",
   },
   {
-    title: "Operator or control",
-    detail: "A traceable point of action",
+    title: "Action",
+    detail: "A traceable decision or control",
   },
 ] as const;
 
 export default function EngineeringIntelligenceFlow() {
   return (
-    <SectionShell surface="paper" sectionProps={{ id: "intelligence" }}>
+    <SectionShell
+      surface="paper"
+      sectionProps={{ id: "intelligence", sx: { py: { xs: 9, md: 14 } } }}
+    >
       <Container size="wide" disableGutters>
-        <Box
-          sx={{
-            display: "grid",
-            gridTemplateColumns: { xs: "1fr", lg: "minmax(300px, 0.72fr) minmax(0, 1.28fr)" },
-            gap: { xs: 6, lg: 10 },
-            alignItems: "end",
-          }}
-        >
-          <Stack spacing={2.5}>
+        <Box>
+          <Box
+            sx={{
+              display: "grid",
+              gridTemplateColumns: { xs: "1fr", md: "minmax(0, 0.9fr) minmax(320px, 0.7fr)" },
+              gap: { xs: 3, md: 8 },
+              alignItems: "end",
+              mb: { xs: 6, md: 9 },
+            }}
+          >
             <Typography component="h2" variant="h2" sx={{ color: "text.primary", textWrap: "balance" }}>
-              Where intelligence fits.
+              From signal to action.
             </Typography>
-            <Typography variant="body1" sx={{ color: "text.secondary", maxWidth: 600 }}>
-              Models can help interpret images, retrieve engineering knowledge, prioritise work or plan within defined constraints. The surrounding system still owns permissions, traceability and safe fallback.
+            <Typography
+              variant="body1"
+              sx={{ color: "rgba(239, 254, 235, 0.7)", maxWidth: 560, justifySelf: { md: "end" } }}
+            >
+              AI is useful when it connects to a real decision. We design the controls, permissions and fallback around it.
             </Typography>
-          </Stack>
+          </Box>
 
           <Box
             component="ol"
@@ -49,32 +55,42 @@ export default function EngineeringIntelligenceFlow() {
               p: 0,
               m: 0,
               display: "grid",
-              gridTemplateColumns: { xs: "1fr", sm: "repeat(2, minmax(0, 1fr))", xl: "repeat(4, minmax(0, 1fr))" },
-              borderTop: "1px solid",
-              borderBottom: "1px solid",
-              borderColor: "divider",
+              gridTemplateColumns: {
+                xs: "1fr",
+                md: "repeat(2, minmax(0, 1fr))",
+                xl: "repeat(4, minmax(0, 1fr))",
+              },
+              gap: { xs: 2.5, md: 3 },
             }}
           >
             {stages.map((stage, index) => (
-              <Box
+              <GlassCard
                 component="li"
                 key={stage.title}
+                variant={index === 2 ? "darkElevated" : "dark"}
                 sx={{
                   position: "relative",
-                  minHeight: 170,
-                  px: { xs: 0, sm: 3 },
-                  py: 3.5,
-                  borderRight: {
-                    xs: 0,
-                    sm: index % 2 === 0 ? "1px solid" : 0,
-                    xl: index < stages.length - 1 ? "1px solid" : 0,
+                  overflow: "hidden",
+                  minHeight: { xs: 210, md: 230, xl: 250 },
+                  p: { xs: 3.5, md: 4 },
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                  background:
+                    index === 2
+                      ? "linear-gradient(145deg, rgba(14, 83, 76, 0.32), rgba(9, 31, 44, 0.78))"
+                      : undefined,
+                  "&::after": {
+                    content: '\"\"',
+                    position: "absolute",
+                    width: 112,
+                    height: 112,
+                    right: -48,
+                    bottom: -56,
+                    borderRadius: "50%",
+                    background: "radial-gradient(circle, rgba(7, 223, 193, 0.16), transparent 70%)",
+                    pointerEvents: "none",
                   },
-                  borderBottom: {
-                    xs: index < stages.length - 1 ? "1px solid" : 0,
-                    sm: index < 2 ? "1px solid" : 0,
-                    xl: 0,
-                  },
-                  borderColor: "divider",
                 }}
               >
                 <Typography
@@ -82,34 +98,20 @@ export default function EngineeringIntelligenceFlow() {
                     color: "primary.main",
                     fontFamily: "var(--font-jetbrains-mono), monospace",
                     fontSize: "0.78rem",
-                    mb: 4,
+                    letterSpacing: "0.08em",
                   }}
                 >
                   {String(index + 1).padStart(2, "0")}
                 </Typography>
-                <Typography component="h3" variant="h5" sx={{ color: "text.primary", fontWeight: 600, mb: 1 }}>
-                  {stage.title}
-                </Typography>
-                <Typography variant="body2" sx={{ color: "text.secondary" }}>
-                  {stage.detail}
-                </Typography>
-                {index < stages.length - 1 ? (
-                  <ArrowForwardRounded
-                    aria-hidden="true"
-                    sx={{
-                      display: { xs: "none", xl: "block" },
-                      position: "absolute",
-                      right: -14,
-                      top: 35,
-                      zIndex: 1,
-                      p: 0.5,
-                      bgcolor: "background.paper",
-                      color: "primary.main",
-                      borderRadius: "50%",
-                    }}
-                  />
-                ) : null}
-              </Box>
+                <Stack spacing={1.5} sx={{ position: "relative", zIndex: 1 }}>
+                  <Typography component="h3" variant="h4" sx={{ color: "text.primary", fontWeight: 600 }}>
+                    {stage.title}
+                  </Typography>
+                  <Typography variant="body1" sx={{ color: "rgba(239, 254, 235, 0.66)", maxWidth: 260 }}>
+                    {stage.detail}
+                  </Typography>
+                </Stack>
+              </GlassCard>
             ))}
           </Box>
         </Box>

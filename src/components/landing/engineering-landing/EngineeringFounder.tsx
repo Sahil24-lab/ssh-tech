@@ -1,5 +1,5 @@
 import { Box, Stack, Typography } from "@mui/material";
-import { Container, SectionShell } from "@ssh/brand-ui";
+import { Container, GlassCard, SectionShell } from "@ssh/brand-ui";
 
 const background = [
   "Mechatronics engineering (Honours)",
@@ -10,17 +10,35 @@ const background = [
 
 export default function EngineeringFounder() {
   return (
-    <SectionShell surface="paper" sectionProps={{ id: "about" }}>
+    <SectionShell surface="paper" sectionProps={{ id: "about", sx: { py: { xs: 9, md: 14 } } }}>
       <Container size="wide" disableGutters>
-        <Box
+        <GlassCard
+          variant="darkElevated"
           sx={{
+            position: "relative",
+            overflow: "hidden",
             display: "grid",
-            gridTemplateColumns: { xs: "1fr", md: "minmax(260px, 0.72fr) minmax(0, 1.28fr)" },
-            gap: { xs: 5, md: 10, lg: 14 },
+            gridTemplateColumns: { xs: "1fr", md: "minmax(280px, 0.78fr) minmax(0, 1.22fr)" },
+            gap: { xs: 6, md: 9 },
             alignItems: "start",
+            p: { xs: 3.5, sm: 5, md: 6 },
+            background:
+              "linear-gradient(135deg, rgba(14, 83, 76, 0.26), rgba(9, 31, 44, 0.82) 52%, rgba(7, 223, 193, 0.05))",
+            "&::after": {
+              content: '\"SH\"',
+              position: "absolute",
+              right: { xs: -12, md: 24 },
+              bottom: { xs: -36, md: -52 },
+              color: "rgba(7, 223, 193, 0.055)",
+              fontFamily: "var(--font-exo2), sans-serif",
+              fontSize: { xs: "9rem", md: "15rem" },
+              fontWeight: 700,
+              lineHeight: 1,
+              pointerEvents: "none",
+            },
           }}
         >
-          <Box>
+          <Stack spacing={2.5} sx={{ position: "relative", zIndex: 1 }}>
             <Typography
               sx={{
                 color: "primary.main",
@@ -32,24 +50,24 @@ export default function EngineeringFounder() {
               Sahil Harriram · Founder and technical lead
             </Typography>
             <Typography component="h2" variant="h2" sx={{ color: "text.primary", textWrap: "balance" }}>
-              Built from both sides of the system.
+              Engineering depth. Commercial judgement.
             </Typography>
-          </Box>
+          </Stack>
 
-          <Stack spacing={3.5}>
+          <Stack spacing={3.5} sx={{ position: "relative", zIndex: 1 }}>
             <Typography
               variant="body1"
               sx={{
                 color: "text.primary",
-                fontSize: { xs: "1.2rem", md: "1.45rem" },
-                lineHeight: 1.6,
+                fontSize: { xs: "1.1rem", md: "1.28rem" },
+                lineHeight: 1.65,
                 maxWidth: 800,
               }}
             >
-              I am a mechatronics engineer and technical lead. I have built embedded systems, robotics platforms and production software, then led the teams and commercial work around them.
+              I am a mechatronics engineer who has built embedded systems, robotics platforms and production software, then led the teams and commercial work around them.
             </Typography>
-            <Typography variant="body1" sx={{ color: "text.secondary", maxWidth: 760 }}>
-              That range matters when a project crosses boundaries. The controller, cloud service, operator interface and delivery plan have to work together.
+            <Typography variant="body1" sx={{ color: "rgba(239, 254, 235, 0.68)", maxWidth: 760 }}>
+              That range helps when software, hardware and operations have to move together.
             </Typography>
 
             <Box
@@ -60,8 +78,7 @@ export default function EngineeringFounder() {
                 m: 0,
                 display: "grid",
                 gridTemplateColumns: { xs: "1fr", sm: "repeat(2, minmax(0, 1fr))" },
-                borderTop: "1px solid",
-                borderColor: "divider",
+                gap: 1.5,
               }}
             >
               {background.map((item) => (
@@ -70,11 +87,12 @@ export default function EngineeringFounder() {
                   variant="body2"
                   key={item}
                   sx={{
-                    color: "text.primary",
-                    py: 2.5,
-                    pr: 3,
-                    borderBottom: "1px solid",
+                    color: "rgba(239, 254, 235, 0.76)",
+                    px: 2,
+                    py: 1.5,
+                    border: "1px solid",
                     borderColor: "divider",
+                    borderRadius: 1.5,
                   }}
                 >
                   {item}
@@ -82,7 +100,7 @@ export default function EngineeringFounder() {
               ))}
             </Box>
           </Stack>
-        </Box>
+        </GlassCard>
       </Container>
     </SectionShell>
   );

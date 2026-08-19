@@ -1,5 +1,6 @@
 "use client";
 
+import { Box } from "@mui/material";
 import Layout from "@/components/layout/Layout";
 import EngineeringCapabilities from "./EngineeringCapabilities";
 import EngineeringContact from "./EngineeringContact";
@@ -13,14 +14,25 @@ import EngineeringTestimonials from "./EngineeringTestimonials";
 export default function EngineeringLanding() {
   return (
     <Layout flushFooter>
-      <EngineeringHero />
-      <EngineeringCapabilities />
-      <EngineeringIntelligenceFlow />
-      <EngineeringSelectedWork />
-      <EngineeringEngagement />
-      <EngineeringTestimonials />
-      <EngineeringFounder />
-      <EngineeringContact />
+      <Box
+        sx={{
+          backgroundColor: "background.paper",
+          backgroundImage:
+            "radial-gradient(circle at 88% 12%, rgba(7, 223, 193, 0.08), transparent 24%), radial-gradient(circle at 8% 62%, rgba(14, 83, 76, 0.22), transparent 28%)",
+          "& section[id]": {
+            scrollMarginTop: { xs: "72px", md: "74px" },
+          },
+        }}
+      >
+        <EngineeringHero />
+        <EngineeringCapabilities />
+        <EngineeringIntelligenceFlow />
+        <EngineeringSelectedWork />
+        <EngineeringEngagement />
+        <EngineeringTestimonials />
+        <EngineeringFounder />
+        <EngineeringContact />
+      </Box>
     </Layout>
   );
 }

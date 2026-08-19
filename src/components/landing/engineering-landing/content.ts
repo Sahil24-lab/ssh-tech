@@ -27,7 +27,7 @@ export const selectedWork = [
     title: "Battery systems and manufacturing automation",
     outcome: "2 months to 3 days",
     description:
-      "Built testing and automation tooling that shortened the manufacturing cycle. Embedded C++ work on the BMS platform supported more than AU$4M in sales.",
+      "Built BMS test and automation tooling that cut the manufacturing cycle. Embedded C++ work supported more than AU$4M in sales.",
     disciplines: "Embedded C++ · CAN · BMS · test automation",
   },
   {
@@ -35,7 +35,7 @@ export const selectedWork = [
     title: "Control-system reverse engineering",
     outcome: "A contract-defining prototype",
     description:
-      "Reverse-engineered vehicle control modules on a 15-tonne Volvo loader and built a circuit to reproduce sensor signals. The work led to a multi-million-dollar electrification contract.",
+      "Reverse-engineered the control modules on a 15-tonne Volvo loader and reproduced sensor signals. The prototype led to a multi-million-dollar electrification contract.",
     disciplines: "Vehicle controls · instrumentation · systems integration",
   },
   {
@@ -43,7 +43,7 @@ export const selectedWork = [
     title: "Autonomous electric vehicle platform",
     outcome: "From sensors to motion",
     description:
-      "Built the C++ and ROS platform across Raspberry Pi and Jetson, integrating GPS, IMU and LiDAR for real-time navigation and control.",
+      "Built the C++ and ROS platform across Raspberry Pi and Jetson, integrating GPS, IMU and LiDAR for navigation and control.",
     disciplines: "C++ · ROS · sensor fusion · motion planning",
   },
   {
@@ -51,25 +51,22 @@ export const selectedWork = [
     title: "Security patrol route optimisation",
     outcome: "30% less overlap and idle time",
     description:
-      "Built a Python backend using Google Maps data to improve route planning for security patrol operations.",
+      "Built a Python route planner with Google Maps data, reducing overlap and idle time by 30%.",
     disciplines: "Python · route optimisation · operational tooling",
   },
 ] as const;
 
 export const engagementSteps = [
   {
-    title: "Diagnose the operation",
-    description:
-      "Map the workflow, interfaces, constraints and failure modes that matter. This defines the technical risk worth removing first.",
+    title: "Understand the system",
+    description: "Map the operation, interfaces and failure points.",
   },
   {
     title: "Prove the hard part",
-    description:
-      "Build a focused prototype or architecture spike around the highest-risk assumption, then test it with the people and systems involved.",
+    description: "Test the riskiest assumption in a focused prototype.",
   },
   {
-    title: "Integrate and deliver",
-    description:
-      "Turn the evidence into production engineering, system integration, validation and a clear handover path.",
+    title: "Build and integrate",
+    description: "Integrate, validate and hand over the working system.",
   },
 ] as const;
