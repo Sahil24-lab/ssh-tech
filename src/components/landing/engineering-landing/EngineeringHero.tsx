@@ -39,7 +39,11 @@ export default function EngineeringHero() {
       <Container
         size="wide"
         sx={{
-          minHeight: { xs: "auto", md: 680, lg: 720 },
+          minHeight: {
+            xs: "calc(100dvh - 72px)",
+            md: "calc(100dvh - 74px)",
+            lg: "calc(100dvh - 72px)",
+          },
           display: "grid",
           gridTemplateColumns: {
             xs: "1fr",

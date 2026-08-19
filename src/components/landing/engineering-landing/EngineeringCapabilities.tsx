@@ -41,7 +41,6 @@ export default function EngineeringCapabilities() {
       id="capabilities"
       sx={{
         backgroundColor: "rgba(8, 24, 36, 0.92)",
-        borderTop: "1px solid",
         borderBottom: "1px solid",
         borderColor: "rgba(145, 254, 230, 0.08)",
       }}
