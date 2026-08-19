@@ -1,5 +1,5 @@
-import { Stack, Typography } from "@mui/material";
-import { Container, SectionShell, TestimonialStack } from "@ssh/brand-ui";
+import { Grid, Stack, Typography } from "@mui/material";
+import { Container, SectionShell, TestimonialCard } from "@ssh/brand-ui";
 import { engineeringTestimonials } from "./content";
 
 export default function EngineeringTestimonials() {
@@ -14,7 +14,13 @@ export default function EngineeringTestimonials() {
             Clear thinking, dependable delivery and systems built for the real operation.
           </Typography>
         </Stack>
-        <TestimonialStack items={engineeringTestimonials} />
+        <Grid container spacing={3} alignItems="stretch">
+          {engineeringTestimonials.map((testimonial) => (
+            <Grid item xs={12} md={4} key={`${testimonial.author}-${testimonial.preview}`}>
+              <TestimonialCard {...testimonial} />
+            </Grid>
+          ))}
+        </Grid>
       </Container>
     </SectionShell>
   );

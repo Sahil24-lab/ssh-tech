@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import ArrowForwardRounded from "@mui/icons-material/ArrowForwardRounded";
-import MailOutlineRounded from "@mui/icons-material/MailOutlineRounded";
 import { Box, Stack, Typography } from "@mui/material";
 import { BrandButton, Container } from "@ssh/brand-ui";
 import BookCallModal from "@/components/book-call-modal/BookCallModal";
@@ -44,9 +43,9 @@ export default function EngineeringContact() {
           sx={{
             position: "relative",
             display: "grid",
-            gridTemplateColumns: { xs: "1fr", md: "minmax(0, 1.2fr) minmax(280px, 0.8fr)" },
+            gridTemplateColumns: { xs: "1fr", md: "minmax(0, 1fr) auto" },
             gap: { xs: 5, md: 8 },
-            alignItems: "end",
+            alignItems: "center",
           }}
         >
           <Stack spacing={2.5}>
@@ -62,23 +61,21 @@ export default function EngineeringContact() {
             </Typography>
           </Stack>
 
-          <Stack spacing={2} alignItems={{ xs: "stretch", sm: "flex-start", md: "stretch" }}>
-            <BrandButton
-              label="Discuss a project"
-              size="large"
-              endIcon={<ArrowForwardRounded />}
-              onClick={() => setContactOpen(true)}
-              sx={{ minHeight: 52 }}
-            />
-            <BrandButton
-              label="Email Sahil"
-              href="mailto:sahil.harriram@gmail.com"
-              variant="outlined"
-              size="large"
-              startIcon={<MailOutlineRounded />}
-              sx={{ minHeight: 52 }}
-            />
-          </Stack>
+          <BrandButton
+            label="Start a project"
+            size="large"
+            endIcon={<ArrowForwardRounded />}
+            onClick={() => setContactOpen(true)}
+            sx={{
+              width: { xs: "100%", sm: "fit-content" },
+              minWidth: { sm: 280, md: 320 },
+              minHeight: 56,
+              px: 4,
+              justifySelf: { sm: "start", md: "end" },
+              fontWeight: 700,
+              letterSpacing: "0.04em",
+            }}
+          />
         </Box>
       </Container>
 
