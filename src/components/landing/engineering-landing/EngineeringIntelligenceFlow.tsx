@@ -47,6 +47,7 @@ export default function EngineeringIntelligenceFlow() {
           </Box>
 
           <Box component="ol" className={styles.flow} sx={{ listStyle: "none", p: 0, m: 0 }}>
+            <span className={styles.track} aria-hidden="true" />
             {stages.map((stage, index) => (
               <Box component="li" key={stage.title} className={styles.stage}>
                 <span className={styles.node} aria-hidden="true" />
