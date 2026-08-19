@@ -2,59 +2,35 @@ import {
   AccountTreeRounded,
   DataObjectRounded,
   HubRounded,
-  MemoryRounded,
   PrecisionManufacturingRounded,
   SensorsRounded,
 } from "@mui/icons-material";
 import { Box, Stack, Typography } from "@mui/material";
 import { Container } from "@ssh/brand-ui";
 
-const proofPoints = [
-  {
-    value: "Founder-led",
-    label: "One technical lead across the system",
-    icon: <AccountTreeRounded />,
-  },
-  {
-    value: "Embedded to cloud",
-    label: "Full-stack systems delivery",
-    icon: <MemoryRounded />,
-  },
-  {
-    value: "Robotics and EVs",
-    label: "Physical systems experience",
-    icon: <PrecisionManufacturingRounded />,
-  },
-  {
-    value: "AI in context",
-    label: "Intelligence inside engineered controls",
-    icon: <HubRounded />,
-  },
-] as const;
-
 const capabilities = [
   {
     title: "Engineering software",
     description:
-      "Tools and platforms for operators, engineers and technical teams.",
+      "Operational tools and platforms built around how technical teams work.",
     icon: <DataObjectRounded />,
   },
   {
-    title: "Connected systems",
+    title: "Embedded to cloud",
     description:
-      "Reliable data between field assets, devices and software.",
+      "Reliable data and software across devices, field assets and cloud services.",
     icon: <SensorsRounded />,
   },
   {
     title: "Robotics and controls",
     description:
-      "Embedded control, perception and autonomy for physical systems.",
+      "Control, perception and autonomy for machines and physical systems.",
     icon: <PrecisionManufacturingRounded />,
   },
   {
-    title: "Applied AI",
+    title: "Applied intelligence",
     description:
-      "Perception, retrieval and planning inside controlled engineering workflows.",
+      "AI used where it improves a broader, controlled engineering system.",
     icon: <HubRounded />,
   },
 ] as const;
@@ -78,82 +54,35 @@ export default function EngineeringCapabilities() {
           py: 0,
         }}
       >
-        <Typography
-          component="h2"
-          sx={{
-            position: "absolute",
-            width: 1,
-            height: 1,
-            p: 0,
-            m: -1,
-            overflow: "hidden",
-            clip: "rect(0, 0, 0, 0)",
-            whiteSpace: "nowrap",
-            border: 0,
-          }}
-        >
-          Engineering capabilities
-        </Typography>
-
         <Box
-          aria-label="SSH Tech engineering background"
           sx={{
             display: "grid",
-            gridTemplateColumns: { xs: "1fr", sm: "repeat(2, minmax(0, 1fr))", lg: "repeat(4, minmax(0, 1fr))" },
+            gridTemplateColumns: { xs: "1fr", md: "minmax(0, 1.15fr) minmax(300px, 0.85fr)" },
+            gap: { xs: 2.5, md: 6 },
+            alignItems: "end",
+            px: { xs: 2.5, md: 3.5 },
+            py: { xs: 4, md: 5 },
             borderBottom: "1px solid",
             borderColor: "rgba(145, 254, 230, 0.08)",
           }}
         >
-          {proofPoints.map((point, index) => (
-            <Stack
-              key={point.value}
-              direction="row"
-              spacing={2}
-              alignItems="flex-start"
-              sx={{
-                position: "relative",
-                minHeight: 126,
-                px: { xs: 2.5, md: 3.5 },
-                py: 3,
-                borderBottom: { xs: index < proofPoints.length - 1 ? "1px solid" : 0, sm: index < 2 ? "1px solid" : 0, lg: 0 },
-                borderColor: "rgba(145, 254, 230, 0.08)",
-                "&::after": {
-                  content: '""',
-                  display: {
-                    xs: "none",
-                    sm: index % 2 === 0 ? "block" : "none",
-                    lg: index < proofPoints.length - 1 ? "block" : "none",
-                  },
-                  position: "absolute",
-                  top: 24,
-                  right: 0,
-                  bottom: 24,
-                  width: "1px",
-                  background:
-                    "linear-gradient(180deg, transparent, rgba(145, 254, 230, 0.12) 18%, rgba(145, 254, 230, 0.12) 82%, transparent)",
-                },
-              }}
-            >
-              <Box sx={{ color: "primary.main", opacity: 0.78, pt: 0.25, "& svg": { fontSize: 27 } }}>
-                {point.icon}
-              </Box>
-              <Stack spacing={0.75}>
-                <Typography
-                  sx={{
-                    color: "text.primary",
-                    fontFamily: "var(--font-exo2), sans-serif",
-                    fontSize: "1.1rem",
-                    fontWeight: 600,
-                  }}
-                >
-                  {point.value}
-                </Typography>
-                <Typography variant="body2" sx={{ color: "rgba(239, 254, 235, 0.58)", fontSize: "0.9rem" }}>
-                  {point.label}
-                </Typography>
-              </Stack>
+          <Typography component="h2" variant="h3" sx={{ color: "text.primary", maxWidth: 720 }}>
+            Engineering across the whole system
+          </Typography>
+
+          <Stack direction="row" spacing={2} alignItems="flex-start">
+            <Box sx={{ color: "primary.main", opacity: 0.82, pt: 0.25, "& svg": { fontSize: 28 } }}>
+              <AccountTreeRounded />
+            </Box>
+            <Stack spacing={0.5}>
+              <Typography sx={{ color: "text.primary", fontWeight: 600 }}>
+                Founder-led from scope to delivery
+              </Typography>
+              <Typography variant="body2" sx={{ color: "rgba(239, 254, 235, 0.66)" }}>
+                One technical lead working across software, hardware and controls.
+              </Typography>
             </Stack>
-          ))}
+          </Stack>
         </Box>
 
         <Box
