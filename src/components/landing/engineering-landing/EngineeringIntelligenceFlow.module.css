@@ -8,12 +8,35 @@
 .track {
   position: absolute;
   z-index: 0;
-  top: 7px;
+  top: 4px;
   left: 12.5%;
   right: 12.5%;
-  height: 1px;
-  background: linear-gradient(90deg, rgba(145, 254, 230, 0.16), rgba(7, 223, 193, 0.54), rgba(145, 254, 230, 0.16));
+  height: 7px;
+  overflow: hidden;
   pointer-events: none;
+}
+
+.track::before {
+  content: "";
+  position: absolute;
+  top: 3px;
+  right: 0;
+  left: 0;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(145, 254, 230, 0.16), rgba(7, 223, 193, 0.48), rgba(145, 254, 230, 0.16));
+}
+
+.track::after {
+  content: "";
+  position: absolute;
+  inset-block: 0;
+  left: 0;
+  width: 18%;
+  height: 7px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, transparent, rgba(7, 223, 193, 0.34), #07dfc1);
+  filter: drop-shadow(0 0 6px rgba(7, 223, 193, 0.64));
+  animation: signal-travel 8s cubic-bezier(0.22, 1, 0.36, 1) infinite;
 }
 
 .stage {
@@ -33,6 +56,7 @@
   border-radius: 50%;
   background: #091f2c;
   box-shadow: 0 0 0 5px rgba(7, 223, 193, 0.06);
+  animation: node-pulse 8s ease-out infinite;
 }
 
 .node::after {
@@ -47,6 +71,58 @@
   position: relative;
 }
 
+.stage:nth-of-type(1) .node {
+  animation-delay: 0.5s;
+}
+
+.stage:nth-of-type(2) .node {
+  animation-delay: 2.2s;
+}
+
+.stage:nth-of-type(3) .node {
+  animation-delay: 3.9s;
+}
+
+.stage:nth-of-type(4) .node {
+  animation-delay: 5.6s;
+}
+
+@keyframes signal-travel {
+  0% {
+    transform: translateX(-110%);
+    opacity: 0;
+  }
+
+  8% {
+    opacity: 1;
+  }
+
+  72% {
+    transform: translateX(555%);
+    opacity: 1;
+  }
+
+  82%,
+  100% {
+    transform: translateX(555%);
+    opacity: 0;
+  }
+}
+
+@keyframes node-pulse {
+  0%,
+  10%,
+  100% {
+    border-color: rgba(145, 254, 230, 0.68);
+    box-shadow: 0 0 0 5px rgba(7, 223, 193, 0.06);
+  }
+
+  4% {
+    border-color: rgba(145, 254, 230, 0.96);
+    box-shadow: 0 0 0 5px rgba(7, 223, 193, 0.12), 0 0 12px rgba(7, 223, 193, 0.34);
+  }
+}
+
 @media (max-width: 899px) {
   .flow {
     display: grid;
@@ -58,11 +134,28 @@
   .track {
     top: 8px;
     bottom: 8px;
-    left: 7px;
+    left: 4px;
     right: auto;
+    width: 7px;
+    height: auto;
+  }
+
+  .track::before {
+    top: 0;
+    right: auto;
+    bottom: 0;
+    left: 3px;
     width: 1px;
     height: auto;
-    background: linear-gradient(180deg, rgba(145, 254, 230, 0.14), rgba(7, 223, 193, 0.58), rgba(145, 254, 230, 0.14));
+    background: linear-gradient(180deg, rgba(145, 254, 230, 0.16), rgba(7, 223, 193, 0.48), rgba(145, 254, 230, 0.16));
+  }
+
+  .track::after {
+    inset: 0;
+    width: 7px;
+    height: 18%;
+    background: linear-gradient(180deg, transparent, rgba(7, 223, 193, 0.34), #07dfc1);
+    animation-name: signal-travel-mobile;
   }
 
   .stage {
@@ -80,5 +173,38 @@
     top: 0;
     left: -52px;
     margin: 0;
+  }
+
+  @keyframes signal-travel-mobile {
+    0% {
+      transform: translateY(-110%);
+      opacity: 0;
+    }
+
+    8% {
+      opacity: 1;
+    }
+
+    72% {
+      transform: translateY(555%);
+      opacity: 1;
+    }
+
+    82%,
+    100% {
+      transform: translateY(555%);
+      opacity: 0;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .track::after {
+    animation: none;
+    opacity: 0;
+  }
+
+  .node {
+    animation: none;
   }
 }
