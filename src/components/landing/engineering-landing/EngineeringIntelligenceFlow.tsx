@@ -1,5 +1,6 @@
 import { Box, Stack, Typography } from "@mui/material";
-import { Container, GlassCard, SectionShell } from "@ssh/brand-ui";
+import { Container, SectionShell } from "@ssh/brand-ui";
+import styles from "./EngineeringIntelligenceFlow.module.css";
 
 const stages = [
   {
@@ -22,10 +23,7 @@ const stages = [
 
 export default function EngineeringIntelligenceFlow() {
   return (
-    <SectionShell
-      surface="paper"
-      sectionProps={{ id: "intelligence", sx: { py: { xs: 9, md: 14 } } }}
-    >
+    <SectionShell sectionProps={{ id: "intelligence", sx: { py: { xs: 10, md: 15 } } }}>
       <Container size="wide" disableGutters>
         <Box>
           <Box
@@ -34,7 +32,7 @@ export default function EngineeringIntelligenceFlow() {
               gridTemplateColumns: { xs: "1fr", md: "minmax(0, 0.9fr) minmax(320px, 0.7fr)" },
               gap: { xs: 3, md: 8 },
               alignItems: "end",
-              mb: { xs: 6, md: 9 },
+              mb: { xs: 7, md: 10 },
             }}
           >
             <Typography component="h2" variant="h2" sx={{ color: "text.primary", textWrap: "balance" }}>
@@ -42,76 +40,35 @@ export default function EngineeringIntelligenceFlow() {
             </Typography>
             <Typography
               variant="body1"
-              sx={{ color: "rgba(239, 254, 235, 0.7)", maxWidth: 560, justifySelf: { md: "end" } }}
+              sx={{ color: "rgba(239, 254, 235, 0.72)", maxWidth: 560, justifySelf: { md: "end" } }}
             >
               AI is useful when it connects to a real decision. We design the controls, permissions and fallback around it.
             </Typography>
           </Box>
 
-          <Box
-            component="ol"
-            sx={{
-              listStyle: "none",
-              p: 0,
-              m: 0,
-              display: "grid",
-              gridTemplateColumns: {
-                xs: "1fr",
-                md: "repeat(2, minmax(0, 1fr))",
-                xl: "repeat(4, minmax(0, 1fr))",
-              },
-              gap: { xs: 2.5, md: 3 },
-            }}
-          >
+          <Box component="ol" className={styles.flow} sx={{ listStyle: "none", p: 0, m: 0 }}>
             {stages.map((stage, index) => (
-              <GlassCard
-                component="li"
-                key={stage.title}
-                variant={index === 2 ? "darkElevated" : "dark"}
-                sx={{
-                  position: "relative",
-                  overflow: "hidden",
-                  minHeight: { xs: 210, md: 230, xl: 250 },
-                  p: { xs: 3.5, md: 4 },
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "space-between",
-                  background:
-                    index === 2
-                      ? "linear-gradient(145deg, rgba(14, 83, 76, 0.32), rgba(9, 31, 44, 0.78))"
-                      : undefined,
-                  "&::after": {
-                    content: '\"\"',
-                    position: "absolute",
-                    width: 112,
-                    height: 112,
-                    right: -48,
-                    bottom: -56,
-                    borderRadius: "50%",
-                    background: "radial-gradient(circle, rgba(7, 223, 193, 0.16), transparent 70%)",
-                    pointerEvents: "none",
-                  },
-                }}
-              >
-                <Typography
-                  sx={{
-                    color: "primary.main",
-                    fontFamily: "var(--font-jetbrains-mono), monospace",
-                    fontSize: "0.78rem",
-                    letterSpacing: "0.08em",
-                  }}
-                >
-                  {String(index + 1).padStart(2, "0")}
-                </Typography>
-                <Stack spacing={1.5} sx={{ position: "relative", zIndex: 1 }}>
+              <Box component="li" key={stage.title} className={styles.stage}>
+                <span className={styles.node} aria-hidden="true" />
+                <Stack spacing={1.75} className={styles.content}>
+                  <Typography
+                    sx={{
+                      color: "primary.main",
+                      fontFamily: "var(--font-jetbrains-mono), monospace",
+                      fontSize: "0.78rem",
+                      letterSpacing: "0.08em",
+                    }}
+                  >
+                    {String(index + 1).padStart(2, "0")}
+                  </Typography>
                   <Typography component="h3" variant="h4" sx={{ color: "text.primary", fontWeight: 600 }}>
                     {stage.title}
                   </Typography>
-                  <Typography variant="body1" sx={{ color: "rgba(239, 254, 235, 0.66)", maxWidth: 260 }}>
+                  <Typography variant="body1" sx={{ color: "rgba(239, 254, 235, 0.68)", maxWidth: 280 }}>
                     {stage.detail}
                   </Typography>
                 </Stack>
-              </GlassCard>
+              </Box>
             ))}
           </Box>
         </Box>

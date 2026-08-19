@@ -16,9 +16,23 @@ export default function EngineeringLanding() {
     <Layout flushFooter>
       <Box
         sx={{
-          backgroundColor: "background.paper",
-          backgroundImage:
-            "radial-gradient(circle at 88% 12%, rgba(7, 223, 193, 0.08), transparent 24%), radial-gradient(circle at 8% 62%, rgba(14, 83, 76, 0.22), transparent 28%)",
+          backgroundColor: "background.default",
+          backgroundImage: `
+            linear-gradient(rgba(9, 31, 44, 0.46), rgba(9, 31, 44, 0.12)),
+            conic-gradient(
+              from -23.81deg at 72.82% 162.44%,
+              #0E534C -44.57deg,
+              #067F71 7.76deg,
+              #029F8C 20.98deg,
+              #067F71 52deg,
+              #0B645C 88.68deg,
+              #067F71 315.43deg,
+              #029F8C 367.76deg
+            )
+          `,
+          backgroundAttachment: "fixed",
+          backgroundSize: "cover",
+          isolation: "isolate",
           "& section[id]": {
             scrollMarginTop: { xs: "72px", md: "74px" },
           },

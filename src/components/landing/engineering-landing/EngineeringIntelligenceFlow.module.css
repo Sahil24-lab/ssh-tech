@@ -1,0 +1,134 @@
+.flow {
+  --track-offset: 8px;
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  min-height: 260px;
+}
+
+.flow::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  top: var(--track-offset);
+  left: 12.5%;
+  right: 12.5%;
+  height: 1px;
+  overflow: visible;
+  background: linear-gradient(90deg, rgba(145, 254, 230, 0.14), rgba(7, 223, 193, 0.58), rgba(145, 254, 230, 0.14));
+}
+
+.flow::after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  top: 5px;
+  left: 12.5%;
+  width: 18%;
+  height: 7px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, transparent, #07dfc1);
+  filter: drop-shadow(0 0 8px rgba(7, 223, 193, 0.78));
+  animation: signal-travel 9s linear infinite;
+}
+
+.stage {
+  position: relative;
+  z-index: 1;
+  min-width: 0;
+  padding-inline: clamp(16px, 2.4vw, 36px);
+}
+
+.node {
+  position: relative;
+  display: block;
+  width: 17px;
+  height: 17px;
+  margin: 0 auto clamp(40px, 4.5vw, 62px);
+  border: 1px solid rgba(145, 254, 230, 0.62);
+  border-radius: 50%;
+  background: #091f2c;
+  box-shadow: 0 0 0 6px rgba(7, 223, 193, 0.06);
+}
+
+.node::after {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  border-radius: inherit;
+  background: #07dfc1;
+}
+
+.content {
+  position: relative;
+}
+
+@keyframes signal-travel {
+  from {
+    transform: translateX(-110%);
+  }
+  to {
+    transform: translateX(560%);
+  }
+}
+
+@media (max-width: 899px) {
+  .flow {
+    display: grid;
+    grid-template-columns: 1fr;
+    min-height: 0;
+    padding-left: 52px !important;
+  }
+
+  .flow::before {
+    top: 8px;
+    bottom: 8px;
+    left: 8px;
+    right: auto;
+    width: 1px;
+    height: auto;
+    background: linear-gradient(180deg, rgba(145, 254, 230, 0.14), rgba(7, 223, 193, 0.58), rgba(145, 254, 230, 0.14));
+  }
+
+  .flow::after {
+    top: 8px;
+    left: 5px;
+    width: 7px;
+    height: 18%;
+    background: linear-gradient(180deg, transparent, #07dfc1);
+    animation-name: signal-travel-mobile;
+  }
+
+  .stage {
+    min-height: 168px;
+    padding: 0 0 48px !important;
+  }
+
+  .stage:last-child {
+    min-height: 0;
+    padding-bottom: 0 !important;
+  }
+
+  .node {
+    position: absolute;
+    top: 0;
+    left: -52px;
+    margin: 0;
+  }
+
+  @keyframes signal-travel-mobile {
+    from {
+      transform: translateY(-110%);
+    }
+    to {
+      transform: translateY(560%);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flow::after {
+    animation: none;
+    opacity: 0.68;
+  }
+}

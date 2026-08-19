@@ -10,7 +10,7 @@ const background = [
 
 export default function EngineeringFounder() {
   return (
-    <SectionShell surface="paper" sectionProps={{ id: "about", sx: { py: { xs: 9, md: 14 } } }}>
+    <SectionShell sectionProps={{ id: "about", sx: { py: { xs: 9, md: 14 } } }}>
       <Container size="wide" disableGutters>
         <GlassCard
           variant="darkElevated"

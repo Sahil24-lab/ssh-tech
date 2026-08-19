@@ -54,7 +54,7 @@ Direct, technical, grounded, and commercially aware. Use plain English. Prefer c
 
 Use the existing Signal Workshop system in `DESIGN.md`: Deep Channel, Field Green, Signal Teal, Near White, and Supporting Cyan. The page should feel like a precise technical workshop, not a SaaS template or science-fiction interface.
 
-The hero uses one connected SVG scene with a satellite, robotic arm, rocket trajectory, and meaningful signal nodes. Motion is slow and subtle, with a static reduced-motion treatment.
+The hero uses the supplied connected raster artwork with a satellite, robotic arm, rocket trajectory, and meaningful signal nodes. Motion is slow and subtle, with a static reduced-motion treatment.
 
 ## Non-goals
 

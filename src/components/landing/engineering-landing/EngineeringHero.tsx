@@ -19,7 +19,7 @@ export default function EngineeringHero() {
         position: "relative",
         overflow: "hidden",
         background:
-          "radial-gradient(circle at 78% 28%, rgba(7, 223, 193, 0.11), transparent 30%), linear-gradient(180deg, rgba(9, 31, 44, 0.98), rgba(8, 24, 36, 0.92))",
+          "radial-gradient(circle at 78% 28%, rgba(7, 223, 193, 0.12), transparent 34%), linear-gradient(180deg, rgba(9, 31, 44, 0.84), rgba(8, 24, 36, 0.5))",
         "&::before": {
           content: '\"\"',
           position: "absolute",
@@ -109,7 +109,7 @@ export default function EngineeringHero() {
             position: "relative",
             zIndex: 1,
             width: "100%",
-            maxWidth: 740,
+            maxWidth: { xs: 520, md: 520, lg: 560 },
             justifySelf: "center",
             alignSelf: "center",
             mt: { xs: -2, md: 0 },

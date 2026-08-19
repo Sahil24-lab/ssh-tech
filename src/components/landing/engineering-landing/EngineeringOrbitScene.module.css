@@ -1,96 +1,76 @@
 .scene {
-  display: block;
+  position: relative;
   width: 100%;
-  height: auto;
-  overflow: visible;
-  filter: drop-shadow(0 22px 42px rgba(7, 223, 193, 0.07));
+  aspect-ratio: 1351 / 1164;
+  overflow: hidden;
+  border: 1px solid rgba(145, 254, 230, 0.1);
+  border-radius: 16px;
+  background: #091f2c;
+  box-shadow: 0 22px 56px rgba(9, 31, 44, 0.3);
   animation: scene-enter 900ms cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-.signalPath {
-  stroke-dasharray: 3 14;
-  animation: signal-travel 14s linear infinite;
+.artwork {
+  display: block;
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: saturate(1.04) contrast(1.03);
+  animation: artwork-breathe 11s ease-in-out infinite alternate;
 }
 
-.orbitSecondary {
-  stroke-dasharray: 2 12;
-  animation: orbit-travel 26s linear infinite;
-}
-
-.engineeringObject {
-  opacity: 0.78;
-  animation: object-resolve 1200ms cubic-bezier(0.16, 1, 0.3, 1) 160ms both;
-}
-
-.signalNode {
-  transform-box: fill-box;
-  transform-origin: center;
-  animation: node-illuminate 10.5s ease-in-out infinite;
-}
-
-.signalNode2 {
-  animation-delay: 3.5s;
-}
-
-.signalNode3 {
-  animation-delay: 7s;
+.signalWash {
+  position: absolute;
+  z-index: 0;
+  width: 34%;
+  aspect-ratio: 1;
+  top: 14%;
+  left: 48%;
+  border-radius: 50%;
+  background: rgba(7, 223, 193, 0.12);
+  filter: blur(58px);
+  animation: wash-drift 12s ease-in-out infinite alternate;
 }
 
 @keyframes scene-enter {
   from {
     opacity: 0;
-    filter: blur(10px) drop-shadow(0 22px 42px rgba(7, 223, 193, 0));
-    transform: translateY(12px) scale(0.99);
+    filter: blur(8px);
+    transform: translateY(10px) scale(0.992);
   }
   to {
     opacity: 1;
-    filter: blur(0) drop-shadow(0 22px 42px rgba(7, 223, 193, 0.07));
+    filter: blur(0);
     transform: translateY(0) scale(1);
   }
 }
 
-@keyframes object-resolve {
+@keyframes artwork-breathe {
   from {
-    opacity: 0;
-    filter: blur(7px);
+    filter: saturate(0.98) contrast(1.01) brightness(0.94);
   }
   to {
-    opacity: 0.78;
-    filter: blur(0);
+    filter: saturate(1.06) contrast(1.04) brightness(1.02);
   }
 }
 
-@keyframes signal-travel {
+@keyframes wash-drift {
+  from {
+    opacity: 0.35;
+    transform: translate3d(-8%, 4%, 0) scale(0.92);
+  }
   to {
-    stroke-dashoffset: -238;
-  }
-}
-
-@keyframes orbit-travel {
-  to {
-    stroke-dashoffset: -168;
-  }
-}
-
-@keyframes node-illuminate {
-  0%,
-  22%,
-  100% {
-    opacity: 0.48;
-    transform: scale(0.96);
-  }
-  10% {
-    opacity: 1;
-    transform: scale(1.05);
+    opacity: 0.72;
+    transform: translate3d(14%, -6%, 0) scale(1.08);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .scene,
-  .signalPath,
-  .orbitSecondary,
-  .engineeringObject,
-  .signalNode {
+  .artwork,
+  .signalWash {
     animation: none;
   }
 }
