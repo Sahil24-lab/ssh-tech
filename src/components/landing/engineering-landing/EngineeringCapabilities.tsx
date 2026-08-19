@@ -9,9 +9,9 @@ import { Container } from "@ssh/brand-ui";
 
 const capabilities = [
   {
-    title: "Engineering software",
+    title: "Software and interfaces",
     description:
-      "Operational tools, interfaces and workflow systems built around real work.",
+      "Dashboards, workflow tools and control interfaces built around how teams actually work.",
     icon: <CodeRounded />,
   },
   {
@@ -27,9 +27,9 @@ const capabilities = [
     icon: <PrecisionManufacturingRounded />,
   },
   {
-    title: "AI-enabled systems",
+    title: "AI for complex engineering",
     description:
-      "AI applied to specific decisions, workflows and controls where it adds value.",
+      "AI for engineering analysis and constrained workflows where accuracy and traceability matter.",
     icon: <HubRounded />,
   },
 ] as const;
