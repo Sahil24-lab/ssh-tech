@@ -108,15 +108,15 @@
     opacity: 1;
   }
   82% {
-    transform: translateX(455.556%);
+    transform: translateX(400%);
     opacity: 1;
   }
   94% {
-    transform: translateX(455.556%);
+    transform: translateX(400%);
     opacity: 1;
   }
   100% {
-    transform: translateX(455.556%);
+    transform: translateX(400%);
     opacity: 0;
   }
 }
