@@ -5,11 +5,11 @@ import styles from "./EngineeringIntelligenceFlow.module.css";
 const stages = [
   {
     title: "Operation",
-    detail: "Assets, people, constraints",
+    detail: "Assets, people and constraints",
   },
   {
     title: "Signals",
-    detail: "Sensors, workflows, controls",
+    detail: "Sensors, data and workflows",
   },
   {
     title: "Intelligence",
@@ -23,26 +23,46 @@ const stages = [
 
 export default function EngineeringIntelligenceFlow() {
   return (
-    <SectionShell sectionProps={{ id: "intelligence", sx: { py: { xs: 10, md: 15 } } }}>
+    <SectionShell
+      containerProps={{ maxWidth: false, disableGutters: true }}
+      sectionProps={{
+        id: "intelligence",
+        sx: {
+          py: { xs: 8, md: 10 },
+          backgroundColor: "rgba(4, 73, 69, 0.42)",
+          borderBottom: "1px solid",
+          borderColor: "rgba(145, 254, 230, 0.1)",
+        },
+      }}
+    >
       <Container size="wide" disableGutters>
         <Box>
           <Box
             sx={{
               display: "grid",
-              gridTemplateColumns: { xs: "1fr", md: "minmax(0, 0.9fr) minmax(320px, 0.7fr)" },
-              gap: { xs: 3, md: 8 },
-              alignItems: "end",
-              mb: { xs: 7, md: 10 },
+              gridTemplateColumns: { xs: "1fr", md: "minmax(0, 1fr) minmax(320px, 0.72fr)" },
+              gap: { xs: 2.5, md: 6 },
+              alignItems: "start",
+              mb: { xs: 6, md: 7 },
             }}
           >
-            <Typography component="h2" variant="h2" sx={{ color: "text.primary", textWrap: "balance" }}>
-              From signal to action.
+            <Typography
+              component="h2"
+              variant="h2"
+              sx={{ color: "text.primary", maxWidth: 680, textWrap: "balance" }}
+            >
+              Where intelligence fits.
             </Typography>
             <Typography
               variant="body1"
-              sx={{ color: "rgba(239, 254, 235, 0.72)", maxWidth: 560, justifySelf: { md: "end" } }}
+              sx={{
+                color: "rgba(239, 254, 235, 0.78)",
+                maxWidth: 520,
+                justifySelf: { md: "end" },
+                textWrap: "pretty",
+              }}
             >
-              AI is useful when it connects to a real decision. We design the controls, permissions and fallback around it.
+              AI is one part of the system. We connect it to real signals, defined controls and traceable outcomes.
             </Typography>
           </Box>
 
