@@ -39,15 +39,19 @@ export default function EngineeringHero() {
       <Container
         size="wide"
         sx={{
-          minHeight: { xs: "auto", md: 560, lg: 600 },
+          minHeight: { xs: "auto", md: 680, lg: 720 },
           display: "grid",
-          gridTemplateColumns: { xs: "1fr", md: "minmax(0, 0.92fr) minmax(480px, 1.08fr)" },
+          gridTemplateColumns: {
+            xs: "1fr",
+            md: "minmax(0, 0.92fr) minmax(440px, 1.08fr)",
+            lg: "minmax(0, 1.02fr) minmax(480px, 0.98fr)",
+          },
           alignItems: "center",
           gap: { xs: 5, md: 5, lg: 8 },
-          py: { xs: 8, md: 6, lg: 8 },
+          py: { xs: 8, sm: 10, md: 12, lg: 15 },
         }}
       >
-        <Stack spacing={{ xs: 3, md: 4 }} sx={{ position: "relative", zIndex: 1 }}>
+        <Stack spacing={3} sx={{ position: "relative", zIndex: 1 }}>
           <Box
             sx={{
               width: 56,
@@ -59,7 +63,7 @@ export default function EngineeringHero() {
           <Typography
             component="h1"
             sx={{
-              maxWidth: 650,
+              maxWidth: { xs: 650, lg: 720 },
               fontFamily: "var(--font-exo2), sans-serif",
               fontSize: { xs: "clamp(2.55rem, 11vw, 3.7rem)", md: "clamp(3.15rem, 4.5vw, 3.9rem)" },
               fontWeight: 600,
@@ -75,7 +79,7 @@ export default function EngineeringHero() {
           <Typography
             variant="body1"
             sx={{
-              maxWidth: 590,
+              maxWidth: 610,
               color: "rgba(239, 254, 235, 0.74)",
               fontSize: { xs: "1rem", md: "1.12rem" },
               lineHeight: 1.65,
@@ -85,7 +89,12 @@ export default function EngineeringHero() {
             We build software, robotics and connected systems that improve how complex work gets done.
           </Typography>
 
-          <Stack direction={{ xs: "column", sm: "row" }} spacing={2} alignItems={{ sm: "center" }}>
+          <Stack
+            direction={{ xs: "column", sm: "row" }}
+            spacing={2}
+            alignItems={{ sm: "center" }}
+            sx={{ pt: { xs: 1, md: 2 } }}
+          >
             <BrandButton
               label="Discuss a project"
               size="large"
