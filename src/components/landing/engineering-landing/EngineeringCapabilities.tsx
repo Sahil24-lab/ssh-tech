@@ -1,6 +1,5 @@
 import {
   AccountTreeRounded,
-  DataObjectRounded,
   HubRounded,
   PrecisionManufacturingRounded,
   SensorsRounded,
@@ -10,15 +9,15 @@ import { Container } from "@ssh/brand-ui";
 
 const capabilities = [
   {
-    title: "Engineering software",
+    title: "Founder-led delivery",
     description:
-      "Operational tools and platforms built around how technical teams work.",
-    icon: <DataObjectRounded />,
+      "One technical lead from system architecture through delivery.",
+    icon: <AccountTreeRounded />,
   },
   {
     title: "Embedded to cloud",
     description:
-      "Reliable data and software across devices, field assets and cloud services.",
+      "Devices, field assets, software and cloud services designed to work together.",
     icon: <SensorsRounded />,
   },
   {
@@ -28,9 +27,9 @@ const capabilities = [
     icon: <PrecisionManufacturingRounded />,
   },
   {
-    title: "Applied intelligence",
+    title: "AI-enabled systems",
     description:
-      "AI used where it improves a broader, controlled engineering system.",
+      "AI applied to specific decisions, workflows and controls where it adds value.",
     icon: <HubRounded />,
   },
 ] as const;
@@ -54,37 +53,6 @@ export default function EngineeringCapabilities() {
           py: 0,
         }}
       >
-        <Box
-          sx={{
-            display: "grid",
-            gridTemplateColumns: { xs: "1fr", md: "minmax(0, 1.15fr) minmax(300px, 0.85fr)" },
-            gap: { xs: 2.5, md: 6 },
-            alignItems: "end",
-            px: { xs: 2.5, md: 3.5 },
-            py: { xs: 4, md: 5 },
-            borderBottom: "1px solid",
-            borderColor: "rgba(145, 254, 230, 0.08)",
-          }}
-        >
-          <Typography component="h2" variant="h3" sx={{ color: "text.primary", maxWidth: 720 }}>
-            Engineering across the whole system
-          </Typography>
-
-          <Stack direction="row" spacing={2} alignItems="flex-start">
-            <Box sx={{ color: "primary.main", opacity: 0.82, pt: 0.25, "& svg": { fontSize: 28 } }}>
-              <AccountTreeRounded />
-            </Box>
-            <Stack spacing={0.5}>
-              <Typography sx={{ color: "text.primary", fontWeight: 600 }}>
-                Founder-led from scope to delivery
-              </Typography>
-              <Typography variant="body2" sx={{ color: "rgba(239, 254, 235, 0.66)" }}>
-                One technical lead working across software, hardware and controls.
-              </Typography>
-            </Stack>
-          </Stack>
-        </Box>
-
         <Box
           aria-label="Engineering capabilities"
           sx={{
@@ -126,7 +94,7 @@ export default function EngineeringCapabilities() {
                 {capability.icon}
               </Box>
               <Stack spacing={1.25}>
-                <Typography component="h3" variant="h5" sx={{ color: "text.primary", fontWeight: 600 }}>
+                <Typography component="h2" variant="h5" sx={{ color: "text.primary", fontWeight: 600 }}>
                   {capability.title}
                 </Typography>
                 <Typography variant="body2" sx={{ color: "rgba(239, 254, 235, 0.58)", fontSize: "0.9rem" }}>
