@@ -16,20 +16,41 @@ export default function EngineeringContact() {
       sx={{
         position: "relative",
         overflow: "hidden",
-        backgroundColor: "rgba(8, 24, 36, 0.94)",
-        borderTop: "1px solid",
-        borderColor: "divider",
+        backgroundColor: "background.paper",
+        borderBlock: "1px solid",
+        borderColor: "rgba(145, 254, 230, 0.14)",
         "&::before": {
           content: '\"\"',
           position: "absolute",
-          width: 520,
-          height: 520,
-          right: "-12%",
-          bottom: "-70%",
+          width: { xs: 360, md: 560 },
+          height: { xs: 360, md: 560 },
+          top: { xs: "-58%", md: "-76%" },
+          right: { xs: "-42%", md: "-8%" },
           borderRadius: "50%",
-          backgroundColor: "rgba(7, 223, 193, 0.12)",
-          filter: "blur(100px)",
+          background:
+            "radial-gradient(circle, rgba(7, 223, 193, 0.16) 0%, rgba(7, 223, 193, 0.07) 34%, transparent 70%)",
+          filter: "blur(28px)",
+          opacity: 0.5,
+          transformOrigin: "center",
+          animation: "engineering-contact-breathe 9s cubic-bezier(0.22, 1, 0.36, 1) infinite alternate",
           pointerEvents: "none",
+        },
+        "@keyframes engineering-contact-breathe": {
+          from: {
+            opacity: 0.42,
+            transform: "scale(0.94)",
+          },
+          to: {
+            opacity: 0.68,
+            transform: "scale(1.06)",
+          },
+        },
+        "@media (prefers-reduced-motion: reduce)": {
+          "&::before": {
+            animation: "none",
+            opacity: 0.52,
+            transform: "none",
+          },
         },
       }}
     >
