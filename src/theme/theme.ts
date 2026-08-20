@@ -30,12 +30,55 @@ const themeOptions: ThemeOptions = {
       default: "#0E534C", // Base background
       paper: "#091F2C", // For cards and panels
     },
+    overlay: {
+      white: {
+        "2":  "rgba(255, 255, 255, 0.02)",
+        "3":  "rgba(255, 255, 255, 0.035)",
+        "4":  "rgba(255, 255, 255, 0.04)",
+        "5":  "rgba(255, 255, 255, 0.05)",
+        "7":  "rgba(255, 255, 255, 0.07)",
+        "8":  "rgba(255, 255, 255, 0.08)",
+        "10": "rgba(255, 255, 255, 0.10)",
+        "12": "rgba(255, 255, 255, 0.12)",
+        "14": "rgba(255, 255, 255, 0.14)",
+        "15": "rgba(255, 255, 255, 0.15)",
+        "18": "rgba(255, 255, 255, 0.18)",
+      },
+      black: {
+        "10": "rgba(0, 0, 0, 0.10)",
+        "12": "rgba(0, 0, 0, 0.12)",
+        "14": "rgba(0, 0, 0, 0.14)",
+        "16": "rgba(0, 0, 0, 0.16)",
+        "18": "rgba(0, 0, 0, 0.18)",
+        "20": "rgba(0, 0, 0, 0.20)",
+        "22": "rgba(0, 0, 0, 0.22)",
+        "24": "rgba(0, 0, 0, 0.24)",
+        "25": "rgba(0, 0, 0, 0.25)",
+        "28": "rgba(0, 0, 0, 0.28)",
+        "30": "rgba(0, 0, 0, 0.30)",
+        "35": "rgba(0, 0, 0, 0.35)",
+      },
+    },
     surface: {
       hero: "#0b0c10",
       elevated: "#0e1a24",
       scrim: "#121212",
       depth: "#0F2E3D",
       imageBlend: themeTokens.palette.surface.imageBlend,
+      glass: {
+        light:        "rgba(255, 255, 255, 0.08)",
+        dark:         "rgba(8, 24, 36, 0.92)",
+        darkElevated: "rgba(9, 31, 44, 0.75)",
+        darkDeep:     "rgba(9, 31, 44, 0.9)",
+        scrim:        "rgba(14, 26, 36, 0.75)",
+      },
+      border: {
+        subtle:   "rgba(255, 255, 255, 0.05)",
+        light:    "rgba(255, 255, 255, 0.08)",
+        medium:   "rgba(255, 255, 255, 0.12)",
+        strong:   "rgba(255, 255, 255, 0.15)",
+        emphasis: "rgba(255, 255, 255, 0.18)",
+      },
     },
     text: {
       primary: "#EFFEEB", // Default text color
