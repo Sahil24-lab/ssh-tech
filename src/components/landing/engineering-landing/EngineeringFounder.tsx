@@ -17,10 +17,9 @@ export default function EngineeringFounder() {
           sx={{
             position: "relative",
             overflow: "hidden",
-            display: "grid",
-            gridTemplateColumns: { xs: "1fr", md: "minmax(280px, 0.78fr) minmax(0, 1.22fr)" },
-            gap: { xs: 6, md: 9 },
-            alignItems: "start",
+            display: "flex",
+            flexDirection: "column",
+            gap: { xs: 3, md: 4.5 },
             p: { xs: 3.5, sm: 5, md: 6 },
             backgroundColor: "rgba(9, 31, 44, 0.96)",
             backgroundImage: "none",
@@ -28,7 +27,8 @@ export default function EngineeringFounder() {
             "&::after": {
               content: '\"SH\"',
               position: "absolute",
-              right: { xs: -12, md: 24 },
+              left: { xs: "auto", md: 24 },
+              right: { xs: -12, md: "auto" },
               bottom: { xs: -36, md: -52 },
               color: "rgba(7, 223, 193, 0.055)",
               fontFamily: "var(--font-exo2), sans-serif",
@@ -39,68 +39,85 @@ export default function EngineeringFounder() {
             },
           }}
         >
-          <Stack spacing={2.5} sx={{ position: "relative", zIndex: 1 }}>
-            <Typography
-              sx={{
-                color: "primary.main",
-                fontFamily: "var(--font-jetbrains-mono), monospace",
-                fontSize: "0.8rem",
-                mb: 2,
-              }}
-            >
-              Sahil Harriram · Founder and technical lead
-            </Typography>
+          <Typography
+            sx={{
+              position: "relative",
+              zIndex: 1,
+              color: "primary.main",
+              fontFamily: "var(--font-jetbrains-mono), monospace",
+              fontSize: "0.8rem",
+            }}
+          >
+            Sahil Harriram · Founder and technical lead
+          </Typography>
+
+          <Box
+            sx={{
+              position: "relative",
+              zIndex: 1,
+              display: "grid",
+              gridTemplateColumns: {
+                xs: "1fr",
+                md: "minmax(360px, 0.9fr) minmax(0, 1.1fr)",
+              },
+              columnGap: { md: 6, lg: 8 },
+              rowGap: { xs: 4 },
+              alignItems: "start",
+            }}
+          >
             <Typography component="h2" variant="h2" sx={{ color: "text.primary", textWrap: "balance" }}>
               Engineering depth. Commercial judgement.
             </Typography>
-          </Stack>
 
-          <Stack spacing={3.5} sx={{ position: "relative", zIndex: 1 }}>
-            <Typography
-              variant="body1"
-              sx={{
-                color: "text.primary",
-                fontSize: { xs: "1.1rem", md: "1.28rem" },
-                lineHeight: 1.65,
-                maxWidth: 800,
-              }}
-            >
-              I am a mechatronics engineer who has built embedded systems, robotics platforms and production software, then led the teams and commercial work around them.
-            </Typography>
-            <Typography variant="body1" sx={{ color: "rgba(239, 254, 235, 0.68)", maxWidth: 760 }}>
-              That range helps when software, hardware and operations have to move together.
-            </Typography>
-
-            <Box
-              component="ul"
-              sx={{
-                listStyle: "none",
-                p: 0,
-                m: 0,
-                display: "grid",
-                gridTemplateColumns: { xs: "1fr", sm: "repeat(2, minmax(0, 1fr))" },
-                gap: 1.5,
-              }}
-            >
-              {background.map((item) => (
+            <Stack spacing={4.5}>
+              <Stack spacing={1.5}>
                 <Typography
-                  component="li"
-                  variant="body2"
-                  key={item}
+                  variant="body1"
                   sx={{
-                    color: "rgba(239, 254, 235, 0.76)",
-                    px: 2,
-                    py: 1.5,
-                    border: "1px solid",
-                    borderColor: "divider",
-                    borderRadius: 1.5,
+                    color: "text.primary",
+                    fontSize: { xs: "1.1rem", md: "1.28rem" },
+                    lineHeight: 1.65,
+                    maxWidth: 800,
                   }}
                 >
-                  {item}
+                  I am a mechatronics engineer who has built embedded systems, robotics platforms and production software, then led the teams and commercial work around them.
                 </Typography>
-              ))}
-            </Box>
-          </Stack>
+                <Typography variant="body1" sx={{ color: "rgba(239, 254, 235, 0.68)", maxWidth: 760 }}>
+                  That range helps when software, hardware and operations have to move together.
+                </Typography>
+              </Stack>
+
+              <Box
+                component="ul"
+                sx={{
+                  listStyle: "none",
+                  p: 0,
+                  m: 0,
+                  display: "grid",
+                  gridTemplateColumns: { xs: "1fr", sm: "repeat(2, minmax(0, 1fr))" },
+                  columnGap: 3,
+                  borderBottom: "1px solid",
+                  borderColor: "divider",
+                }}
+              >
+                {background.map((item) => (
+                  <Typography
+                    component="li"
+                    variant="body2"
+                    key={item}
+                    sx={{
+                      color: "rgba(239, 254, 235, 0.76)",
+                      py: 2,
+                      borderTop: "1px solid",
+                      borderColor: "divider",
+                    }}
+                  >
+                    {item}
+                  </Typography>
+                ))}
+              </Box>
+            </Stack>
+          </Box>
         </GlassCard>
       </Container>
     </SectionShell>
