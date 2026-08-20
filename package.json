@@ -7,10 +7,14 @@
     "packages/*"
   ],
   "scripts": {
-    "dev": "npm run dev --workspace apps/new-site",
-    "build": "npm run build --workspace apps/new-site",
-    "start": "npm run start --workspace apps/new-site",
-    "lint": "npm run lint --workspace apps/new-site && npm run lint --workspace packages/brand-ui",
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint .",
+    "dev:new-site": "npm run dev --workspace apps/new-site",
+    "build:new-site": "npm run build --workspace apps/new-site",
+    "start:new-site": "npm run start --workspace apps/new-site",
+    "lint:new-site": "npm run lint --workspace apps/new-site && npm run lint --workspace packages/brand-ui",
     "dev:legacy": "next dev",
     "build:legacy": "next build",
     "start:legacy": "next start",
